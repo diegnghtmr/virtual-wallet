@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#080e48" height="51.0" layoutX="50.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1179.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="305.0" layoutY="1.0" text="           ¡Bienvenido, Usuario!" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="60.0" prefWidth="1250.0" />
+      <GridPane layoutX="76.0" layoutY="80.0" prefHeight="210.0" prefWidth="1150.0">
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Nombre" GridPane.columnIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="Correo" GridPane.columnIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="txtUserName" prefHeight="35.0" prefWidth="344.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+            </TextField>
+            <TextField fx:id="txtEmail" editable="false" prefHeight="35.0" prefWidth="343.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+            </TextField>
+            <Label text="Saldo" GridPane.columnIndex="3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="Número de Identificación" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtId" editable="false" prefHeight="31.0" prefWidth="340.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtDateBirth" editable="false" prefHeight="31.0" prefWidth="340.0" GridPane.columnIndex="2" GridPane.rowIndex="12">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Fecha de Nacimiento" GridPane.columnIndex="2" GridPane.rowIndex="8">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPhone" prefHeight="31.0" prefWidth="340.0" GridPane.columnIndex="1" GridPane.rowIndex="21">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Teléfono" GridPane.columnIndex="1" GridPane.rowIndex="17">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtRegistrationDate" editable="false" prefHeight="31.0" prefWidth="340.0" GridPane.columnIndex="2" GridPane.rowIndex="21">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Fecha de Registro" GridPane.columnIndex="2" GridPane.rowIndex="17">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label text="Dirección" GridPane.columnIndex="1" GridPane.rowIndex="26">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtAddress" prefHeight="31.0" prefWidth="340.0" GridPane.columnIndex="1" GridPane.rowIndex="30">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Contraseña" GridPane.columnIndex="2" GridPane.rowIndex="26">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPassword" prefHeight="31.0" prefWidth="340.0" GridPane.columnIndex="2" GridPane.rowIndex="30">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtBalance" editable="false" prefHeight="35.0" prefWidth="343.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <padding>
+                  <Insets top="14.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets right="40.0" />
+               </GridPane.margin>
+            </TextField>
+            <ImageView fitHeight="323.0" fitWidth="564.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="19">
+               <image>
+                  <Image url="@img/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <Label layoutX="113.0" layoutY="564.0" text="&quot;Incluso cuando las cosas salen muy very very, recuerda: tu memoria muscular sabe el camino. Cada dia es una leccion que te acerca mas a la meta, no olvides que esto vale la plata. ¡Persiste y triunfaras!&quot;" />
+      <Button fx:id="btnLogout" layoutX="116.0" layoutY="618.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="37.0" prefWidth="137.0" style="-fx-background-color: #1971c2;" text="Cerrar Sesión" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnGoDashboard" layoutX="1019.0" layoutY="618.0" mnemonicParsing="false" onAction="#onGoDashboard" prefHeight="37.0" prefWidth="137.0" style="-fx-background-color: #1971c2;" text="Ir al Dashboard" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Separator layoutX="-1.0" layoutY="536.0" prefHeight="2.0" prefWidth="1255.0" />
+      <Separator layoutX="10.0" layoutY="440.0" prefHeight="2.0" prefWidth="1255.0" />
+      <Button fx:id="btnUpdate" layoutX="558.0" layoutY="467.0" mnemonicParsing="false" onAction="#onUpdate" prefHeight="37.0" prefWidth="137.0" style="-fx-background-color: #1971c2;" text="Actualizar" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
