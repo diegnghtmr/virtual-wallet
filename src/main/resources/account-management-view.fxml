@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sigecim.sigecimapp.viewController.CitaViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.AccountManagementViewController">
    <children>
       <Separator layoutX="14.0" layoutY="60.0" prefWidth="1250.0" />
       <GridPane layoutX="76.0" layoutY="80.0" prefHeight="210.0" prefWidth="1150.0">
@@ -102,6 +102,7 @@
       <TableView fx:id="tblAccount" layoutX="95.0" layoutY="391.0" prefHeight="234.0" prefWidth="1089.0">
          <columns>
             <TableColumn fx:id="tcId" prefWidth="144.0" text="Id" />
+            <TableColumn fx:id="tcAccountNumber" prefWidth="144.0" text="Número de Cuenta" />
             <TableColumn fx:id="tcBankName" prefWidth="159.0" text="Nombre Banco" />
             <TableColumn fx:id="tcAccountType" prefWidth="161.0" text="Tipo Cuenta" />
             <TableColumn fx:id="tcCreationDate" prefWidth="143.0" text="Fecha Creación" />

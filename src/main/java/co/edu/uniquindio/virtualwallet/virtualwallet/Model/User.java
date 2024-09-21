@@ -1,4 +1,4 @@
-package co.edu.uniquindio.virtualwallet.virtualwallet.Model;
+package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

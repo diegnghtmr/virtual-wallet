@@ -1,4 +1,4 @@
-package co.edu.uniquindio.virtualwallet.virtualwallet.Model;
+package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +19,9 @@ public abstract class Person {
     private LocalDate registrationDate;
 
     public Person() {
+
+    }
+    public Person(String id, String fullName, String phoneNumber, String email, String password, String birthDate, String registrationDate){
         this.id = id;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -27,4 +30,5 @@ public abstract class Person {
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
     }
+
 }
