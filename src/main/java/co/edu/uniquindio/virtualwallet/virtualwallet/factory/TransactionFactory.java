@@ -1,9 +1,9 @@
-package co.edu.uniquindio.virtualwallet.virtualwallet.Factory;
+package co.edu.uniquindio.virtualwallet.virtualwallet.factory;
 
-import co.edu.uniquindio.virtualwallet.virtualwallet.Factory.inter.Transaction;
-import co.edu.uniquindio.virtualwallet.virtualwallet.Factory.inter.implementation.Deposit;
-import co.edu.uniquindio.virtualwallet.virtualwallet.Factory.inter.implementation.Transfer;
-import co.edu.uniquindio.virtualwallet.virtualwallet.Factory.inter.implementation.Withdrawal;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Transfer;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal;
 
 public class TransactionFactory {
     public Transaction getTransaction(String transactionType) {

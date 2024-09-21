@@ -1,13 +1,14 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 
 public abstract class Person {
     private String id;
@@ -21,7 +22,7 @@ public abstract class Person {
     public Person() {
 
     }
-    public Person(String id, String fullName, String phoneNumber, String email, String password, String birthDate, String registrationDate){
+    public Person(String id, String fullName, String phoneNumber, String email, String password, LocalDate birthDate, LocalDate registrationDate){
         this.id = id;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;

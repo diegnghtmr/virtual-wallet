@@ -1,4 +1,5 @@
-package co.edu.uniquindio.virtualwallet.virtualwallet.Model;
+package co.edu.uniquindio.virtualwallet.virtualwallet.model;
+
 
 public class Administrator extends Person{
     public Administrator(){

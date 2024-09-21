@@ -1,4 +1,4 @@
-package co.edu.uniquindio.virtualwallet.virtualwallet.Factory.inter;
+package co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

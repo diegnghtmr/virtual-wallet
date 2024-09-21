@@ -1,6 +1,6 @@
-package co.edu.uniquindio.virtualwallet.virtualwallet.Factory.inter.implementation;
+package co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation;
 
-import co.edu.uniquindio.virtualwallet.virtualwallet.Factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import lombok.Getter;
 import lombok.Setter;
 
