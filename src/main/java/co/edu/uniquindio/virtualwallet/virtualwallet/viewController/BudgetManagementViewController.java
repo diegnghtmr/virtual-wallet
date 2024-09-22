@@ -1,5 +1,7 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.BudgetDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class BudgetManagementViewController {
+public class BudgetManagementViewController extends CoreViewController implements ICoreViewController<BudgetDto> {
     @FXML
     private Button btnAdd;
 
@@ -52,46 +54,67 @@ public class BudgetManagementViewController {
     private TextField txttotalAmount;
 
     @FXML
-    void onAdd(ActionEvent event) {
+    public void onAdd(ActionEvent event) {
 
     }
 
     @FXML
-    void onNew(ActionEvent event) {
+    public void onNew(ActionEvent event) {
 
     }
 
     @FXML
-    void onNotification(ActionEvent event) {
+    public void onNotification(ActionEvent event) {
 
     }
 
     @FXML
-    void onRemove(ActionEvent event) {
+    public void onRemove(ActionEvent event) {
 
     }
 
     @FXML
-    void onUpdate(ActionEvent event) {
+    public void onUpdate(ActionEvent event) {
 
     }
 
     @FXML
-    void initialize() {
-        assert btnAdd != null : "fx:id=\"btnAdd\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert btnNew != null : "fx:id=\"btnNew\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert btnNotification != null : "fx:id=\"btnNotification\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert btnRemove != null : "fx:id=\"btnRemove\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert btnUpdate != null : "fx:id=\"btnUpdate\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert cbCategory != null : "fx:id=\"cbCategory\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert tblBudget != null : "fx:id=\"tblBudget\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert tcCategory != null : "fx:id=\"tcCategory\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert tcId != null : "fx:id=\"tcId\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert tcName != null : "fx:id=\"tcName\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert tcamountSpent != null : "fx:id=\"tcamountSpent\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert tctotalAmount != null : "fx:id=\"tctotalAmount\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert txtNombre != null : "fx:id=\"txtNombre\" was not injected: check your FXML file 'budget-management-view.fxml'.";
-        assert txttotalAmount != null : "fx:id=\"txttotalAmount\" was not injected: check your FXML file 'budget-management-view.fxml'.";
+    public void initialize() {
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initDataBinding() {
+
+    }
+
+    @Override
+    public void listenerSelection() {
+
+    }
+
+    @Override
+    public void showInformation(BudgetDto budgetSelected) {
+
+    }
+
+    @Override
+    public boolean validateData(BudgetDto budgetDto) {
+        return false;
+    }
+
+    @Override
+    public void clearFields() {
+
+    }
+
+    @Override
+    public void deselectTable() {
 
     }
 

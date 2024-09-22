@@ -2,23 +2,17 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementati
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@SuperBuilder
 
 public class Deposit extends Transaction {
-    private Account account;
 
-    public Deposit() {
-        super();
-
-    }
-
-    public Deposit(Account account) {
-        super();
-        this.account = account;
-
-    }
 }

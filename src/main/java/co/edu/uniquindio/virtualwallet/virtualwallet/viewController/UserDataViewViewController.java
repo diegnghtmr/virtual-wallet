@@ -1,11 +1,13 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IUserManagementViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class UserDataViewController {
+public class UserDataViewViewController extends CoreViewController implements IUserManagementViewController<UserDto> {
     @FXML
     private Button btnGoDashboard;
 
@@ -43,23 +45,43 @@ public class UserDataViewController {
     private TextField txtUserName;
 
     @FXML
-    void onGoDashboard(ActionEvent event) {
+    public void onGoDashboard(ActionEvent event) {
 
     }
 
     @FXML
-    void onLogout(ActionEvent event) {
+    public void onLogout(ActionEvent event) {
 
     }
 
     @FXML
-    void onUpdate(ActionEvent event) {
+    public void onUpdate(ActionEvent event) {
 
     }
 
     @FXML
-    void initialize() {
+    public void initialize() {
 
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initDataBinding() {
+
+    }
+
+    @Override
+    public void listenerSelection() {
+
+    }
+
+    @Override
+    public boolean validateData(UserDto userDto) {
+        return false;
     }
 
 }

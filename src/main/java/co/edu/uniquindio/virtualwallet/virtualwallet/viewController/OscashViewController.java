@@ -1,5 +1,6 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IOscashViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class OscashViewController {
+public class OscashViewController extends CoreViewController implements IOscashViewController {
 
     @FXML
     private Button btnNotification;
@@ -28,22 +29,22 @@ public class OscashViewController {
     private TextArea txtaAnswer;
 
     @FXML
-    void onNotification(ActionEvent event) {
+    public void onNotification(ActionEvent event) {
 
     }
 
     @FXML
-    void onSendMessage(ActionEvent event) {
+    public void onSendMessage(ActionEvent event) {
 
     }
 
     @FXML
-    void onSendRating(ActionEvent event) {
+    public void onSendRating(ActionEvent event) {
 
     }
 
     @FXML
-    void initialize() {
+    public void initialize() {
 
     }
 

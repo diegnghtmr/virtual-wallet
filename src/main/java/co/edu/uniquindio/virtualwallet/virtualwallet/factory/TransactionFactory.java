@@ -19,7 +19,5 @@ public class TransactionFactory {
         }else {
             return null;
         }
-
-
     }
 }

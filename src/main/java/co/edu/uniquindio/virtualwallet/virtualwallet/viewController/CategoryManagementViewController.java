@@ -1,5 +1,7 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,7 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class CategoryManagementViewController extends CoreViewController {
+public class CategoryManagementViewController extends CoreViewController implements ICoreViewController<CategoryDto> {
 
     @FXML
     private Button btnAdd;
@@ -44,32 +46,67 @@ public class CategoryManagementViewController extends CoreViewController {
     private TextArea txtaDescription;
 
     @FXML
-    void onAdd(ActionEvent event) {
+    public void onAdd(ActionEvent event) {
 
     }
 
     @FXML
-    void onNew(ActionEvent event) {
+    public void onNew(ActionEvent event) {
 
     }
 
     @FXML
-    void onNotification(ActionEvent event) {
+    public void onNotification(ActionEvent event) {
 
     }
 
     @FXML
-    void onRemove(ActionEvent event) {
+    public void onRemove(ActionEvent event) {
 
     }
 
     @FXML
-    void onUpdate(ActionEvent event) {
+    public void onUpdate(ActionEvent event) {
 
     }
 
     @FXML
-    void initialize() {
+    public void initialize() {
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initDataBinding() {
+
+    }
+
+    @Override
+    public void listenerSelection() {
+
+    }
+
+    @Override
+    public void showInformation(CategoryDto categorySelected) {
+
+    }
+
+    @Override
+    public boolean validateData(CategoryDto categoryDto) {
+        return false;
+    }
+
+    @Override
+    public void clearFields() {
+
+    }
+
+    @Override
+    public void deselectTable() {
 
     }
 

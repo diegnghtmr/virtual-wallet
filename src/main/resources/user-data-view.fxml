@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.UserDataViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.UserDataViewViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#080e48" height="51.0" layoutX="50.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1179.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="305.0" layoutY="1.0" text="           ¡Bienvenido, Usuario!" textAlignment="CENTER" textFill="WHITE">
@@ -216,7 +216,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <Label layoutX="113.0" layoutY="564.0" text="&quot;Incluso cuando las cosas salen muy very very, recuerda: tu memoria muscular sabe el camino. Cada dia es una leccion que te acerca mas a la meta, no olvides que esto vale la plata. ¡Persiste y triunfaras!&quot;" />
+      <Label layoutX="104.0" layoutY="570.0" text="&quot;Incluso cuando las cosas salen muy very very, recuerda: tu memoria muscular sabe el camino. Cada día es una lección que te acerca más a la meta, no olvides que esto vale la plata. ¡Persiste y triunfarás!&quot;" />
       <Button fx:id="btnLogout" layoutX="116.0" layoutY="618.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="37.0" prefWidth="137.0" style="-fx-background-color: #1971c2;" text="Cerrar Sesión" textFill="WHITE">
          <font>
             <Font size="14.0" />
@@ -227,12 +227,12 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Separator layoutX="-1.0" layoutY="536.0" prefHeight="2.0" prefWidth="1255.0" />
-      <Separator layoutX="10.0" layoutY="440.0" prefHeight="2.0" prefWidth="1255.0" />
       <Button fx:id="btnUpdate" layoutX="558.0" layoutY="467.0" mnemonicParsing="false" onAction="#onUpdate" prefHeight="37.0" prefWidth="137.0" style="-fx-background-color: #1971c2;" text="Actualizar" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
+      <Separator layoutX="14.0" layoutY="440.0" prefWidth="1250.0" />
+      <Separator layoutX="14.0" layoutY="536.0" prefWidth="1250.0" />
    </children>
 </AnchorPane>

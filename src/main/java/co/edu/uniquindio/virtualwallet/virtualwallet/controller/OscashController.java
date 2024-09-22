@@ -1,0 +1,4 @@
+package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
+
+public class OscashController {
+}

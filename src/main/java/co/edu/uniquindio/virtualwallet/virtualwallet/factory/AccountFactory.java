@@ -9,7 +9,7 @@ public class AccountFactory {
         if (accountType == null) {
             return null;
         }
-        if (accountType.equalsIgnoreCase("AHORRO") || accountType.equalsIgnoreCase("AHORROS")) {
+        if (accountType.equalsIgnoreCase("AHORROS")) {
             return new SavingsAccount();
         } else if (accountType.equalsIgnoreCase("CORRIENTE")) {
             return new CheckingAccount();

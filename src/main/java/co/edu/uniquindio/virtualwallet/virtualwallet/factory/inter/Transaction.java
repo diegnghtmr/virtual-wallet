@@ -1,8 +1,10 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
@@ -10,25 +12,29 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Transaction {
+@SuperBuilder
+
+public abstract class Transaction {
     private String idTransaction;
     private LocalDate date;
     private double amount;
     private String description;
     private Category category;
+    private Account account;
 
 
-    public Transaction(double amount, String description, Category category) {
-        this.date = LocalDate.now();
+    public Transaction(double amount, String description, Category category, Account account) {
         this.idTransaction = generateId();
+        this.date = LocalDate.now();
         this.amount = amount;
         this.description = description;
         this.category = category;
+        this.account = account;
     }
 
     private String generateId() {
         SecureRandom random = new SecureRandom();
-        int idNumber = random.nextInt(1_000_000_000); // Genera un número entre 0 y 999999999
-        return String.format("%09d", idNumber); // Formatea a 9 dígitos
+        int idNumber = random.nextInt(1_000_000_000);
+        return String.format("%09d", idNumber);
     }
 }

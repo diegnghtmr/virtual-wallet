@@ -28,8 +28,5 @@ public class User extends Person{
         budgetList = new ArrayList<>();
     }
 
-    @Override
-    public String toString() {
-        return getId();
-    }
+
 }

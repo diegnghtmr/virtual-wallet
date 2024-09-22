@@ -1,5 +1,7 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.WithdrawalDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ITransactionViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class WithdrawalManagementViewController {
+public class WithdrawalManagementViewController extends CoreViewController implements ITransactionViewController<WithdrawalDto> {
 
     @FXML
     private Button btnAdd;
@@ -57,22 +59,52 @@ public class WithdrawalManagementViewController {
     private TextArea txtaDescription;
 
     @FXML
-    void onAdd(ActionEvent event) {
+    public void onAdd(ActionEvent event) {
 
     }
 
     @FXML
-    void onNew(ActionEvent event) {
+    public void onNew(ActionEvent event) {
 
     }
 
     @FXML
-    void onNotification(ActionEvent event) {
+    public void onNotification(ActionEvent event) {
 
     }
 
     @FXML
-    void initialize() {
+    public void initialize() {
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initDataBinding() {
+
+    }
+
+    @Override
+    public void listenerSelection() {
+
+    }
+
+    @Override
+    public boolean validateData(WithdrawalDto withdrawalDto) {
+        return false;
+    }
+
+    @Override
+    public void clearFields() {
+
+    }
+
+    @Override
+    public void deselectTable() {
 
     }
 
