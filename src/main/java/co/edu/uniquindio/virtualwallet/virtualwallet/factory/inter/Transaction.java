@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @SuperBuilder
 
-public abstract class Transaction {
+public  class Transaction {
     private String idTransaction;
     private LocalDate date;
     private double amount;

@@ -18,7 +18,7 @@ import java.util.Random;
 @NoArgsConstructor
 @SuperBuilder
 
-public abstract class Account {
+public  class Account {
     private double balance;
     private String bankName;
     private String accountNumber;

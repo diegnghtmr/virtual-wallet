@@ -3,6 +3,7 @@ module co.edu.uniquindio.virtualwallet.virtualwallet {
     requires javafx.fxml;
     requires static lombok;
     requires org.mapstruct;
+    requires org.mapstruct.processor;
 
 
     opens co.edu.uniquindio.virtualwallet.virtualwallet to javafx.fxml;
