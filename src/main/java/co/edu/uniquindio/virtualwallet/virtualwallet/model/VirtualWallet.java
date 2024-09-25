@@ -60,11 +60,13 @@ public class VirtualWallet {
         return verifyAccountExistenceRecursive(accounts, accountNumber, i + 1);
     }
 
-    public void addAccount(Account account) {
+    public void addAccount(Account account) throws AccountException {
         if (account instanceof SavingsAccount) {
             savingsAccountList.add((SavingsAccount) account);
         } else if (account instanceof CheckingAccount) {
             checkingAccountList.add((CheckingAccount) account);
+        } else {
+            throw new AccountException("Tipo de cuenta no soportado");
         }
     }
 
@@ -99,7 +101,7 @@ public class VirtualWallet {
             accountCurrent.setUser(account.getUser());
             accountCurrent.setAssociatedTransfers(account.getAssociatedTransfers());
             accountCurrent.setAssociatedDeposits(account.getAssociatedDeposits());
-            accountCurrent.setAssociatedWithdrawal(account.getAssociatedWithdrawal());
+            accountCurrent.setAssociatedWithdrawals(account.getAssociatedWithdrawals());
             return true;
         }
     }

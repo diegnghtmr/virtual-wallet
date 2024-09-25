@@ -1,6 +1,6 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto;
 
-import co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +14,8 @@ public record UserDto(
         LocalDate birthDate,
         LocalDate registrationDate,
         String address,
-        double totalBalance
-
+        double totalBalance,
+        List<BudgetDto> budgetList,
+        List<Account> associatedAccounts
 ) {
 }

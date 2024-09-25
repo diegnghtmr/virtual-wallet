@@ -2,14 +2,16 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.AccountDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransactionDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CheckingAccountDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.SavingsAccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWalletMapper;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.VirtualWalletUtils;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -47,14 +49,24 @@ public class ModelFactory {
 
 
     // Methods to be implemented
-
     public List<AccountDto> getAccounts() {
-        return virtualWalletMapper.getAccountsDto(virtualWallet.getAccounts());
+        List<AccountDto> accountDtos = new ArrayList<>();
+        accountDtos.addAll(virtualWalletMapper.getSavingsAccountsDto(virtualWallet.getSavingsAccountList()));
+        accountDtos.addAll(virtualWalletMapper.getCheckingAccountsDto(virtualWallet.getCheckingAccountList()));
+        return accountDtos;
     }
+
     public boolean addAccount(AccountDto accountDto) {
         try {
             if (!virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
-                Account account = virtualWalletMapper.accountDtoToAccount(accountDto);
+                Account account;
+                if (accountDto instanceof CheckingAccountDto) {
+                    account = virtualWalletMapper.checkingAccountDtoToCheckingAccount((CheckingAccountDto) accountDto);
+                } else if (accountDto instanceof SavingsAccountDto) {
+                    account = virtualWalletMapper.savingsAccountDtoToSavingsAccount((SavingsAccountDto) accountDto);
+                } else {
+                    throw new IllegalArgumentException("Tipo de cuenta no soportado");
+                }
                 getVirtualWallet().addAccount(account);
             }
             return true;
@@ -76,7 +88,14 @@ public class ModelFactory {
 
     public boolean updateAccount(AccountDto accountSelected, AccountDto accountDto) {
         try {
-            Account account = virtualWalletMapper.accountDtoToAccount(accountDto);
+            Account account;
+            if (accountDto instanceof CheckingAccountDto) {
+                account = virtualWalletMapper.checkingAccountDtoToCheckingAccount((CheckingAccountDto) accountDto);
+            } else if (accountDto instanceof SavingsAccountDto) {
+                account = virtualWalletMapper.savingsAccountDtoToSavingsAccount((SavingsAccountDto) accountDto);
+            } else {
+                throw new IllegalArgumentException("Tipo de cuenta no soportado");
+            }
             getVirtualWallet().updateAccount(accountSelected.accountNumber(), account);
             return true;
         } catch (AccountException e) {

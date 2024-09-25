@@ -2,6 +2,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.AccountManagementController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AccountManagementViewController extends CoreViewController implements ICoreViewController<AccountDto> {
@@ -169,6 +171,10 @@ public class AccountManagementViewController extends CoreViewController implemen
 
     private void addAccount() {
         AccountDto accountDto = buildAccountDto();
+        if (accountDto == null) {
+            showMessage("Error", "Datos no válidos", "El tipo de cuenta seleccionado no es válido", Alert.AlertType.ERROR);
+            return;
+        }
         if (validateData(accountDto)) {
             if (accountManagementController.addAccountDto(accountDto)) {
                 accountsListDto.add(accountDto);
@@ -182,17 +188,33 @@ public class AccountManagementViewController extends CoreViewController implemen
         }
     }
 
+    // src/main/java/co/edu/uniquindio/virtualwallet/virtualwallet/viewController/AccountManagementViewController.java
     private AccountDto buildAccountDto() {
-        return new AccountDto(
-                0, // Balance inicial
-                txtBankName.getText(), // Nombre del banco
-                txtAccountNumber.getText(), // Número de cuenta
-                new UserDto(null, null, null, null, null,
-                        null, null, null, 0), // Usuario asociado
-                new ArrayList<TransferDto>(), // Lista de transferencias asociadas
-                new ArrayList<DepositDto>(), // Lista de depósitos asociados
-                new ArrayList<WithdrawalDto>() // Lista de retiros asociados
-        );
+        String accountType = cbAccountType.getValue();
+        if ("AHORROS".equals(accountType)) {
+            return new SavingsAccountDto(
+                    0, // Balance inicial
+                    txtBankName.getText(), // Nombre del banco
+                    txtAccountNumber.getText(), // Número de cuenta
+                    new UserDto("", "", "", "", "", LocalDate.now(),  LocalDate.now(), "", 0, new ArrayList<>(), new ArrayList<>()), // Usuario asociado
+                    new ArrayList<TransferDto>(), // Lista de transferencias asociadas
+                    new ArrayList<DepositDto>(), // Lista de depósitos asociadas
+                    new ArrayList<WithdrawalDto>() // Lista de retiros asociados
+            );
+        } else if ("CORRIENTE".equals(accountType)) {
+            return new CheckingAccountDto(
+                    0, // Balance inicial
+                    txtBankName.getText(), // Nombre del banco
+                    txtAccountNumber.getText(), // Número de cuenta
+                    new UserDto("", "", "", "", "", LocalDate.now(),  LocalDate.now(), "", 0, new ArrayList<>(), new ArrayList<>()), // Usuario asociado
+                    new ArrayList<TransferDto>(), // Lista de transferencias asociadas
+                    new ArrayList<DepositDto>(), // Lista de depósitos asociadas
+                    new ArrayList<WithdrawalDto>(), // Lista de retiros asociados
+                    0 // Límite de sobregiro
+            );
+        } else {
+            return null;
+        }
     }
 
     private void removeAccount() {

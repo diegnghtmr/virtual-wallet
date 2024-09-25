@@ -25,7 +25,7 @@ public  class Account {
     private User user;
     private List<Transfer>associatedTransfers;
     private List<Deposit>associatedDeposits ;
-    private List<Withdrawal> associatedWithdrawal;
+    private List<Withdrawal> associatedWithdrawals;
 
     public Account(String bankName, String accountNumber, User user){
         this.balance = 0;
@@ -34,6 +34,6 @@ public  class Account {
         this.associatedTransfers = new ArrayList<>();
         this.bankName = bankName;
         this.associatedDeposits = new ArrayList<>();
-        this.associatedWithdrawal = new ArrayList<>();
+        this.associatedWithdrawals = new ArrayList<>();
     }
 }

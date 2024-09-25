@@ -1,22 +1,15 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.MovementManagementController;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.AccountDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransactionDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransferDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IRecordViewController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IReportGenerationViewController;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Function;
 
 
 public class MovementManagementViewController extends CoreViewController implements IRecordViewController<TransactionDto>, IReportGenerationViewController {

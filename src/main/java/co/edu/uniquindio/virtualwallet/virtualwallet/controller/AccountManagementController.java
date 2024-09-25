@@ -1,6 +1,6 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.AccountDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 
 import java.util.List;
 

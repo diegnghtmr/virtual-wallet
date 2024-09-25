@@ -28,7 +28,6 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "amount", target = "amount")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "category", target = "category")
-    @Mapping(source = "commission", target = "commission")
     @Mapping(source = "account", target = "account")
     @Mapping(source = "receivingAccount", target = "receivingAccount")
     TransferDto transferToTransferDto(Transfer transfer);
@@ -39,7 +38,6 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "amount", target = "amount")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "category", target = "category")
-    @Mapping(source = "commission", target = "commission")
     @Mapping(source = "account", target = "account")
     @Mapping(source = "receivingAccount", target = "receivingAccount")
     Transfer transferDtoToTransfer(TransferDto transferDto);
@@ -70,8 +68,6 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "amount", target = "amount")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "category", target = "category")
-    @Mapping(source = "withdrawalLimit", target = "withdrawalLimit")
-    @Mapping(source = "commission", target = "commission")
     @Mapping(source = "account", target = "account")
     WithdrawalDto withdrawalToWithdrawalDto(Withdrawal withdrawal);
 
@@ -81,8 +77,6 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "amount", target = "amount")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "category", target = "category")
-    @Mapping(source = "withdrawalLimit", target = "withdrawalLimit")
-    @Mapping(source = "commission", target = "commission")
     @Mapping(source = "account", target = "account")
     Withdrawal withdrawalDtoToWithdrawal(WithdrawalDto withdrawalDto);
 
@@ -196,40 +190,6 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "user", target = "user")
     Budget budgetDtoToBudget(BudgetDto budgetDto);
 
-    // Transaction mapping methods
-    @Named("transactionToTransactionDto")
-    @Mapping(source = "idTransaction", target = "idTransaction")
-    @Mapping(source = "date", target = "date")
-    @Mapping(source = "amount", target = "amount")
-    @Mapping(source = "description", target = "description")
-    @Mapping(source = "category", target = "category")
-    @Mapping(source = "account", target = "account")
-    TransactionDto transactionToTransactionDto(Transaction transaction);
-
-    @Named("transactionDtoToTransaction")
-    @Mapping(source = "idTransaction", target = "idTransaction")
-    @Mapping(source = "date", target = "date")
-    @Mapping(source = "amount", target = "amount")
-    @Mapping(source = "description", target = "description")
-    @Mapping(source = "category", target = "category")
-    @Mapping(source = "account", target = "account")
-    Transaction transactionDtoToTransaction(TransactionDto transactionDto);
-
-    // Account mapping methods
-    @Named("accountToAccountDto")
-    @Mapping(source = "balance", target = "balance")
-    @Mapping(source = "bankName", target = "bankName")
-    @Mapping(source = "accountNumber", target = "accountNumber")
-    @Mapping(source = "user", target = "user")
-    AccountDto accountToAccountDto(Account account);
-
-    @Named("accountDtoToAccount")
-    @Mapping(source = "balance", target = "balance")
-    @Mapping(source = "bankName", target = "bankName")
-    @Mapping(source = "accountNumber", target = "accountNumber")
-    @Mapping(source = "user", target = "user")
-    Account accountDtoToAccount(AccountDto accountDto);
-
     // List mapping methods
     @IterableMapping(qualifiedByName = "transferToTransferDto")
     List<TransferDto> getTransfersDto(List<Transfer> listTransfers);
@@ -284,16 +244,4 @@ public interface IVirtualWalletMapper {
 
     @IterableMapping(qualifiedByName = "budgetDtoToBudget")
     List<Budget> getBudgets(List<BudgetDto> listBudgetsDto);
-
-    @IterableMapping(qualifiedByName = "transactionToTransactionDto")
-    List<TransactionDto> getTransactionsDto(List<Transaction> listTransactions);
-
-    @IterableMapping(qualifiedByName = "transactionDtoToTransaction")
-    List<Transaction> getTransactions(List<TransactionDto> listTransactionsDto);
-
-    @IterableMapping(qualifiedByName = "accountToAccountDto")
-    List<AccountDto> getAccountsDto(List<Account> listAccounts);
-
-    @IterableMapping(qualifiedByName = "accountDtoToAccount")
-    List<Account> getAccounts(List<AccountDto> listAccountsDto);
 }
