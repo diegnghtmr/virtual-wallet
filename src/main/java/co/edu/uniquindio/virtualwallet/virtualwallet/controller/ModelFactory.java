@@ -58,17 +58,18 @@ public class ModelFactory {
 
     public boolean addAccount(AccountDto accountDto) {
         try {
-            if (!virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
-                Account account;
-                if (accountDto instanceof CheckingAccountDto) {
-                    account = virtualWalletMapper.checkingAccountDtoToCheckingAccount((CheckingAccountDto) accountDto);
-                } else if (accountDto instanceof SavingsAccountDto) {
-                    account = virtualWalletMapper.savingsAccountDtoToSavingsAccount((SavingsAccountDto) accountDto);
-                } else {
-                    throw new IllegalArgumentException("Tipo de cuenta no soportado");
-                }
-                getVirtualWallet().addAccount(account);
+            if (virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
+                return false;
             }
+            Account account;
+            if (accountDto instanceof CheckingAccountDto) {
+                account = virtualWalletMapper.checkingAccountDtoToCheckingAccount((CheckingAccountDto) accountDto);
+            } else if (accountDto instanceof SavingsAccountDto) {
+                account = virtualWalletMapper.savingsAccountDtoToSavingsAccount((SavingsAccountDto) accountDto);
+            } else {
+                throw new IllegalArgumentException("Tipo de cuenta no soportado");
+            }
+            getVirtualWallet().addAccount(account);
             return true;
         } catch (Exception e) {
             e.getMessage();
