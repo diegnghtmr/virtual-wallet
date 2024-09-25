@@ -4,10 +4,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,28 +13,19 @@ import java.util.List;
 @Setter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 
 public class VirtualWallet {
-    private List<Deposit> depositList;
-    private List<Transfer> transferList;
-    private List<Withdrawal> withdrawalList;
-    private List<Category> categoryList;
-    private List<Budget> budgetList;
-    private List<SavingsAccount> savingsAccountList;
-    private List<CheckingAccount> checkingAccountList;
-    private List<User> userList;
+    private String name = "BuckTrack";
+    private List<Deposit> depositList = new ArrayList<>();
+    private List<Transfer> transferList = new ArrayList<>();
+    private List<Withdrawal> withdrawalList = new ArrayList<>();
+    private List<Category> categoryList = new ArrayList<>();
+    private List<Budget> budgetList = new ArrayList<>();
+    private List<SavingsAccount> savingsAccountList = new ArrayList<>();
+    private List<CheckingAccount> checkingAccountList = new ArrayList<>();
+    private List<User> userList = new ArrayList<>();
     private Administrator administrator;
-
-    public VirtualWallet(){
-        depositList = new ArrayList<>();
-        transferList = new ArrayList<>();
-        withdrawalList = new ArrayList<>();
-        categoryList = new ArrayList<>();
-        budgetList = new ArrayList<>();
-        savingsAccountList = new ArrayList<>();
-        checkingAccountList = new ArrayList<>();
-        userList = new ArrayList<>();
-    }
 
     public List<Account> getAccounts() {
         List<Account> accountList = new ArrayList<>();
@@ -71,16 +59,17 @@ public class VirtualWallet {
     }
 
     public boolean removeAccount(String accountNumber) throws AccountException {
-        Account account = null;
-        boolean flagExist = false;
-        account = getAccount(accountNumber);
+        Account account = getAccount(accountNumber);
         if (account == null) {
             throw new AccountException("La cuenta a eliminar no existe");
         } else {
-            getAccounts().remove(account);
-            flagExist = true;
+            if (account instanceof SavingsAccount) {
+                savingsAccountList.remove(account);
+            } else if (account instanceof CheckingAccount) {
+                checkingAccountList.remove(account);
+            }
+            return true;
         }
-        return flagExist;
     }
 
     private Account getAccount(String accountNumber) {

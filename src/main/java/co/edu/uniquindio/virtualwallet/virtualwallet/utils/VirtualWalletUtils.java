@@ -114,17 +114,18 @@ public class VirtualWalletUtils {
         transfer.setReceivingAccount(checkingAccount);
 
         // Create and populate VirtualWallet
-        VirtualWallet virtualWallet = VirtualWallet.builder()
-                .categoryList(Arrays.asList(foodCategory, travelCategory))
-                .budgetList(Arrays.asList(foodBudget, travelBudget))
-                .savingsAccountList(Arrays.asList(savingsAccount))
-                .checkingAccountList(Arrays.asList(checkingAccount))
-                .userList(Arrays.asList(user1))
-                .administrator(admin)
-                .depositList(Arrays.asList(deposit))
-                .withdrawalList(Arrays.asList(withdrawal))
-                .transferList(Arrays.asList(transfer))
-                .build();
+        VirtualWallet virtualWallet = new VirtualWallet();
+        virtualWallet.getCategoryList().add(foodCategory);
+        virtualWallet.getCategoryList().add(travelCategory);
+        virtualWallet.getBudgetList().add(foodBudget);
+        virtualWallet.getBudgetList().add(travelBudget);
+        virtualWallet.getSavingsAccountList().add(savingsAccount);
+        virtualWallet.getCheckingAccountList().add(checkingAccount);
+        virtualWallet.getUserList().add(user1);
+        virtualWallet.setAdministrator(admin);
+        virtualWallet.getDepositList().add(deposit);
+        virtualWallet.getWithdrawalList().add(withdrawal);
+        virtualWallet.getTransferList().add(transfer);
 
         return virtualWallet;
     }
