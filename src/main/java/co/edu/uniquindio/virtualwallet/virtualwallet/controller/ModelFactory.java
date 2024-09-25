@@ -71,7 +71,7 @@ public class ModelFactory {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
             return false;
         }
     }
