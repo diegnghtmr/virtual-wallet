@@ -2,7 +2,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.exceptions;
 
 public class CategoryException extends Exception{
 
-    public CategoryException(String mensaje){
-        super(mensaje);
+    public CategoryException(String message){
+        super(message);
     }
 }

@@ -7,10 +7,12 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CheckingAccount
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.SavingsAccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWalletMapper;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PersistenceUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.VirtualWalletUtils;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,19 +26,74 @@ public class ModelFactory {
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
     private static class SingletonHolder {
-
         private static final ModelFactory eINSTANCE = new ModelFactory();
-
-
-
-
     }
+
     public static ModelFactory getInstance(){
         return SingletonHolder.eINSTANCE;
     }
+
     public ModelFactory() {
+        //1. initialize data and then save it to files
+        System.out.println("singleton class invocation");
         initializeData();
+        //saveTestData();
+
+        //2. Load data from files
+        //loadDataFromFiles();
+
+        //3. Save and Load the binary serializable resource
+        //loadBinaryResource();
+        //saveBinaryResource();
+
+        //4. Save and Load the XML serializable resource
+        //saveXMLResource();
+        loadXMLResource();
+
+        //You should always check if the root of the resource is null
+
+        if(virtualWallet == null){
+            initializeData();
+            saveXMLResource();
+        }
+        registerSystemActions("Login", 1, "login");
     }
+
+    private void loadDataFromFiles() {
+        virtualWallet = new VirtualWallet();
+        try {
+            PersistenceUtil.loadFileData(virtualWallet);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void saveTestData() {
+        try {
+            //PersistenceUtil.saveEmployees(getBank().getEmployeeList());
+            PersistenceUtil.saveAccounts(getVirtualWallet().getAccounts());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void loadXMLResource() {
+        virtualWallet = PersistenceUtil.loadXMLVirtualWalletResource();
+    }
+
+    private void saveXMLResource() {
+        PersistenceUtil.saveXMLVirtualWalletResource(virtualWallet);
+    }
+
+    private void registerSystemActions(String logMessage, int level, String action) {
+        PersistenceUtil.saveLogRecord(logMessage, level, action);
+    }
+
+
+
+
+
+
     private void initializeData() {
         virtualWallet = VirtualWalletUtils.initializeData();
     }
@@ -46,7 +103,6 @@ public class ModelFactory {
     public List<String> getAccountTypes() {
         return VirtualWalletUtils.getAccountTypes();
     }
-
 
     // Methods to be implemented
     public List<AccountDto> getAccounts() {
@@ -64,15 +120,19 @@ public class ModelFactory {
             Account account;
             if (accountDto instanceof CheckingAccountDto) {
                 account = virtualWalletMapper.checkingAccountDtoToCheckingAccount((CheckingAccountDto) accountDto);
+                registerSystemActions("CheckingAccountDto added: " + accountDto.accountNumber(), 1, "addAccount");
             } else if (accountDto instanceof SavingsAccountDto) {
                 account = virtualWalletMapper.savingsAccountDtoToSavingsAccount((SavingsAccountDto) accountDto);
+                registerSystemActions("SavingsAccountDto added: " + accountDto.accountNumber(), 1, "addAccount");
             } else {
                 throw new IllegalArgumentException("Tipo de cuenta no soportado");
             }
             getVirtualWallet().addAccount(account);
+            saveXMLResource();
             return true;
         } catch (Exception e) {
             e.getMessage();
+            registerSystemActions(e.getMessage(), 3, "addAccount");
             return false;
         }
     }

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.4" class="java.beans.XMLDecoder">
+ <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet" id="VirtualWallet0">
+  <void property="administrator">
+   <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator">
+    <void property="email">
+     <string>admin@example.com</string>
+    </void>
+    <void property="fullName">
+     <string>Admin User</string>
+    </void>
+    <void property="id">
+     <string>A001</string>
+    </void>
+    <void property="password">
+     <string>adminpassword</string>
+    </void>
+    <void property="phoneNumber">
+     <string>0987654321</string>
+    </void>
+   </object>
+  </void>
+  <void property="budgetList">
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget">
+     <void property="amountSpent">
+      <double>200.0</double>
+     </void>
+     <void property="category">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category" id="Category0">
+       <void property="description">
+        <string>Expenses on food</string>
+       </void>
+       <void property="id">
+        <string>001</string>
+       </void>
+       <void property="name">
+        <string>Food</string>
+       </void>
+      </object>
+     </void>
+     <void property="id">
+      <string>B001</string>
+     </void>
+     <void property="name">
+      <string>Monthly Food Budget</string>
+     </void>
+     <void property="totalAmount">
+      <double>500.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget">
+     <void property="amountSpent">
+      <double>100.0</double>
+     </void>
+     <void property="category">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category" id="Category1">
+       <void property="description">
+        <string>Expenses on travel</string>
+       </void>
+       <void property="id">
+        <string>002</string>
+       </void>
+       <void property="name">
+        <string>Travel</string>
+       </void>
+      </object>
+     </void>
+     <void property="id">
+      <string>B002</string>
+     </void>
+     <void property="name">
+      <string>Monthly Travel Budget</string>
+     </void>
+     <void property="totalAmount">
+      <double>300.0</double>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="categoryList">
+   <void method="add">
+    <object idref="Category0"/>
+   </void>
+   <void method="add">
+    <object idref="Category1"/>
+   </void>
+  </void>
+  <void property="checkingAccountList">
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount" id="CheckingAccount0">
+     <void property="accountNumber">
+      <string>0987654321</string>
+     </void>
+     <void property="balance">
+      <double>1500.0</double>
+     </void>
+     <void property="bankName">
+      <string>Bancolombia</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="depositList">
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit">
+     <void property="account">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount0">
+       <void property="accountNumber">
+        <string>1234567890</string>
+       </void>
+       <void property="balance">
+        <double>1500.0</double>
+       </void>
+       <void property="bankName">
+        <string>Banco de Occidente</string>
+       </void>
+      </object>
+     </void>
+     <void property="amount">
+      <double>500.0</double>
+     </void>
+     <void property="category">
+      <object idref="Category0"/>
+     </void>
+     <void property="description">
+      <string>Initial deposit</string>
+     </void>
+     <void property="idTransaction">
+      <string>D001</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="savingsAccountList">
+   <void method="add">
+    <object idref="SavingsAccount0"/>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount">
+     <void property="accountNumber">
+      <string>321312312</string>
+     </void>
+     <void property="associatedDeposits">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedTransfers">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedWithdrawals">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="bankName">
+      <string>dasdadsa</string>
+     </void>
+     <void property="user">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+       <void property="address">
+        <string></string>
+       </void>
+       <void property="associatedAccounts">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="budgetList">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="email">
+        <string></string>
+       </void>
+       <void property="fullName">
+        <string></string>
+       </void>
+       <void property="id">
+        <string></string>
+       </void>
+       <void property="password">
+        <string></string>
+       </void>
+       <void property="phoneNumber">
+        <string></string>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="transferList">
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Transfer">
+     <void property="account">
+      <object idref="SavingsAccount0"/>
+     </void>
+     <void property="amount">
+      <double>300.0</double>
+     </void>
+     <void property="category">
+      <object idref="Category0"/>
+     </void>
+     <void property="description">
+      <string>Transfer to checking account</string>
+     </void>
+     <void property="idTransaction">
+      <string>T001</string>
+     </void>
+     <void property="receivingAccount">
+      <object idref="CheckingAccount0"/>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="userList">
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+     <void property="address">
+      <string>123 Main St</string>
+     </void>
+     <void property="email">
+      <string>john.doe@example.com</string>
+     </void>
+     <void property="fullName">
+      <string>John Doe</string>
+     </void>
+     <void property="id">
+      <string>U001</string>
+     </void>
+     <void property="password">
+      <string>password</string>
+     </void>
+     <void property="phoneNumber">
+      <string>1234567890</string>
+     </void>
+     <void property="totalBalance">
+      <double>3000.0</double>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="withdrawalList">
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal">
+     <void property="account">
+      <object idref="CheckingAccount0"/>
+     </void>
+     <void property="amount">
+      <double>200.0</double>
+     </void>
+     <void property="category">
+      <object idref="Category1"/>
+     </void>
+     <void property="description">
+      <string>ATM withdrawal</string>
+     </void>
+     <void property="idTransaction">
+      <string>W001</string>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

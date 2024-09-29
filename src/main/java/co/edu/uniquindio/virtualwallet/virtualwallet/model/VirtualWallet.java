@@ -2,7 +2,6 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
-import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
 import lombok.*;
 
@@ -27,8 +26,8 @@ public class VirtualWallet {
     private List<User> userList = new ArrayList<>();
     private Administrator administrator;
 
-    public List<Account> getAccounts() {
-        List<Account> accountList = new ArrayList<>();
+    public ArrayList<Account> getAccounts() {
+        ArrayList<Account> accountList = new ArrayList<>();
         accountList.addAll(savingsAccountList);
         accountList.addAll(checkingAccountList);
         return accountList;

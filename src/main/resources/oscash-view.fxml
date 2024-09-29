@@ -78,12 +78,12 @@
             </ImageView>
             <ImageView fitHeight="39.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT">
                <image>
-                  <Image url="@img/usuario.png" />
+                  <Image url="@img/user.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="35.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@img/enviar-pregunta.png" />
+                  <Image url="@img/send-question.png" />
                </image>
             </ImageView>
             <Button fx:id="btnSendMessage" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#onSendMessage" opacity="0.0" text="Button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
