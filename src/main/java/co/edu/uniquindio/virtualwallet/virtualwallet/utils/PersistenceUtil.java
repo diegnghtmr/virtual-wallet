@@ -15,8 +15,8 @@ import java.util.List;
 
 public class PersistenceUtil {
 
-    public static final String ACCOUNTS_FILE_PATH = "src/main/resources/persistence/FileAccount.txt";
-    public static final String USERS_FILE_PATH = "src/main/resources/persistence/FileUser.txt";
+    public static final String ACCOUNTS_FILE_PATH = "src/main/resources/persistence/files/FileAccount.txt";
+    public static final String USERS_FILE_PATH = "src/main/resources/persistence/files/FileUser.txt";
     public static final String LOG_FILE_PATH = "src/main/resources/persistence/log/VirtualWalletLog.txt";
 //    public static final String OBJECTS_FILE_PATH = "co.edu.uniquindio.programacion3/src/main/resources/persistencia/archivoObjetos.txt";
     public static final String VIRTUAL_WALLET_MODEL_BINARY_FILE_PATH = "src/main/resources/persistence/Model.dat";
