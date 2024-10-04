@@ -5,6 +5,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class VirtualWallet {
+public class VirtualWallet implements Serializable {
     private String name = "BuckTrack";
     private List<Deposit> depositList = new ArrayList<>();
     private List<Transfer> transferList = new ArrayList<>();
@@ -31,6 +32,16 @@ public class VirtualWallet {
         accountList.addAll(savingsAccountList);
         accountList.addAll(checkingAccountList);
         return accountList;
+    }
+
+    public void getFileAccounts(List<Account> loadedAccounts) {
+        for (Account account : loadedAccounts) {
+            if (account instanceof SavingsAccount) {
+                savingsAccountList.add((SavingsAccount) account);
+            } else if (account instanceof CheckingAccount) {
+                checkingAccountList.add((CheckingAccount) account);
+            }
+        }
     }
 
     public boolean verifyAccountExistence(String accountNumber) {

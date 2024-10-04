@@ -36,19 +36,19 @@ public class ModelFactory {
     public ModelFactory() {
         //1. initialize data and then save it to files
         System.out.println("singleton class invocation");
-        initializeData();
+        //initializeData();
         //saveTestData();
 
         //2. Load data from files
         //loadDataFromFiles();
 
         //3. Save and Load the binary serializable resource
-        //loadBinaryResource();
-        //saveBinaryResource();
+        loadBinaryResource();
+        saveBinaryResource();
 
         //4. Save and Load the XML serializable resource
         //saveXMLResource();
-        loadXMLResource();
+        //loadXMLResource();
 
         //You should always check if the root of the resource is null
 
@@ -76,6 +76,16 @@ public class ModelFactory {
             throw new RuntimeException(e);
         }
     }
+
+    private void loadBinaryResource() {
+        virtualWallet = PersistenceUtil.loadBinaryVirtualWalletResource();
+    }
+
+    private void saveBinaryResource() {
+        PersistenceUtil.saveBinaryVirtualWalletResource(virtualWallet);
+    }
+
+
 
     private void loadXMLResource() {
         virtualWallet = PersistenceUtil.loadXMLVirtualWalletResource();

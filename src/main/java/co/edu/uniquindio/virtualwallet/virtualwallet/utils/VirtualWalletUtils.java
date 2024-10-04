@@ -10,6 +10,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementatio
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,18 +64,26 @@ public class VirtualWalletUtils {
 
         // Create example users
         User user1 = User.builder()
-                .id("U001")
+                .id("123456789")
                 .fullName("John Doe")
-                .phoneNumber("1234567890")
+                .phoneNumber("3244544139")
                 .email("john.doe@example.com")
-                .password("password")
+                .password("p1ssw0rd")
                 .birthDate(LocalDate.of(1990, 1, 1))
                 .registrationDate(LocalDate.now())
+                .budgetList(new ArrayList<>())
+                .associatedAccounts(new ArrayList<>())
                 .address("123 Main St")
                 .totalBalance(3000.0)
-                .associatedAccounts(Arrays.asList(savingsAccount, checkingAccount))
-                .budgetList(Arrays.asList(foodBudget, travelBudget))
                 .build();
+
+        user1.getAssociatedAccounts().add(savingsAccount);
+        user1.getAssociatedAccounts().add(checkingAccount);
+        user1.getBudgetList().add(foodBudget);
+        user1.getBudgetList().add(travelBudget);
+
+        checkingAccount.setUser(user1);
+        savingsAccount.setUser(user1);
 
         // Create example administrator
         Administrator admin = Administrator.builder()
@@ -112,6 +121,8 @@ public class VirtualWalletUtils {
         transfer.setCategory(foodCategory);
         transfer.setAccount(savingsAccount);
         transfer.setReceivingAccount(checkingAccount);
+
+
 
         // Create and populate VirtualWallet
         VirtualWallet virtualWallet = new VirtualWallet();

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @SuperBuilder
 
-public  class Transaction {
+public  class Transaction implements Serializable {
     private String idTransaction;
     private LocalDate date;
     private double amount;

@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PersistenceUtil {
 
@@ -24,7 +25,7 @@ public class PersistenceUtil {
     public static void loadFileData(VirtualWallet virtualWallet) throws FileNotFoundException, IOException {
         ArrayList<Account> loadedAccounts = loadAccounts();
         if (loadedAccounts.size() > 0)
-            virtualWallet.getAccounts().addAll(loadedAccounts);
+            virtualWallet.getFileAccounts(loadedAccounts);
 
 //        ArrayList<User> loadedUsers = loadUsers();
 //        if (loadedUsers.size() > 0)
@@ -36,36 +37,35 @@ public class PersistenceUtil {
         for (Account account : accountList) {
             if (account instanceof CheckingAccount) {
                 CheckingAccount checkingAccount = (CheckingAccount) account;
+                User user = findUserById(checkingAccount.getUser().getId(), loadUsers(PersistenceUtil.USERS_FILE_PATH));
                 content += checkingAccount.getBankName()
                         + "," + checkingAccount.getAccountNumber()
                         + "," + checkingAccount.getBalance()
-                        + "," + checkingAccount.getUser().getFullName()
-                        + "," + checkingAccount.getUser().getId()
-                        + "," + checkingAccount.getUser().getAddress()
-                        + "," + checkingAccount.getUser().getEmail()
-                        + "," + checkingAccount.getUser().getBirthDate()
-                        + "," + checkingAccount.getUser().getPhoneNumber()
-                        + "," + checkingAccount.getUser().getPassword()
-                        + "," + checkingAccount.getUser().getRegistrationDate()
-                        + "," + checkingAccount.getUser().getTotalBalance()
-                        + "," + checkingAccount.getOverdraftLimit() + "\n";
+                        + "," + user.getId() // setear solo id
+                        + "\n";
             } else if (account instanceof SavingsAccount) {
                 SavingsAccount savingsAccount = (SavingsAccount) account;
+                // Modify the code to use the findUserById method
+                User user = savingsAccount.getUser();
+                findUserById(user.getId(), loadUsers(PersistenceUtil.USERS_FILE_PATH));
                 content += savingsAccount.getBankName()
                         + "," + savingsAccount.getAccountNumber()
                         + "," + savingsAccount.getBalance()
-                        + "," + savingsAccount.getUser().getFullName()
-                        + "," + savingsAccount.getUser().getId()
-                        + "," + savingsAccount.getUser().getAddress()
-                        + "," + savingsAccount.getUser().getEmail()
-                        + "," + savingsAccount.getUser().getBirthDate()
-                        + "," + savingsAccount.getUser().getPhoneNumber()
-                        + "," + savingsAccount.getUser().getPassword()
-                        + "," + savingsAccount.getUser().getRegistrationDate()
-                        + "," + savingsAccount.getUser().getTotalBalance() + "\n";
+                        + "," + user.getId() // setear solo id
+                        + "\n";
             }
         }
         FileUtil.saveFile(ACCOUNTS_FILE_PATH, content, false);
+    }
+
+    // Add this method to find a user by ID in the appropriate class, e.g., VirtualWallet or a utility class
+    public static User findUserById(String userId, List<User> userList) {
+        for (User user : userList) {
+            if (user.getId().equals(userId)) {
+                return user;
+            }
+        }
+        return null; // or throw an exception if user not found
     }
 
 //        public static void saveUsers(ArrayList<User> userList) throws IOException {
@@ -89,30 +89,12 @@ public class PersistenceUtil {
             String bankName = attributes[0];
             String accountNumber = attributes[1];
             double balance = Double.parseDouble(attributes[2]);
-            String fullName = attributes[3];
-            String id = attributes[4];
-            String address = attributes[5];
-            String email = attributes[6];
-            LocalDate birthDate = LocalDate.parse(attributes[7]);
-            String phoneNumber = attributes[8];
-            String password = attributes[9];
-            LocalDate registrationDate = LocalDate.parse(attributes[10]);
-            double totalBalance = Double.parseDouble(attributes[11]);
+            String userId = attributes[3];
 
-            User user = User.builder()
-                    .fullName(fullName)
-                    .id(id)
-                    .address(address)
-                    .email(email)
-                    .birthDate(birthDate)
-                    .phoneNumber(phoneNumber)
-                    .password(password)
-                    .registrationDate(registrationDate)
-                    .totalBalance(totalBalance)
-                    .build();
+            User user = findUserById(userId, loadUsers(PersistenceUtil.USERS_FILE_PATH));
 
-            if (attributes.length == 13) { // CheckingAccount
-                double overdraftLimit = Double.parseDouble(attributes[12]);
+            if (attributes.length == 5) { // CheckingAccount
+                double overdraftLimit = Double.parseDouble(attributes[4]);
                 CheckingAccount checkingAccount = CheckingAccount.builder()
                         .bankName(bankName)
                         .accountNumber(accountNumber)
@@ -181,9 +163,17 @@ public class PersistenceUtil {
 
         for (int i = 0; i < content.size(); i++) {
             line = content.get(i);
+            String[] attributes = line.split(",");
             User user = new User();
-            user.setFullName(line.split(",")[0]);
-            user.setPassword(line.split(",")[1]);
+            user.setFullName(attributes[0]);
+            user.setId(attributes[1]);
+            user.setAddress(attributes[2]);
+            user.setEmail(attributes[3]);
+            user.setBirthDate(LocalDate.parse(attributes[4]));
+            user.setPhoneNumber(attributes[5]);
+            user.setPassword(attributes[6]);
+            user.setRegistrationDate(LocalDate.parse(attributes[7]));
+            user.setTotalBalance(Double.parseDouble(attributes[8]));
             users.add(user);
         }
         return users;

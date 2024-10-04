@@ -3,6 +3,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @SuperBuilder
 
-public abstract class Person {
+public abstract class Person implements Serializable {
     private String id;
     private String fullName;
     private String phoneNumber;

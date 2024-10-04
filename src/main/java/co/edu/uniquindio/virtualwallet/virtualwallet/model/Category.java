@@ -3,6 +3,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +14,7 @@ import java.util.Random;
 @NoArgsConstructor
 @Builder
 
-public class Category {
+public class Category implements Serializable {
     private String id;
     private String name;
     private String description;

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +19,7 @@ import java.util.Random;
 @NoArgsConstructor
 @SuperBuilder
 
-public  class Account {
+public  class Account implements Serializable {
     private double balance;
     private String bankName;
     private String accountNumber;
