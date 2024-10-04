@@ -27,6 +27,7 @@ public  class Account implements Serializable {
     private List<Transfer>associatedTransfers;
     private List<Deposit>associatedDeposits ;
     private List<Withdrawal> associatedWithdrawals;
+    private static final long serialVersionUID = 1L;
 
     public Account(String bankName, String accountNumber, User user){
         this.balance = 0;

@@ -20,4 +20,5 @@ public abstract class Person implements Serializable {
     private String password;
     private LocalDate birthDate;
     private LocalDate registrationDate;
+    private static final long serialVersionUID = 1L;
 }

@@ -20,6 +20,7 @@ public class Category implements Serializable {
     private String description;
     private List<Budget> budgetList;
     private List<Transaction> transactionList;
+    private static final long serialVersionUID = 1L;
 
     public Category(String id, String name, String description) {
         this.id = generateId();

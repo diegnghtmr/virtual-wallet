@@ -18,4 +18,5 @@ public class Budget implements Serializable {
     private double amountSpent;
     private Category category;
     private User user;
+    private static final long serialVersionUID = 1L;
 }

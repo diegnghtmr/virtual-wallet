@@ -34,8 +34,8 @@ public class ModelFactory {
     }
 
     public ModelFactory() {
-        //1. initialize data and then save it to files
         System.out.println("singleton class invocation");
+        //1. initialize data and then save it to files
         //initializeData();
         //saveTestData();
 
@@ -43,17 +43,18 @@ public class ModelFactory {
         //loadDataFromFiles();
 
         //3. Save and Load the binary serializable resource
-        loadBinaryResource();
-        saveBinaryResource();
+        //loadBinaryResource();
+        //saveBinaryResource();
 
         //4. Save and Load the XML serializable resource
-        //saveXMLResource();
-        //loadXMLResource();
+        loadXMLResource();
+        saveXMLResource();
 
         //You should always check if the root of the resource is null
 
         if(virtualWallet == null){
             initializeData();
+            //saveBinaryResource();
             saveXMLResource();
         }
         registerSystemActions("Login", 1, "login");

@@ -22,6 +22,7 @@ public  class Transaction implements Serializable {
     private String description;
     private Category category;
     private Account account;
+    private static final long serialVersionUID = 1L;
 
 
     public Transaction(double amount, String description, Category category, Account account) {

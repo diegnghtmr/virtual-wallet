@@ -26,6 +26,7 @@ public class VirtualWallet implements Serializable {
     private List<CheckingAccount> checkingAccountList = new ArrayList<>();
     private List<User> userList = new ArrayList<>();
     private Administrator administrator;
+    private static final long serialVersionUID = 1L;
 
     public ArrayList<Account> getAccounts() {
         ArrayList<Account> accountList = new ArrayList<>();
