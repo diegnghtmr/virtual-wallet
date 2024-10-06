@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.RegisterViewController">
+    <Rectangle fill="#f0f0f0" height="700" width="400" />
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <VBox alignment="CENTER" prefHeight="698.0" prefWidth="655.0" spacing="20.0" style="-fx-background-color: transparent;">
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+
+            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1971c2;" text="Crear Nueva Cuenta">
+                <effect>
+                    <DropShadow color="#00000040" radius="5" spread="0.2" />
+                </effect>
+            </Label>
+
+            <ImageView fitHeight="363.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@img/logo.png" />
+                </image>
+                <effect>
+                    <DropShadow />
+                </effect>
+            </ImageView>
+
+            <GridPane alignment="CENTER" hgap="30.0" vgap="10.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                </columnConstraints>
+
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Número de identificación" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="txtIdentification" promptText="Ingrese su identificación" style="-fx-background-radius: 25; -fx-font-size: 12px; -fx-padding: 8 12 8 12;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Nombre Completo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="txtName" promptText="Ingrese su nombre completo" style="-fx-background-radius: 25; -fx-font-size: 12px; -fx-padding: 8 12 8 12;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Fecha de Nacimiento" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <DatePicker fx:id="dpDateBirth" prefHeight="41.0" prefWidth="305.0" promptText="Seleccione fecha" style="-fx-background-radius: 25; -fx-font-size: 12px; -fx-padding: 8 12 8 12;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Dirección de residencia" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="txtAddress" promptText="Ingrese su dirección" style="-fx-background-radius: 25; -fx-font-size: 12px; -fx-padding: 8 12 8 12;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Teléfono" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="txtPhone" promptText="Ingrese su teléfono" style="-fx-background-radius: 25; -fx-font-size: 12px; -fx-padding: 8 12 8 12;" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Correo electrónico" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="txtEmail" promptText="Ingrese su correo electrónico" style="-fx-background-radius: 25; -fx-font-size: 12px; -fx-padding: 8 12 8 12;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Contraseña" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <PasswordField fx:id="txtPassword" promptText="Ingrese su contraseña" style="-fx-background-radius: 25; -fx-font-size: 12px; -fx-padding: 8 12 8 12;" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+
+                <Label style="-fx-font-size: 14px; -fx-text-fill: #333333;" text="Verificar Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <PasswordField fx:id="txtVerifyPassword" promptText="Repita su contraseña" style="-fx-background-radius: 25; -fx-font-size: 12px; -fx-padding: 8 12 8 12;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            <padding>
+               <Insets left="20.0" right="20.0" />
+            </padding>
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="20.0">
+                <Button fx:id="btnRegistration" minHeight="50.0" minWidth="150.0" onAction="#onRegistration" style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25;" text="Registrarse">
+                    <effect>
+                        <DropShadow color="#00000060" radius="10" spread="0.1" />
+                    </effect>
+                </Button>
+                <Button fx:id="btnReturn" minHeight="50.0" minWidth="150.0" onAction="#onReturn" style="-fx-background-color: #c21919; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25;" text="Volver">
+                    <effect>
+                        <DropShadow color="#00000060" radius="10" spread="0.1" />
+                    </effect>
+                </Button>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</StackPane>

@@ -1,11 +1,17 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Optional;
@@ -54,6 +60,28 @@ public abstract class CoreViewController {
                 setText(empty ? "" : displayFunction.apply(item));
             }
         });
+    }
+
+    public void browseWindow(String nameFileFxml, String titleWindow, ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(nameFileFxml));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle(titleWindow);
+            stage.show();
+
+            closeWindow(actionEvent);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void closeWindow(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 
 }

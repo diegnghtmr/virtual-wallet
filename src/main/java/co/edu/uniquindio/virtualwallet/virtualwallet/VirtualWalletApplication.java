@@ -10,7 +10,7 @@ import java.io.IOException;
 public class VirtualWalletApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(VirtualWalletApplication.class.getResource("/user-container-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(VirtualWalletApplication.class.getResource("/startup.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("BuckTrack");
         stage.setScene(scene);

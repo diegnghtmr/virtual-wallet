@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @SuperBuilder
 
-public abstract class Person implements Serializable {
+public class Person implements Serializable {
     private String id;
     private String fullName;
     private String phoneNumber;

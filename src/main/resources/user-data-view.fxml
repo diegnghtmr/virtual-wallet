@@ -121,7 +121,7 @@
                   <Insets right="40.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="txtDateBirth" editable="false" prefHeight="31.0" prefWidth="340.0" GridPane.columnIndex="2" GridPane.rowIndex="12">
+            <TextField fx:id="dpDateBirth" editable="false" prefHeight="31.0" prefWidth="340.0" GridPane.columnIndex="2" GridPane.rowIndex="12">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

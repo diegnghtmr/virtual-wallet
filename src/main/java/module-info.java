@@ -6,6 +6,8 @@ module co.edu.uniquindio.virtualwallet.virtualwallet {
     requires org.mapstruct.processor;
     requires java.desktop;
     requires java.logging;
+    requires org.simplejavamail.core;
+    requires org.simplejavamail;
 
 
     opens co.edu.uniquindio.virtualwallet.virtualwallet to javafx.fxml;

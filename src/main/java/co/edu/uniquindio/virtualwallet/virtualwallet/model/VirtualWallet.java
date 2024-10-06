@@ -3,9 +3,11 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,6 +108,35 @@ public class VirtualWallet implements Serializable {
         }
     }
 
+    public Person validateLogin(String email, String password) throws Exception {
+        if (administrator != null && administrator.getEmail().equals(email)
+                && administrator.getPassword().equals(password)) {
+            return administrator;
+        }
+
+        for (User user : userList) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+
+        throw new Exception("Identificación o contraseña incorrecta");
+    }
+
+    public boolean verifyUserExistence(String email) {
+        for (User user : userList) {
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void registerUser(User user) {
+        userList.add(user);
+    }
+
+
 //    public List<Transaction> getTransactionList() {
 //        List<Transaction> transactionList = new ArrayList<>();
 //        transactionList.addAll(depositList);
@@ -113,4 +144,5 @@ public class VirtualWallet implements Serializable {
 //        transactionList.addAll(transferList);
 //        return transactionList;
 //    }
+
 }

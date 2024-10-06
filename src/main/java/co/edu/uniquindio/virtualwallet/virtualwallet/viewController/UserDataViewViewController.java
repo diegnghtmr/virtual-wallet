@@ -24,7 +24,7 @@ public class UserDataViewViewController extends CoreViewController implements IU
     private TextField txtBalance;
 
     @FXML
-    private TextField txtDateBirth;
+    private TextField dpDateBirth;
 
     @FXML
     private TextField txtEmail;

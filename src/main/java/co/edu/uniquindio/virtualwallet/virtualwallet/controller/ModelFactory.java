@@ -2,10 +2,13 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CheckingAccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.SavingsAccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWalletMapper;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PersistenceUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.VirtualWalletUtils;
@@ -26,13 +29,14 @@ public class ModelFactory {
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
     private static class SingletonHolder {
-        private static final ModelFactory eINSTANCE = new ModelFactory();
-    }
 
+        private static final ModelFactory eINSTANCE = new ModelFactory();
+
+
+    }
     public static ModelFactory getInstance(){
         return SingletonHolder.eINSTANCE;
     }
-
     public ModelFactory() {
         System.out.println("singleton class invocation");
         //1. initialize data and then save it to files
@@ -59,7 +63,6 @@ public class ModelFactory {
         }
         registerSystemActions("Login", 1, "login");
     }
-
     private void loadDataFromFiles() {
         virtualWallet = new VirtualWallet();
         try {
@@ -108,9 +111,11 @@ public class ModelFactory {
     private void initializeData() {
         virtualWallet = VirtualWalletUtils.initializeData();
     }
+
     public List<String> getTransactionTypes() {
         return VirtualWalletUtils.getTransactionTypes();
     }
+
     public List<String> getAccountTypes() {
         return VirtualWalletUtils.getAccountTypes();
     }
@@ -122,7 +127,6 @@ public class ModelFactory {
         accountDtos.addAll(virtualWalletMapper.getCheckingAccountsDto(virtualWallet.getCheckingAccountList()));
         return accountDtos;
     }
-
     public boolean addAccount(AccountDto accountDto) {
         try {
             if (virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
@@ -157,7 +161,6 @@ public class ModelFactory {
         }
         return flagExist;
     }
-
     public boolean updateAccount(AccountDto accountSelected, AccountDto accountDto) {
         try {
             Account account;
@@ -179,8 +182,24 @@ public class ModelFactory {
 
 
 
+    public Person validateLogin(String email, String password) throws Exception {
+        return virtualWallet.validateLogin(email, password);
+    }
 
-
+    public boolean registerUser(UserDto userDto) {
+        try {
+            if (virtualWallet.verifyUserExistence(userDto.email())) {
+                return false;
+            }
+            User user = virtualWalletMapper.userDtoToUser(userDto);
+            registerSystemActions("UserDto added: " + userDto.email(), 1, "registerUser");
+            getVirtualWallet().registerUser(user);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
 

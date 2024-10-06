@@ -19,7 +19,7 @@ import java.util.Random;
 @NoArgsConstructor
 @SuperBuilder
 
-public  class Account implements Serializable {
+public class Account implements Serializable {
     private double balance;
     private String bankName;
     private String accountNumber;

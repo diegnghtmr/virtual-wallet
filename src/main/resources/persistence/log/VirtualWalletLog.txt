@@ -1,0 +1,64 @@
+Oct 04, 2024 7:32:57 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-04
+Oct 04, 2024 7:33:34 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: weeqeqe,2024-10-04
+Oct 04, 2024 7:46:49 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-04
+Oct 04, 2024 7:47:32 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 2,2024-10-04
+Oct 04, 2024 7:47:51 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 1,2024-10-04
+Oct 04, 2024 7:50:55 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 1312313,2024-10-04
+Oct 04, 2024 7:51:23 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-04
+Oct 04, 2024 7:51:39 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 231313,2024-10-04
+Oct 04, 2024 7:56:01 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-04
+Oct 04, 2024 7:56:12 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 231212,2024-10-04
+Oct 05, 2024 6:30:48 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 6:35:45 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 6:39:30 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 10:25:36 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 10:32:59 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:23:05 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:24:19 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:27:38 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:48:03 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:49:25 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:50:32 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:53:10 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:54:12 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:55:44 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:57:20 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 05, 2024 11:58:49 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-05
+Oct 06, 2024 12:01:23 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 12:16:05 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 12:18:09 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 12:19:57 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 12:23:35 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 1:39:50 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06

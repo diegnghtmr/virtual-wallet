@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.StartupViewController">
+    <Rectangle fill="#f0f0f0" height="600" width="400" />
+
+    <VBox alignment="CENTER" spacing="30.0" style="-fx-background-color: transparent;">
+        <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+        </padding>
+
+        <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1971c2;" text="Bienvenido a BuckTrack">
+            <effect>
+                <DropShadow color="#00000040" radius="5" spread="0.2" />
+            </effect>
+        </Label>
+
+        <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@img/logo.png" />
+            </image>
+            <effect>
+                <DropShadow />
+            </effect>
+        </ImageView>
+
+        <Label style="-fx-font-size: 18px; -fx-text-fill: #333333;" text="¿Qué desea hacer?" />
+
+        <HBox alignment="CENTER" spacing="20.0">
+            <Button fx:id="btnLogin" minHeight="50.0" minWidth="150.0" onAction="#onLogin" style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25;" text="Iniciar sesión">
+                <HBox.margin>
+                    <Insets right="10.0" />
+                </HBox.margin>
+                <effect>
+                    <DropShadow color="#00000060" radius="10" spread="0.1" />
+                </effect>
+            </Button>
+            <Button fx:id="btnRegistration" minHeight="50.0" minWidth="150.0" onAction="#onRegistration" style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25;" text="Registrarse">
+                <HBox.margin>
+                    <Insets left="10.0" />
+                </HBox.margin>
+                <effect>
+                    <DropShadow color="#00000060" radius="10" spread="0.1" />
+                </effect>
+            </Button>
+        </HBox>
+
+        <Label style="-fx-font-size: 14px; -fx-text-fill: #666666;" text="Gestiona tus finanzas de manera inteligente" />
+    </VBox>
+</StackPane>
