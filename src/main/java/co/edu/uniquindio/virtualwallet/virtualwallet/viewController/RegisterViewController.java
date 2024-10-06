@@ -106,7 +106,7 @@ public class RegisterViewController extends CoreViewController {
 
     private void returnToStartup(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/startup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/startup-view.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

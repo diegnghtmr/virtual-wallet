@@ -46,7 +46,7 @@ public class UserDataViewViewController extends CoreViewController implements IU
 
     @FXML
     public void onGoDashboard(ActionEvent event) {
-
+        browseWindow("/user-container-view.fxml", "Dashboard", event);
     }
 
     @FXML
