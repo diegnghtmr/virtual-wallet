@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="21.0.4" class="java.beans.XMLDecoder">
+<java version="21.0.2" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet" id="VirtualWallet0">
   <void property="administrator">
    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator">
@@ -160,6 +160,120 @@
      </void>
     </object>
    </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount">
+     <void property="accountNumber">
+      <string>92375397</string>
+     </void>
+     <void property="associatedDeposits">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedTransfers">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedWithdrawals">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="bankName">
+      <string>Banco de bogotá</string>
+     </void>
+     <void property="overdraftLimit">
+      <double>0.0</double>
+     </void>
+     <void property="user">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+       <void property="address">
+        <string></string>
+       </void>
+       <void property="associatedAccounts">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="budgetList">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="email">
+        <string></string>
+       </void>
+       <void property="fullName">
+        <string></string>
+       </void>
+       <void property="id">
+        <string></string>
+       </void>
+       <void property="password">
+        <string></string>
+       </void>
+       <void property="phoneNumber">
+        <string></string>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount">
+     <void property="accountNumber">
+      <string>3332373213312</string>
+     </void>
+     <void property="associatedDeposits">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedTransfers">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedWithdrawals">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="bankName">
+      <string>Banco de occidente</string>
+     </void>
+     <void property="overdraftLimit">
+      <double>0.0</double>
+     </void>
+     <void property="user">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+       <void property="address">
+        <string></string>
+       </void>
+       <void property="associatedAccounts">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="birthDate">
+        <object class="java.time.LocalDate" method="of">
+         <int>2024</int>
+         <int>10</int>
+         <int>5</int>
+        </object>
+       </void>
+       <void property="budgetList">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="email">
+        <string></string>
+       </void>
+       <void property="fullName">
+        <string></string>
+       </void>
+       <void property="id">
+        <string></string>
+       </void>
+       <void property="password">
+        <string></string>
+       </void>
+       <void property="phoneNumber">
+        <string></string>
+       </void>
+       <void property="registrationDate">
+        <object class="java.time.LocalDate" method="of">
+         <int>2024</int>
+         <int>10</int>
+         <int>5</int>
+        </object>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
   </void>
   <void property="depositList">
    <void method="add">
@@ -185,6 +299,114 @@
   <void property="savingsAccountList">
    <void method="add">
     <object idref="SavingsAccount0"/>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount">
+     <void property="accountNumber">
+      <string>1834153</string>
+     </void>
+     <void property="associatedDeposits">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedTransfers">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedWithdrawals">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="bankName">
+      <string>Davivienda</string>
+     </void>
+     <void property="user">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+       <void property="address">
+        <string></string>
+       </void>
+       <void property="associatedAccounts">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="budgetList">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="email">
+        <string></string>
+       </void>
+       <void property="fullName">
+        <string></string>
+       </void>
+       <void property="id">
+        <string></string>
+       </void>
+       <void property="password">
+        <string></string>
+       </void>
+       <void property="phoneNumber">
+        <string></string>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount">
+     <void property="accountNumber">
+      <string>7429357524</string>
+     </void>
+     <void property="associatedDeposits">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedTransfers">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedWithdrawals">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="bankName">
+      <string>Banco de bogotá</string>
+     </void>
+     <void property="user">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+       <void property="address">
+        <string></string>
+       </void>
+       <void property="associatedAccounts">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="birthDate">
+        <object class="java.time.LocalDate" method="of">
+         <int>2024</int>
+         <int>10</int>
+         <int>5</int>
+        </object>
+       </void>
+       <void property="budgetList">
+        <object class="java.util.ArrayList"/>
+       </void>
+       <void property="email">
+        <string></string>
+       </void>
+       <void property="fullName">
+        <string></string>
+       </void>
+       <void property="id">
+        <string></string>
+       </void>
+       <void property="password">
+        <string></string>
+       </void>
+       <void property="phoneNumber">
+        <string></string>
+       </void>
+       <void property="registrationDate">
+        <object class="java.time.LocalDate" method="of">
+         <int>2024</int>
+         <int>10</int>
+         <int>5</int>
+        </object>
+       </void>
+      </object>
+     </void>
+    </object>
    </void>
   </void>
   <void property="transferList">
