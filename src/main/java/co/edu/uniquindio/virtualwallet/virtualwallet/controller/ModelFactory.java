@@ -33,6 +33,10 @@ public class ModelFactory {
         private static final ModelFactory eINSTANCE = new ModelFactory();
 
 
+
+
+
+
     }
     public static ModelFactory getInstance(){
         return SingletonHolder.eINSTANCE;
@@ -71,7 +75,6 @@ public class ModelFactory {
             throw new RuntimeException(e);
         }
     }
-
     private void saveTestData() {
         try {
             //PersistenceUtil.saveEmployees(getBank().getEmployeeList());
@@ -80,15 +83,12 @@ public class ModelFactory {
             throw new RuntimeException(e);
         }
     }
-
     private void loadBinaryResource() {
         virtualWallet = PersistenceUtil.loadBinaryVirtualWalletResource();
     }
-
     private void saveBinaryResource() {
         PersistenceUtil.saveBinaryVirtualWalletResource(virtualWallet);
     }
-
 
 
     private void loadXMLResource() {
@@ -120,6 +120,8 @@ public class ModelFactory {
         return VirtualWalletUtils.getAccountTypes();
     }
 
+
+
     // Methods to be implemented
     public List<AccountDto> getAccounts() {
         List<AccountDto> accountDtos = new ArrayList<>();
@@ -127,6 +129,7 @@ public class ModelFactory {
         accountDtos.addAll(virtualWalletMapper.getCheckingAccountsDto(virtualWallet.getCheckingAccountList()));
         return accountDtos;
     }
+
     public boolean addAccount(AccountDto accountDto) {
         try {
             if (virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
@@ -151,7 +154,6 @@ public class ModelFactory {
             return false;
         }
     }
-
     public boolean removeAccount(AccountDto accountSelected) {
         boolean flagExist = false;
         try {
@@ -161,6 +163,7 @@ public class ModelFactory {
         }
         return flagExist;
     }
+
     public boolean updateAccount(AccountDto accountSelected, AccountDto accountDto) {
         try {
             Account account;
@@ -178,10 +181,6 @@ public class ModelFactory {
             return false;
         }
     }
-
-
-
-
     public Person validateLogin(String email, String password) throws Exception {
         return virtualWallet.validateLogin(email, password);
     }
@@ -194,11 +193,30 @@ public class ModelFactory {
             User user = virtualWalletMapper.userDtoToUser(userDto);
             registerSystemActions("UserDto added: " + userDto.email(), 1, "registerUser");
             getVirtualWallet().registerUser(user);
+            saveXMLResource();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getMessage();
+            registerSystemActions(e.getMessage(), 3, "registerUser");
             return false;
         }
+    }
+
+
+    public String generateRandomCode() {
+        return virtualWallet.generateRandomCode();
+    }
+
+    public void saveSession(Person validatedUser) {
+        virtualWallet.saveSession(validatedUser);
+    }
+
+    public boolean isFirstLogin(Person validatedUser) {
+        return virtualWallet.isFirstLogin(validatedUser);
+    }
+
+    public boolean verifyCode(String verificationCode) {
+        return virtualWallet.verifyCode(verificationCode);
     }
 
 

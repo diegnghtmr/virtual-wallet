@@ -39,9 +39,9 @@ public class PersistenceUtil {
                 CheckingAccount checkingAccount = (CheckingAccount) account;
                 User user = findUserById(checkingAccount.getUser().getId(), loadUsers(PersistenceUtil.USERS_FILE_PATH));
                 content += checkingAccount.getBankName()
-                        + "," + checkingAccount.getAccountNumber()
-                        + "," + checkingAccount.getBalance()
-                        + "," + user.getId() // setear solo id
+                        + "@@" + checkingAccount.getAccountNumber()
+                        + "@@" + checkingAccount.getBalance()
+                        + "@@" + user.getId() // setear solo id
                         + "\n";
             } else if (account instanceof SavingsAccount) {
                 SavingsAccount savingsAccount = (SavingsAccount) account;
@@ -49,9 +49,9 @@ public class PersistenceUtil {
                 User user = savingsAccount.getUser();
                 findUserById(user.getId(), loadUsers(PersistenceUtil.USERS_FILE_PATH));
                 content += savingsAccount.getBankName()
-                        + "," + savingsAccount.getAccountNumber()
-                        + "," + savingsAccount.getBalance()
-                        + "," + user.getId() // setear solo id
+                        + "@@" + savingsAccount.getAccountNumber()
+                        + "@@" + savingsAccount.getBalance()
+                        + "@@" + user.getId() // setear solo id
                         + "\n";
             }
         }
@@ -85,7 +85,7 @@ public class PersistenceUtil {
         String line;
         for (String s : content) {
             line = s;
-            String[] attributes = line.split(",");
+            String[] attributes = line.split("@@");
             String bankName = attributes[0];
             String accountNumber = attributes[1];
             double balance = Double.parseDouble(attributes[2]);
@@ -163,7 +163,7 @@ public class PersistenceUtil {
 
         for (int i = 0; i < content.size(); i++) {
             line = content.get(i);
-            String[] attributes = line.split(",");
+            String[] attributes = line.split("@@");
             User user = new User();
             user.setFullName(attributes[0]);
             user.setId(attributes[1]);

@@ -4,12 +4,15 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.SessionManager;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Getter
 @Setter
@@ -134,6 +137,36 @@ public class VirtualWallet implements Serializable {
 
     public void registerUser(User user) {
         userList.add(user);
+    }
+
+    public String generateRandomCode() {
+        StringBuilder codigoRegistro = new StringBuilder();
+
+
+        Random random = new Random();
+        for (int i = 0; i < 6; i++) {
+            int numero = random.nextInt(8);
+            codigoRegistro.append(numero);
+        }
+
+        return codigoRegistro.toString();
+    }
+
+    public void saveSession(Person validatedUser) {
+        Session session = Session.getInstance();
+        session.setPerson(validatedUser);
+    }
+
+    public boolean isFirstLogin(Person user) {
+        SessionManager sessionManager = SessionManager.getInstance();
+        boolean firstLogin = sessionManager.hasLoggedInBefore(user);
+        return firstLogin;
+    }
+
+    public boolean verifyCode(String verificationCode) {
+        Session session = Session.getInstance();
+        boolean codeVerified = session.getVerificationCode().equals(verificationCode);
+        return codeVerified;
     }
 
 

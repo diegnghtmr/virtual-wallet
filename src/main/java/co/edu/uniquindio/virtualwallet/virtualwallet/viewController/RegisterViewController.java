@@ -62,19 +62,20 @@ public class RegisterViewController extends CoreViewController {
     }
 
     private void register(ActionEvent actionEvent) {
-//        UserDto userDto = buildUserDto();
-//        if (validateForm()) {
-//            try {
-//                registerController.registerUser(userDto);
-//                showMessage("¡Registro exitoso!", "Bienvenido " + userDto.fullName(), "Te has registrado correctamente.", Alert.AlertType.INFORMATION);
-//                closeWindow(actionEvent);
-//                browseWindow("/user-data-view.fxml", "User Data View", actionEvent);
-//            } catch (Exception e) {
-//                showMessage("Error de registro", "No se pudo completar el registro", e.getMessage(), Alert.AlertType.ERROR);
-//            }
-//        } else {
-//            showMessage("Error de validación", "Por favor, complete todos los campos", "Todos los campos son obligatorios.", Alert.AlertType.ERROR);
-//        }
+        UserDto userDto = buildUserDto();
+        if (validateForm()) {
+            try {
+                registerController.registerUser(userDto);
+                registerController.sendVerificationCode(userDto);
+                showMessage("¡Registro exitoso!", "Bienvenido " + userDto.fullName(), "Te has registrado correctamente.", Alert.AlertType.INFORMATION);
+                closeWindow(actionEvent);
+                browseWindow("/login-view.fxml", "Login", actionEvent);
+            } catch (Exception e) {
+                showMessage("Error de registro", "No se pudo completar el registro", e.getMessage(), Alert.AlertType.ERROR);
+            }
+        } else {
+            showMessage("Error de validación", "Por favor, complete todos los campos", "Todos los campos son obligatorios.", Alert.AlertType.ERROR);
+        }
     }
 
     private UserDto buildUserDto() {

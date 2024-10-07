@@ -1,7 +1,6 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.utils;
 
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
+import java.beans.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -11,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.FileHandler;
@@ -165,10 +165,28 @@ public class FileUtil {
     }
 
     public static void saveSerializedXMLResource(String filePath, Object object) throws IOException {
-        XMLEncoder xmlEncoder;
-
-        xmlEncoder = new XMLEncoder(new FileOutputStream(filePath));
-        xmlEncoder.writeObject(object);
-        xmlEncoder.close();
+        XMLEncoder xmlEncoder = null;
+        try {
+            xmlEncoder = new XMLEncoder(new FileOutputStream(filePath));
+            // Registrar un PersistenceDelegate para LocalDate
+            xmlEncoder.setPersistenceDelegate(LocalDate.class, new DefaultPersistenceDelegate() {
+                @Override
+                protected Expression instantiate(Object obj, Encoder enc) {
+                    LocalDate date = (LocalDate) obj;
+                    return new Expression(obj, LocalDate.class, "of", new Object[]{
+                            date.getYear(),
+                            date.getMonthValue(),
+                            date.getDayOfMonth()
+                    });
+                }
+            });
+            xmlEncoder.writeObject(object);
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            if (xmlEncoder != null) {
+                xmlEncoder.close();
+            }
+        }
     }
 }

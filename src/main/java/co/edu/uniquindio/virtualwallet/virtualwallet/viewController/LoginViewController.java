@@ -2,6 +2,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.LoginController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,22 +46,25 @@ public class LoginViewController extends CoreViewController{
     }
 
     private void start(ActionEvent actionEvent) {
-        if (validateForm()) {
-            try {
-                Person person = loginController.validateLogin(txtEmail.getText(), txtPassword.getText());
-                showMessage("¡Inicio de sesión exitoso!", "Bienvenido " + person.getFullName(), "Has iniciado sesión correctamente.", Alert.AlertType.INFORMATION);
-                closeWindow(actionEvent);
-                browseWindow("/user-data-view.fxml", "User Data View", actionEvent);
-            } catch (Exception e) {
-                showMessage("Error de inicio de sesión", "No se pudo iniciar sesión", e.getMessage(), Alert.AlertType.ERROR);
-            }
-        } else {
-            showMessage("Por favor, complete todos los campos", "Error de validación", "Todos los campos son obligatorios.", Alert.AlertType.ERROR);        }
-    }
+        try {
+            String email = txtEmail.getText();
+            String password = txtPassword.getText();
 
-    private boolean validateForm() {
-        return txtEmail.getText() != null && !txtEmail.getText().isEmpty()
-                && txtPassword.getText() != null && !txtPassword.getText().isEmpty();
+            Person validatedUser = loginController.validateLogin(email, password);
+            loginController.saveSession(validatedUser);
+
+            if (loginController.isFirstLogin(validatedUser)) {
+                browseWindow("/validation-view.fxml", "Validation", actionEvent);
+            } else {
+                if (validatedUser instanceof User) {
+                    browseWindow("/user-data-view.fxml", "User Panel", actionEvent);
+                } else {
+                    browseWindow("/adminPanel.fxml", "Admin Panel", actionEvent);
+                }
+            }
+        } catch (Exception e) {
+            showMessage(e.getMessage(), "Error de inicio de sesión", "La sesión no pudo ser iniciada" , Alert.AlertType.ERROR);
+        }
     }
 
 
