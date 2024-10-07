@@ -102,7 +102,12 @@ public class RegisterViewController extends CoreViewController {
                 && txtPassword.getText() != null && !txtPassword.getText().isEmpty()
                 && txtPhone.getText() != null && !txtPhone.getText().isEmpty()
                 && dpDateBirth.getValue() != null
-                && txtPassword.getText().equals(txtVerifyPassword.getText());
+                && txtPassword.getText().equals(txtVerifyPassword.getText())
+                && isAdult(dpDateBirth.getValue());
+    }
+
+    private boolean isAdult(LocalDate birthDate) {
+        return birthDate != null && birthDate.plusYears(18).isBefore(LocalDate.now());
     }
 
     private void returnToStartup(ActionEvent actionEvent) {
