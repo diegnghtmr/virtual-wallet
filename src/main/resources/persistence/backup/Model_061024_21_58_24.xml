@@ -467,48 +467,6 @@
    <void method="add">
     <object idref="User1"/>
    </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
-     <void property="address">
-      <string>dasdasdas</string>
-     </void>
-     <void property="associatedAccounts">
-      <object class="java.util.ArrayList"/>
-     </void>
-     <void property="birthDate">
-      <object class="java.time.LocalDate" method="of">
-       <int>2024</int>
-       <int>9</int>
-       <int>30</int>
-      </object>
-     </void>
-     <void property="budgetList">
-      <object class="java.util.ArrayList"/>
-     </void>
-     <void property="email">
-      <string>diegoflorez332@gmail.com</string>
-     </void>
-     <void property="fullName">
-      <string>Diego</string>
-     </void>
-     <void property="id">
-      <string>3123123312</string>
-     </void>
-     <void property="password">
-      <string>inge</string>
-     </void>
-     <void property="phoneNumber">
-      <string>4324234234</string>
-     </void>
-     <void property="registrationDate">
-      <object class="java.time.LocalDate" method="of">
-       <int>2024</int>
-       <int>10</int>
-       <int>6</int>
-      </object>
-     </void>
-    </object>
-   </void>
   </void>
   <void property="withdrawalList">
    <void method="add">

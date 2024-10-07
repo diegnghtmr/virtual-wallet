@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class UserDataViewViewController extends CoreViewController implements IUserManagementViewController<UserDto> {
+public class UserDataViewController extends CoreViewController implements IUserManagementViewController<UserDto> {
     @FXML
     private Button btnGoDashboard;
 
@@ -51,7 +51,7 @@ public class UserDataViewViewController extends CoreViewController implements IU
 
     @FXML
     public void onLogout(ActionEvent event) {
-
+        browseWindow("/login-view.fxml", "Login", event);
     }
 
     @FXML

@@ -41,6 +41,11 @@ public class LoginViewController extends CoreViewController{
     }
 
     @FXML
+    void onRegister(ActionEvent event) {
+        browseWindow("/register-view.fxml", "Register", event);
+    }
+
+    @FXML
     private void onStart(ActionEvent actionEvent) {
         start(actionEvent);
     }

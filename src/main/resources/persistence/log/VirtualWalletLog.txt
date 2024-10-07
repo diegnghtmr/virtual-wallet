@@ -52,3 +52,15 @@ Oct 06, 2024 8:22:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: login,Login,2024-10-06
 Oct 06, 2024 8:22:55 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-10-06
+Oct 06, 2024 9:52:19 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 9:57:35 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 9:58:24 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 10:02:07 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 10:04:22 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: diegoflorez332@gmail.com,2024-10-06
+Oct 06, 2024 10:11:48 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
