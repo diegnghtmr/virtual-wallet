@@ -32,3 +32,23 @@ Oct 06, 2024 7:41:37 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: login,Login,2024-10-06
 Oct 06, 2024 7:42:25 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: registerUser,UserDto added: rodassantiago442@gmail.com,2024-10-06
+Oct 06, 2024 7:49:16 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 7:49:51 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: jorgew.montoyat@uqvirtual.edu.co,2024-10-06
+Oct 06, 2024 8:13:28 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 8:14:57 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 8:15:55 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 8:20:04 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 8:21:20 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 8:21:44 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 8:22:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06
+Oct 06, 2024 8:22:55 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-06

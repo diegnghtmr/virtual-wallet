@@ -10,6 +10,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWal
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.BackupUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PersistenceUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.VirtualWalletUtils;
 import lombok.Getter;
@@ -54,9 +55,12 @@ public class ModelFactory {
         //loadBinaryResource();
         //saveBinaryResource();
 
+        // Backup the XML file before loading or saving
+        BackupUtil.backupXMLFile(PersistenceUtil.VIRTUAL_WALLET_XML_FILE_PATH);
         //4. Save and Load the XML serializable resource
         loadXMLResource();
         saveXMLResource();
+
 
         //You should always check if the root of the resource is null
 
@@ -154,11 +158,26 @@ public class ModelFactory {
             return false;
         }
     }
+
     public boolean removeAccount(AccountDto accountSelected) {
         boolean flagExist = false;
         try {
+            // Intentar eliminar la cuenta del monedero virtual
             flagExist = getVirtualWallet().removeAccount(accountSelected.accountNumber());
+
+            if (flagExist) {
+                // Registrar la acción de eliminación si se eliminó correctamente
+                registerSystemActions("Account removed: " + accountSelected.accountNumber(), 1, "removeAccount");
+
+                // Guardar los cambios en el recurso XML
+                saveXMLResource();
+            } else {
+                // Registrar la acción si la cuenta no existía
+                registerSystemActions("Attempted to remove non-existent account: " + accountSelected.accountNumber(), 2, "removeAccount");
+            }
         } catch (AccountException e) {
+            // Registrar la excepción en el log
+            registerSystemActions(e.getMessage(), 3, "removeAccount");
             e.printStackTrace();
         }
         return flagExist;
@@ -174,13 +193,24 @@ public class ModelFactory {
             } else {
                 throw new IllegalArgumentException("Tipo de cuenta no soportado");
             }
+
             getVirtualWallet().updateAccount(accountSelected.accountNumber(), account);
+
+            // Registrar la acción de actualización
+            registerSystemActions("Account updated: " + accountSelected.accountNumber(), 1, "updateAccount");
+
+            // Guardar los cambios en el recurso XML
+            saveXMLResource();
+
             return true;
         } catch (AccountException e) {
+            // Registrar la excepción en el log
+            registerSystemActions(e.getMessage(), 3, "updateAccount");
             e.printStackTrace();
             return false;
         }
     }
+
     public Person validateLogin(String email, String password) throws Exception {
         return virtualWallet.validateLogin(email, password);
     }

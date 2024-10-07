@@ -64,16 +64,16 @@ public class VirtualWalletUtils {
 
         // Create example users
         User user1 = User.builder()
-                .id("123456789")
-                .fullName("John Doe")
+                .id("1097032932")
+                .fullName("Jorge William Montoya")
                 .phoneNumber("3244544139")
-                .email("john.doe@example.com")
-                .password("p1ssw0rd")
+                .email("jorgew.montoyat@uqvirtual.edu.co")
+                .password("maloh")
                 .birthDate(LocalDate.of(1990, 1, 1))
                 .registrationDate(LocalDate.now())
                 .budgetList(new ArrayList<>())
                 .associatedAccounts(new ArrayList<>())
-                .address("123 Main St")
+                .address("Quimbaya, Quindio")
                 .totalBalance(3000.0)
                 .build();
 
@@ -88,10 +88,10 @@ public class VirtualWalletUtils {
         // Create example administrator
         Administrator admin = Administrator.builder()
                 .id("A001")
-                .fullName("Admin User")
+                .fullName("admin")
                 .phoneNumber("0987654321")
                 .email("admin@example.com")
-                .password("adminpassword")
+                .password("admin")
                 .birthDate(LocalDate.of(1985, 5, 15))
                 .registrationDate(LocalDate.now())
                 .build();
@@ -122,8 +122,6 @@ public class VirtualWalletUtils {
         transfer.setAccount(savingsAccount);
         transfer.setReceivingAccount(checkingAccount);
 
-
-
         // Create and populate VirtualWallet
         VirtualWallet virtualWallet = new VirtualWallet();
         virtualWallet.getCategoryList().add(foodCategory);
@@ -137,6 +135,110 @@ public class VirtualWalletUtils {
         virtualWallet.getDepositList().add(deposit);
         virtualWallet.getWithdrawalList().add(withdrawal);
         virtualWallet.getTransferList().add(transfer);
+
+        // New categories
+        Category entertainmentCategory = Category.builder()
+                .id("003")
+                .name("Entertainment")
+                .description("Expenses on entertainment")
+                .build();
+
+        Category healthCategory = Category.builder()
+                .id("004")
+                .name("Health")
+                .description("Expenses on health")
+                .build();
+
+        // New budgets
+        Budget entertainmentBudget = Budget.builder()
+                .id("B003")
+                .name("Monthly Entertainment Budget")
+                .totalAmount(400.0)
+                .amountSpent(150.0)
+                .category(entertainmentCategory)
+                .user(null)
+                .build();
+
+        Budget healthBudget = Budget.builder()
+                .id("B004")
+                .name("Monthly Health Budget")
+                .totalAmount(200.0)
+                .amountSpent(50.0)
+                .category(healthCategory)
+                .user(null)
+                .build();
+
+        // New accounts
+        SavingsAccount newSavingsAccount = (SavingsAccount) accountFactory.getAccount("AHORROS");
+        newSavingsAccount.setBalance(2000);
+        newSavingsAccount.setBankName("Davivienda");
+        newSavingsAccount.setAccountNumber("1122334455");
+
+        CheckingAccount newCheckingAccount = (CheckingAccount) accountFactory.getAccount("CORRIENTE");
+        newCheckingAccount.setBalance(2500);
+        newCheckingAccount.setBankName("BBVA");
+        newCheckingAccount.setAccountNumber("5566778899");
+
+        // New user
+        User user2 = User.builder()
+                .id("1090273361")
+                .fullName("Maria Camila Rosero Henao")
+                .phoneNumber("3148613948")
+                .email("mariac.roseroh@uqvirtual.edu.co")
+                .password("soloplacah")
+                .birthDate(LocalDate.of(1992, 2, 2))
+                .registrationDate(LocalDate.now())
+                .budgetList(new ArrayList<>())
+                .associatedAccounts(new ArrayList<>())
+                .address("Armenia, Quindio")
+                .totalBalance(4500.0)
+                .build();
+
+        user2.getAssociatedAccounts().add(newSavingsAccount);
+        user2.getAssociatedAccounts().add(newCheckingAccount);
+        user2.getBudgetList().add(entertainmentBudget);
+        user2.getBudgetList().add(healthBudget);
+
+        newCheckingAccount.setUser(user2);
+        newSavingsAccount.setUser(user2);
+
+        // New transactions
+        Deposit newDeposit = (Deposit) transactionFactory.getTransaction("DEPÓSITO");
+        newDeposit.setIdTransaction("D002");
+        newDeposit.setAmount(600.0);
+        newDeposit.setDate(LocalDate.now());
+        newDeposit.setDescription("Salary deposit");
+        newDeposit.setCategory(entertainmentCategory);
+        newDeposit.setAccount(newSavingsAccount);
+
+        Withdrawal newWithdrawal = (Withdrawal) transactionFactory.getTransaction("RETIRO");
+        newWithdrawal.setIdTransaction("W002");
+        newWithdrawal.setAmount(100.0);
+        newWithdrawal.setDate(LocalDate.now());
+        newWithdrawal.setDescription("Pharmacy purchase");
+        newWithdrawal.setCategory(healthCategory);
+        newWithdrawal.setAccount(newCheckingAccount);
+
+        Transfer newTransfer = (Transfer) transactionFactory.getTransaction("TRANSFERENCIA");
+        newTransfer.setIdTransaction("T002");
+        newTransfer.setAmount(200.0);
+        newTransfer.setDate(LocalDate.now());
+        newTransfer.setDescription("Transfer to savings account");
+        newTransfer.setCategory(entertainmentCategory);
+        newTransfer.setAccount(newCheckingAccount);
+        newTransfer.setReceivingAccount(newSavingsAccount);
+
+        // Add new data to VirtualWallet
+        virtualWallet.getCategoryList().add(entertainmentCategory);
+        virtualWallet.getCategoryList().add(healthCategory);
+        virtualWallet.getBudgetList().add(entertainmentBudget);
+        virtualWallet.getBudgetList().add(healthBudget);
+        virtualWallet.getSavingsAccountList().add(newSavingsAccount);
+        virtualWallet.getCheckingAccountList().add(newCheckingAccount);
+        virtualWallet.getUserList().add(user2);
+        virtualWallet.getDepositList().add(newDeposit);
+        virtualWallet.getWithdrawalList().add(newWithdrawal);
+        virtualWallet.getTransferList().add(newTransfer);
 
         return virtualWallet;
     }
