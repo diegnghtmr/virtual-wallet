@@ -1,10 +1,10 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.utils;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 
 public class Session {
     private Person person;
-    private String verificationCode;
     private static Session INSTANCE;
 
     private Session() {
@@ -25,11 +25,8 @@ public class Session {
         return INSTANCE.person;
     }
 
-    public void setVerificationCode(String verificationCode) {
-        INSTANCE.verificationCode = verificationCode;
+    public void closeSession() {
+        INSTANCE.person = null;
     }
 
-    public String getVerificationCode() {
-        return INSTANCE.verificationCode;
-    }
 }

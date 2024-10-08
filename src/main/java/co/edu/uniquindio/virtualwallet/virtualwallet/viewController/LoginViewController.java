@@ -56,17 +56,27 @@ public class LoginViewController extends CoreViewController{
             String password = txtPassword.getText();
 
             Person validatedUser = loginController.validateLogin(email, password);
-            loginController.saveSession(validatedUser);
 
-            if (loginController.isFirstLogin(validatedUser)) {
-                browseWindow("/validation-view.fxml", "Validation", actionEvent);
-            } else {
+            if(validatedUser == null) {
+                showMessage("El usuario no existe", "Error de inicio de sesión", "El usuario no existe", Alert.AlertType.ERROR);
+            }else {
+
+                loginController.saveSession(validatedUser);
+
                 if (validatedUser instanceof User) {
-                    browseWindow("/user-data-view.fxml", "User Panel", actionEvent);
+
+                    if (!loginController.isVerified()) {
+                        browseWindow("/validation-view.fxml", "Validation", actionEvent);
+                    } else {
+                        browseWindow("/user-data-view.fxml", "User Panel", actionEvent);
+                    }
+
                 } else {
                     browseWindow("/adminPanel.fxml", "Admin Panel", actionEvent);
                 }
+
             }
+
         } catch (Exception e) {
             showMessage(e.getMessage(), "Error de inicio de sesión", "La sesión no pudo ser iniciada" , Alert.AlertType.ERROR);
         }

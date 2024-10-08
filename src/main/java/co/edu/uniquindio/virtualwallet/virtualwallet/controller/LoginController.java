@@ -1,22 +1,22 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.SessionManager;
 
 public class LoginController {
     private final ModelFactory modelFactory = ModelFactory.getInstance();
 
     public Person validateLogin(String email, String password) throws Exception {
-        Person user = modelFactory.validateLogin(email, password);
-        SessionManager.getInstance().addSession(user);
-        return user;
+        return modelFactory.validateLogin(email, password);
     }
 
     public void saveSession(Person validatedUser) {
-        modelFactory.saveSession(validatedUser);
+        Session.getInstance().setPerson(validatedUser);
     }
 
-    public boolean isFirstLogin(Person validatedUser) {
-        return modelFactory.isFirstLogin(validatedUser);
+    public boolean isVerified() {
+        return modelFactory.isVerified();
     }
+
 }

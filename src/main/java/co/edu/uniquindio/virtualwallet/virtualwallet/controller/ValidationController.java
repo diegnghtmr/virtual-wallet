@@ -10,13 +10,12 @@ public class ValidationController extends CoreController {
     }
 
     public boolean verifyCode(String verificationCode) {
-        String sessionVerificationCode = Session.getInstance().getVerificationCode();
-        return sessionVerificationCode != null && sessionVerificationCode.equals(verificationCode);
+        return modelFactory.verifyCode(verificationCode);
     }
 
     public void resendVerificationCode(String email) {
         String newVerificationCode = modelFactory.generateRandomCode();
-        Session.getInstance().setVerificationCode(newVerificationCode);
+        modelFactory.setVerificationCode(email, newVerificationCode);
 
         String subject = "Nuevo código de verificación cuenta VirtualWallet";
         String message = "Su nuevo código de verificación es: " + newVerificationCode + ", gracias por registrarse en nuestra app.";

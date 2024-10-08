@@ -11,8 +11,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 public class Person implements Serializable {
+   @EqualsAndHashCode.Include
     private String id;
     private String fullName;
     private String phoneNumber;

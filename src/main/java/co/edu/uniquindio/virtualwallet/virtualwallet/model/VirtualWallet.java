@@ -142,7 +142,6 @@ public class VirtualWallet implements Serializable {
     public String generateRandomCode() {
         StringBuilder codigoRegistro = new StringBuilder();
 
-
         Random random = new Random();
         for (int i = 0; i < 6; i++) {
             int numero = random.nextInt(8);
@@ -152,21 +151,53 @@ public class VirtualWallet implements Serializable {
         return codigoRegistro.toString();
     }
 
-    public void saveSession(Person validatedUser) {
-        Session session = Session.getInstance();
-        session.setPerson(validatedUser);
+
+    public boolean verifyCode(String id, String verificationCode) {
+
+        boolean isCorrect = false;
+
+        for (User u : userList) {
+            if (u.getId().equals(id)) {
+                 isCorrect = u.getVerificationCode().equals(verificationCode);
+                if (isCorrect) {
+                    u.setVerified(true);
+                }
+                break;
+            }
+        }
+        return isCorrect;
     }
 
-    public boolean isFirstLogin(Person user) {
-        SessionManager sessionManager = SessionManager.getInstance();
-        boolean firstLogin = sessionManager.hasLoggedInBefore(user);
-        return firstLogin;
+    public List<Account> getAccountList(String id) {
+        return getAccounts().stream().filter(account -> account.getUser().getId().equals(id)).toList();
     }
 
-    public boolean verifyCode(String verificationCode) {
-        Session session = Session.getInstance();
-        boolean codeVerified = session.getVerificationCode().equals(verificationCode);
-        return codeVerified;
+    public void setVerificationCode(String id, String verificationCode) {
+
+        User user = findById(id);
+        if(user != null){
+            int index = userList.indexOf(user);
+            user.setVerificationCode(verificationCode);
+        }
+
+    }
+
+    public boolean isVerified(String id) {
+        for(User u : userList){
+            if(u.getId().equals(id)){
+                return u.isVerified();
+            }
+        }
+        return false;
+    }
+
+    public User findById(String id) {
+        for(User u : userList){
+            if(u.getId().equals(id)){
+                return u;
+            }
+        }
+        return null;
     }
 
 

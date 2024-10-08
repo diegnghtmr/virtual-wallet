@@ -37,11 +37,16 @@ public class ValidationViewController extends CoreViewController {
     private void verifyCode(ActionEvent event) {
         try {
             String verificationCode = txtVerificationCode.getText();
-
+            if (verificationCode.isEmpty()) {
+                showMessage("Código de verificación vacío", "Ingrese un código de verificación", "Por favor ingrese el código de verificación que ha recibido en su correo electrónico.", Alert.AlertType.WARNING);
+                return;
+            }
             if (validationController.verifyCode(verificationCode)) {
                 showMessage("Verificación exitosa", "Código verificado correctamente", "Su cuenta ha sido verificada exitosamente.", Alert.AlertType.INFORMATION);
                 closeWindow(event);
                 browseWindow("/user-data-view.fxml", "User Panel", event);
+            }else{
+                showMessage("Código incorrecto", "Código de verificación incorrecto", "El código de verificación ingresado no es correcto.", Alert.AlertType.WARNING);
             }
         } catch (Exception e) {
             e.printStackTrace();

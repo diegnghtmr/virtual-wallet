@@ -1,6 +1,8 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IUserManagementViewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,6 +53,7 @@ public class UserDataViewController extends CoreViewController implements IUserM
 
     @FXML
     public void onLogout(ActionEvent event) {
+        Session.getInstance().closeSession();
         browseWindow("/login-view.fxml", "Login", event);
     }
 
@@ -61,6 +64,10 @@ public class UserDataViewController extends CoreViewController implements IUserM
 
     @FXML
     public void initialize() {
+
+        Person person = Session.getInstance().getPerson();
+
+        txtEmail.setText(person.getEmail());
 
     }
 

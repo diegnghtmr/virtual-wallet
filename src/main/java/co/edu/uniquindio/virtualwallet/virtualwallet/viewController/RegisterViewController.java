@@ -65,7 +65,10 @@ public class RegisterViewController extends CoreViewController {
         UserDto userDto = buildUserDto();
         if (validateForm()) {
             try {
-                registerController.registerUser(userDto);
+                if(!registerController.registerUser(userDto)) {
+                    showMessage("Error de registro", "No se pudo completar el registro", "El usuario ya existe.", Alert.AlertType.ERROR);
+                    return;
+                }
                 registerController.sendVerificationCode(userDto);
                 showMessage("¡Registro exitoso!", "Bienvenido " + userDto.fullName(), "Te has registrado correctamente.", Alert.AlertType.INFORMATION);
                 closeWindow(actionEvent);

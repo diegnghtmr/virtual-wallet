@@ -12,6 +12,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.BackupUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PersistenceUtil;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.VirtualWalletUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,11 @@ public class ModelFactory {
     // Main model class
     VirtualWallet virtualWallet;
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
+
+    public void setVerificationCode(String id, String verificationCode) {
+        virtualWallet.setVerificationCode(id, verificationCode);
+        saveXMLResource();
+    }
 
     private static class SingletonHolder {
 
@@ -232,24 +238,32 @@ public class ModelFactory {
         }
     }
 
+    public List<Account> getAccountList() {
+        Person person = Session.getInstance().getPerson();
+        return virtualWallet.getAccountList(person.getId());
+    }
 
     public String generateRandomCode() {
         return virtualWallet.generateRandomCode();
     }
 
     public void saveSession(Person validatedUser) {
-        virtualWallet.saveSession(validatedUser);
+        Session.getInstance().setPerson(validatedUser);
     }
 
-    public boolean isFirstLogin(Person validatedUser) {
-        return virtualWallet.isFirstLogin(validatedUser);
+    public boolean isVerified() {
+        Person person = Session.getInstance().getPerson();
+        return virtualWallet.isVerified(person.getId());
     }
 
     public boolean verifyCode(String verificationCode) {
-        return virtualWallet.verifyCode(verificationCode);
+        Person person = Session.getInstance().getPerson();
+        boolean isCorrect =  virtualWallet.verifyCode(person.getId(), verificationCode);
+        if(isCorrect){
+            saveXMLResource();
+        }
+        return isCorrect;
     }
-
-
 
 //    public List<TransactionDto> getTransactionList() {
 //        return  IVirtualWalletMapper.transactionDtoToTransaction(virtualWallet.getTransactionList());

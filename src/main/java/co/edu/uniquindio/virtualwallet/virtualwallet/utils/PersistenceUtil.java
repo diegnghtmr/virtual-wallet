@@ -212,6 +212,7 @@ public class PersistenceUtil {
         try {
             virtualWallet = (VirtualWallet) FileUtil.loadSerializedXMLResource(VIRTUAL_WALLET_XML_FILE_PATH);
         } catch (Exception e) {
+            //Leer el backup acá y asignarlo a virtualWallet
             e.printStackTrace();
         }
         return virtualWallet;

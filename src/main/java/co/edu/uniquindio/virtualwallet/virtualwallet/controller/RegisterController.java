@@ -24,7 +24,7 @@ public class RegisterController extends CoreController {
         String verificationCode = modelFactory.generateRandomCode();
         String message = "Hola " + userDto.fullName() + ", su código de verificación es: " + verificationCode + ". Gracias por registrarse en nuestra app.";
 
-        Session.getInstance().setVerificationCode(verificationCode);
+        modelFactory.setVerificationCode(userDto.id(), verificationCode);
 
         EmailUtil emailUtil = new EmailUtil(email, subject, message);
         emailUtil.sendNotification();

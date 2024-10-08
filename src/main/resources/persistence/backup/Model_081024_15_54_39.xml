@@ -29,7 +29,7 @@
      <object class="java.time.LocalDate" method="of">
       <int>2024</int>
       <int>10</int>
-      <int>6</int>
+      <int>8</int>
      </object>
     </void>
    </object>
@@ -242,7 +242,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>10</int>
-         <int>6</int>
+         <int>8</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -327,7 +327,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>10</int>
-         <int>6</int>
+         <int>8</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -354,7 +354,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>10</int>
-       <int>6</int>
+       <int>8</int>
       </object>
      </void>
      <void property="description">
@@ -380,7 +380,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>10</int>
-       <int>6</int>
+       <int>8</int>
       </object>
      </void>
      <void property="description">
@@ -416,7 +416,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>10</int>
-       <int>6</int>
+       <int>8</int>
       </object>
      </void>
      <void property="description">
@@ -445,7 +445,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>10</int>
-       <int>6</int>
+       <int>8</int>
       </object>
      </void>
      <void property="description">
@@ -467,6 +467,54 @@
    <void method="add">
     <object idref="User1"/>
    </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+     <void property="address">
+      <string>yuhdsh</string>
+     </void>
+     <void property="associatedAccounts">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="birthDate">
+      <object class="java.time.LocalDate" method="of">
+       <int>1900</int>
+       <int>12</int>
+       <int>12</int>
+      </object>
+     </void>
+     <void property="budgetList">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="email">
+      <string>diego</string>
+     </void>
+     <void property="fullName">
+      <string>hshsdhj</string>
+     </void>
+     <void property="id">
+      <string>278287</string>
+     </void>
+     <void property="password">
+      <string>123</string>
+     </void>
+     <void property="phoneNumber">
+      <string>hjshjs</string>
+     </void>
+     <void property="registrationDate">
+      <object class="java.time.LocalDate" method="of">
+       <int>2024</int>
+       <int>10</int>
+       <int>8</int>
+      </object>
+     </void>
+     <void property="verificationCode">
+      <string>043111</string>
+     </void>
+     <void property="verified">
+      <boolean>true</boolean>
+     </void>
+    </object>
+   </void>
   </void>
   <void property="withdrawalList">
    <void method="add">
@@ -484,7 +532,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>10</int>
-       <int>6</int>
+       <int>8</int>
       </object>
      </void>
      <void property="description">
@@ -510,7 +558,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>10</int>
-       <int>6</int>
+       <int>8</int>
       </object>
      </void>
      <void property="description">
