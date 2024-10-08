@@ -13,12 +13,11 @@ public class ValidationController extends CoreController {
         return modelFactory.verifyCode(verificationCode);
     }
 
-    public void resendVerificationCode(String email) {
-        String newVerificationCode = modelFactory.generateRandomCode();
-        modelFactory.setVerificationCode(email, newVerificationCode);
-
+    public void resendVerificationCode(String id, String email) {
         String subject = "Nuevo código de verificación cuenta VirtualWallet";
+        String newVerificationCode = modelFactory.generateRandomCode();
         String message = "Su nuevo código de verificación es: " + newVerificationCode + ", gracias por registrarse en nuestra app.";
+        modelFactory.setVerificationCode(id, newVerificationCode);
 
         EmailUtil emailUtil = new EmailUtil(email, subject, message);
         emailUtil.sendNotification();

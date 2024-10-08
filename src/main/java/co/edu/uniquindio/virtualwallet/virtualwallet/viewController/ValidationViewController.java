@@ -56,8 +56,9 @@ public class ValidationViewController extends CoreViewController {
     private void resendCode(ActionEvent event) {
         try {
             if (showConfirmationMessage("¿Está seguro de que desea reenviar el código de verificación?")) {
+                String id = Session.getInstance().getPerson().getId();
                 String email = Session.getInstance().getPerson().getEmail();
-                validationController.resendVerificationCode(email);
+                validationController.resendVerificationCode(id, email);
                 showMessage("Código reenviado", "Código de verificación reenviado", "Se ha reenviado el código de verificación a su correo electrónico.", Alert.AlertType.INFORMATION);
             }
         } catch (Exception e) {
