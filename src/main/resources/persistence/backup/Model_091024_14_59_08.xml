@@ -289,6 +289,35 @@
          <void method="add">
           <object idref="CheckingAccount1"/>
          </void>
+         <void method="add">
+          <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount" id="CheckingAccount2">
+           <void property="accountNumber">
+            <string>119777</string>
+           </void>
+           <void property="associatedDeposits">
+            <object class="java.util.ArrayList"/>
+           </void>
+           <void property="associatedTransfers">
+            <object class="java.util.ArrayList"/>
+           </void>
+           <void property="associatedWithdrawals">
+            <object class="java.util.ArrayList"/>
+           </void>
+           <void property="bankName">
+            <string>Nequi</string>
+           </void>
+           <void property="overdraftLimit">
+            <double>0.0</double>
+           </void>
+           <void property="user">
+            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+             <void property="id">
+              <string>1090273361</string>
+             </void>
+            </object>
+           </void>
+          </object>
+         </void>
         </object>
        </void>
        <void property="birthDate">
@@ -333,9 +362,18 @@
        <void property="totalBalance">
         <double>4500.0</double>
        </void>
+       <void property="verificationCode">
+        <string>121733</string>
+       </void>
+       <void property="verified">
+        <boolean>true</boolean>
+       </void>
       </object>
      </void>
     </object>
+   </void>
+   <void method="add">
+    <object idref="CheckingAccount2"/>
    </void>
   </void>
   <void property="depositList">
@@ -398,6 +436,32 @@
    </void>
    <void method="add">
     <object idref="SavingsAccount1"/>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount2">
+     <void property="accountNumber">
+      <string>123777</string>
+     </void>
+     <void property="associatedDeposits">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedTransfers">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="associatedWithdrawals">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="bankName">
+      <string>Daviplata</string>
+     </void>
+     <void property="user">
+      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+       <void property="id">
+        <string>123</string>
+       </void>
+      </object>
+     </void>
+    </object>
    </void>
   </void>
   <void property="transferList">
@@ -473,7 +537,11 @@
       <string>armenia</string>
      </void>
      <void property="associatedAccounts">
-      <object class="java.util.ArrayList"/>
+      <object class="java.util.ArrayList">
+       <void method="add">
+        <object idref="SavingsAccount2"/>
+       </void>
+      </object>
      </void>
      <void property="birthDate">
       <object class="java.time.LocalDate" method="of">
@@ -512,6 +580,51 @@
      </void>
      <void property="verified">
       <boolean>true</boolean>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+     <void property="address">
+      <string>Armenia</string>
+     </void>
+     <void property="associatedAccounts">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="birthDate">
+      <object class="java.time.LocalDate" method="of">
+       <int>2000</int>
+       <int>9</int>
+       <int>29</int>
+      </object>
+     </void>
+     <void property="budgetList">
+      <object class="java.util.ArrayList"/>
+     </void>
+     <void property="email">
+      <string>diego.afloresq@uqvirtual.edu.co</string>
+     </void>
+     <void property="fullName">
+      <string>Don Diego</string>
+     </void>
+     <void property="id">
+      <string>77777</string>
+     </void>
+     <void property="password">
+      <string>inge</string>
+     </void>
+     <void property="phoneNumber">
+      <string>423423423</string>
+     </void>
+     <void property="registrationDate">
+      <object class="java.time.LocalDate" method="of">
+       <int>2024</int>
+       <int>10</int>
+       <int>9</int>
+      </object>
+     </void>
+     <void property="verificationCode">
+      <string>235412</string>
      </void>
     </object>
    </void>

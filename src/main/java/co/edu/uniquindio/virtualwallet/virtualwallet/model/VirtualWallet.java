@@ -202,6 +202,14 @@ public class VirtualWallet implements Serializable {
         return null;
     }
 
+    public void addAccountToUser(Account account) {
+        for(User u : userList){
+            if(u.getId().equals(account.getUser().getId())){
+                u.getAssociatedAccounts().add(account);
+            }
+        }
+    }
+
 
 //    public List<Transaction> getTransactionList() {
 //        List<Transaction> transactionList = new ArrayList<>();

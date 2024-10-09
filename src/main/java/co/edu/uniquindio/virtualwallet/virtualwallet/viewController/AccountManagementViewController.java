@@ -3,6 +3,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.AccountManagementController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 public class AccountManagementViewController extends CoreViewController implements ICoreViewController<AccountDto> {
     AccountManagementController accountManagementController;
+    User loggedUser;
     ObservableList<AccountDto> accountsListDto = FXCollections.observableArrayList();
     AccountDto accountSelected;
 
@@ -88,6 +90,7 @@ public class AccountManagementViewController extends CoreViewController implemen
     @FXML
     public void initialize() {
         accountManagementController = new AccountManagementController();
+        loggedUser = (User) Session.getInstance().getPerson();
         initView();
     }
 
@@ -110,7 +113,7 @@ public class AccountManagementViewController extends CoreViewController implemen
     }
 
     private void getAccounts() {
-        String userId = Session.getInstance().getPerson().getId();
+        String userId = loggedUser.getId();
         accountsListDto.addAll(accountManagementController.getAccountsByUserId(userId));
     }
 
@@ -193,12 +196,14 @@ public class AccountManagementViewController extends CoreViewController implemen
     // src/main/java/co/edu/uniquindio/virtualwallet/virtualwallet/viewController/AccountManagementViewController.java
     private AccountDto buildAccountDto() {
         String accountType = cbAccountType.getValue();
+        String userId = loggedUser.getId();
+
         if ("AHORROS".equals(accountType)) {
             return new SavingsAccountDto(
                     0, // Balance inicial
                     txtBankName.getText(), // Nombre del banco
                     txtAccountNumber.getText(), // Número de cuenta
-                    new UserDto("", "", "", "", "", LocalDate.now(),  LocalDate.now(), "", 0, new ArrayList<>(), new ArrayList<>()), // Usuario asociado
+                    userId, // Usuario asociado
                     new ArrayList<TransferDto>(), // Lista de transferencias asociadas
                     new ArrayList<DepositDto>(), // Lista de depósitos asociadas
                     new ArrayList<WithdrawalDto>() // Lista de retiros asociados
@@ -208,7 +213,7 @@ public class AccountManagementViewController extends CoreViewController implemen
                     0, // Balance inicial
                     txtBankName.getText(), // Nombre del banco
                     txtAccountNumber.getText(), // Número de cuenta
-                    new UserDto("", "", "", "", "", LocalDate.now(),  LocalDate.now(), "", 0, new ArrayList<>(), new ArrayList<>()), // Usuario asociado
+                    userId, // Usuario asociado
                     new ArrayList<TransferDto>(), // Lista de transferencias asociadas
                     new ArrayList<DepositDto>(), // Lista de depósitos asociadas
                     new ArrayList<WithdrawalDto>(), // Lista de retiros asociados

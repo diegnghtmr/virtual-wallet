@@ -11,7 +11,7 @@ public interface AccountDto {
     double balance();
     String bankName();
     String accountNumber();
-    UserDto user();
+    String userId();
     List<TransferDto> associatedTransfers();
     List<DepositDto> associatedDeposits();
     List<WithdrawalDto> associatedWithdrawals();

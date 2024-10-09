@@ -148,6 +148,7 @@ public class ModelFactory {
                 throw new IllegalArgumentException("Tipo de cuenta no soportado");
             }
             getVirtualWallet().addAccount(account);
+            getVirtualWallet().addAccountToUser(account);
             saveXMLResource();
             return true;
         } catch (Exception e) {
