@@ -9,9 +9,9 @@ public class AccountManagementController extends CoreController {
         super();
     }
 
-    public List<AccountDto> getAccounts() {
-        return modelFactory.getAccounts();
-    }
+//    public List<AccountDto> getAccounts() {
+//        return modelFactory.getAccounts();
+//    }
 
     public List<String> getAccountTypes() {
         return modelFactory.getAccountTypes();
@@ -27,5 +27,9 @@ public class AccountManagementController extends CoreController {
 
     public boolean updateAccount(AccountDto accountSelected, AccountDto accountDto) {
         return modelFactory.updateAccount(accountSelected, accountDto);
+    }
+
+    public List<AccountDto> getAccountsByUserId(String userId) {
+        return modelFactory.getAccountsByUserId(userId);
     }
 }

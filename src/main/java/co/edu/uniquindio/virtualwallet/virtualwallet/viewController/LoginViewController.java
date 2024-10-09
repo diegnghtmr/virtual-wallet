@@ -42,7 +42,7 @@ public class LoginViewController extends CoreViewController{
 
     @FXML
     void onRegister(ActionEvent event) {
-        browseWindow("/register-view.fxml", "Register", event);
+        browseWindow("/register-view.fxml", "Registro de Usuario", event);
     }
 
     @FXML
@@ -66,19 +66,19 @@ public class LoginViewController extends CoreViewController{
                 if (validatedUser instanceof User) {
 
                     if (!loginController.isVerified()) {
-                        browseWindow("/validation-view.fxml", "Validation", actionEvent);
+                        browseWindow("/validation-view.fxml", "Validación de Usuario", actionEvent);
                     } else {
-                        browseWindow("/user-data-view.fxml", "User Panel", actionEvent);
+                        browseWindow("/user-data-view.fxml", "Datos de Usuario", actionEvent);
                     }
 
                 } else {
-                    browseWindow("/adminPanel.fxml", "Admin Panel", actionEvent);
+                    browseWindow("/adminPanel.fxml", "Dashboard", actionEvent);
                 }
 
             }
 
         } catch (Exception e) {
-            showMessage(e.getMessage(), "Error de inicio de sesión", "La sesión no pudo ser iniciada" , Alert.AlertType.ERROR);
+            showMessage("Error de inicio de sesión", e.getMessage(), "La sesión no pudo ser iniciada" , Alert.AlertType.ERROR);
         }
     }
 
@@ -91,7 +91,7 @@ public class LoginViewController extends CoreViewController{
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("App Byte Bank");
+            stage.setTitle("BuckTrack");
             stage.show();
 
             closeWindow(actionEvent);

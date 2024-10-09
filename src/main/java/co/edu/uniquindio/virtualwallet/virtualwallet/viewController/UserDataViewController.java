@@ -1,7 +1,7 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IUserManagementViewController;
 import javafx.event.ActionEvent;
@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class UserDataViewController extends CoreViewController implements IUserManagementViewController<UserDto> {
+    User person;
+
     @FXML
     private Button btnGoDashboard;
 
@@ -54,7 +56,7 @@ public class UserDataViewController extends CoreViewController implements IUserM
     @FXML
     public void onLogout(ActionEvent event) {
         Session.getInstance().closeSession();
-        browseWindow("/login-view.fxml", "Login", event);
+        browseWindow("/startup-view.fxml", "BuckTrack", event);
     }
 
     @FXML
@@ -64,27 +66,27 @@ public class UserDataViewController extends CoreViewController implements IUserM
 
     @FXML
     public void initialize() {
-
-        Person person = Session.getInstance().getPerson();
-
-        txtEmail.setText(person.getEmail());
-
+        person = (User) Session.getInstance().getPerson();
+        initView();
     }
 
     @Override
     public void initView() {
-
+        showInformationUser();
     }
 
-    @Override
-    public void initDataBinding() {
-
+    private void showInformationUser() {
+        txtId.setText(person.getId());
+        txtUserName.setText(person.getFullName());
+        txtEmail.setText(person.getEmail());
+        txtPassword.setText(person.getPassword());
+        txtPhone.setText(person.getPhoneNumber());
+        txtAddress.setText(person.getAddress());
+        dpDateBirth.setText(String.valueOf(person.getBirthDate()));
+        txtBalance.setText(String.valueOf(person.getTotalBalance()));
+        txtRegistrationDate.setText(String.valueOf(person.getRegistrationDate()));
     }
 
-    @Override
-    public void listenerSelection() {
-
-    }
 
     @Override
     public boolean validateData(UserDto userDto) {

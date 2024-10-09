@@ -5,7 +5,6 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
-import co.edu.uniquindio.virtualwallet.virtualwallet.utils.SessionManager;
 import lombok.*;
 
 import java.io.Serializable;
@@ -118,11 +117,14 @@ public class VirtualWallet implements Serializable {
         }
 
         for (User user : userList) {
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                return user;
+            if (verifyUserExistence(email)) {
+                if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                    return user;
+                }
+            } else {
+                throw new Exception("El usuario no existe");
             }
         }
-
         throw new Exception("Identificación o contraseña incorrecta");
     }
 

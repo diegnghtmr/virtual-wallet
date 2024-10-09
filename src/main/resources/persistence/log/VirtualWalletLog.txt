@@ -142,3 +142,29 @@ Oct 08, 2024 4:51:35 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: login,Login,2024-10-08
 Oct 08, 2024 4:52:32 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: registerUser,UserDto added: rodassantiago442@gmail.com,2024-10-08
+Oct 08, 2024 7:49:34 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-08
+Oct 08, 2024 7:53:36 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: sarac.varonc@uqvirtual.edu.co,2024-10-08
+Oct 09, 2024 10:37:45 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:39:47 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:45:17 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:47:05 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:55:57 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:57:30 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:58:29 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: diegoflorez332@gmail.com,2024-10-09
+Oct 09, 2024 11:02:16 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 11:28:40 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 11:29:42 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: diego.afloresq@uqvirtual.edu.co,2024-10-09
+Oct 09, 2024 2:25:31 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09

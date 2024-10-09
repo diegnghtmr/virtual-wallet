@@ -2,6 +2,8 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CheckingAccountDto;
@@ -30,24 +32,14 @@ public class ModelFactory {
     VirtualWallet virtualWallet;
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
-    public void setVerificationCode(String id, String verificationCode) {
-        virtualWallet.setVerificationCode(id, verificationCode);
-        saveXMLResource();
-    }
-
     private static class SingletonHolder {
-
         private static final ModelFactory eINSTANCE = new ModelFactory();
-
-
-
-
-
-
     }
+
     public static ModelFactory getInstance(){
         return SingletonHolder.eINSTANCE;
     }
+
     public ModelFactory() {
         System.out.println("singleton class invocation");
         //1. initialize data and then save it to files
@@ -263,6 +255,24 @@ public class ModelFactory {
             saveXMLResource();
         }
         return isCorrect;
+    }
+
+    public void setVerificationCode(String id, String verificationCode) {
+        virtualWallet.setVerificationCode(id, verificationCode);
+        saveXMLResource();
+    }
+
+    public List<AccountDto> getAccountsByUserId(String userId) {
+        List<Account> userAccounts = virtualWallet.getAccountList(userId);
+        List<AccountDto> accountsDto = new ArrayList<>();
+        for (Account account : userAccounts) {
+            if (account instanceof SavingsAccount) {
+                accountsDto.add(virtualWalletMapper.savingsAccountToSavingsAccountDto((SavingsAccount) account));
+            } else if (account instanceof CheckingAccount) {
+                accountsDto.add(virtualWalletMapper.checkingAccountToCheckingAccountDto((CheckingAccount) account));
+            }
+        }
+        return accountsDto;
     }
 
 //    public List<TransactionDto> getTransactionList() {

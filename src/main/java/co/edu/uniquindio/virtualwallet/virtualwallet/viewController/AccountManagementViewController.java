@@ -3,6 +3,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.AccountManagementController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -109,7 +110,8 @@ public class AccountManagementViewController extends CoreViewController implemen
     }
 
     private void getAccounts() {
-        accountsListDto.addAll(accountManagementController.getAccounts());
+        String userId = Session.getInstance().getPerson().getId();
+        accountsListDto.addAll(accountManagementController.getAccountsByUserId(userId));
     }
 
     private void initializeDataComboBox() {

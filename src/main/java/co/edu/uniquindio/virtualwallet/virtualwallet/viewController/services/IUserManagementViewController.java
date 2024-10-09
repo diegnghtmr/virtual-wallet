@@ -13,9 +13,5 @@ public interface IUserManagementViewController<T> {
 
     void initView();
 
-    void initDataBinding();
-
-    void listenerSelection();
-
     boolean validateData(T object);
 }

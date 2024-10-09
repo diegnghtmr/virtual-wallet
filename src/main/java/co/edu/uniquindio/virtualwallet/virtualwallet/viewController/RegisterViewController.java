@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterViewController extends CoreViewController {
     private RegisterController registerController;
@@ -106,11 +108,18 @@ public class RegisterViewController extends CoreViewController {
                 && txtPhone.getText() != null && !txtPhone.getText().isEmpty()
                 && dpDateBirth.getValue() != null
                 && txtPassword.getText().equals(txtVerifyPassword.getText())
-                && isAdult(dpDateBirth.getValue());
+                && isAdult(dpDateBirth.getValue())
+                && validateEmail(txtEmail.getText());
     }
 
     private boolean isAdult(LocalDate birthDate) {
         return birthDate != null && birthDate.plusYears(18).isBefore(LocalDate.now());
+    }
+
+    private boolean validateEmail(String email) {
+        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mather = pattern.matcher(email);
+        return mather.find();
     }
 
     private void returnToStartup(ActionEvent actionEvent) {
