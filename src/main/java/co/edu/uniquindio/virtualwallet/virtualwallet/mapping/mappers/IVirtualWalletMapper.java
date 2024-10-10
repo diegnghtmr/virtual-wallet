@@ -85,14 +85,14 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "balance", target = "balance")
     @Mapping(source = "bankName", target = "bankName")
     @Mapping(source = "accountNumber", target = "accountNumber")
-    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user", target = "user")
     SavingsAccountDto savingsAccountToSavingsAccountDto(SavingsAccount savingsAccount);
 
     @Named("savingsAccountDtoToSavingsAccount")
     @Mapping(source = "balance", target = "balance")
     @Mapping(source = "bankName", target = "bankName")
     @Mapping(source = "accountNumber", target = "accountNumber")
-    @Mapping(source = "userId", target = "user.id")
+    @Mapping(source = "user", target = "user")
     SavingsAccount savingsAccountDtoToSavingsAccount(SavingsAccountDto savingsAccountDto);
 
     // CheckingAccount mapping methods
@@ -100,7 +100,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "balance", target = "balance")
     @Mapping(source = "bankName", target = "bankName")
     @Mapping(source = "accountNumber", target = "accountNumber")
-    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user", target = "user")
     @Mapping(source = "overdraftLimit", target = "overdraftLimit")
     CheckingAccountDto checkingAccountToCheckingAccountDto(CheckingAccount checkingAccount);
 
@@ -108,7 +108,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "balance", target = "balance")
     @Mapping(source = "bankName", target = "bankName")
     @Mapping(source = "accountNumber", target = "accountNumber")
-    @Mapping(source = "userId", target = "user.id")
+    @Mapping(source = "user", target = "user")
     @Mapping(source = "overdraftLimit", target = "overdraftLimit")
     CheckingAccount checkingAccountDtoToCheckingAccount(CheckingAccountDto checkingAccountDto);
 

@@ -178,3 +178,79 @@ Oct 09, 2024 2:58:48 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: addAccount,CheckingAccountDto added: 119777,2024-10-09
 Oct 09, 2024 2:59:09 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-10-09
+Oct 09, 2024 3:26:09 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 3:33:57 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 3:34:26 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,CheckingAccountDto added: 777,2024-10-09
+Oct 09, 2024 3:34:34 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateAccount,Account updated: 123777,2024-10-09
+Oct 09, 2024 3:36:54 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 3:37:15 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeAccount,Account removed: 123777,2024-10-09
+Oct 09, 2024 3:37:52 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 3:40:31 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 3:41:04 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 4234234,2024-10-09
+Oct 09, 2024 3:41:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,CheckingAccountDto added: 95345345,2024-10-09
+Oct 09, 2024 3:41:26 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 12343234,2024-10-09
+Oct 09, 2024 3:41:54 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateAccount,Account updated: 777,2024-10-09
+Oct 09, 2024 3:51:26 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 3:52:04 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: diegoflorez332@gmail.com,2024-10-09
+Oct 09, 2024 3:52:55 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 998877,2024-10-09
+Oct 09, 2024 3:53:49 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,CheckingAccountDto added: 9900,2024-10-09
+Oct 09, 2024 3:54:42 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeAccount,Account removed: 9900,2024-10-09
+Oct 09, 2024 3:55:57 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 3:57:23 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 3:57:47 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,CheckingAccountDto added: 5566,2024-10-09
+Oct 09, 2024 3:58:32 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 7788,2024-10-09
+Oct 09, 2024 4:04:18 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeAccount,Account removed: 7788,2024-10-09
+Oct 09, 2024 4:09:31 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 4:09:53 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 4:10:57 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 4:11:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeAccount,Account removed: 5566,2024-10-09
+Oct 09, 2024 4:11:19 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateAccount,Account updated: 998877,2024-10-09
+Oct 09, 2024 4:12:17 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 4:13:51 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 7777777777,2024-10-09
+Oct 09, 2024 4:14:38 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateAccount,Account updated: 7777777777,2024-10-09
+Oct 09, 2024 10:13:03 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:18:52 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateAccount,Account updated: 998877,2024-10-09
+Oct 09, 2024 10:25:58 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:26:59 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:27:33 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: diegoflorez332@gmail.com,2024-10-09
+Oct 09, 2024 10:28:48 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 123456,2024-10-09
+Oct 09, 2024 10:29:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,CheckingAccountDto added: 888,2024-10-09
+Oct 09, 2024 10:30:56 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateAccount,Account updated: 123456,2024-10-09

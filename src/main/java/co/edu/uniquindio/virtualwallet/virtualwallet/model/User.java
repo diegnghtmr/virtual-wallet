@@ -18,8 +18,8 @@ import java.util.List;
 public class User extends Person{
     private String address;
     private double totalBalance;
-    private List<Budget> budgetList;
-    private List<Account> associatedAccounts;
+    private List<Budget> budgetList = new ArrayList<>();
+    private List<Account> associatedAccounts = new ArrayList<>();
     private String verificationCode;
     private boolean isVerified;
 

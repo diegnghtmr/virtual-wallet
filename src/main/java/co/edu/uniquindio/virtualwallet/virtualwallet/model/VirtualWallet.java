@@ -210,6 +210,34 @@ public class VirtualWallet implements Serializable {
         }
     }
 
+    public void removeAccountFromUser(String accountNumber) {
+        for(User u : userList){
+            for(Account a : u.getAssociatedAccounts()){
+                if(a.getAccountNumber().equals(accountNumber)){
+                    u.getAssociatedAccounts().remove(a);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void updateAccountFromUser(String accountNumber, Account account) {
+        for(User u : userList){
+            for(Account a : u.getAssociatedAccounts()){
+                if(a.getAccountNumber().equals(accountNumber)){
+                    a.setAccountNumber(account.getAccountNumber());
+                    a.setBankName(account.getBankName());
+                    a.setBalance(account.getBalance());
+                    a.setUser(account.getUser());
+                    a.setAssociatedTransfers(account.getAssociatedTransfers());
+                    a.setAssociatedDeposits(account.getAssociatedDeposits());
+                    a.setAssociatedWithdrawals(account.getAssociatedWithdrawals());
+                    break;
+                }
+            }
+        }
+    }
+
 
 //    public List<Transaction> getTransactionList() {
 //        List<Transaction> transactionList = new ArrayList<>();

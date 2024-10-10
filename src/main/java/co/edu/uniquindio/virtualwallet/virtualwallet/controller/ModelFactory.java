@@ -165,6 +165,9 @@ public class ModelFactory {
             flagExist = getVirtualWallet().removeAccount(accountSelected.accountNumber());
 
             if (flagExist) {
+
+                getVirtualWallet().removeAccountFromUser(accountSelected.accountNumber());
+
                 // Registrar la acción de eliminación si se eliminó correctamente
                 registerSystemActions("Account removed: " + accountSelected.accountNumber(), 1, "removeAccount");
 
@@ -194,6 +197,7 @@ public class ModelFactory {
             }
 
             getVirtualWallet().updateAccount(accountSelected.accountNumber(), account);
+            getVirtualWallet().updateAccountFromUser(accountSelected.accountNumber(), account);
 
             // Registrar la acción de actualización
             registerSystemActions("Account updated: " + accountSelected.accountNumber(), 1, "updateAccount");

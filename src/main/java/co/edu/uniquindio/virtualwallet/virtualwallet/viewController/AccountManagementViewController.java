@@ -196,14 +196,13 @@ public class AccountManagementViewController extends CoreViewController implemen
     // src/main/java/co/edu/uniquindio/virtualwallet/virtualwallet/viewController/AccountManagementViewController.java
     private AccountDto buildAccountDto() {
         String accountType = cbAccountType.getValue();
-        String userId = loggedUser.getId();
 
         if ("AHORROS".equals(accountType)) {
             return new SavingsAccountDto(
                     0, // Balance inicial
                     txtBankName.getText(), // Nombre del banco
                     txtAccountNumber.getText(), // Número de cuenta
-                    userId, // Usuario asociado
+                    loggedUser, // Usuario asociado
                     new ArrayList<TransferDto>(), // Lista de transferencias asociadas
                     new ArrayList<DepositDto>(), // Lista de depósitos asociadas
                     new ArrayList<WithdrawalDto>() // Lista de retiros asociados
@@ -213,7 +212,7 @@ public class AccountManagementViewController extends CoreViewController implemen
                     0, // Balance inicial
                     txtBankName.getText(), // Nombre del banco
                     txtAccountNumber.getText(), // Número de cuenta
-                    userId, // Usuario asociado
+                    loggedUser, // Usuario asociado
                     new ArrayList<TransferDto>(), // Lista de transferencias asociadas
                     new ArrayList<DepositDto>(), // Lista de depósitos asociadas
                     new ArrayList<WithdrawalDto>(), // Lista de retiros asociados
