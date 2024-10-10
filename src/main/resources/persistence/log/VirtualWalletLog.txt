@@ -254,3 +254,17 @@ Oct 09, 2024 10:29:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.Fil
 INFO: addAccount,CheckingAccountDto added: 888,2024-10-09
 Oct 09, 2024 10:30:56 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: updateAccount,Account updated: 123456,2024-10-09
+Oct 09, 2024 10:44:50 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:46:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:49:28 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 10:52:43 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 11:05:35 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 11:11:30 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09
+Oct 09, 2024 11:13:41 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-10-09

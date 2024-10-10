@@ -235,18 +235,18 @@ public class ModelFactory {
         }
     }
 
-    public List<Account> getAccountList() {
-        Person person = Session.getInstance().getPerson();
-        return virtualWallet.getAccountList(person.getId());
-    }
+//    public List<Account> getAccountList() {
+//        Person person = Session.getInstance().getPerson();
+//        return virtualWallet.getAccountList(person.getId());
+//    }
 
     public String generateRandomCode() {
         return virtualWallet.generateRandomCode();
     }
 
-    public void saveSession(Person validatedUser) {
-        Session.getInstance().setPerson(validatedUser);
-    }
+//    public void saveSession(Person validatedUser) {
+//        Session.getInstance().setPerson(validatedUser);
+//    }
 
     public boolean isVerified() {
         Person person = Session.getInstance().getPerson();
@@ -268,7 +268,7 @@ public class ModelFactory {
     }
 
     public List<AccountDto> getAccountsByUserId(String userId) {
-        List<Account> userAccounts = virtualWallet.getAccountList(userId);
+        List<Account> userAccounts = virtualWallet.getAccountListByUserId(userId);
         List<AccountDto> accountsDto = new ArrayList<>();
         for (Account account : userAccounts) {
             if (account instanceof SavingsAccount) {

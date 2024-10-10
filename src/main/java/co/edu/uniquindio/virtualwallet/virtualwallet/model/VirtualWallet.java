@@ -2,13 +2,11 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,6 +35,14 @@ public class VirtualWallet implements Serializable {
         accountList.addAll(savingsAccountList);
         accountList.addAll(checkingAccountList);
         return accountList;
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        ArrayList<Transaction> transactionList = new ArrayList<>();
+        transactionList.addAll(depositList);
+        transactionList.addAll(withdrawalList);
+        transactionList.addAll(transferList);
+        return transactionList;
     }
 
     public void getFileAccounts(List<Account> loadedAccounts) {
@@ -170,9 +176,21 @@ public class VirtualWallet implements Serializable {
         return isCorrect;
     }
 
-    public List<Account> getAccountList(String id) {
+    public List<Account> getAccountListByUserId(String id) {
         return getAccounts().stream().filter(account -> account.getUser().getId().equals(id)).toList();
     }
+
+    public List<Transaction> getTransactionListByUserId(String id) {
+        return getTransactions().stream().filter(transaction -> transaction.getAccount().getUser().getId().equals(id)).toList();
+    }
+
+    public List<Budget> getBudgetListByUserId(String id) {
+        return budgetList.stream().filter(budget -> budget.getUser().getId().equals(id)).toList();
+    }
+
+//    public List<Category> getCategoryListByUserId(String id) {
+//        return categoryList.stream().filter(category -> category.getUser().getId().equals(id)).toList();
+//    }
 
     public void setVerificationCode(String id, String verificationCode) {
 
