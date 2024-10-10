@@ -16,7 +16,6 @@ import java.util.Random;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class VirtualWallet implements Serializable {
     private String name = "BuckTrack";
     private List<Deposit> depositList = new ArrayList<>();
@@ -30,6 +29,9 @@ public class VirtualWallet implements Serializable {
     private Administrator administrator;
     private static final long serialVersionUID = 1L;
 
+    // Account Management Methods
+    // --------------------------
+    
     public ArrayList<Account> getAccounts() {
         ArrayList<Account> accountList = new ArrayList<>();
         accountList.addAll(savingsAccountList);
@@ -37,12 +39,8 @@ public class VirtualWallet implements Serializable {
         return accountList;
     }
 
-    public ArrayList<Transaction> getTransactions() {
-        ArrayList<Transaction> transactionList = new ArrayList<>();
-        transactionList.addAll(depositList);
-        transactionList.addAll(withdrawalList);
-        transactionList.addAll(transferList);
-        return transactionList;
+    public List<Account> getAccountListByUserId(String id) {
+        return getAccounts().stream().filter(account -> account.getUser().getId().equals(id)).toList();
     }
 
     public void getFileAccounts(List<Account> loadedAccounts) {
@@ -116,6 +114,66 @@ public class VirtualWallet implements Serializable {
         }
     }
 
+    public void addAccountToUser(Account account) {
+        for (User u : userList) {
+            if (u.getId().equals(account.getUser().getId())) {
+                u.getAssociatedAccounts().add(account);
+            }
+        }
+    }
+
+    public void removeAccountFromUser(String accountNumber) {
+        for (User u : userList) {
+            for (Account a : u.getAssociatedAccounts()) {
+                if (a.getAccountNumber().equals(accountNumber)) {
+                    u.getAssociatedAccounts().remove(a);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void updateAccountFromUser(String accountNumber, Account account) {
+        for (User u : userList) {
+            for (Account a : u.getAssociatedAccounts()) {
+                if (a.getAccountNumber().equals(accountNumber)) {
+                    a.setAccountNumber(account.getAccountNumber());
+                    a.setBankName(account.getBankName());
+                    a.setBalance(account.getBalance());
+                    a.setUser(account.getUser());
+                    a.setAssociatedTransfers(account.getAssociatedTransfers());
+                    a.setAssociatedDeposits(account.getAssociatedDeposits());
+                    a.setAssociatedWithdrawals(account.getAssociatedWithdrawals());
+                    break;
+                }
+            }
+        }
+    }
+
+    // Transaction Management Methods
+    // ------------------------------
+    public ArrayList<Transaction> getTransactions() {
+        ArrayList<Transaction> transactionList = new ArrayList<>();
+        transactionList.addAll(depositList);
+        transactionList.addAll(withdrawalList);
+        transactionList.addAll(transferList);
+        return transactionList;
+    }
+
+    public List<Transaction> getTransactionListByUserId(String id) {
+        return getTransactions().stream().filter(transaction -> transaction.getAccount().getUser().getId().equals(id)).toList();
+    }
+
+    // Budget Management Methods
+    // -------------------------
+
+    public List<Budget> getBudgetListByUserId(String id) {
+        return budgetList.stream().filter(budget -> budget.getUser().getId().equals(id)).toList();
+    }
+
+    // User Management Methods
+    // -----------------------
+
     public Person validateLogin(String email, String password) throws Exception {
         if (administrator != null && administrator.getEmail().equals(email)
                 && administrator.getPassword().equals(password)) {
@@ -147,6 +205,18 @@ public class VirtualWallet implements Serializable {
         userList.add(user);
     }
 
+    public User findById(String id) {
+        for (User u : userList) {
+            if (u.getId().equals(id)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    // Verification Code Methods
+    // -------------------------
+
     public String generateRandomCode() {
         StringBuilder codigoRegistro = new StringBuilder();
 
@@ -159,14 +229,12 @@ public class VirtualWallet implements Serializable {
         return codigoRegistro.toString();
     }
 
-
     public boolean verifyCode(String id, String verificationCode) {
-
         boolean isCorrect = false;
 
         for (User u : userList) {
             if (u.getId().equals(id)) {
-                 isCorrect = u.getVerificationCode().equals(verificationCode);
+                isCorrect = u.getVerificationCode().equals(verificationCode);
                 if (isCorrect) {
                     u.setVerified(true);
                 }
@@ -176,93 +244,20 @@ public class VirtualWallet implements Serializable {
         return isCorrect;
     }
 
-    public List<Account> getAccountListByUserId(String id) {
-        return getAccounts().stream().filter(account -> account.getUser().getId().equals(id)).toList();
-    }
-
-    public List<Transaction> getTransactionListByUserId(String id) {
-        return getTransactions().stream().filter(transaction -> transaction.getAccount().getUser().getId().equals(id)).toList();
-    }
-
-    public List<Budget> getBudgetListByUserId(String id) {
-        return budgetList.stream().filter(budget -> budget.getUser().getId().equals(id)).toList();
-    }
-
-//    public List<Category> getCategoryListByUserId(String id) {
-//        return categoryList.stream().filter(category -> category.getUser().getId().equals(id)).toList();
-//    }
-
     public void setVerificationCode(String id, String verificationCode) {
-
         User user = findById(id);
-        if(user != null){
+        if (user != null) {
             int index = userList.indexOf(user);
             user.setVerificationCode(verificationCode);
         }
-
     }
 
     public boolean isVerified(String id) {
-        for(User u : userList){
-            if(u.getId().equals(id)){
+        for (User u : userList) {
+            if (u.getId().equals(id)) {
                 return u.isVerified();
             }
         }
         return false;
     }
-
-    public User findById(String id) {
-        for(User u : userList){
-            if(u.getId().equals(id)){
-                return u;
-            }
-        }
-        return null;
-    }
-
-    public void addAccountToUser(Account account) {
-        for(User u : userList){
-            if(u.getId().equals(account.getUser().getId())){
-                u.getAssociatedAccounts().add(account);
-            }
-        }
-    }
-
-    public void removeAccountFromUser(String accountNumber) {
-        for(User u : userList){
-            for(Account a : u.getAssociatedAccounts()){
-                if(a.getAccountNumber().equals(accountNumber)){
-                    u.getAssociatedAccounts().remove(a);
-                    break;
-                }
-            }
-        }
-    }
-
-    public void updateAccountFromUser(String accountNumber, Account account) {
-        for(User u : userList){
-            for(Account a : u.getAssociatedAccounts()){
-                if(a.getAccountNumber().equals(accountNumber)){
-                    a.setAccountNumber(account.getAccountNumber());
-                    a.setBankName(account.getBankName());
-                    a.setBalance(account.getBalance());
-                    a.setUser(account.getUser());
-                    a.setAssociatedTransfers(account.getAssociatedTransfers());
-                    a.setAssociatedDeposits(account.getAssociatedDeposits());
-                    a.setAssociatedWithdrawals(account.getAssociatedWithdrawals());
-                    break;
-                }
-            }
-        }
-    }
-
-
-//    public List<Transaction> getTransactionList() {
-//        List<Transaction> transactionList = new ArrayList<>();
-//        transactionList.addAll(depositList);
-//        transactionList.addAll(withdrawalList);
-//        transactionList.addAll(transferList);
-//        return transactionList;
-//    }
-
 }

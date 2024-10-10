@@ -25,20 +25,20 @@ import java.util.List;
 
 @Getter
 @Setter
-
 public class ModelFactory {
-
     // Main model class
     VirtualWallet virtualWallet;
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
+    // Singleton instance
     private static class SingletonHolder {
         private static final ModelFactory eINSTANCE = new ModelFactory();
     }
 
-    public static ModelFactory getInstance(){
+    public static ModelFactory getInstance() {
         return SingletonHolder.eINSTANCE;
     }
+
 
     public ModelFactory() {
         System.out.println("singleton class invocation");
@@ -69,6 +69,14 @@ public class ModelFactory {
         }
         registerSystemActions("Login", 1, "login");
     }
+
+    // Initialization Methods
+    // ----------------------
+
+    private void initializeData() {
+        virtualWallet = VirtualWalletUtils.initializeData();
+    }
+
     private void loadDataFromFiles() {
         virtualWallet = new VirtualWallet();
         try {
@@ -77,21 +85,22 @@ public class ModelFactory {
             throw new RuntimeException(e);
         }
     }
+
     private void saveTestData() {
         try {
-            //PersistenceUtil.saveEmployees(getBank().getEmployeeList());
             PersistenceUtil.saveAccounts(getVirtualWallet().getAccounts());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
     private void loadBinaryResource() {
         virtualWallet = PersistenceUtil.loadBinaryVirtualWalletResource();
     }
+
     private void saveBinaryResource() {
         PersistenceUtil.saveBinaryVirtualWalletResource(virtualWallet);
     }
-
 
     private void loadXMLResource() {
         virtualWallet = PersistenceUtil.loadXMLVirtualWalletResource();
@@ -105,14 +114,8 @@ public class ModelFactory {
         PersistenceUtil.saveLogRecord(logMessage, level, action);
     }
 
-
-
-
-
-
-    private void initializeData() {
-        virtualWallet = VirtualWalletUtils.initializeData();
-    }
+    // Utility Methods
+    // ---------------
 
     public List<String> getTransactionTypes() {
         return VirtualWalletUtils.getTransactionTypes();
@@ -122,9 +125,32 @@ public class ModelFactory {
         return VirtualWalletUtils.getAccountTypes();
     }
 
+    public String generateRandomCode() {
+        return virtualWallet.generateRandomCode();
+    }
 
+    public boolean isVerified() {
+        Person person = Session.getInstance().getPerson();
+        return virtualWallet.isVerified(person.getId());
+    }
 
-    // Methods to be implemented
+    public boolean verifyCode(String verificationCode) {
+        Person person = Session.getInstance().getPerson();
+        boolean isCorrect = virtualWallet.verifyCode(person.getId(), verificationCode);
+        if (isCorrect) {
+            saveXMLResource();
+        }
+        return isCorrect;
+    }
+
+    public void setVerificationCode(String id, String verificationCode) {
+        virtualWallet.setVerificationCode(id, verificationCode);
+        saveXMLResource();
+    }
+
+    // Account Management Methods
+    // --------------------------
+
     public List<AccountDto> getAccounts() {
         List<AccountDto> accountDtos = new ArrayList<>();
         accountDtos.addAll(virtualWalletMapper.getSavingsAccountsDto(virtualWallet.getSavingsAccountList()));
@@ -161,24 +187,16 @@ public class ModelFactory {
     public boolean removeAccount(AccountDto accountSelected) {
         boolean flagExist = false;
         try {
-            // Intentar eliminar la cuenta del monedero virtual
             flagExist = getVirtualWallet().removeAccount(accountSelected.accountNumber());
 
             if (flagExist) {
-
                 getVirtualWallet().removeAccountFromUser(accountSelected.accountNumber());
-
-                // Registrar la acción de eliminación si se eliminó correctamente
                 registerSystemActions("Account removed: " + accountSelected.accountNumber(), 1, "removeAccount");
-
-                // Guardar los cambios en el recurso XML
                 saveXMLResource();
             } else {
-                // Registrar la acción si la cuenta no existía
                 registerSystemActions("Attempted to remove non-existent account: " + accountSelected.accountNumber(), 2, "removeAccount");
             }
         } catch (AccountException e) {
-            // Registrar la excepción en el log
             registerSystemActions(e.getMessage(), 3, "removeAccount");
             e.printStackTrace();
         }
@@ -198,21 +216,31 @@ public class ModelFactory {
 
             getVirtualWallet().updateAccount(accountSelected.accountNumber(), account);
             getVirtualWallet().updateAccountFromUser(accountSelected.accountNumber(), account);
-
-            // Registrar la acción de actualización
             registerSystemActions("Account updated: " + accountSelected.accountNumber(), 1, "updateAccount");
-
-            // Guardar los cambios en el recurso XML
             saveXMLResource();
-
             return true;
         } catch (AccountException e) {
-            // Registrar la excepción en el log
             registerSystemActions(e.getMessage(), 3, "updateAccount");
             e.printStackTrace();
             return false;
         }
     }
+
+    public List<AccountDto> getAccountsByUserId(String userId) {
+        List<Account> userAccounts = virtualWallet.getAccountListByUserId(userId);
+        List<AccountDto> accountsDto = new ArrayList<>();
+        for (Account account : userAccounts) {
+            if (account instanceof SavingsAccount) {
+                accountsDto.add(virtualWalletMapper.savingsAccountToSavingsAccountDto((SavingsAccount) account));
+            } else if (account instanceof CheckingAccount) {
+                accountsDto.add(virtualWalletMapper.checkingAccountToCheckingAccountDto((CheckingAccount) account));
+            }
+        }
+        return accountsDto;
+    }
+
+    // User Management Methods
+    // -----------------------
 
     public Person validateLogin(String email, String password) throws Exception {
         return virtualWallet.validateLogin(email, password);
@@ -234,54 +262,4 @@ public class ModelFactory {
             return false;
         }
     }
-
-//    public List<Account> getAccountList() {
-//        Person person = Session.getInstance().getPerson();
-//        return virtualWallet.getAccountList(person.getId());
-//    }
-
-    public String generateRandomCode() {
-        return virtualWallet.generateRandomCode();
-    }
-
-//    public void saveSession(Person validatedUser) {
-//        Session.getInstance().setPerson(validatedUser);
-//    }
-
-    public boolean isVerified() {
-        Person person = Session.getInstance().getPerson();
-        return virtualWallet.isVerified(person.getId());
-    }
-
-    public boolean verifyCode(String verificationCode) {
-        Person person = Session.getInstance().getPerson();
-        boolean isCorrect =  virtualWallet.verifyCode(person.getId(), verificationCode);
-        if(isCorrect){
-            saveXMLResource();
-        }
-        return isCorrect;
-    }
-
-    public void setVerificationCode(String id, String verificationCode) {
-        virtualWallet.setVerificationCode(id, verificationCode);
-        saveXMLResource();
-    }
-
-    public List<AccountDto> getAccountsByUserId(String userId) {
-        List<Account> userAccounts = virtualWallet.getAccountListByUserId(userId);
-        List<AccountDto> accountsDto = new ArrayList<>();
-        for (Account account : userAccounts) {
-            if (account instanceof SavingsAccount) {
-                accountsDto.add(virtualWalletMapper.savingsAccountToSavingsAccountDto((SavingsAccount) account));
-            } else if (account instanceof CheckingAccount) {
-                accountsDto.add(virtualWalletMapper.checkingAccountToCheckingAccountDto((CheckingAccount) account));
-            }
-        }
-        return accountsDto;
-    }
-
-//    public List<TransactionDto> getTransactionList() {
-//        return  IVirtualWalletMapper.transactionDtoToTransaction(virtualWallet.getTransactionList());
-//
-//    }
 }

@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AccountManagementViewController extends CoreViewController implements ICoreViewController<AccountDto> {
@@ -61,6 +60,9 @@ public class AccountManagementViewController extends CoreViewController implemen
     @FXML
     private TextField txtBankName;
 
+    // Event Handling Methods
+    // ----------------------
+
     @FXML
     public void onAdd(ActionEvent event) {
         addAccount();
@@ -87,6 +89,9 @@ public class AccountManagementViewController extends CoreViewController implemen
         updateAccount();
     }
 
+    // Initialization Methods
+    // ----------------------
+
     @FXML
     public void initialize() {
         accountManagementController = new AccountManagementController();
@@ -112,6 +117,14 @@ public class AccountManagementViewController extends CoreViewController implemen
         tcBalance.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().balance())));
     }
 
+    @Override
+    public void listenerSelection() {
+        tblAccount.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            accountSelected = newSelection;
+            showInformation(accountSelected);
+        });
+    }
+
     private void getAccounts() {
         String userId = loggedUser.getId();
         accountsListDto.addAll(accountManagementController.getAccountsByUserId(userId));
@@ -124,55 +137,8 @@ public class AccountManagementViewController extends CoreViewController implemen
         initializeComboBox(cbAccountType, accountTypes, item -> item);
     }
 
-    @Override
-    public void listenerSelection() {
-        tblAccount.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            accountSelected = newSelection;
-            showInformation(accountSelected);
-        });
-    }
-
-    @Override
-    public void showInformation(AccountDto accountSelected) {
-        if (accountSelected != null) {
-            txtAccountNumber.setText(accountSelected.accountNumber());
-            txtBankName.setText(accountSelected.bankName());
-            cbAccountType.setValue(accountSelected.accountType());
-        }
-    }
-
-
-    @Override
-    public boolean validateData(AccountDto accountDto) {
-        String message = "";
-        if (accountDto.accountNumber().isEmpty()) {
-            message += "El número de cuenta es requerido.\n";
-        }
-        if (accountDto.bankName().isEmpty()) {
-            message += "El nombre del banco es requerido.\n";
-        }
-        if (accountDto.accountType().isEmpty()) {
-            message += "El tipo de cuenta es requerido.\n";
-        }
-        if (!message.isEmpty()) {
-            showMessage("Notificación de validación", "Datos no válidos", message, Alert.AlertType.WARNING);
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void clearFields() {
-        txtAccountNumber.clear();
-        txtBankName.clear();
-        cbAccountType.getSelectionModel().clearSelection();
-    }
-
-    @Override
-    public void deselectTable() {
-        tblAccount.getSelectionModel().clearSelection();
-        accountSelected = null;
-    }
+    // Account Management Methods
+    // --------------------------
 
     private void addAccount() {
         AccountDto accountDto = buildAccountDto();
@@ -193,7 +159,6 @@ public class AccountManagementViewController extends CoreViewController implemen
         }
     }
 
-    // src/main/java/co/edu/uniquindio/virtualwallet/virtualwallet/viewController/AccountManagementViewController.java
     private AccountDto buildAccountDto() {
         String accountType = cbAccountType.getValue();
 
@@ -216,7 +181,7 @@ public class AccountManagementViewController extends CoreViewController implemen
                     new ArrayList<TransferDto>(), // Lista de transferencias asociadas
                     new ArrayList<DepositDto>(), // Lista de depósitos asociadas
                     new ArrayList<WithdrawalDto>(), // Lista de retiros asociados
-                    0 // Límite de sobregiro
+                    580000 // Límite de sobregiro
             );
         } else {
             return null;
@@ -276,10 +241,53 @@ public class AccountManagementViewController extends CoreViewController implemen
         }
     }
 
+    // Utility Methods
+    // ---------------
+
+    @Override
+    public void showInformation(AccountDto accountSelected) {
+        if (accountSelected != null) {
+            txtAccountNumber.setText(accountSelected.accountNumber());
+            txtBankName.setText(accountSelected.bankName());
+            cbAccountType.setValue(accountSelected.accountType());
+        }
+    }
+
+    @Override
+    public boolean validateData(AccountDto accountDto) {
+        String message = "";
+        if (accountDto.accountNumber().isEmpty()) {
+            message += "El número de cuenta es requerido.\n";
+        }
+        if (accountDto.bankName().isEmpty()) {
+            message += "El nombre del banco es requerido.\n";
+        }
+        if (accountDto.accountType().isEmpty()) {
+            message += "El tipo de cuenta es requerido.\n";
+        }
+        if (!message.isEmpty()) {
+            showMessage("Notificación de validación", "Datos no válidos", message, Alert.AlertType.WARNING);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void clearFields() {
+        txtAccountNumber.clear();
+        txtBankName.clear();
+        cbAccountType.getSelectionModel().clearSelection();
+    }
+
+    @Override
+    public void deselectTable() {
+        tblAccount.getSelectionModel().clearSelection();
+        accountSelected = null;
+    }
+
     private boolean hasChanges(AccountDto accountSelected, AccountDto accountDto) {
         return !accountSelected.accountNumber().equals(accountDto.accountNumber()) ||
                 !accountSelected.bankName().equals(accountDto.bankName()) ||
                 !accountSelected.accountType().equals(accountDto.accountType());
     }
-
 }
