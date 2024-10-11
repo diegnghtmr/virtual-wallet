@@ -1,5 +1,6 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.controller.UserDataController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
@@ -9,8 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
+
 public class UserDataViewController extends CoreViewController implements IUserManagementViewController<UserDto> {
     User person;
+    UserDataController userDataController;
 
     @FXML
     private Button btnGoDashboard;
@@ -61,21 +65,26 @@ public class UserDataViewController extends CoreViewController implements IUserM
 
     @FXML
     public void onUpdate(ActionEvent event) {
-
+        updateUser();
     }
 
     @FXML
     public void initialize() {
         person = (User) Session.getInstance().getPerson();
+        userDataController = new UserDataController();
         initView();
     }
 
     @Override
     public void initView() {
-        showInformationUser();
+        showInformation();
     }
 
-    private void showInformationUser() {
+    private void updateUser() {
+
+    }
+
+    private void showInformation() {
         txtId.setText(person.getId());
         txtUserName.setText(person.getFullName());
         txtEmail.setText(person.getEmail());
