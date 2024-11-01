@@ -1,5 +1,6 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public  class Transaction implements Serializable {
     private String description;
     private Category category;
     private Account account;
+    private TransactionStatus status; // Nuevo atributo
     private static final long serialVersionUID = 1L;
 
 
@@ -32,6 +34,7 @@ public  class Transaction implements Serializable {
         this.description = description;
         this.category = category;
         this.account = account;
+        this.status = TransactionStatus.PENDING;
     }
 
     private String generateId() {

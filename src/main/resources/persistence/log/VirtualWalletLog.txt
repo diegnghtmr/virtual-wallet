@@ -308,3 +308,5 @@ Oct 10, 2024 11:51:28 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.Fil
 INFO: registerUser,UserDto added: danielj.narvaezh@uqvirtual.edu.co,2024-10-10
 Oct 10, 2024 11:57:07 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: updateAccount,Account updated: 15432423,2024-10-10
+Nov 01, 2024 2:46:35 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
