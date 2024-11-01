@@ -344,7 +344,7 @@
       <object class="java.util.ArrayList"/>
      </void>
      <void property="bankName">
-      <string>Bancolombia</string>
+      <string>Bancolombina</string>
      </void>
      <void property="user">
       <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User" id="User2">
@@ -552,6 +552,48 @@
    </void>
    <void method="add">
     <object idref="User2"/>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
+     <void property="address">
+      <string>El granada</string>
+     </void>
+     <void property="birthDate">
+      <object class="java.time.LocalDate" method="of">
+       <int>2000</int>
+       <int>10</int>
+       <int>9</int>
+      </object>
+     </void>
+     <void property="email">
+      <string>danielj.narvaezh@uqvirtual.edu.co</string>
+     </void>
+     <void property="fullName">
+      <string>Daniel Josue Narvaez Hincapie</string>
+     </void>
+     <void property="id">
+      <string>1090273355</string>
+     </void>
+     <void property="password">
+      <string>maya</string>
+     </void>
+     <void property="phoneNumber">
+      <string>3103595877</string>
+     </void>
+     <void property="registrationDate">
+      <object class="java.time.LocalDate" method="of">
+       <int>2024</int>
+       <int>10</int>
+       <int>10</int>
+      </object>
+     </void>
+     <void property="verificationCode">
+      <string>333602</string>
+     </void>
+     <void property="verified">
+      <boolean>true</boolean>
+     </void>
+    </object>
    </void>
   </void>
   <void property="withdrawalList">

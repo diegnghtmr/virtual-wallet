@@ -73,17 +73,17 @@
             </TextArea>
             <ImageView fitHeight="65.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <image>
-                  <Image url="@img/oscash.png" />
+                  <Image url="@../img/oscash.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="39.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT">
                <image>
-                  <Image url="@img/user.png" />
+                  <Image url="@../img/user.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="35.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@img/send-question.png" />
+                  <Image url="@../img/send-question.png" />
                </image>
             </ImageView>
             <Button fx:id="btnSendMessage" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#onSendMessage" opacity="0.0" text="Button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
@@ -93,7 +93,7 @@
       <Separator layoutX="-1.0" layoutY="536.0" prefHeight="2.0" prefWidth="1255.0" />
       <ImageView fitHeight="428.0" fitWidth="479.0" layoutX="696.0" layoutY="51.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/oscash.png" />
+            <Image url="@../img/oscash.png" />
          </image>
       </ImageView>
       <Label layoutX="467.0" layoutY="599.0" prefHeight="29.0" prefWidth="266.0" text="Ayúdanos a mejorar. ¡Califícanos!">
@@ -103,7 +103,7 @@
       </Label>
       <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="1165.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/notification.png" />
+            <Image url="@../img/notification.png" />
          </image>
       </ImageView>
       <Button fx:id="btnNotification" contentDisplay="GRAPHIC_ONLY" layoutX="1165.0" layoutY="11.0" mnemonicParsing="false" onAction="#onNotification" opacity="0.0" prefHeight="39.0" prefWidth="39.0" text="Button" />

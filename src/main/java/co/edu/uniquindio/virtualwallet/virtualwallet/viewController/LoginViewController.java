@@ -42,7 +42,7 @@ public class LoginViewController extends CoreViewController{
 
     @FXML
     void onRegister(ActionEvent event) {
-        browseWindow("/register-view.fxml", "Registro de Usuario", event);
+        browseWindow("/view/register-view.fxml", "Registro de Usuario", event);
     }
 
     @FXML
@@ -66,9 +66,9 @@ public class LoginViewController extends CoreViewController{
                 if (validatedUser instanceof User) {
 
                     if (!loginController.isVerified()) {
-                        browseWindow("/validation-view.fxml", "Validación de Usuario", actionEvent);
+                        browseWindow("/view/validation-view.fxml", "Validación de Usuario", actionEvent);
                     } else {
-                        browseWindow("/user-data-view.fxml", "Datos de Usuario", actionEvent);
+                        browseWindow("/view/user-data-view.fxml", "Datos de Usuario", actionEvent);
                     }
 
                 } else {
@@ -85,7 +85,7 @@ public class LoginViewController extends CoreViewController{
 
     private void returnToStartup(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/startup-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/startup-view.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

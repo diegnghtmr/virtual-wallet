@@ -74,7 +74,7 @@ public class RegisterViewController extends CoreViewController {
                 registerController.sendVerificationCode(userDto);
                 showMessage("¡Registro exitoso!", "Bienvenido " + userDto.fullName(), "Te has registrado correctamente.", Alert.AlertType.INFORMATION);
                 closeWindow(actionEvent);
-                browseWindow("/login-view.fxml", "Login", actionEvent);
+                browseWindow("/view/login-view.fxml", "Login", actionEvent);
             } catch (Exception e) {
                 showMessage("Error de registro", "No se pudo completar el registro", e.getMessage(), Alert.AlertType.ERROR);
             }
@@ -124,7 +124,7 @@ public class RegisterViewController extends CoreViewController {
 
     private void returnToStartup(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/startup-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/startup-view.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

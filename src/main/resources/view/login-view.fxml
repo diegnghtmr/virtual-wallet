@@ -30,7 +30,7 @@
 
         <ImageView fitHeight="363.0" fitWidth="197.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@img/logo.png" />
+                <Image url="@../img/logo.png" />
             </image>
             <effect>
                 <DropShadow />

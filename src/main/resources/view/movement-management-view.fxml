@@ -103,7 +103,7 @@
       </Label>
       <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="1165.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/notification.png" />
+            <Image url="@../img/notification.png" />
          </image>
       </ImageView>
       <Button fx:id="btnNotification" contentDisplay="GRAPHIC_ONLY" layoutX="1165.0" layoutY="11.0" mnemonicParsing="false" onAction="#onNotification" opacity="0.0" prefHeight="39.0" prefWidth="39.0" text="Button" />

@@ -1,8 +1,6 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.ValidationController;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +42,7 @@ public class ValidationViewController extends CoreViewController {
             if (validationController.verifyCode(verificationCode)) {
                 showMessage("Verificación exitosa", "Código verificado correctamente", "Su cuenta ha sido verificada exitosamente.", Alert.AlertType.INFORMATION);
                 closeWindow(event);
-                browseWindow("/user-data-view.fxml", "User Panel", event);
+                browseWindow("/view/user-data-view.fxml", "User Panel", event);
             }else{
                 showMessage("Código incorrecto", "Código de verificación incorrecto", "El código de verificación ingresado no es correcto.", Alert.AlertType.WARNING);
             }

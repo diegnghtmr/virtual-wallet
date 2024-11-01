@@ -211,7 +211,7 @@
             </TextField>
             <ImageView fitHeight="323.0" fitWidth="564.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="19">
                <image>
-                  <Image url="@img/logo.png" />
+                  <Image url="@../img/logo.png" />
                </image>
             </ImageView>
          </children>

@@ -10,8 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
-
 public class UserDataViewController extends CoreViewController implements IUserManagementViewController<UserDto> {
     User person;
     UserDataController userDataController;
@@ -54,13 +52,13 @@ public class UserDataViewController extends CoreViewController implements IUserM
 
     @FXML
     public void onGoDashboard(ActionEvent event) {
-        browseWindow("/user-container-view.fxml", "Dashboard", event);
+        browseWindow("/view/user-container-view.fxml", "Dashboard", event);
     }
 
     @FXML
     public void onLogout(ActionEvent event) {
         Session.getInstance().closeSession();
-        browseWindow("/startup-view.fxml", "BuckTrack", event);
+        browseWindow("/view/startup-view.fxml", "BuckTrack", event);
     }
 
     @FXML
