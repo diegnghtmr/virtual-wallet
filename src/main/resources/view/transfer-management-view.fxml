@@ -70,10 +70,6 @@
                <padding>
                   <Insets top="8.0" />
                </padding></ComboBox>
-            <ComboBox fx:id="cbReceivingAccount" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <padding>
-                  <Insets top="8.0" />
-               </padding></ComboBox>
             <ComboBox fx:id="cbCategory" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <padding>
                   <Insets top="8.0" />
@@ -85,6 +81,14 @@
                <padding>
                   <Insets top="16.0" />
                </padding>
+            </TextField>
+            <TextField fx:id="txtIdReceivingAccount" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <padding>
+                  <Insets top="16.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets right="16.0" />
+               </GridPane.margin>
             </TextField>
          </children>
       </GridPane>
