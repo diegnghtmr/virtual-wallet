@@ -7,6 +7,8 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementatio
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Transfer;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.*;
 
 import java.time.LocalDate;
@@ -74,7 +76,7 @@ public class VirtualWalletUtils {
                 .budgetList(new ArrayList<>())
                 .associatedAccounts(new ArrayList<>())
                 .address("Quimbaya, Quindio")
-                .totalBalance(3000.0)
+                .totalBalance(3000.0).notificationUtils(new ArrayList<>())
                 .build();
 
         user1.getAssociatedAccounts().add(savingsAccount);
@@ -84,6 +86,17 @@ public class VirtualWalletUtils {
 
         checkingAccount.setUser(user1);
         savingsAccount.setUser(user1);
+
+        // Crear notificaciones de ejemplo para user1
+        NotificationUtil notification1 = new NotificationUtil(
+                "¡Bienvenido a VirtualWallet!", LocalDate.now(), NotificationType.ADVERTISEMENT);
+        NotificationUtil notification2 = new NotificationUtil(
+                "Tu cuenta ha sido acreditada con $500", LocalDate.now(), NotificationType.TRANSACTION);
+
+        user1.getNotificationUtils().add(notification1);
+        user1.getNotificationUtils().add(notification2);
+
+
 
         // Create example administrator
         Administrator admin = Administrator.builder()
@@ -192,6 +205,7 @@ public class VirtualWalletUtils {
                 .associatedAccounts(new ArrayList<>())
                 .address("Armenia, Quindio")
                 .totalBalance(4500.0)
+                .notificationUtils(new ArrayList<>())
                 .build();
 
         user2.getAssociatedAccounts().add(newSavingsAccount);
@@ -201,6 +215,15 @@ public class VirtualWalletUtils {
 
         newCheckingAccount.setUser(user2);
         newSavingsAccount.setUser(user2);
+
+        // Crear notificaciones de ejemplo para user2
+        NotificationUtil notification3 = new NotificationUtil(
+                "¡Bienvenido a VirtualWallet!", LocalDate.now(), NotificationType.ADVERTISEMENT);
+        NotificationUtil notification4 = new NotificationUtil(
+                "Tu cuenta ha sido debitada con $100", LocalDate.now(), NotificationType.TRANSACTION);
+
+        user2.getNotificationUtils().add(notification3);
+        user2.getNotificationUtils().add(notification4);
 
         // New transactions
         Deposit newDeposit = (Deposit) transactionFactory.getTransaction("DEPÓSITO");

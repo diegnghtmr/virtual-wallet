@@ -314,3 +314,37 @@ Nov 01, 2024 2:49:37 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: login,Login,2024-11-01
 Nov 01, 2024 2:50:52 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-01
+Nov 01, 2024 6:16:49 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 6:17:39 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 6:19:46 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 6:26:44 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 6:31:12 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 6:42:52 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 6:45:33 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 6:48:29 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: jorgetoro708@gmail.com,2024-11-01
+Nov 01, 2024 6:55:53 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 6:57:27 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: diegoa.floresq@uqvirtual.edu.co,2024-11-01
+Nov 01, 2024 7:13:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 7:13:52 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: diegoa.floresq@uqvirtual.edu.co,2024-11-01
+Nov 01, 2024 7:20:22 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 7:20:40 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: registerUser,UserDto added: jorgetoro708@gmail.com,2024-11-01
+Nov 01, 2024 7:26:55 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 7:38:23 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01
+Nov 01, 2024 7:42:52 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-01

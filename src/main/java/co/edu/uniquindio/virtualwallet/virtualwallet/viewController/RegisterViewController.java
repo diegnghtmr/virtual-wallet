@@ -95,6 +95,7 @@ public class RegisterViewController extends CoreViewController {
                 txtAddress.getText(),
                 0,
                 new ArrayList<>(),
+                new ArrayList<>(),
                 new ArrayList<>()
         );
     }

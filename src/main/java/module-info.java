@@ -26,4 +26,6 @@ module co.edu.uniquindio.virtualwallet.virtualwallet {
     exports co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter;
     exports co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation;
     exports co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services;
+    opens co.edu.uniquindio.virtualwallet.virtualwallet.utils to javafx.base, javafx.controls;
+    exports co.edu.uniquindio.virtualwallet.virtualwallet.utils;
 }

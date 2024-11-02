@@ -26,9 +26,6 @@ public class TransferManagementViewController extends CoreViewController impleme
     private ComboBox<?> cbCategory;
 
     @FXML
-    private ComboBox<?> cbReceivingAccount;
-
-    @FXML
     private ComboBox<?> cbSourceAccount;
 
     @FXML
@@ -60,6 +57,9 @@ public class TransferManagementViewController extends CoreViewController impleme
 
     @FXML
     private TextField txtAmount;
+
+    @FXML
+    private TextField txtIdReceivingAccount;
 
     @FXML
     private TextArea txtaDescription;

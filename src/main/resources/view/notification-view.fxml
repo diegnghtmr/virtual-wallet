@@ -16,7 +16,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.MovementManagementViewController">
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.NotificationViewController">
     <VBox spacing="20" style="-fx-background-color: #f0f0f0;">
         <padding>
             <Insets top="20" right="20" bottom="20" left="20"/>

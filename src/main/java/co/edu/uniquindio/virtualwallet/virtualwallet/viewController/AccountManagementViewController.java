@@ -11,7 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -76,7 +78,8 @@ public class AccountManagementViewController extends CoreViewController implemen
 
     @FXML
     public void onNotification(ActionEvent event) {
-
+        Stage ownerStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        openWindow("/view/notification-view.fxml", "Notificaciones", ownerStage);
     }
 
     @FXML

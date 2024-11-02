@@ -79,6 +79,29 @@ public abstract class CoreViewController {
         }
     }
 
+    public void openWindow(String nameFileFxml, String titleWindow, Stage ownerStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(nameFileFxml));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle(titleWindow);
+
+            // Establecer el propietario de la nueva ventana
+            if (ownerStage != null) {
+                stage.initOwner(ownerStage);
+            }
+
+            stage.show();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     public void closeWindow(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
