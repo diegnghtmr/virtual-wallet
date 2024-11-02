@@ -26,6 +26,18 @@ public class NotificationUtil {
         this.type = type;
     }
 
+    public String getTypeInSpanish() {
+        switch (this.type) {
+            case TRANSACTION:
+                return "Transacción";
+            case ADVERTISEMENT:
+                return "Publicidad";
+            case INFORMATION:
+                return "Información";
+            default:
+                return this.type.toString();
+        }
+    }
 
 }
 

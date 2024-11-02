@@ -2,6 +2,8 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
@@ -9,7 +11,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.INotificationViewController;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -21,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class NotificationViewController extends CoreViewController implements INotificationViewController {
+    private ObservableList<NotificationUtil> notificationList;
 
     @FXML
     private Button btnCloseNotifications;
@@ -35,10 +40,10 @@ public class NotificationViewController extends CoreViewController implements IN
     private TableColumn<NotificationUtil, String> tcMessage;
 
     @FXML
-    private TableColumn<NotificationUtil, LocalDate> tcDate;
+    private TableColumn<NotificationUtil, String> tcDate;
 
     @FXML
-    private TableColumn<NotificationUtil, NotificationType> tcType;
+    private TableColumn<NotificationUtil, String> tcType;
 
     @FXML
     private TextField txtFilter;
@@ -50,6 +55,27 @@ public class NotificationViewController extends CoreViewController implements IN
 
     @FXML
     void onReturnToUserData(ActionEvent event) {
+        returnToUserData(event);
+    }
+
+    public void initialize() {
+        User user = (User) Session.getInstance().getPerson();
+        notificationList = FXCollections.observableArrayList(user.getNotificationUtils());
+        loadNotifications();
+        setupFilter(notificationList);
+    }
+
+    private void loadNotifications() {
+        // Configurar las columnas
+        tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
+        tcMessage.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessage()));
+        tcType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeInSpanish()));
+
+        // Cargar las notificaciones en la tabla
+        tblNotification.setItems(notificationList);
+    }
+
+    private void returnToUserData(ActionEvent event) {
         // Obtener el Stage de la ventana de notificaciones
         Stage notificationStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -68,15 +94,27 @@ public class NotificationViewController extends CoreViewController implements IN
         openWindow("/view/user-data-view.fxml", "Datos de Usuario", null);
     }
 
-    public void initialize() {
-        User user = (User) Session.getInstance().getPerson();
-
-        // Configurar las columnas
-        tcMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
-        tcDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        tcType.setCellValueFactory(new PropertyValueFactory<>("type"));
-
-        // Cargar las notificaciones en la tabla
-        tblNotification.setItems(FXCollections.observableArrayList(user.getNotificationUtils()));
+    private void setupFilter(ObservableList<NotificationUtil> notificationList) {
+        txtFilter.textProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<NotificationUtil> filteredList = filteredList(notificationList, newValue);
+            tblNotification.setItems(filteredList);
+        });
     }
+
+    private ObservableList<NotificationUtil> filteredList(ObservableList<NotificationUtil> originalList, String searchText) {
+        List<NotificationUtil> filteredList = new ArrayList<>();
+        for (NotificationUtil notification : originalList) {
+            if (searchFindsNotification(notification, searchText)) {
+                filteredList.add(notification);
+            }
+        }
+        return FXCollections.observableList(filteredList);
+    }
+
+    private boolean searchFindsNotification(NotificationUtil notification, String searchText) {
+        return (notification.getMessage().toLowerCase().contains(searchText.toLowerCase())) ||
+                (notification.getDate().toString().toLowerCase().contains(searchText.toLowerCase())) ||
+                (notification.getTypeInSpanish().toLowerCase().contains(searchText.toLowerCase()));
+    }
+
 }
