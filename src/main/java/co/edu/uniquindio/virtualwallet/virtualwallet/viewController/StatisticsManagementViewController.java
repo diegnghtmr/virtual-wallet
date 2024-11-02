@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
-public class StatisticsManagementViewController {
+public class StatisticsManagementViewController extends CoreViewController{
 
     @FXML
     private ResourceBundle resources;
@@ -49,28 +49,6 @@ public class StatisticsManagementViewController {
     @FXML
     void onOpenFrecuentTransactions(ActionEvent event) {
         openWindow("graphic-transactions-frecuentes-view.fxml", "Frequent Transactions", (Stage) btnOpenFrecuentTransactions.getScene().getWindow());
-    }
-
-    public void openWindow(String nameFileFxml, String titleWindow, Stage ownerStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(nameFileFxml));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle(titleWindow);
-
-            // Establecer el propietario de la nueva ventana
-            if (ownerStage != null) {
-                stage.initOwner(ownerStage);
-            }
-
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
