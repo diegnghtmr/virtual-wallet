@@ -188,7 +188,7 @@
          </children>
       </GridPane>
       <Label layoutX="113.0" layoutY="564.0" text="&quot;Incluso cuando las cosas salen muy very very, recuerda: tu memoria muscular sabe el camino. Cada dia es una leccion que te acerca mas a la meta, no olvides que esto vale la plata. ¡Persiste y triunfaras!&quot;" />
-      <Button fx:id="btncloseSession" layoutX="116.0" layoutY="624.0" mnemonicParsing="false" onAction="#onCloseSession" prefHeight="37.0" prefWidth="137.0" style="-fx-background-color: #1971c2;" text="Cerrar Sesión" textFill="WHITE">
+      <Button fx:id="btnLogout" layoutX="116.0" layoutY="624.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="37.0" prefWidth="137.0" style="-fx-background-color: #1971c2;" text="Cerrar Sesión" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
