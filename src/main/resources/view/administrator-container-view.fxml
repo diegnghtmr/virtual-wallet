@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.sigecim.sigecimapp.viewController.EmpleadoViewController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.AdministratorContainerViewController">
   <tabs>
-    <Tab text="Citas">
+    <Tab text="Gestión de Cuentas">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
@@ -20,31 +20,70 @@
         </AnchorPane>
       </content>
     </Tab>
-    <Tab text="Pacientes">
+    <Tab text="Gestión de Usuarios">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
             <SplitPane prefHeight="691.0" prefWidth="1280.0">
               <items>
-                <fx:include source="paciente-view.fxml" />
+                <fx:include source="userManagement-view.fxml" />
               </items>
             </SplitPane>
           </children>
         </AnchorPane>
       </content>
     </Tab>
-    <Tab text="Doctores">
+    <Tab text="Gestión de Depósitos">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
             <SplitPane prefHeight="691.0" prefWidth="1280.0">
               <items>
-                <fx:include source="doctor-view.fxml" />
+                <fx:include source="adminDeposit-view.fxml" />
               </items>
             </SplitPane>
           </children>
         </AnchorPane>
       </content>
     </Tab>
+      <Tab text="Gestión de Transferencias">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+              <SplitPane prefHeight="691.0" prefWidth="1280.0">
+                <items>
+                  <fx:include source="adminTransfer-view.fxml" />
+                </items>
+              </SplitPane>
+            </children>
+          </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Gestión de Retiros">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+              <SplitPane prefHeight="691.0" prefWidth="1280.0">
+                <items>
+                  <fx:include source="adminWithdrawal-management-view.fxml" />
+                </items>
+              </SplitPane>
+            </children>
+          </AnchorPane>
+        </content>
+      </Tab>
+      <Tab text="Gestión de Estadísticas">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <children>
+            <SplitPane prefHeight="691.0" prefWidth="1280.0">
+              <items>
+                <fx:include source="management-statistics-view.fxml" />
+              </items>
+            </SplitPane>
+          </children>
+        </AnchorPane>
+        </content>
+      </Tab>
   </tabs>
 </TabPane>
