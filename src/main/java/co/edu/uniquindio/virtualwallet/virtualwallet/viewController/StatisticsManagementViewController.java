@@ -33,36 +33,48 @@ public class StatisticsManagementViewController {
 
     @FXML
     void onHome(ActionEvent event) {
-        loadView("adminData-view.fxml");
+        openWindow("adminData-view.fxml", "Datos", (Stage) btnHome.getScene().getWindow());
     }
 
     @FXML
     void onOpenAverageBalance(ActionEvent event) {
-        loadView("graphic-average-balance-view.fxml");
+        openWindow("graphic-average-balance-view.fxml", "Average Balance", (Stage) btnOpenAverageBalance.getScene().getWindow());
     }
 
     @FXML
     void onOpenCommonExpenses(ActionEvent event) {
-        loadView("graphic-common-expenses-view.fxml");
+        openWindow("graphic-common-expenses-view.fxml", "Common Expenses", (Stage) btnOpenCommonExpenses.getScene().getWindow());
     }
 
     @FXML
     void onOpenFrecuentTransactions(ActionEvent event) {
-        loadView("graphic-transactions-frecuentes-view.fxml");
+        openWindow("graphic-transactions-frecuentes-view.fxml", "Frequent Transactions", (Stage) btnOpenFrecuentTransactions.getScene().getWindow());
     }
 
-    private void loadView(String fxmlFile) {
+    public void openWindow(String nameFileFxml, String titleWindow, Stage ownerStage) {
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(nameFileFxml));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle(titleWindow);
 
-            Parent newView = FXMLLoader.load(getClass().getResource(fxmlFile));
-            Scene currentScene = btnHome.getScene();
-            currentScene.setRoot(newView);
-        } catch (IOException e) {
+            // Establecer el propietario de la nueva ventana
+            if (ownerStage != null) {
+                stage.initOwner(ownerStage);
+            }
+
+            stage.show();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
     void initialize() {
+
     }
 }
