@@ -1,6 +1,7 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
+import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.UserException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
@@ -205,7 +206,7 @@ public class VirtualWallet implements Serializable {
         userList.add(user);
     }
 
-    public User findById(String id) {
+    public User findUserById(String id) {
         for (User u : userList) {
             if (u.getId().equals(id)) {
                 return u;
@@ -245,7 +246,7 @@ public class VirtualWallet implements Serializable {
     }
 
     public void setVerificationCode(String id, String verificationCode) {
-        User user = findById(id);
+        User user = findUserById(id);
         if (user != null) {
             int index = userList.indexOf(user);
             user.setVerificationCode(verificationCode);
@@ -260,4 +261,36 @@ public class VirtualWallet implements Serializable {
         }
         return false;
     }
+
+    public boolean updateUser(String id, User user) throws UserException {
+        User userCurrent = findUserById(id);
+        if (userCurrent == null) {
+            throw new UserException("El usuario a actualizar no existe");
+        } else {
+            userCurrent.setFullName(user.getFullName());
+            userCurrent.setPhoneNumber(user.getPhoneNumber());
+            userCurrent.setEmail(user.getEmail());
+            userCurrent.setPassword(user.getPassword());
+            userCurrent.setBirthDate(user.getBirthDate());
+            userCurrent.setRegistrationDate(user.getRegistrationDate());
+            userCurrent.setAddress(user.getAddress());
+            userCurrent.setTotalBalance(user.getTotalBalance());
+            // Combine existing budget list with new budget list
+            if (user.getBudgetList() != null) {
+                userCurrent.getBudgetList().addAll(user.getBudgetList());
+            }
+
+            // Combine existing associated accounts with new associated accounts
+            if (user.getAssociatedAccounts() != null) {
+                userCurrent.getAssociatedAccounts().addAll(user.getAssociatedAccounts());
+            }
+
+            // Combine existing notifications with new notifications
+            if (user.getNotificationUtils() != null) {
+                userCurrent.getNotificationUtils().addAll(user.getNotificationUtils());
+            }
+            return true;
+        }
+    }
+
 }

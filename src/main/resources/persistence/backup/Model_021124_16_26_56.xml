@@ -281,7 +281,7 @@
         <string>mariac.roseroh@uqvirtual.edu.co</string>
        </void>
        <void property="fullName">
-        <string>Maria Camila Rosero Henaoo</string>
+        <string>Maria Camila Rosero Henao</string>
        </void>
        <void property="id">
         <string>1090273361</string>
@@ -343,12 +343,6 @@
        </void>
        <void property="totalBalance">
         <double>4500.0</double>
-       </void>
-       <void property="verificationCode">
-        <string>746421</string>
-       </void>
-       <void property="verified">
-        <boolean>true</boolean>
        </void>
       </object>
      </void>

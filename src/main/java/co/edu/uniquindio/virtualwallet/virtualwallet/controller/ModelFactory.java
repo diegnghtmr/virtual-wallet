@@ -32,13 +32,13 @@ public class ModelFactory {
 
     // Singleton instance
     private static class SingletonHolder {
-        private static final ModelFactory eINSTANCE = new ModelFactory();
-    }
 
+        private static final ModelFactory eINSTANCE = new ModelFactory();
+
+    }
     public static ModelFactory getInstance() {
         return SingletonHolder.eINSTANCE;
     }
-
 
     public ModelFactory() {
         System.out.println("singleton class invocation");
@@ -70,13 +70,13 @@ public class ModelFactory {
         registerSystemActions("Login", 1, "login");
     }
 
+
     // Initialization Methods
     // ----------------------
 
     private void initializeData() {
         virtualWallet = VirtualWalletUtils.initializeData();
     }
-
     private void loadDataFromFiles() {
         virtualWallet = new VirtualWallet();
         try {
@@ -114,13 +114,13 @@ public class ModelFactory {
         PersistenceUtil.saveLogRecord(logMessage, level, action);
     }
 
+
     // Utility Methods
     // ---------------
 
     public List<String> getTransactionTypes() {
         return VirtualWalletUtils.getTransactionTypes();
     }
-
     public List<String> getAccountTypes() {
         return VirtualWalletUtils.getAccountTypes();
     }
@@ -148,6 +148,7 @@ public class ModelFactory {
         saveXMLResource();
     }
 
+
     // Account Management Methods
     // --------------------------
 
@@ -157,7 +158,6 @@ public class ModelFactory {
         accountDtos.addAll(virtualWalletMapper.getCheckingAccountsDto(virtualWallet.getCheckingAccountList()));
         return accountDtos;
     }
-
     public boolean addAccount(AccountDto accountDto) {
         try {
             if (virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
@@ -239,13 +239,13 @@ public class ModelFactory {
         return accountsDto;
     }
 
+
     // User Management Methods
     // -----------------------
 
     public Person validateLogin(String email, String password) throws Exception {
         return virtualWallet.validateLogin(email, password);
     }
-
     public boolean registerUser(UserDto userDto) {
         try {
             if (virtualWallet.verifyUserExistence(userDto.email())) {
@@ -261,5 +261,23 @@ public class ModelFactory {
             registerSystemActions(e.getMessage(), 3, "registerUser");
             return false;
         }
+    }
+
+    public boolean updateUser(User person, UserDto userDto) {
+        try {
+            User user = virtualWalletMapper.userDtoToUser(userDto);
+            getVirtualWallet().updateUser(person.getId(), user);
+            registerSystemActions("User updated: " + userDto.email(), 1, "updateUser");
+            saveXMLResource();
+            return true;
+        } catch (Exception e) {
+            registerSystemActions(e.getMessage(), 3, "updateUser");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public User getUserById(String id) {
+        return virtualWallet.findUserById(id);
     }
 }
