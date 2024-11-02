@@ -104,7 +104,7 @@ public class VirtualWalletUtils {
                 .id("A001")
                 .fullName("admin")
                 .phoneNumber("0987654321")
-                .email("admin@example.com")
+                .email("virtualwalletuq@gmail.com")
                 .password("admin")
                 .birthDate(LocalDate.of(1985, 5, 15))
                 .registrationDate(LocalDate.now())

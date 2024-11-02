@@ -11,7 +11,7 @@
      </object>
     </void>
     <void property="email">
-     <string>admin@example.com</string>
+     <string>virtualwalletuq@gmail.com</string>
     </void>
     <void property="fullName">
      <string>admin</string>
@@ -286,9 +286,6 @@
        <void property="totalBalance">
         <double>3000.0</double>
        </void>
-       <void property="verificationCode">
-        <string>373313</string>
-       </void>
       </object>
      </void>
     </object>
@@ -539,48 +536,6 @@
    </void>
    <void method="add">
     <object idref="User1"/>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
-     <void property="address">
-      <string>A</string>
-     </void>
-     <void property="birthDate">
-      <object class="java.time.LocalDate" method="of">
-       <int>2000</int>
-       <int>11</int>
-       <int>2</int>
-      </object>
-     </void>
-     <void property="email">
-      <string>diegoflorez332@gmail.com</string>
-     </void>
-     <void property="fullName">
-      <string>Diegouwu</string>
-     </void>
-     <void property="id">
-      <string>124323490</string>
-     </void>
-     <void property="password">
-      <string>inge</string>
-     </void>
-     <void property="phoneNumber">
-      <string>423423</string>
-     </void>
-     <void property="registrationDate">
-      <object class="java.time.LocalDate" method="of">
-       <int>2024</int>
-       <int>11</int>
-       <int>2</int>
-      </object>
-     </void>
-     <void property="verificationCode">
-      <string>255364</string>
-     </void>
-     <void property="verified">
-      <boolean>true</boolean>
-     </void>
-    </object>
    </void>
   </void>
   <void property="withdrawalList">

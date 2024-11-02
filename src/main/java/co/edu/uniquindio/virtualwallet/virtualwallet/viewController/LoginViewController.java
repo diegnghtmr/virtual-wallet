@@ -72,7 +72,7 @@ public class LoginViewController extends CoreViewController{
                     }
 
                 } else {
-                    browseWindow("/adminPanel.fxml", "Dashboard", actionEvent);
+                    browseWindow("/view/admin-data-view.fxml", "Dashboard", actionEvent);
                 }
 
             }
