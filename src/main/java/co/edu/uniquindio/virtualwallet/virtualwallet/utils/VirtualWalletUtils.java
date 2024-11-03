@@ -41,7 +41,6 @@ public class VirtualWalletUtils {
                 .totalAmount(500.0)
                 .amountSpent(200.0)
                 .category(foodCategory)
-                .user(null)
                 .build();
 
         Budget travelBudget = Budget.builder()
@@ -50,7 +49,6 @@ public class VirtualWalletUtils {
                 .totalAmount(300.0)
                 .amountSpent(100.0)
                 .category(travelCategory)
-                .user(null)
                 .build();
 
         // Create example accounts
@@ -102,7 +100,7 @@ public class VirtualWalletUtils {
         user1.getCategoryList().add(foodCategory);
         user1.getCategoryList().add(travelCategory);
 
-
+        user1.getBudgetList().add(travelBudget);
 
         // Create example administrator
         Administrator admin = Administrator.builder()
@@ -175,7 +173,6 @@ public class VirtualWalletUtils {
                 .totalAmount(400.0)
                 .amountSpent(150.0)
                 .category(entertainmentCategory)
-                .user(null)
                 .build();
 
         Budget healthBudget = Budget.builder()
@@ -184,7 +181,6 @@ public class VirtualWalletUtils {
                 .totalAmount(200.0)
                 .amountSpent(50.0)
                 .category(healthCategory)
-                .user(null)
                 .build();
 
         // New accounts
@@ -236,6 +232,9 @@ public class VirtualWalletUtils {
         user2.getCategoryList().add(foodCategory);
         user2.getCategoryList().add(travelCategory);
 
+        user2.getBudgetList().add(entertainmentBudget);
+        user2.getBudgetList().add(healthBudget);
+
         // New transactions
         Deposit newDeposit = (Deposit) transactionFactory.getTransaction("DEPÓSITO");
         newDeposit.setIdTransaction("D002");
@@ -261,6 +260,11 @@ public class VirtualWalletUtils {
         newTransfer.setCategory(entertainmentCategory);
         newTransfer.setAccount(newCheckingAccount);
         newTransfer.setReceivingAccount(newSavingsAccount);
+
+        travelBudget.setUser(user1);
+        foodBudget.setUser(user1);
+        entertainmentBudget.setUser(user2);
+        healthBudget.setUser(user2);
 
         // Add new data to VirtualWallet
         virtualWallet.getCategoryList().add(entertainmentCategory);

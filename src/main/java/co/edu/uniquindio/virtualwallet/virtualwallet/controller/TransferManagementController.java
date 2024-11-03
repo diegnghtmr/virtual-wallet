@@ -1,5 +1,26 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
-public class TransferManagementController {
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransferDto;
 
+import java.util.List;
+
+public class TransferManagementController extends CoreController {
+    public TransferManagementController() {
+        super();
+    }
+
+
+    public List<TransferDto> getTransfersByUser(String userId) {
+        return modelFactory.getTransfersByUser(userId);
+    }
+
+    public List<Account> getAccountsByUserId(String id) {
+        return modelFactory.getAccountListByUserId(id);
+    }
+
+    public List<CategoryDto> getCategoriesByUserId(String id) {
+        return modelFactory.getCategoriesByUserId(id);
+    }
 }

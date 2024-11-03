@@ -1,17 +1,31 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.controller.WithdrawalManagementController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.WithdrawalDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ITransactionViewController;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class WithdrawalManagementViewController extends CoreViewController implements ITransactionViewController<WithdrawalDto> {
+    WithdrawalManagementController withdrawalManagementController;
+    User loggedUser;
+    ObservableList<WithdrawalDto> withdrawalListDto = FXCollections.observableArrayList();
+    WithdrawalDto withdrawalSelected;
 
     @FXML
     private Button btnAdd;
@@ -23,34 +37,34 @@ public class WithdrawalManagementViewController extends CoreViewController imple
     private Button btnNotification;
 
     @FXML
-    private ComboBox<?> cbAccount;
+    private ComboBox<Account> cbAccount;
 
     @FXML
-    private ComboBox<?> cbCategory;
+    private ComboBox<CategoryDto> cbCategory;
 
     @FXML
-    private TableView<?> tblWithdrawal;
+    private TableView<WithdrawalDto> tblWithdrawal;
 
     @FXML
-    private TableColumn<?, ?> tcAccount;
+    private TableColumn<WithdrawalDto, String> tcAccount;
 
     @FXML
-    private TableColumn<?, ?> tcAmount;
+    private TableColumn<WithdrawalDto, String> tcAmount;
 
     @FXML
-    private TableColumn<?, ?> tcCategory;
+    private TableColumn<WithdrawalDto, String> tcCategory;
 
     @FXML
-    private TableColumn<?, ?> tcCommission;
+    private TableColumn<WithdrawalDto, String> tcCommission;
 
     @FXML
-    private TableColumn<?, ?> tcDate;
+    private TableColumn<WithdrawalDto, String> tcDate;
 
     @FXML
-    private TableColumn<?, ?> tcDescription;
+    private TableColumn<WithdrawalDto, String> tcDescription;
 
     @FXML
-    private TableColumn<?, ?> tcId;
+    private TableColumn<WithdrawalDto, String> tcId;
 
     @FXML
     private TextField txtAmount;
@@ -60,37 +74,92 @@ public class WithdrawalManagementViewController extends CoreViewController imple
 
     @FXML
     public void onAdd(ActionEvent event) {
-
+        addWithdrawal();
     }
 
     @FXML
     public void onNew(ActionEvent event) {
-
+        clearFields();
+        deselectTable();
     }
 
     @FXML
     public void onNotification(ActionEvent event) {
-
+        Stage ownerStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        openWindow("/view/notification-view.fxml", "Notificaciones", ownerStage);
     }
 
     @FXML
     public void initialize() {
-
+        withdrawalManagementController = new WithdrawalManagementController();
+        loggedUser = (User) Session.getInstance().getPerson();
+        initView();
     }
 
     @Override
     public void initView() {
-
+        initDataBinding();
+        getWithdrawals();
+        initializeDataComboBox();
+        tblWithdrawal.getItems().clear();
+        tblWithdrawal.setItems(withdrawalListDto);
+        listenerSelection();
     }
 
     @Override
     public void initDataBinding() {
+        tcAccount.setCellValueFactory(cellData -> new SimpleStringProperty(
+                cellData.getValue().account().getBankName() + " - "
+                        + cellData.getValue().account().getAccountNumber()));
+        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.valueOf(cellData.getValue().amount())));
+        tcCategory.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.valueOf(cellData.getValue().category().name())));
+        tcCommission.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.valueOf(cellData.getValue().commission())));
+        tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.valueOf(cellData.getValue().date())));
+        tcDescription.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.valueOf(cellData.getValue().description())));
+        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.valueOf(cellData.getValue().idTransaction())));
+    }
 
+    private void getWithdrawals() {
+        String userId = loggedUser.getId();
+        withdrawalListDto.addAll(withdrawalManagementController.getWithdrawalsByUser(userId));
+    }
+
+    private void initializeDataComboBox() {
+        ObservableList<Account> accountDtoList = FXCollections.observableArrayList(
+                withdrawalManagementController.getAccountsByUserId(loggedUser.getId()));
+        ObservableList<CategoryDto> categoryDtoList = FXCollections.observableArrayList(
+                withdrawalManagementController.getCategoriesByUserId(loggedUser.getId()));
+
+        initializeComboBox(cbAccount, accountDtoList,
+                account -> account.getBankName() + " - " + account.getAccountNumber());
+
+        initializeComboBox(cbCategory, categoryDtoList, CategoryDto::name);
     }
 
     @Override
     public void listenerSelection() {
+        tblWithdrawal.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            withdrawalSelected = newSelection;
+            showInformation();
+        });
+    }
 
+    private void showInformation() {
+        if (withdrawalSelected != null) {
+            txtAmount.setText(String.valueOf(withdrawalSelected.amount()));
+            cbAccount.setValue(withdrawalSelected.account());
+            cbCategory.setValue(withdrawalSelected.category());
+            txtaDescription.setText(withdrawalSelected.description());
+        }
+    }
+
+    private void addWithdrawal() {
     }
 
     @Override
@@ -100,12 +169,16 @@ public class WithdrawalManagementViewController extends CoreViewController imple
 
     @Override
     public void clearFields() {
-
+        txtAmount.clear();
+        txtaDescription.clear();
+        cbAccount.getSelectionModel().clearSelection();
+        cbCategory.getSelectionModel().clearSelection();
     }
 
     @Override
     public void deselectTable() {
-
+        tblWithdrawal.getSelectionModel().clearSelection();
+        withdrawalSelected = null;
     }
 
 }

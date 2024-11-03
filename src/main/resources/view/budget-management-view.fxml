@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -59,7 +59,7 @@
                   <Insets top="14.0" />
                </padding>
             </TextField>
-            <TextField fx:id="txttotalAmount" prefHeight="35.0" prefWidth="343.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
+            <TextField fx:id="txtTotalAmount" prefHeight="35.0" prefWidth="343.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
                <GridPane.margin>
                   <Insets right="40.0" />
                </GridPane.margin>
@@ -72,14 +72,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="cbCategory" minWidth="-Infinity" prefHeight="2.0" prefWidth="338.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
+            <ComboBox fx:id="cbCategory" prefHeight="2.0" prefWidth="338.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
                <padding>
                   <Insets top="10.0" />
                </padding>
-            </ChoiceBox>
+            </ComboBox>
          </children>
       </GridPane>
       <Separator layoutX="14.0" layoutY="315.0" prefWidth="1250.0" />
@@ -103,8 +100,8 @@
          <columns>
             <TableColumn fx:id="tcId" prefWidth="144.0" text="Id" />
             <TableColumn fx:id="tcName" prefWidth="159.0" text="Nombre" />
-            <TableColumn fx:id="tctotalAmount" prefWidth="161.0" text="Cantidad Total" />
-            <TableColumn fx:id="tcamountSpent" prefWidth="143.0" text="Cantidad Gastada" />
+            <TableColumn fx:id="tcTotalAmount" prefWidth="161.0" text="Cantidad Total" />
+            <TableColumn fx:id="tcAmountSpent" prefWidth="143.0" text="Cantidad Gastada" />
             <TableColumn fx:id="tcCategory" prefWidth="143.0" text="Categoría" />
          </columns>
          <columnResizePolicy>

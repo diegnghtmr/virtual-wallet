@@ -169,9 +169,10 @@ public class VirtualWallet implements Serializable {
     // Budget Management Methods
     // -------------------------
 
-    public List<Budget> getBudgetListByUserId(String id) {
-        return budgetList.stream().filter(budget -> budget.getUser().getId().equals(id)).toList();
+    public List<Budget> getBudgetsByUser(String userId) {
+        return budgetList.stream().filter(budget -> budget.getUser().getId().equals(userId)).toList();
     }
+
 
     // User Management Methods
     // -----------------------
@@ -325,5 +326,13 @@ public class VirtualWallet implements Serializable {
             return user.getCategoryList();
         }
         return new ArrayList<>();
+    }
+
+    public List<Transfer> getTransfersByUser(String userId) {
+        return transferList.stream().filter(transfer -> transfer.getAccount().getUser().getId().equals(userId)).toList();
+    }
+
+    public List<Withdrawal> getWithdrawalsByUser(String userId) {
+        return withdrawalList.stream().filter(withdrawal -> withdrawal.getAccount().getUser().getId().equals(userId)).toList();
     }
 }
