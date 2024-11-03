@@ -77,6 +77,8 @@ public class VirtualWalletUtils {
                 .associatedAccounts(new ArrayList<>())
                 .address("Quimbaya, Quindio")
                 .totalBalance(3000.0).notificationUtils(new ArrayList<>())
+                .categoryList(new ArrayList<>())
+                .isVerified(true)
                 .build();
 
         user1.getAssociatedAccounts().add(savingsAccount);
@@ -96,6 +98,9 @@ public class VirtualWalletUtils {
 
         user1.getNotificationUtils().add(notification1);
         user1.getNotificationUtils().add(notification2);
+
+        user1.getCategoryList().add(foodCategory);
+        user1.getCategoryList().add(travelCategory);
 
 
 
@@ -207,6 +212,7 @@ public class VirtualWalletUtils {
                 .address("Armenia, Quindio")
                 .totalBalance(4500.0)
                 .notificationUtils(new ArrayList<>())
+                .categoryList(new ArrayList<>())
                 .build();
 
         user2.getAssociatedAccounts().add(newSavingsAccount);
@@ -226,6 +232,9 @@ public class VirtualWalletUtils {
 
         user2.getNotificationUtils().add(notification3);
         user2.getNotificationUtils().add(notification4);
+
+        user2.getCategoryList().add(foodCategory);
+        user2.getCategoryList().add(travelCategory);
 
         // New transactions
         Deposit newDeposit = (Deposit) transactionFactory.getTransaction("DEPÓSITO");

@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -285,6 +286,10 @@ public class VirtualWallet implements Serializable {
                 userCurrent.getAssociatedAccounts().addAll(user.getAssociatedAccounts());
             }
 
+            if (user.getCategoryList() != null) {
+                userCurrent.getCategoryList().addAll(user.getCategoryList());
+            }
+
             // Combine existing notifications with new notifications
             if (user.getNotificationUtils() != null) {
                 userCurrent.getNotificationUtils().addAll(user.getNotificationUtils());
@@ -293,4 +298,32 @@ public class VirtualWallet implements Serializable {
         }
     }
 
+    public List<Deposit> getDepositsByUser(String userId) {
+        return depositList.stream().filter(deposit -> deposit.getAccount().getUser().getId().equals(userId)).toList();
+    }
+
+    public boolean isTransactionIdExists(String idTransaction) {
+        for (Transaction t : getTransactions()) {
+            if (t.getIdTransaction().equals(idTransaction)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addDepositToAccount(Deposit deposit) {
+        for (Account a : getAccounts()) {
+            if (a.getAccountNumber().equals(deposit.getAccount().getAccountNumber())) {
+                a.getAssociatedDeposits().add(deposit);
+            }
+        }
+    }
+
+    public List<Category> getCategoryListByUserId(String userId) {
+        User user = findUserById(userId);
+        if (user != null) {
+            return user.getCategoryList();
+        }
+        return new ArrayList<>();
+    }
 }

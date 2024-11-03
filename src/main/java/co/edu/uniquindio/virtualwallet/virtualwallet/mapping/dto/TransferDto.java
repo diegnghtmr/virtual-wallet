@@ -14,7 +14,7 @@ public record TransferDto (
         String description,
         CategoryDto category,
         Account account,
-        String state,
+        String status,
         Account receivingAccount
 ) implements TransactionDto {
     @Override

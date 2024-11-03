@@ -21,6 +21,7 @@ public class User extends Person implements Observer {
     private List<Account> associatedAccounts = new ArrayList<>();
     private String verificationCode;
     private boolean isVerified;
+    private List<Category> categoryList = new ArrayList<>();
     private List<NotificationUtil> notificationUtils = new ArrayList<>();
 
     public User(String address, double totalBalance) {
@@ -29,6 +30,7 @@ public class User extends Person implements Observer {
         this.totalBalance = totalBalance;
         associatedAccounts = new ArrayList<>();
         budgetList = new ArrayList<>();
+        categoryList = new ArrayList<>();
         notificationUtils = new ArrayList<>();
     }
 

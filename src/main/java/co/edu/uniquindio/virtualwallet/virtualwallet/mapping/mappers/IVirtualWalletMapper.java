@@ -30,6 +30,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "category", target = "category")
     @Mapping(source = "account", target = "account")
     @Mapping(source = "receivingAccount", target = "receivingAccount")
+    @Mapping(source = "status", target = "status")
     TransferDto transferToTransferDto(Transfer transfer);
 
     @Named("transferDtoToTransfer")
@@ -40,6 +41,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "category", target = "category")
     @Mapping(source = "account", target = "account")
     @Mapping(source = "receivingAccount", target = "receivingAccount")
+    @Mapping(source = "status", target = "status")
     Transfer transferDtoToTransfer(TransferDto transferDto);
 
     // Deposit mapping methods
@@ -50,6 +52,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "category", target = "category")
     @Mapping(source = "account", target = "account")
+    @Mapping(source = "status", target = "status")
     DepositDto depositToDepositDto(Deposit deposit);
 
     @Named("depositDtoToDeposit")
@@ -59,6 +62,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "category", target = "category")
     @Mapping(source = "account", target = "account")
+    @Mapping(source = "status", target = "status")
     Deposit depositDtoToDeposit(DepositDto depositDto);
 
     // Withdrawal mapping methods
@@ -69,6 +73,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "category", target = "category")
     @Mapping(source = "account", target = "account")
+    @Mapping(source = "status", target = "status")
     WithdrawalDto withdrawalToWithdrawalDto(Withdrawal withdrawal);
 
     @Named("withdrawalDtoToWithdrawal")
@@ -78,6 +83,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "category", target = "category")
     @Mapping(source = "account", target = "account")
+    @Mapping(source = "status", target = "status")
     Withdrawal withdrawalDtoToWithdrawal(WithdrawalDto withdrawalDto);
 
     // SavingsAccount mapping methods

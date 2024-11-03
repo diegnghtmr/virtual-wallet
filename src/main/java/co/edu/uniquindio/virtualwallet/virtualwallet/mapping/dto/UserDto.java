@@ -18,6 +18,7 @@ public record UserDto(
         double totalBalance,
         List<BudgetDto> budgetList,
         List<Account> associatedAccounts,
+        List<CategoryDto> categoryList,
         List<NotificationUtil> notificationUtils
 ) {
 }

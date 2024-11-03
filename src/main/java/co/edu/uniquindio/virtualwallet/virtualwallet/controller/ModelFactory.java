@@ -3,11 +3,10 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CheckingAccountDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.SavingsAccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWalletMapper;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
@@ -35,11 +34,17 @@ public class ModelFactory {
 
         private static final ModelFactory eINSTANCE = new ModelFactory();
 
+
+
+
+
+
+
+
     }
     public static ModelFactory getInstance() {
         return SingletonHolder.eINSTANCE;
     }
-
     public ModelFactory() {
         System.out.println("singleton class invocation");
         //1. initialize data and then save it to files
@@ -69,14 +74,12 @@ public class ModelFactory {
         }
         registerSystemActions("Login", 1, "login");
     }
-
-
     // Initialization Methods
     // ----------------------
-
     private void initializeData() {
         virtualWallet = VirtualWalletUtils.initializeData();
     }
+
     private void loadDataFromFiles() {
         virtualWallet = new VirtualWallet();
         try {
@@ -85,7 +88,6 @@ public class ModelFactory {
             throw new RuntimeException(e);
         }
     }
-
     private void saveTestData() {
         try {
             PersistenceUtil.saveAccounts(getVirtualWallet().getAccounts());
@@ -97,7 +99,6 @@ public class ModelFactory {
     private void loadBinaryResource() {
         virtualWallet = PersistenceUtil.loadBinaryVirtualWalletResource();
     }
-
     private void saveBinaryResource() {
         PersistenceUtil.saveBinaryVirtualWalletResource(virtualWallet);
     }
@@ -105,7 +106,6 @@ public class ModelFactory {
     private void loadXMLResource() {
         virtualWallet = PersistenceUtil.loadXMLVirtualWalletResource();
     }
-
     private void saveXMLResource() {
         PersistenceUtil.saveXMLVirtualWalletResource(virtualWallet);
     }
@@ -115,16 +115,18 @@ public class ModelFactory {
     }
 
 
+
+
+
     // Utility Methods
     // ---------------
-
     public List<String> getTransactionTypes() {
         return VirtualWalletUtils.getTransactionTypes();
     }
+
     public List<String> getAccountTypes() {
         return VirtualWalletUtils.getAccountTypes();
     }
-
     public String generateRandomCode() {
         return virtualWallet.generateRandomCode();
     }
@@ -133,7 +135,6 @@ public class ModelFactory {
         Person person = Session.getInstance().getPerson();
         return virtualWallet.isVerified(person.getId());
     }
-
     public boolean verifyCode(String verificationCode) {
         Person person = Session.getInstance().getPerson();
         boolean isCorrect = virtualWallet.verifyCode(person.getId(), verificationCode);
@@ -149,15 +150,17 @@ public class ModelFactory {
     }
 
 
+
+
     // Account Management Methods
     // --------------------------
-
     public List<AccountDto> getAccounts() {
         List<AccountDto> accountDtos = new ArrayList<>();
         accountDtos.addAll(virtualWalletMapper.getSavingsAccountsDto(virtualWallet.getSavingsAccountList()));
         accountDtos.addAll(virtualWalletMapper.getCheckingAccountsDto(virtualWallet.getCheckingAccountList()));
         return accountDtos;
     }
+
     public boolean addAccount(AccountDto accountDto) {
         try {
             if (virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
@@ -183,7 +186,6 @@ public class ModelFactory {
             return false;
         }
     }
-
     public boolean removeAccount(AccountDto accountSelected) {
         boolean flagExist = false;
         try {
@@ -225,7 +227,6 @@ public class ModelFactory {
             return false;
         }
     }
-
     public List<AccountDto> getAccountsByUserId(String userId) {
         List<Account> userAccounts = virtualWallet.getAccountListByUserId(userId);
         List<AccountDto> accountsDto = new ArrayList<>();
@@ -240,12 +241,14 @@ public class ModelFactory {
     }
 
 
+
+
     // User Management Methods
     // -----------------------
-
     public Person validateLogin(String email, String password) throws Exception {
         return virtualWallet.validateLogin(email, password);
     }
+
     public boolean registerUser(UserDto userDto) {
         try {
             if (virtualWallet.verifyUserExistence(userDto.email())) {
@@ -262,7 +265,6 @@ public class ModelFactory {
             return false;
         }
     }
-
     public boolean updateUser(User person, UserDto userDto) {
         try {
             User user = virtualWalletMapper.userDtoToUser(userDto);
@@ -279,5 +281,35 @@ public class ModelFactory {
 
     public User getUserById(String id) {
         return virtualWallet.findUserById(id);
+    }
+    public List<DepositDto> getDepositsByUser(String userId) {
+        return virtualWalletMapper.getDepositsDto(virtualWallet.getDepositsByUser(userId));
+    }
+
+    public boolean isTransactionIdExists(String idTransaction) {
+        return virtualWallet.isTransactionIdExists(idTransaction);
+    }
+
+    public boolean addDeposit(DepositDto depositDto) {
+        try {
+            Deposit deposit = virtualWalletMapper.depositDtoToDeposit(depositDto);
+            getVirtualWallet().getDepositList().add(deposit);
+            getVirtualWallet().addDepositToAccount(deposit);
+            registerSystemActions("DepositDto added: " + deposit.getIdTransaction(), 1, "addDeposit");
+            saveXMLResource();
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+            registerSystemActions(e.getMessage(), 3, "addDeposit");
+            return false;
+        }
+    }
+
+    public List<Account> getAccountListByUserId(String id) {
+        return virtualWallet.getAccountListByUserId(id);
+    }
+
+    public List<CategoryDto> getCategoriesByUserId() {
+        return virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryListByUserId(Session.getInstance().getPerson().getId()));
     }
 }

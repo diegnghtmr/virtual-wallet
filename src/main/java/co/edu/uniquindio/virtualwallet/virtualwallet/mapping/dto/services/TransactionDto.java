@@ -13,6 +13,6 @@ public interface TransactionDto {
     String description();
     CategoryDto category();
     Account account();
-    String state();
+    String status();
     String transactionType();
 }

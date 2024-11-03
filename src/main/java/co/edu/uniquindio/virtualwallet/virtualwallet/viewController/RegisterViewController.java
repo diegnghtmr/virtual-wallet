@@ -1,7 +1,11 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.RegisterController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.BudgetDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -94,9 +98,10 @@ public class RegisterViewController extends CoreViewController {
                 LocalDate.now(),
                 txtAddress.getText(),
                 0,
-                new ArrayList<>(),
-                new ArrayList<>(),
-                new ArrayList<>()
+                new ArrayList<BudgetDto>(), // Empty list for budgetList
+                new ArrayList<Account>(), // Empty list for associatedAccounts
+                new ArrayList<CategoryDto>(), // Empty list for categories
+                new ArrayList<NotificationUtil>()  // Empty list for notificationUtils
         );
     }
 

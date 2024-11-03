@@ -3,7 +3,9 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.UserDataController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.BudgetDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.Category;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
@@ -131,6 +133,7 @@ public class UserDataViewController extends CoreViewController implements IUserM
                 Double.parseDouble(txtBalance.getText()),
                 new ArrayList<BudgetDto>(), // Empty list for budgetList
                 new ArrayList<Account>(), // Empty list for associatedAccounts
+                new ArrayList<CategoryDto>(), // Empty list for categories
                 new ArrayList<NotificationUtil>()  // Empty list for notificationUtils
         );
     }

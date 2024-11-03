@@ -24,9 +24,9 @@ public class Account implements Serializable {
     private String bankName;
     private String accountNumber;
     private User user;
-    private List<Transfer>associatedTransfers;
-    private List<Deposit>associatedDeposits ;
-    private List<Withdrawal> associatedWithdrawals;
+    private List<Transfer>associatedTransfers = new ArrayList<>();
+    private List<Deposit>associatedDeposits = new ArrayList<>();
+    private List<Withdrawal> associatedWithdrawals = new ArrayList<>();
     private static final long serialVersionUID = 1L;
 
     public Account(String bankName, String accountNumber, User user){

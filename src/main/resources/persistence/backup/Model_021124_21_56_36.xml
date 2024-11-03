@@ -172,6 +172,53 @@
      <void property="accountNumber">
       <string>0987654321</string>
      </void>
+     <void property="associatedDeposits">
+      <void method="add">
+       <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit0">
+        <void property="account">
+         <object idref="CheckingAccount0"/>
+        </void>
+        <void property="amount">
+         <double>1000.0</double>
+        </void>
+        <void property="category">
+         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
+          <void property="description">
+           <string>Expenses on food</string>
+          </void>
+          <void property="id">
+           <string>001</string>
+          </void>
+          <void property="name">
+           <string>Food</string>
+          </void>
+         </object>
+        </void>
+        <void property="date">
+         <object class="java.time.LocalDate" method="of">
+          <int>2024</int>
+          <int>11</int>
+          <int>2</int>
+         </object>
+        </void>
+        <void property="description">
+         <string>xd</string>
+        </void>
+        <void property="idTransaction">
+         <string>492309903</string>
+        </void>
+        <void property="observers">
+         <null/>
+        </void>
+        <void property="status">
+         <object class="java.lang.Enum" method="valueOf">
+          <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
+          <string>PENDING</string>
+         </object>
+        </void>
+       </object>
+      </void>
+     </void>
      <void property="balance">
       <double>1500.0</double>
      </void>
@@ -217,6 +264,14 @@
         </void>
         <void method="add">
          <object idref="Budget1"/>
+        </void>
+       </void>
+       <void property="categoryList">
+        <void method="add">
+         <object idref="Category0"/>
+        </void>
+        <void method="add">
+         <object idref="Category1"/>
         </void>
        </void>
        <void property="email">
@@ -286,6 +341,9 @@
        <void property="totalBalance">
         <double>3000.0</double>
        </void>
+       <void property="verified">
+        <boolean>true</boolean>
+       </void>
       </object>
      </void>
     </object>
@@ -340,6 +398,14 @@
         </void>
         <void method="add">
          <object idref="Budget3"/>
+        </void>
+       </void>
+       <void property="categoryList">
+        <void method="add">
+         <object idref="Category0"/>
+        </void>
+        <void method="add">
+         <object idref="Category1"/>
         </void>
        </void>
        <void property="email">
@@ -460,6 +526,9 @@
       <string>D002</string>
      </void>
     </object>
+   </void>
+   <void method="add">
+    <object idref="Deposit0"/>
    </void>
   </void>
   <void property="savingsAccountList">
