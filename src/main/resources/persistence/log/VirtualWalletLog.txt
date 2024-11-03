@@ -440,3 +440,9 @@ Nov 03, 2024 12:03:46 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.Fil
 INFO: login,Login,2024-11-03
 Nov 03, 2024 12:06:26 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-03
+Nov 03, 2024 2:52:41 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-03
+Nov 03, 2024 2:52:59 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-03
+Nov 03, 2024 2:54:57 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-03
