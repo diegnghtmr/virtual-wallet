@@ -15,7 +15,8 @@ public record TransferDto (
         CategoryDto category,
         Account account,
         String status,
-        Account receivingAccount
+        Account receivingAccount,
+        double commission
 ) implements TransactionDto {
     @Override
     public String transactionType() {

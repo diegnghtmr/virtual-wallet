@@ -14,7 +14,9 @@ public record WithdrawalDto(
         String description,
         CategoryDto category,
         Account account,
-        String status
+        String status,
+        double commission,
+        double withdrawalLimit
 ) implements TransactionDto {
     @Override
     public String transactionType() {

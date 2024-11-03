@@ -309,7 +309,7 @@ public class ModelFactory {
         return virtualWallet.getAccountListByUserId(id);
     }
 
-    public List<CategoryDto> getCategoriesByUserId() {
-        return virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryListByUserId(Session.getInstance().getPerson().getId()));
+    public List<CategoryDto> getCategoriesByUserId(String id) {
+        return virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryListByUserId(id));
     }
 }

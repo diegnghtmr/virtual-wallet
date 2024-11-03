@@ -31,6 +31,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "account", target = "account")
     @Mapping(source = "receivingAccount", target = "receivingAccount")
     @Mapping(source = "status", target = "status")
+    @Mapping(source = "commission", target = "commission")
     TransferDto transferToTransferDto(Transfer transfer);
 
     @Named("transferDtoToTransfer")
@@ -42,6 +43,7 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "account", target = "account")
     @Mapping(source = "receivingAccount", target = "receivingAccount")
     @Mapping(source = "status", target = "status")
+    @Mapping(source = "commission", target = "commission")
     Transfer transferDtoToTransfer(TransferDto transferDto);
 
     // Deposit mapping methods
@@ -74,6 +76,8 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "category", target = "category")
     @Mapping(source = "account", target = "account")
     @Mapping(source = "status", target = "status")
+    @Mapping(source = "commission", target = "commission")
+    @Mapping(source = "withdrawalLimit", target = "withdrawalLimit")
     WithdrawalDto withdrawalToWithdrawalDto(Withdrawal withdrawal);
 
     @Named("withdrawalDtoToWithdrawal")
@@ -84,6 +88,8 @@ public interface IVirtualWalletMapper {
     @Mapping(source = "category", target = "category")
     @Mapping(source = "account", target = "account")
     @Mapping(source = "status", target = "status")
+    @Mapping(source = "commission", target = "commission")
+    @Mapping(source = "withdrawalLimit", target = "withdrawalLimit")
     Withdrawal withdrawalDtoToWithdrawal(WithdrawalDto withdrawalDto);
 
     // SavingsAccount mapping methods

@@ -20,8 +20,8 @@ public class DepositManagementController extends CoreController {
         return modelFactory.getAccountListByUserId(id);
     }
 
-    public List<CategoryDto> getCategoriesByUserId() {
-        return modelFactory.getCategoriesByUserId();
+    public List<CategoryDto> getCategoriesByUserId(String id) {
+        return modelFactory.getCategoriesByUserId(id);
     }
 
     public boolean isTransactionIdExists(String idTransaction) {
