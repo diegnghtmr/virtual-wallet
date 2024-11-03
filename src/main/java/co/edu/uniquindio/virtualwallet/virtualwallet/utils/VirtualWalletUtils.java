@@ -2,6 +2,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.utils;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.AccountFactory;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.TransactionFactory;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount;
@@ -121,6 +122,7 @@ public class VirtualWalletUtils {
         deposit.setDescription("Initial deposit");
         deposit.setCategory(foodCategory);
         deposit.setAccount(savingsAccount);
+        deposit.setStatus(TransactionStatus.ACCEPTED);
 
         Withdrawal withdrawal = (Withdrawal) transactionFactory.getTransaction("RETIRO");
         withdrawal.setIdTransaction("W001");
@@ -129,6 +131,7 @@ public class VirtualWalletUtils {
         withdrawal.setDescription("ATM withdrawal");
         withdrawal.setCategory(travelCategory);
         withdrawal.setAccount(checkingAccount);
+        withdrawal.setStatus(TransactionStatus.ACCEPTED);
 
         Transfer transfer = (Transfer) transactionFactory.getTransaction("TRANSFERENCIA");
         transfer.setIdTransaction("T001");
@@ -138,6 +141,7 @@ public class VirtualWalletUtils {
         transfer.setCategory(foodCategory);
         transfer.setAccount(savingsAccount);
         transfer.setReceivingAccount(checkingAccount);
+        transfer.setStatus(TransactionStatus.PENDING);
 
         // Create and populate VirtualWallet
         VirtualWallet virtualWallet = new VirtualWallet();
@@ -243,6 +247,7 @@ public class VirtualWalletUtils {
         newDeposit.setDescription("Salary deposit");
         newDeposit.setCategory(entertainmentCategory);
         newDeposit.setAccount(newSavingsAccount);
+        newDeposit.setStatus(TransactionStatus.ACCEPTED);
 
         Withdrawal newWithdrawal = (Withdrawal) transactionFactory.getTransaction("RETIRO");
         newWithdrawal.setIdTransaction("W002");
@@ -251,6 +256,8 @@ public class VirtualWalletUtils {
         newWithdrawal.setDescription("Pharmacy purchase");
         newWithdrawal.setCategory(healthCategory);
         newWithdrawal.setAccount(newCheckingAccount);
+        newWithdrawal.setStatus(TransactionStatus.ACCEPTED);
+
 
         Transfer newTransfer = (Transfer) transactionFactory.getTransaction("TRANSFERENCIA");
         newTransfer.setIdTransaction("T002");
@@ -260,6 +267,8 @@ public class VirtualWalletUtils {
         newTransfer.setCategory(entertainmentCategory);
         newTransfer.setAccount(newCheckingAccount);
         newTransfer.setReceivingAccount(newSavingsAccount);
+        newTransfer.setStatus(TransactionStatus.REJECTED);
+
 
         travelBudget.setUser(user1);
         foodBudget.setUser(user1);

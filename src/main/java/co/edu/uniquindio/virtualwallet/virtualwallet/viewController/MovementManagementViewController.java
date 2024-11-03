@@ -1,22 +1,28 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.MovementManagementController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IRecordViewController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IReportGenerationViewController;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 
 public class MovementManagementViewController extends CoreViewController implements IRecordViewController<TransactionDto>, IReportGenerationViewController {
     MovementManagementController movementManagementController;
+    User loggedUser;
     ObservableList<TransactionDto> transactionsListDto = FXCollections.observableArrayList();
     TransactionDto transactionSelected;
-
 
     @FXML
     private Button btnGenerateCSV;
@@ -37,7 +43,7 @@ public class MovementManagementViewController extends CoreViewController impleme
     private Button btnNotification;
 
     @FXML
-    private ComboBox<AccountDto> cbAccount;
+    private ComboBox<Account> cbAccount;
 
     @FXML
     private DatePicker dpDate;
@@ -65,17 +71,17 @@ public class MovementManagementViewController extends CoreViewController impleme
 
     @FXML
     public void onGenerateCSV(ActionEvent event) {
-
+        generateCSV();
     }
 
     @FXML
     public void onGeneratePDF(ActionEvent event) {
-
+        generatePDF();
     }
 
     @FXML
     public void onGetCurrentRecords(ActionEvent event) {
-
+        getCurrentRecords();
     }
 
     @FXML
@@ -87,90 +93,89 @@ public class MovementManagementViewController extends CoreViewController impleme
 
     @FXML
     public void onGetSubsequentRecords(ActionEvent event) {
-
+        getSubsequentRecords();
     }
 
     @FXML
     public void onNotification(ActionEvent event) {
-
+        Stage ownerStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        openWindow("/view/notification-view.fxml", "Notificaciones", ownerStage);
     }
 
     @FXML
     public void initialize() {
-//        movementManagementController = new MovementManagementController();
-//        initView();
+        movementManagementController = new MovementManagementController();
+        loggedUser = (User) Session.getInstance().getPerson();
+        initView();
 
     }
 
     @Override
     public void initView() {
-//        initDataBinding();
-//        getTransactionList();
-//        loadDataComboBox();
-//        tblMovement.getItems().clear();
-//        tblMovement.setItems(transactionsListDto);
-//        listenerSelection();
-//
-
+        initDataBinding();
+        getTransactionList();
+        initializeDataComboBox();
+        tblMovement.getItems().clear();
+        tblMovement.setItems(transactionsListDto);
+        listenerSelection();
     }
 
 
     @Override
     public void initDataBinding() {
-//        tcAccount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().account() !=null? cellData.getValue().account().accountNumber(): ""));
-//        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().amount())));
-//        tcDateMovement.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().date())));
-//        tcState.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().state()));
-//        tcIdTransaction.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().idTransaction())));
-//        tcTransactionType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().transactionType()));
+        tcAccount.setCellValueFactory(cellData -> new SimpleStringProperty(
+                cellData.getValue().account().getBankName() + " - "
+                        + cellData.getValue().account().getAccountNumber()));
+        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(
+                String.valueOf(cellData.getValue().amount())));
+        tcDateMovement.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().date().toString()));
+        tcIdTransaction.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().idTransaction()));
+        tcState.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().status()));
+        tcTransactionType.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().transactionType().toString()));
 
 
     }
+
     private void getTransactionList() {
-//        transactionsListDto.addAll(movementManagementController.getTransactionList());
-//
+        String userId = loggedUser.getId();
+        transactionsListDto.addAll(movementManagementController.getTransactionsByUser(userId));
+
+    }
+    private void initializeDataComboBox() {
+        ObservableList<Account> accountDtoList = FXCollections.observableArrayList(
+                movementManagementController.getAccountsByUserId(loggedUser.getId()));
+
+        initializeComboBox(cbAccount, accountDtoList,
+                account -> account.getBankName() + " - " + account.getAccountNumber());
 
     }
 
-    private void loadDataComboBox() {
-//        List<AccountDto> accountListData = movementManagementController.getAccountList();
-//        ObservableList<AccountDto> accountList = FXCollections.observableArrayList(accountListData != null ? accountListData : Collections.emptyList());
-//
-//        initializeComboBox(cbAccount, accountList, account -> account != null ? account.toString() : "");
-    }
-
-//    protected  <T> void initializeComboBox(ComboBox<T> comboBox, ObservableList<T> items, Function<T, String> displayFunction) {
-//        comboBox.setItems(items);
-//        comboBox.setCellFactory(lv -> new ListCell<T>() {
-//            @Override
-//            protected void updateItem(T item, boolean empty) {
-//                super.updateItem(item, empty);
-//                setText(empty ? "" : displayFunction.apply(item));
-//            }
-//        });
-//        comboBox.setButtonCell(new ListCell<T>() {
-//            @Override
-//            protected void updateItem(T item, boolean empty) {
-//                super.updateItem(item, empty);
-//                setText(empty ? "" : displayFunction.apply(item));
-//            }
-//        });
-//    }
 
     @Override
     public void listenerSelection() {
-//        tblMovement.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
-//            transactionSelected = newSelection;
-//            showInformationMovement(transactionSelected);
-//        });
-
+        tblMovement.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+            transactionSelected = newSelection;
+            showInformation();
+        });
     }
 
-    private void showInformationMovement(TransactionDto transactionSelected) {
-//        if (transactionSelected != null) {
-//            cbAccount.setValue(transactionSelected.account());
-//            dpDate.setValue(transactionSelected.date());
-//        }
+    private void showInformation() {
+        if(transactionSelected != null) {
+            cbAccount.setValue(transactionSelected.account());
+            dpDate.setValue(transactionSelected.date());
+        }
+    }
+
+    @Override
+    public void clearFields() {
+        cbAccount.getSelectionModel().clearSelection();
+        dpDate.setValue(null);
+    }
+
+    @Override
+    public void deselectTable() {
+        tblMovement.getSelectionModel().clearSelection();
+        transactionSelected = null;
     }
 
     @Override
@@ -178,25 +183,18 @@ public class MovementManagementViewController extends CoreViewController impleme
         return false;
     }
 
-    @Override
-    public void clearFields() {
-
+    private void generateCSV() {
     }
 
-    @Override
-    public void deselectTable() {
+    private void generatePDF() {
+    }
+
+    private void getCurrentRecords() {
     }
 
     private void getPreviousRecords() {
-//        LocalDate date = dpDate.getValue();
-//        AccountDto accountDto = cbAccount.getValue();
-//        if(date != null && accountDto !=null) {
-//            transactionsListDto.clear();
-//            transactionsListDto.addAll(movementManagementController.getPreviousRecords(date, accountDto));
-//        }
-
-
     }
 
-
+    private void getSubsequentRecords() {
+    }
 }

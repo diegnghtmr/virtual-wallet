@@ -2,11 +2,11 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
-import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount;
-import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit;
-import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWalletMapper;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
@@ -33,6 +33,8 @@ public class ModelFactory {
     private static class SingletonHolder {
 
         private static final ModelFactory eINSTANCE = new ModelFactory();
+
+
 
 
 
@@ -100,7 +102,6 @@ public class ModelFactory {
     private void loadBinaryResource() {
         virtualWallet = PersistenceUtil.loadBinaryVirtualWalletResource();
     }
-
     private void saveBinaryResource() {
         PersistenceUtil.saveBinaryVirtualWalletResource(virtualWallet);
     }
@@ -241,15 +242,30 @@ public class ModelFactory {
         }
         return accountsDto;
     }
+    public List<TransactionDto> getTransactionsByUser(String userId) {
+        List<Transaction> userTransactions = virtualWallet.getTransactionsByUser(userId);
+        List<TransactionDto> transactionsDto = new ArrayList<>();
+        for (Transaction transaction : userTransactions) {
+            if (transaction instanceof Deposit) {
+                transactionsDto.add(virtualWalletMapper.depositToDepositDto((Deposit) transaction));
+            } else if (transaction instanceof Transfer) {
+                transactionsDto.add(virtualWalletMapper.transferToTransferDto((Transfer) transaction));
+            } else if (transaction instanceof Withdrawal) {
+                transactionsDto.add(virtualWalletMapper.withdrawalToWithdrawalDto((Withdrawal) transaction));
+            }
+        }
+        return transactionsDto;
+    }
+
 
 
 
     // User Management Methods
     // -----------------------
-
     public Person validateLogin(String email, String password) throws Exception {
         return virtualWallet.validateLogin(email, password);
     }
+
     public boolean registerUser(UserDto userDto) {
         try {
             if (virtualWallet.verifyUserExistence(userDto.email())) {
@@ -266,7 +282,6 @@ public class ModelFactory {
             return false;
         }
     }
-
     public boolean updateUser(User person, UserDto userDto) {
         try {
             User user = virtualWalletMapper.userDtoToUser(userDto);
@@ -280,17 +295,17 @@ public class ModelFactory {
             return false;
         }
     }
+
     public User getUserById(String id) {
         return virtualWallet.findUserById(id);
     }
-
     public List<DepositDto> getDepositsByUser(String userId) {
         return virtualWalletMapper.getDepositsDto(virtualWallet.getDepositsByUser(userId));
     }
+
     public boolean isTransactionIdExists(String idTransaction) {
         return virtualWallet.isTransactionIdExists(idTransaction);
     }
-
     public boolean addDeposit(DepositDto depositDto) {
         try {
             Deposit deposit = virtualWalletMapper.depositDtoToDeposit(depositDto);
@@ -305,10 +320,10 @@ public class ModelFactory {
             return false;
         }
     }
+
     public List<Account> getAccountListByUserId(String id) {
         return virtualWallet.getAccountListByUserId(id);
     }
-
     public List<CategoryDto> getCategoriesByUserId(String id) {
         return virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryListByUserId(id));
     }
@@ -323,5 +338,9 @@ public class ModelFactory {
 
     public List<BudgetDto> getBudgetsByUser(String userId) {
         return virtualWalletMapper.getBudgetsDto(virtualWallet.getBudgetsByUser(userId));
+    }
+
+    public List<CategoryDto> getCategoriesByUser(String userId) {
+        return virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryListByUserId(userId));
     }
 }

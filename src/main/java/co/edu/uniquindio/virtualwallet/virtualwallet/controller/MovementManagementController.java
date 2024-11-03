@@ -1,19 +1,21 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
+
+import java.util.List;
+
 public class MovementManagementController extends CoreController{
     public MovementManagementController(){
         super();
     }
-//    public List<TransactionDto> getTransactionList(){
-//        return modelFactory.getTransactionList();
-//    }
-//
-//    public List<AccountDto>getAccountList(){
-//        return  modelFactory.getAccountList();
-//    }
-//
-//    public List<TransactionDto> getPreviousRecords(LocalDate date, AccountDto accountDto) {
-//        return modelFactory.getPreviousRecords(date, accountDto);
-//    }
 
+
+    public List<TransactionDto> getTransactionsByUser(String userId) {
+        return modelFactory.getTransactionsByUser(userId);
+    }
+
+    public List<Account> getAccountsByUserId(String id) {
+        return modelFactory.getAccountListByUserId(id);
+    }
 }

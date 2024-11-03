@@ -154,6 +154,7 @@ public class VirtualWallet implements Serializable {
 
     // Transaction Management Methods
     // ------------------------------
+
     public ArrayList<Transaction> getTransactions() {
         ArrayList<Transaction> transactionList = new ArrayList<>();
         transactionList.addAll(depositList);
@@ -162,8 +163,8 @@ public class VirtualWallet implements Serializable {
         return transactionList;
     }
 
-    public List<Transaction> getTransactionListByUserId(String id) {
-        return getTransactions().stream().filter(transaction -> transaction.getAccount().getUser().getId().equals(id)).toList();
+    public List<Transaction> getTransactionsByUser(String userId) {
+        return getTransactions().stream().filter(transaction -> transaction.getAccount().getUser().getId().equals(userId)).toList();
     }
 
     // Budget Management Methods
@@ -335,4 +336,5 @@ public class VirtualWallet implements Serializable {
     public List<Withdrawal> getWithdrawalsByUser(String userId) {
         return withdrawalList.stream().filter(withdrawal -> withdrawal.getAccount().getUser().getId().equals(userId)).toList();
     }
+
 }
