@@ -64,8 +64,8 @@ public class CategoryManagementViewController extends CoreViewController impleme
 
     @FXML
     public void onNew(ActionEvent event) {
-        Stage ownerStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        openWindow("/view/notification-view.fxml", "Notificaciones", ownerStage);
+        clearFields();
+        deselectTable();
     }
 
     @FXML

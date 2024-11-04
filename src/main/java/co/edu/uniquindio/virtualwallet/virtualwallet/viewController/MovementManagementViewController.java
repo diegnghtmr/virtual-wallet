@@ -131,7 +131,7 @@ public class MovementManagementViewController extends CoreViewController impleme
         tcDateMovement.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().date().toString()));
         tcIdTransaction.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().idTransaction()));
         tcState.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().status()));
-        tcTransactionType.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().transactionType().toString()));
+        tcTransactionType.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().transactionType()));
 
 
     }
@@ -184,17 +184,22 @@ public class MovementManagementViewController extends CoreViewController impleme
     }
 
     private void generateCSV() {
+        //logic to generate CSV
     }
 
     private void generatePDF() {
+        //logic to generate PDF
     }
 
     private void getCurrentRecords() {
+        //logic to get current records
     }
 
     private void getPreviousRecords() {
+        //logic to get previous records
     }
 
     private void getSubsequentRecords() {
+        //logic to get subsequent records
     }
 }
