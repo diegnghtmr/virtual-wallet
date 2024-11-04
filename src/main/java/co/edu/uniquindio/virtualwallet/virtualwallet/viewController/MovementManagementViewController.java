@@ -187,15 +187,28 @@ public class MovementManagementViewController extends CoreViewController impleme
     }
 
     private void generateCSV() {
-        IReportGenerator reportGenerator = new CsvReportGenerator();
-        reportGenerator.generateReport(transactionsListDto);
-        showMessage("Éxito", "CSV Generado", "El reporte CSV ha sido generado exitosamente.", Alert.AlertType.INFORMATION);
+        Stage ownerStage = (Stage) btnGenerateCSV.getScene().getWindow();
+        IReportGenerator reportGenerator = new CsvReportGenerator(ownerStage);
+
+        boolean isGenerated = reportGenerator.generateReport(transactionsListDto);
+        if (isGenerated) {
+            showMessage("Éxito", "CSV Generado", "El reporte CSV ha sido generado exitosamente.", Alert.AlertType.INFORMATION);
+        } else {
+            showMessage("Error", "CSV No Generado", "Ocurrió un error al generar el reporte CSV.", Alert.AlertType.ERROR);
+        }
     }
 
     private void generatePDF() {
-        IReportGenerator reportGenerator = new PdfReportGenerator();
-        reportGenerator.generateReport(transactionsListDto);
-        showMessage("Éxito", "PDF Generado", "El reporte PDF ha sido generado exitosamente.", Alert.AlertType.INFORMATION);
+        // Obtener el Stage actual
+        Stage ownerStage = (Stage) btnGeneratePDF.getScene().getWindow();
+        IReportGenerator reportGenerator = new PdfReportGenerator(ownerStage);
+
+        boolean isGenerated = reportGenerator.generateReport(transactionsListDto);
+        if (isGenerated) {
+            showMessage("Éxito", "PDF Generado", "El reporte PDF ha sido generado exitosamente.", Alert.AlertType.INFORMATION);
+        } else {
+            showMessage("Error", "PDF No Generado", "Ocurrió un error al generar el reporte PDF.", Alert.AlertType.ERROR);
+        }
     }
 
     private void getCurrentRecords() {

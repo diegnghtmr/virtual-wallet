@@ -4,5 +4,5 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.Transa
 import java.util.List;
 
 public interface IReportGenerator {
-    void generateReport(List<TransactionDto> data);
+    boolean generateReport(List<TransactionDto> data);
 }

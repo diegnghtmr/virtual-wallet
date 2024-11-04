@@ -3,6 +3,8 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.utils;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.services.IReportGenerator;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,17 +13,22 @@ import java.util.List;
 
 public class CsvReportGenerator implements IReportGenerator {
 
+    private Window ownerWindow;
+
+    public CsvReportGenerator(Window ownerWindow) {
+        this.ownerWindow = ownerWindow;
+    }
+
     @Override
-    public void generateReport(List<TransactionDto> data) {
+    public boolean generateReport(List<TransactionDto> data) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Reporte CSV");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos CSV", "*.csv"));
-        File file = fileChooser.showSaveDialog(null);
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Archivos CSV", "*.csv"));
+        File file = fileChooser.showSaveDialog(ownerWindow);
         if (file != null) {
             try (FileWriter writer = new FileWriter(file)) {
-                // Write CSV header
-                writer.append("ID,Account,Amount,Date,Status,Transaction Type\n");
-                // Write data rows
+                // Escribir encabezados y datos
+                writer.append("ID,Cuenta,Monto,Fecha,Estado,Tipo de Transacción\n");
                 for (TransactionDto transaction : data) {
                     writer.append(transaction.idTransaction()).append(",")
                             .append(transaction.account().getBankName()).append(" - ")
@@ -32,10 +39,14 @@ public class CsvReportGenerator implements IReportGenerator {
                             .append(transaction.transactionType()).append("\n");
                 }
                 writer.flush();
+                return true;
             } catch (IOException e) {
                 e.printStackTrace();
-                // Handle exceptions appropriately
+                return false; // Ocurrió un error durante la generación
+                // Manejar excepciones adecuadamente
             }
+        } else {
+            return false; // El usuario canceló la operación
         }
     }
 }
