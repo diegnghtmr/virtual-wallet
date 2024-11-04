@@ -9,6 +9,7 @@ module co.edu.uniquindio.virtualwallet.virtualwallet {
     requires org.simplejavamail.core;
     requires org.simplejavamail;
     requires jdk.sctp;
+    requires org.apache.pdfbox;
 
     opens co.edu.uniquindio.virtualwallet.virtualwallet to javafx.fxml;
     exports co.edu.uniquindio.virtualwallet.virtualwallet;

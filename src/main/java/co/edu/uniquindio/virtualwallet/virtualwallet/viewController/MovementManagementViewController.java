@@ -5,7 +5,10 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.CsvReportGenerator;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PdfReportGenerator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.services.IReportGenerator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IRecordViewController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IReportGenerationViewController;
 import javafx.beans.property.SimpleStringProperty;
@@ -184,11 +187,15 @@ public class MovementManagementViewController extends CoreViewController impleme
     }
 
     private void generateCSV() {
-        //logic to generate CSV
+        IReportGenerator reportGenerator = new CsvReportGenerator();
+        reportGenerator.generateReport(transactionsListDto);
+        showMessage("Éxito", "CSV Generado", "El reporte CSV ha sido generado exitosamente.", Alert.AlertType.INFORMATION);
     }
 
     private void generatePDF() {
-        //logic to generate PDF
+        IReportGenerator reportGenerator = new PdfReportGenerator();
+        reportGenerator.generateReport(transactionsListDto);
+        showMessage("Éxito", "PDF Generado", "El reporte PDF ha sido generado exitosamente.", Alert.AlertType.INFORMATION);
     }
 
     private void getCurrentRecords() {
