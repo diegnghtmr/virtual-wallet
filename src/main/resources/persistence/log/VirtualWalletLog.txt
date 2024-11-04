@@ -486,3 +486,7 @@ Nov 04, 2024 5:54:42 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: login,Login,2024-11-04
 Nov 04, 2024 5:59:49 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-04
+Nov 04, 2024 6:05:30 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-04
+Nov 04, 2024 6:08:29 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-04
