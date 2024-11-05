@@ -68,7 +68,7 @@ public class VirtualWalletUtils {
                 .id("1097032932")
                 .fullName("Jorge William Montoya")
                 .phoneNumber("3244544139")
-                .email("jorgew.montoyat@uqvirtual.edu.co")
+                .email("diegoa.floresq@uqvirtual.edu.co") //jorgew.montoyat@uqvirtual.edu.co
                 .password("maloh")
                 .birthDate(LocalDate.of(1990, 1, 1))
                 .registrationDate(LocalDate.now())

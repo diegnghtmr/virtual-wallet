@@ -29,7 +29,7 @@
      <object class="java.time.LocalDate" method="of">
       <int>2024</int>
       <int>11</int>
-      <int>3</int>
+      <int>4</int>
      </object>
     </void>
    </object>
@@ -72,53 +72,6 @@
          <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount0">
           <void property="accountNumber">
            <string>1234567890</string>
-          </void>
-          <void property="associatedDeposits">
-           <void method="add">
-            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit0">
-             <void property="account">
-              <object idref="SavingsAccount0"/>
-             </void>
-             <void property="amount">
-              <double>100.0</double>
-             </void>
-             <void property="category">
-              <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
-               <void property="description">
-                <string>Expenses on food</string>
-               </void>
-               <void property="id">
-                <string>001</string>
-               </void>
-               <void property="name">
-                <string>Food</string>
-               </void>
-              </object>
-             </void>
-             <void property="date">
-              <object class="java.time.LocalDate" method="of">
-               <int>2024</int>
-               <int>11</int>
-               <int>4</int>
-              </object>
-             </void>
-             <void property="description">
-              <string>depósito de food con un monto de 100</string>
-             </void>
-             <void property="idTransaction">
-              <string>477027455</string>
-             </void>
-             <void property="observers">
-              <null/>
-             </void>
-             <void property="status">
-              <object class="java.lang.Enum" id="TransactionStatus0" method="valueOf">
-               <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
-               <string>PENDING</string>
-              </object>
-             </void>
-            </object>
-           </void>
           </void>
           <void property="balance">
            <double>1500.0</double>
@@ -204,7 +157,7 @@
         </void>
        </void>
        <void property="email">
-        <string>jorgew.montoyat@uqvirtual.edu.co</string>
+        <string>diegoa.floresq@uqvirtual.edu.co</string>
        </void>
        <void property="fullName">
         <string>Jorge William Montoya</string>
@@ -219,7 +172,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>3</int>
+            <int>4</int>
            </object>
           </void>
           <void property="message">
@@ -239,7 +192,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>3</int>
+            <int>4</int>
            </object>
           </void>
           <void property="message">
@@ -250,6 +203,23 @@
             <class>co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType</class>
             <string>TRANSACTION</string>
            </object>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil">
+          <void property="date">
+           <object class="java.time.LocalDate" method="of">
+            <int>2024</int>
+            <int>11</int>
+            <int>4</int>
+           </object>
+          </void>
+          <void property="message">
+           <string>Reporte PDF generado exitosamente.</string>
+          </void>
+          <void property="type">
+           <object idref="NotificationType0"/>
           </void>
          </object>
         </void>
@@ -264,7 +234,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>11</int>
-         <int>3</int>
+         <int>4</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -420,7 +390,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>3</int>
+            <int>4</int>
            </object>
           </void>
           <void property="message">
@@ -437,7 +407,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>3</int>
+            <int>4</int>
            </object>
           </void>
           <void property="message">
@@ -459,7 +429,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>11</int>
-         <int>3</int>
+         <int>4</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -511,7 +481,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>3</int>
+       <int>4</int>
       </object>
      </void>
      <void property="description">
@@ -521,7 +491,7 @@
       <string>D001</string>
      </void>
      <void property="status">
-      <object class="java.lang.Enum" id="TransactionStatus1" method="valueOf">
+      <object class="java.lang.Enum" id="TransactionStatus0" method="valueOf">
        <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
        <string>ACCEPTED</string>
       </object>
@@ -543,7 +513,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>3</int>
+       <int>4</int>
       </object>
      </void>
      <void property="description">
@@ -553,12 +523,9 @@
       <string>D002</string>
      </void>
      <void property="status">
-      <object idref="TransactionStatus1"/>
+      <object idref="TransactionStatus0"/>
      </void>
     </object>
-   </void>
-   <void method="add">
-    <object idref="Deposit0"/>
    </void>
   </void>
   <void property="savingsAccountList">
@@ -585,7 +552,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>3</int>
+       <int>4</int>
       </object>
      </void>
      <void property="description">
@@ -598,7 +565,10 @@
       <object idref="CheckingAccount0"/>
      </void>
      <void property="status">
-      <object idref="TransactionStatus0"/>
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
+       <string>PENDING</string>
+      </object>
      </void>
     </object>
    </void>
@@ -617,7 +587,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>3</int>
+       <int>4</int>
       </object>
      </void>
      <void property="description">
@@ -662,7 +632,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>3</int>
+       <int>4</int>
       </object>
      </void>
      <void property="description">
@@ -672,7 +642,7 @@
       <string>W001</string>
      </void>
      <void property="status">
-      <object idref="TransactionStatus1"/>
+      <object idref="TransactionStatus0"/>
      </void>
     </object>
    </void>
@@ -691,7 +661,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>3</int>
+       <int>4</int>
       </object>
      </void>
      <void property="description">
@@ -701,7 +671,7 @@
       <string>W002</string>
      </void>
      <void property="status">
-      <object idref="TransactionStatus1"/>
+      <object idref="TransactionStatus0"/>
      </void>
     </object>
    </void>

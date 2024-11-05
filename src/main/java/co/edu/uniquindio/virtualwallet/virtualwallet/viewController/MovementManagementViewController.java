@@ -5,10 +5,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
-import co.edu.uniquindio.virtualwallet.virtualwallet.utils.CsvReportGenerator;
-import co.edu.uniquindio.virtualwallet.virtualwallet.utils.EmailAttachmentUtil;
-import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PdfReportGenerator;
-import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.services.IReportGenerator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IRecordViewController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IReportGenerationViewController;
@@ -190,24 +187,20 @@ public class MovementManagementViewController extends CoreViewController impleme
     }
 
     private void generateCSV() {
-        // Obtener el ID del usuario
         String userId = loggedUser.getId();
 
-        // Crear el generador de reportes con el ID del usuario
-        IReportGenerator reportGenerator = new CsvReportGenerator(userId);
+        // Crear una instancia de ReportGeneration para CSV
+        ReportGeneration reportGeneration = new ReportGeneration("CSV");
+        reportGeneration.addObserver(loggedUser); // Añadir al usuario como observador
 
-        // Generar el CSV y obtener el archivo
-        File csvFile = reportGenerator.generateReport(transactionsListDto);
+        // Generar el reporte
+        File csvFile = reportGeneration.generateReport(transactionsListDto, userId);
 
         if (csvFile != null && csvFile.exists()) {
-            // Obtener el correo electrónico del usuario
             String userEmail = loggedUser.getEmail();
-
-            // Crear el asunto y el mensaje del correo electrónico
             String subject = "Reporte de Transacciones CSV - Usuario ID: " + userId;
             String message = "Estimado " + loggedUser.getFullName() + ", adjunto encontrará su reporte de transacciones en formato CSV.";
 
-            // Enviar el correo con el CSV adjunto
             EmailAttachmentUtil emailUtil = new EmailAttachmentUtil(userEmail, subject, message, csvFile);
             emailUtil.sendNotification();
 
@@ -219,24 +212,20 @@ public class MovementManagementViewController extends CoreViewController impleme
 
 
     private void generatePDF() {
-        // Obtener el ID del usuario
         String userId = loggedUser.getId();
 
-        // Crear el generador de reportes con el ID del usuario
-        IReportGenerator reportGenerator = new PdfReportGenerator(userId);
+        // Crear una instancia de ReportGeneration para PDF
+        ReportGeneration reportGeneration = new ReportGeneration("PDF");
+        reportGeneration.addObserver(loggedUser); // Añadir al usuario como observador
 
-        // Generar el PDF y obtener el archivo
-        File pdfFile = reportGenerator.generateReport(transactionsListDto);
+        // Generar el reporte
+        File pdfFile = reportGeneration.generateReport(transactionsListDto, userId);
 
         if (pdfFile != null && pdfFile.exists()) {
-            // Obtener el correo electrónico del usuario
             String userEmail = loggedUser.getEmail();
-
-            // Crear el asunto y el mensaje del correo electrónico
             String subject = "Reporte de Transacciones - Usuario ID: " + userId;
             String message = "Estimado " + loggedUser.getFullName() + ", adjunto encontrará su reporte de transacciones en formato PDF.";
 
-            // Enviar el correo con el PDF adjunto
             EmailAttachmentUtil emailUtil = new EmailAttachmentUtil(userEmail, subject, message, pdfFile);
             emailUtil.sendNotification();
 

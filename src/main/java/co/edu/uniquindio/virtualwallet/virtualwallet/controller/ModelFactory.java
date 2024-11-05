@@ -116,8 +116,10 @@ public class ModelFactory {
         PersistenceUtil.saveLogRecord(logMessage, level, action);
     }
 
-
-
+    public void generateSerialization() {
+        //saveBinaryResource();
+        saveXMLResource();
+    }
 
 
     // Utility Methods
