@@ -6,6 +6,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.Accoun
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.CsvReportGenerator;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.EmailAttachmentUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PdfReportGenerator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.services.IReportGenerator;
@@ -19,6 +20,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 public class MovementManagementViewController extends CoreViewController implements IRecordViewController<TransactionDto>, IReportGenerationViewController {
@@ -187,29 +190,62 @@ public class MovementManagementViewController extends CoreViewController impleme
     }
 
     private void generateCSV() {
-        Stage ownerStage = (Stage) btnGenerateCSV.getScene().getWindow();
-        IReportGenerator reportGenerator = new CsvReportGenerator(ownerStage);
+        // Obtener el ID del usuario
+        String userId = loggedUser.getId();
 
-        boolean isGenerated = reportGenerator.generateReport(transactionsListDto);
-        if (isGenerated) {
-            showMessage("Éxito", "CSV Generado", "El reporte CSV ha sido generado exitosamente.", Alert.AlertType.INFORMATION);
+        // Crear el generador de reportes con el ID del usuario
+        IReportGenerator reportGenerator = new CsvReportGenerator(userId);
+
+        // Generar el CSV y obtener el archivo
+        File csvFile = reportGenerator.generateReport(transactionsListDto);
+
+        if (csvFile != null && csvFile.exists()) {
+            // Obtener el correo electrónico del usuario
+            String userEmail = loggedUser.getEmail();
+
+            // Crear el asunto y el mensaje del correo electrónico
+            String subject = "Reporte de Transacciones CSV - Usuario ID: " + userId;
+            String message = "Estimado " + loggedUser.getFullName() + ", adjunto encontrará su reporte de transacciones en formato CSV.";
+
+            // Enviar el correo con el CSV adjunto
+            EmailAttachmentUtil emailUtil = new EmailAttachmentUtil(userEmail, subject, message, csvFile);
+            emailUtil.sendNotification();
+
+            showMessage("Éxito", "CSV Generado y Enviado", "El reporte CSV ha sido generado y enviado a su correo.", Alert.AlertType.INFORMATION);
         } else {
             showMessage("Error", "CSV No Generado", "Ocurrió un error al generar el reporte CSV.", Alert.AlertType.ERROR);
         }
     }
 
-    private void generatePDF() {
-        // Obtener el Stage actual
-        Stage ownerStage = (Stage) btnGeneratePDF.getScene().getWindow();
-        IReportGenerator reportGenerator = new PdfReportGenerator(ownerStage);
 
-        boolean isGenerated = reportGenerator.generateReport(transactionsListDto);
-        if (isGenerated) {
-            showMessage("Éxito", "PDF Generado", "El reporte PDF ha sido generado exitosamente.", Alert.AlertType.INFORMATION);
+    private void generatePDF() {
+        // Obtener el ID del usuario
+        String userId = loggedUser.getId();
+
+        // Crear el generador de reportes con el ID del usuario
+        IReportGenerator reportGenerator = new PdfReportGenerator(userId);
+
+        // Generar el PDF y obtener el archivo
+        File pdfFile = reportGenerator.generateReport(transactionsListDto);
+
+        if (pdfFile != null && pdfFile.exists()) {
+            // Obtener el correo electrónico del usuario
+            String userEmail = loggedUser.getEmail();
+
+            // Crear el asunto y el mensaje del correo electrónico
+            String subject = "Reporte de Transacciones - Usuario ID: " + userId;
+            String message = "Estimado " + loggedUser.getFullName() + ", adjunto encontrará su reporte de transacciones en formato PDF.";
+
+            // Enviar el correo con el PDF adjunto
+            EmailAttachmentUtil emailUtil = new EmailAttachmentUtil(userEmail, subject, message, pdfFile);
+            emailUtil.sendNotification();
+
+            showMessage("Éxito", "PDF Generado y Enviado", "El reporte PDF ha sido generado y enviado a su correo.", Alert.AlertType.INFORMATION);
         } else {
             showMessage("Error", "PDF No Generado", "Ocurrió un error al generar el reporte PDF.", Alert.AlertType.ERROR);
         }
     }
+
 
     private void getCurrentRecords() {
         //logic to get current records

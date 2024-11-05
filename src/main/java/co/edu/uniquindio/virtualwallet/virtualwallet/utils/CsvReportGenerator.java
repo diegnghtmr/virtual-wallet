@@ -3,64 +3,65 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.utils;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.services.IReportGenerator;
 import com.opencsv.CSVWriter;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Window;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 public class CsvReportGenerator implements IReportGenerator {
 
-    private Window ownerWindow;
+    private String userId;
 
-    public CsvReportGenerator(Window ownerWindow) {
-        this.ownerWindow = ownerWindow;
+    // Formato de fechas
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy", new Locale("es", "CO"));
+
+    public CsvReportGenerator(String userId) {
+        this.userId = userId;
     }
 
     @Override
-    public boolean generateReport(List<TransactionDto> data) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Guardar Reporte CSV");
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("Archivos CSV", "*.csv"));
-        File file = fileChooser.showSaveDialog(ownerWindow);
-        if (file != null) {
-            try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
-                 CSVWriter writer = new CSVWriter(osw,
-                         CSVWriter.DEFAULT_SEPARATOR,
-                         CSVWriter.NO_QUOTE_CHARACTER,
-                         CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                         CSVWriter.DEFAULT_LINE_END)) {
+    public File generateReport(List<TransactionDto> data) {
+        // Crear el archivo en el directorio temporal
+        String tempDir = System.getProperty("java.io.tmpdir");
+        File file = new File(tempDir, userId + ".csv");
 
-                // Escribir BOM para UTF-8
-                osw.write('\uFEFF');
+        try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+             CSVWriter writer = new CSVWriter(osw,
+                     CSVWriter.DEFAULT_SEPARATOR,
+                     CSVWriter.NO_QUOTE_CHARACTER,
+                     CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                     CSVWriter.DEFAULT_LINE_END)) {
 
-                // Escribir encabezados
-                String[] headers = {"ID", "Cuenta", "Monto", "Fecha", "Estado", "Tipo de Transacción"};
-                writer.writeNext(headers);
+            // Escribir BOM para UTF-8
+            osw.write('\uFEFF');
 
-                // Escribir datos
-                for (TransactionDto transaction : data) {
-                    String[] rowData = {
-                            transaction.idTransaction(),
-                            transaction.account().getBankName() + " - " + transaction.account().getAccountNumber(),
-                            String.valueOf(transaction.amount()),
-                            transaction.date().toString(),
-                            transaction.status(),
-                            transaction.transactionType()
-                    };
-                    writer.writeNext(rowData);
-                }
+            // Escribir encabezados
+            String[] headers = {"ID", "Cuenta", "Monto", "Fecha", "Estado", "Tipo de Transacción"};
+            writer.writeNext(headers);
 
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false; // Ocurrió un error durante la generación
-                // Manejar excepciones adecuadamente
+            // Escribir datos
+            for (TransactionDto transaction : data) {
+                // Formatear fecha y monto
+                String formattedDate = transaction.date().format(DATE_FORMAT);
+                String formattedAmount = String.format(Locale.getDefault(), "%.2f", transaction.amount());
+
+                String[] rowData = {
+                        transaction.idTransaction(),
+                        transaction.account().getBankName() + " - " + transaction.account().getAccountNumber(),
+                        formattedAmount,
+                        formattedDate,
+                        transaction.status(),
+                        transaction.transactionType()
+                };
+                writer.writeNext(rowData);
             }
-        } else {
-            return false; // El usuario canceló la operación
+
+            return file;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null; // Ocurrió un error durante la generación
         }
     }
 }

@@ -11,6 +11,7 @@ module co.edu.uniquindio.virtualwallet.virtualwallet {
     requires jdk.sctp;
     requires com.github.librepdf.openpdf;
     requires com.opencsv;
+    requires jakarta.activation;
 
     opens co.edu.uniquindio.virtualwallet.virtualwallet to javafx.fxml;
     exports co.edu.uniquindio.virtualwallet.virtualwallet;
