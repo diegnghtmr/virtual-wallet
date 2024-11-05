@@ -223,23 +223,6 @@
           </void>
          </object>
         </void>
-        <void method="add">
-         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil">
-          <void property="date">
-           <object class="java.time.LocalDate" method="of">
-            <int>2024</int>
-            <int>11</int>
-            <int>5</int>
-           </object>
-          </void>
-          <void property="message">
-           <string>Reporte CSV generado exitosamente.</string>
-          </void>
-          <void property="type">
-           <object idref="NotificationType0"/>
-          </void>
-         </object>
-        </void>
        </void>
        <void property="password">
         <string>maloh</string>

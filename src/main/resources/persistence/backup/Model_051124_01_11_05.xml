@@ -29,7 +29,7 @@
      <object class="java.time.LocalDate" method="of">
       <int>2024</int>
       <int>11</int>
-      <int>4</int>
+      <int>5</int>
      </object>
     </void>
    </object>
@@ -43,13 +43,13 @@
      <void property="category">
       <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category" id="Category0">
        <void property="description">
-        <string>Expenses on food</string>
+        <string>Compras de alimentos</string>
        </void>
        <void property="id">
         <string>001</string>
        </void>
        <void property="name">
-        <string>Food</string>
+        <string>Comida</string>
        </void>
       </object>
      </void>
@@ -57,7 +57,7 @@
       <string>B001</string>
      </void>
      <void property="name">
-      <string>Monthly Food Budget</string>
+      <string>Mensualidad Comida</string>
      </void>
      <void property="totalAmount">
       <double>500.0</double>
@@ -120,13 +120,13 @@
           <void property="category">
            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category" id="Category1">
             <void property="description">
-             <string>Expenses on travel</string>
+             <string>Gastos en viajes</string>
             </void>
             <void property="id">
              <string>002</string>
             </void>
             <void property="name">
-             <string>Travel</string>
+             <string>Viaje</string>
             </void>
            </object>
           </void>
@@ -134,7 +134,7 @@
            <string>B002</string>
           </void>
           <void property="name">
-           <string>Monthly Travel Budget</string>
+           <string>Mensualidad Viaje</string>
           </void>
           <void property="totalAmount">
            <double>300.0</double>
@@ -172,7 +172,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>4</int>
+            <int>5</int>
            </object>
           </void>
           <void property="message">
@@ -192,7 +192,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>4</int>
+            <int>5</int>
            </object>
           </void>
           <void property="message">
@@ -203,6 +203,40 @@
             <class>co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType</class>
             <string>TRANSACTION</string>
            </object>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil">
+          <void property="date">
+           <object class="java.time.LocalDate" method="of">
+            <int>2024</int>
+            <int>11</int>
+            <int>5</int>
+           </object>
+          </void>
+          <void property="message">
+           <string>Reporte PDF generado exitosamente.</string>
+          </void>
+          <void property="type">
+           <object idref="NotificationType0"/>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil">
+          <void property="date">
+           <object class="java.time.LocalDate" method="of">
+            <int>2024</int>
+            <int>11</int>
+            <int>5</int>
+           </object>
+          </void>
+          <void property="message">
+           <string>Reporte CSV generado exitosamente.</string>
+          </void>
+          <void property="type">
+           <object idref="NotificationType0"/>
           </void>
          </object>
         </void>
@@ -217,7 +251,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>11</int>
-         <int>4</int>
+         <int>5</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -241,13 +275,13 @@
      <void property="category">
       <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category" id="Category2">
        <void property="description">
-        <string>Expenses on entertainment</string>
+        <string>Gastos en entretenimiento</string>
        </void>
        <void property="id">
         <string>003</string>
        </void>
        <void property="name">
-        <string>Entertainment</string>
+        <string>Entretenimiento</string>
        </void>
       </object>
      </void>
@@ -255,7 +289,7 @@
       <string>B003</string>
      </void>
      <void property="name">
-      <string>Monthly Entertainment Budget</string>
+      <string>Mensualidad Entretenimiento</string>
      </void>
      <void property="totalAmount">
       <double>400.0</double>
@@ -318,13 +352,13 @@
           <void property="category">
            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category" id="Category3">
             <void property="description">
-             <string>Expenses on health</string>
+             <string>Gastos en salud</string>
             </void>
             <void property="id">
              <string>004</string>
             </void>
             <void property="name">
-             <string>Health</string>
+             <string>Salud</string>
             </void>
            </object>
           </void>
@@ -332,7 +366,7 @@
            <string>B004</string>
           </void>
           <void property="name">
-           <string>Monthly Health Budget</string>
+           <string>Mensualidad Salud</string>
           </void>
           <void property="totalAmount">
            <double>200.0</double>
@@ -373,7 +407,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>4</int>
+            <int>5</int>
            </object>
           </void>
           <void property="message">
@@ -390,7 +424,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>4</int>
+            <int>5</int>
            </object>
           </void>
           <void property="message">
@@ -412,7 +446,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>11</int>
-         <int>4</int>
+         <int>5</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -464,11 +498,11 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>4</int>
+       <int>5</int>
       </object>
      </void>
      <void property="description">
-      <string>Initial deposit</string>
+      <string>Depósito de salario</string>
      </void>
      <void property="idTransaction">
       <string>D001</string>
@@ -496,11 +530,11 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>4</int>
+       <int>5</int>
       </object>
      </void>
      <void property="description">
-      <string>Salary deposit</string>
+      <string>Depósito de salario</string>
      </void>
      <void property="idTransaction">
       <string>D002</string>
@@ -535,11 +569,11 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>4</int>
+       <int>5</int>
       </object>
      </void>
      <void property="description">
-      <string>Transfer to checking account</string>
+      <string>Transferencia a cuenta corriente</string>
      </void>
      <void property="idTransaction">
       <string>T001</string>
@@ -570,11 +604,11 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>4</int>
+       <int>5</int>
       </object>
      </void>
      <void property="description">
-      <string>Transfer to savings account</string>
+      <string>Transferencia a cuenta de ahorros</string>
      </void>
      <void property="idTransaction">
       <string>T002</string>
@@ -615,11 +649,11 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>4</int>
+       <int>5</int>
       </object>
      </void>
      <void property="description">
-      <string>ATM withdrawal</string>
+      <string>Retiro para viaje</string>
      </void>
      <void property="idTransaction">
       <string>W001</string>
@@ -644,11 +678,11 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>4</int>
+       <int>5</int>
       </object>
      </void>
      <void property="description">
-      <string>Pharmacy purchase</string>
+      <string>Retiro para salud</string>
      </void>
      <void property="idTransaction">
       <string>W002</string>

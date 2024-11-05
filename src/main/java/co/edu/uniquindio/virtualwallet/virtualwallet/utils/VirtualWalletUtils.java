@@ -108,8 +108,8 @@ public class VirtualWalletUtils {
                 .id("A001")
                 .fullName("admin")
                 .phoneNumber("0987654321")
-                .email("virtualwalletuq@gmail.com")
-                .password("admin")
+                .email(PersistenceUtil.ADMIN_EMAIL)
+                .password(PersistenceUtil.ADMIN_PASSWORD)
                 .birthDate(LocalDate.of(1985, 5, 15))
                 .registrationDate(LocalDate.now())
                 .build();

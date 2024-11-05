@@ -12,15 +12,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class PersistenceUtil {
+    private static final ResourceBundle config = ResourceBundle.getBundle("config.config");
 
-    public static final String ACCOUNTS_FILE_PATH = "src/main/resources/persistence/files/FileAccount.txt";
-    public static final String USERS_FILE_PATH = "src/main/resources/persistence/files/FileUser.txt";
-    public static final String LOG_FILE_PATH = "src/main/resources/persistence/log/VirtualWalletLog.txt";
-//    public static final String OBJECTS_FILE_PATH = "co.edu.uniquindio.programacion3/src/main/resources/persistencia/archivoObjetos.txt";
-    public static final String VIRTUAL_WALLET_MODEL_BINARY_FILE_PATH = "src/main/resources/persistence/Model.dat";
-    public static final String VIRTUAL_WALLET_XML_FILE_PATH = "src/main/resources/persistence/Model.xml";
+    // Rutas obtenidas del archivo de propiedades
+    public static final String ACCOUNTS_FILE_PATH = config.getString("accountsFilePath");
+    public static final String USERS_FILE_PATH = config.getString("usersFilePath");
+    public static final String LOG_FILE_PATH = config.getString("logFilePath");
+    public static final String VIRTUAL_WALLET_MODEL_BINARY_FILE_PATH = config.getString("virtualWalletModelBinaryFilePath");
+    public static final String VIRTUAL_WALLET_XML_FILE_PATH = config.getString("virtualWalletXmlFilePath");
+
+    // Credenciales del administrador obtenidas del archivo de propiedades
+    public static final String ADMIN_EMAIL = config.getString("admin.email");
+    public static final String ADMIN_PASSWORD = config.getString("admin.password");
 
     public static void loadFileData(VirtualWallet virtualWallet) throws FileNotFoundException, IOException {
         ArrayList<Account> loadedAccounts = loadAccounts();

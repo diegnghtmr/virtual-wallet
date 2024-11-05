@@ -212,6 +212,7 @@ public class MovementManagementViewController extends CoreViewController impleme
         } else {
             showMessage("Error", "CSV No Generado", "Ocurrió un error al generar el reporte CSV.", Alert.AlertType.ERROR);
         }
+        movementManagementController.generateSerialization();
     }
 
 
@@ -237,6 +238,7 @@ public class MovementManagementViewController extends CoreViewController impleme
         } else {
             showMessage("Error", "PDF No Generado", "Ocurrió un error al generar el reporte PDF.", Alert.AlertType.ERROR);
         }
+        movementManagementController.generateSerialization();
     }
 
 

@@ -18,4 +18,8 @@ public class MovementManagementController extends CoreController{
     public List<Account> getAccountsByUserId(String id) {
         return modelFactory.getAccountListByUserId(id);
     }
+
+    public void generateSerialization() {
+        modelFactory.generateSerialization();
+    }
 }
