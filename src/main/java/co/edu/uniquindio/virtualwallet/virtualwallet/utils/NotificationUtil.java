@@ -27,17 +27,14 @@ public class NotificationUtil {
         this.type = type;
     }
 
-    public String getTypeInSpanish() {
-        switch (this.type) {
-            case TRANSACTION:
-                return "Transacción";
-            case ADVERTISEMENT:
-                return "Publicidad";
-            case INFORMATION:
-                return "Información";
-            default:
-                return this.type.toString();
-        }
+    /**
+     * Obtiene el tipo de notificación traducido al idioma actual.
+     *
+     * @return El tipo de notificación en el idioma actual.
+     */
+    public String getLocalizedType() {
+        String key = "notification.type." + this.type.name();
+        return I18n.get(key);
     }
 
 }

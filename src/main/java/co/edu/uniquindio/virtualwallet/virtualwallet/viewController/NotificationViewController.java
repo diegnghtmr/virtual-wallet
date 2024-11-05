@@ -69,7 +69,7 @@ public class NotificationViewController extends CoreViewController implements IN
         // Configurar las columnas
         tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate().toString()));
         tcMessage.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessage()));
-        tcType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeInSpanish()));
+        tcType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLocalizedType()));
 
         // Cargar las notificaciones en la tabla
         tblNotification.setItems(notificationList);
@@ -114,7 +114,7 @@ public class NotificationViewController extends CoreViewController implements IN
     private boolean searchFindsNotification(NotificationUtil notification, String searchText) {
         return (notification.getMessage().toLowerCase().contains(searchText.toLowerCase())) ||
                 (notification.getDate().toString().toLowerCase().contains(searchText.toLowerCase())) ||
-                (notification.getTypeInSpanish().toLowerCase().contains(searchText.toLowerCase()));
+                (notification.getLocalizedType().toLowerCase().contains(searchText.toLowerCase()));
     }
 
 }

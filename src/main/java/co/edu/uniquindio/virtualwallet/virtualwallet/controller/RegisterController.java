@@ -29,4 +29,8 @@ public class RegisterController extends CoreController {
         EmailUtil emailUtil = new EmailUtil(email, subject, message);
         emailUtil.sendNotification();
     }
+
+    public User getUserById(String id) {
+        return modelFactory.getUserById(id);
+    }
 }

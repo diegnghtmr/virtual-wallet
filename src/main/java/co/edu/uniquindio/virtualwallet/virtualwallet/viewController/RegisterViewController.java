@@ -5,7 +5,10 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.BudgetDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,6 +80,17 @@ public class RegisterViewController extends CoreViewController {
                 }
                 registerController.sendVerificationCode(userDto);
                 showMessage("¡Registro exitoso!", "Bienvenido " + userDto.fullName(), "Te has registrado correctamente.", Alert.AlertType.INFORMATION);
+
+                // Crear y enviar la notificación de bienvenida
+                String welcomeMessage = I18n.getFormatted("notification.message.WELCOME", userDto.fullName());
+                NotificationUtil welcomeNotification = new NotificationUtil(
+                        welcomeMessage,
+                        LocalDate.now(),
+                        NotificationType.INFORMATION
+                );
+                User user = registerController.getUserById(userDto.id());
+                user.update(welcomeNotification);
+
                 closeWindow(actionEvent);
                 browseWindow("/view/login-view.fxml", "Login", actionEvent);
             } catch (Exception e) {

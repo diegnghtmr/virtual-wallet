@@ -90,7 +90,10 @@ public class VirtualWalletUtils {
 
         // Crear notificaciones de ejemplo para user1
         NotificationUtil notification1 = new NotificationUtil(
-                "¡Bienvenido " + user1.getFullName()+ " a VirtualWallet!" , LocalDate.now(), NotificationType.INFORMATION);
+                I18n.getFormatted("notification.message.WELCOME", user1.getFullName()),
+                LocalDate.now(),
+                NotificationType.INFORMATION
+        );
         NotificationUtil notification2 = new NotificationUtil(
                 "Deposito de $500 Aceptado. Referencia: T001.",
                 LocalDate.now(), NotificationType.TRANSACTION);
@@ -225,7 +228,10 @@ public class VirtualWalletUtils {
 
         // Crear notificaciones de ejemplo para user2
         NotificationUtil notification3 = new NotificationUtil(
-                "¡Bienvenido " + user2.getFullName()+ " a VirtualWallet!", LocalDate.now(), NotificationType.INFORMATION);
+                I18n.getFormatted("notification.message.WELCOME", user2.getFullName()),
+                LocalDate.now(),
+                NotificationType.INFORMATION
+        );
         NotificationUtil notification4 = new NotificationUtil(
                 "¡Hola! Tu cuenta ha sido debitada con $100. Referencia: T002. Estado: Aceptado.",
                 LocalDate.now(), NotificationType.TRANSACTION);
