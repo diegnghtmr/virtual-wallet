@@ -144,7 +144,7 @@ public class PdfReportGenerator implements IReportGenerator {
                 document.add(table);
 
                 // Añadir Resumen de Transacciones
-                Font summaryFont = new Font(Font.HELVETICA, 12, Font.BOLD, PRIMARY_COLOR);
+                Font summaryFont = new Font(Font.HELVETICA, 12, Font.BOLD, SECONDARY_COLOR);
                 Paragraph summary = new Paragraph("Resumen de Transacciones", summaryFont);
                 summary.setAlignment(Element.ALIGN_LEFT);
                 document.add(summary);
