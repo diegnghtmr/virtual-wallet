@@ -25,20 +25,20 @@ public class VirtualWalletUtils {
         // Create example categories
         Category foodCategory = Category.builder()
                 .id("001")
-                .name("Food")
-                .description("Expenses on food")
+                .name("Comida")
+                .description("Compras de alimentos")
                 .build();
 
         Category travelCategory = Category.builder()
                 .id("002")
-                .name("Travel")
-                .description("Expenses on travel")
+                .name("Viaje")
+                .description("Gastos en viajes")
                 .build();
 
         // Create example budgets
         Budget foodBudget = Budget.builder()
                 .id("B001")
-                .name("Monthly Food Budget")
+                .name("Mensualidad Comida")
                 .totalAmount(500.0)
                 .amountSpent(200.0)
                 .category(foodCategory)
@@ -46,19 +46,19 @@ public class VirtualWalletUtils {
 
         Budget travelBudget = Budget.builder()
                 .id("B002")
-                .name("Monthly Travel Budget")
+                .name("Mensualidad Viaje")
                 .totalAmount(300.0)
                 .amountSpent(100.0)
                 .category(travelCategory)
                 .build();
 
         // Create example accounts
-        SavingsAccount savingsAccount = (SavingsAccount) accountFactory.getAccount("AHORROS");
+        SavingsAccount savingsAccount = (SavingsAccount) accountFactory.getAccount(I18n.get("account.type.savings"));
         savingsAccount.setBalance(1500);
         savingsAccount.setBankName("Banco de Occidente");
         savingsAccount.setAccountNumber("1234567890");
 
-        CheckingAccount checkingAccount = (CheckingAccount) accountFactory.getAccount("CORRIENTE");
+        CheckingAccount checkingAccount = (CheckingAccount) accountFactory.getAccount(I18n.get("account.type.checking"));
         checkingAccount.setBalance(1500);
         checkingAccount.setBankName("Bancolombia");
         checkingAccount.setAccountNumber("0987654321");
@@ -115,29 +115,29 @@ public class VirtualWalletUtils {
                 .build();
 
         // Create example transactions
-        Deposit deposit = (Deposit) transactionFactory.getTransaction("DEPÓSITO");
+        Deposit deposit = (Deposit) transactionFactory.getTransaction(I18n.get("transaction.type.deposit"));
         deposit.setIdTransaction("D001");
         deposit.setAmount(500.0);
         deposit.setDate(LocalDate.now());
-        deposit.setDescription("Initial deposit");
+        deposit.setDescription("Depósito de salario");
         deposit.setCategory(foodCategory);
         deposit.setAccount(savingsAccount);
         deposit.setStatus(TransactionStatus.ACCEPTED);
 
-        Withdrawal withdrawal = (Withdrawal) transactionFactory.getTransaction("RETIRO");
+        Withdrawal withdrawal = (Withdrawal) transactionFactory.getTransaction(I18n.get("transaction.type.withdrawal"));
         withdrawal.setIdTransaction("W001");
         withdrawal.setAmount(200.0);
         withdrawal.setDate(LocalDate.now());
-        withdrawal.setDescription("ATM withdrawal");
+        withdrawal.setDescription("Retiro para viaje");
         withdrawal.setCategory(travelCategory);
         withdrawal.setAccount(checkingAccount);
         withdrawal.setStatus(TransactionStatus.ACCEPTED);
 
-        Transfer transfer = (Transfer) transactionFactory.getTransaction("TRANSFERENCIA");
+        Transfer transfer = (Transfer) transactionFactory.getTransaction(I18n.get("transaction.type.transfer"));
         transfer.setIdTransaction("T001");
         transfer.setAmount(300.0);
         transfer.setDate(LocalDate.now());
-        transfer.setDescription("Transfer to checking account");
+        transfer.setDescription("Transferencia a cuenta corriente");
         transfer.setCategory(foodCategory);
         transfer.setAccount(savingsAccount);
         transfer.setReceivingAccount(checkingAccount);
@@ -160,20 +160,20 @@ public class VirtualWalletUtils {
         // New categories
         Category entertainmentCategory = Category.builder()
                 .id("003")
-                .name("Entertainment")
-                .description("Expenses on entertainment")
+                .name("Entretenimiento")
+                .description("Gastos en entretenimiento")
                 .build();
 
         Category healthCategory = Category.builder()
                 .id("004")
-                .name("Health")
-                .description("Expenses on health")
+                .name("Salud")
+                .description("Gastos en salud")
                 .build();
 
         // New budgets
         Budget entertainmentBudget = Budget.builder()
                 .id("B003")
-                .name("Monthly Entertainment Budget")
+                .name("Mensualidad Entretenimiento")
                 .totalAmount(400.0)
                 .amountSpent(150.0)
                 .category(entertainmentCategory)
@@ -181,19 +181,19 @@ public class VirtualWalletUtils {
 
         Budget healthBudget = Budget.builder()
                 .id("B004")
-                .name("Monthly Health Budget")
+                .name("Mensualidad Salud")
                 .totalAmount(200.0)
                 .amountSpent(50.0)
                 .category(healthCategory)
                 .build();
 
         // New accounts
-        SavingsAccount newSavingsAccount = (SavingsAccount) accountFactory.getAccount("AHORROS");
+        SavingsAccount newSavingsAccount = (SavingsAccount) accountFactory.getAccount(I18n.get("account.type.savings"));
         newSavingsAccount.setBalance(2000);
         newSavingsAccount.setBankName("Davivienda");
         newSavingsAccount.setAccountNumber("1122334455");
 
-        CheckingAccount newCheckingAccount = (CheckingAccount) accountFactory.getAccount("CORRIENTE");
+        CheckingAccount newCheckingAccount = (CheckingAccount) accountFactory.getAccount(I18n.get("account.type.checking"));
         newCheckingAccount.setBalance(2500);
         newCheckingAccount.setBankName("BBVA");
         newCheckingAccount.setAccountNumber("5566778899");
@@ -240,30 +240,30 @@ public class VirtualWalletUtils {
         user2.getBudgetList().add(healthBudget);
 
         // New transactions
-        Deposit newDeposit = (Deposit) transactionFactory.getTransaction("DEPÓSITO");
+        Deposit newDeposit = (Deposit) transactionFactory.getTransaction(I18n.get("transaction.type.deposit"));
         newDeposit.setIdTransaction("D002");
         newDeposit.setAmount(600.0);
         newDeposit.setDate(LocalDate.now());
-        newDeposit.setDescription("Salary deposit");
+        newDeposit.setDescription("Depósito de salario");
         newDeposit.setCategory(entertainmentCategory);
         newDeposit.setAccount(newSavingsAccount);
         newDeposit.setStatus(TransactionStatus.ACCEPTED);
 
-        Withdrawal newWithdrawal = (Withdrawal) transactionFactory.getTransaction("RETIRO");
+        Withdrawal newWithdrawal = (Withdrawal) transactionFactory.getTransaction(I18n.get("transaction.type.withdrawal"));
         newWithdrawal.setIdTransaction("W002");
         newWithdrawal.setAmount(100.0);
         newWithdrawal.setDate(LocalDate.now());
-        newWithdrawal.setDescription("Pharmacy purchase");
+        newWithdrawal.setDescription("Retiro para salud");
         newWithdrawal.setCategory(healthCategory);
         newWithdrawal.setAccount(newCheckingAccount);
         newWithdrawal.setStatus(TransactionStatus.ACCEPTED);
 
 
-        Transfer newTransfer = (Transfer) transactionFactory.getTransaction("TRANSFERENCIA");
+        Transfer newTransfer = (Transfer) transactionFactory.getTransaction(I18n.get("transaction.type.transfer"));
         newTransfer.setIdTransaction("T002");
         newTransfer.setAmount(200.0);
         newTransfer.setDate(LocalDate.now());
-        newTransfer.setDescription("Transfer to savings account");
+        newTransfer.setDescription("Transferencia a cuenta de ahorros");
         newTransfer.setCategory(entertainmentCategory);
         newTransfer.setAccount(newCheckingAccount);
         newTransfer.setReceivingAccount(newSavingsAccount);
@@ -291,10 +291,10 @@ public class VirtualWalletUtils {
     }
 
     public static List<String> getTransactionTypes() {
-        return Arrays.asList("DEPÓSITO", "RETIRO", "TRANSFERENCIA");
+        return Arrays.asList(I18n.get("transaction.type.deposit"), I18n.get("transaction.type.withdrawal"), I18n.get("transaction.type.transfer"));
     }
 
     public static List<String> getAccountTypes() {
-        return Arrays.asList("AHORROS", "CORRIENTE");
+        return Arrays.asList(I18n.get("account.type.savings"), I18n.get("account.type.checking"));
     }
 }
