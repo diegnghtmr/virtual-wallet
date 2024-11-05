@@ -66,13 +66,13 @@
          </children>
       </GridPane>
       <Separator layoutX="14.0" layoutY="315.0" prefWidth="1250.0" />
-      <HBox alignment="CENTER" layoutX="190.0" layoutY="329.0" prefHeight="57.0" prefWidth="922.0" spacing="180.0">
+      <HBox alignment="CENTER" layoutX="103.0" layoutY="324.0" prefHeight="57.0" prefWidth="1073.0" spacing="100.0">
          <children>
             <Button fx:id="btnGetPreviousRecords" mnemonicParsing="false" onAction="#onGetPreviousRecords" prefHeight="35.0" style="-fx-background-color: #1971c2;" text="Obtener Registros Previos" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button fx:id="btnGetCurrentRecords" mnemonicParsing="false" onAction="#onGetCurrentRecords" prefHeight="35.0" style="-fx-background-color: #1971c2;" text="Obtener Registros Actual" textFill="WHITE">
+            <Button fx:id="btnGetCurrentRecords" mnemonicParsing="false" onAction="#onGetCurrentRecords" prefHeight="35.0" style="-fx-background-color: #1971c2;" text="Obtener Registros Actuales" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font></Button>
@@ -80,6 +80,11 @@
                <font>
                   <Font size="14.0" />
                </font></Button>
+            <Button fx:id="btnGetAllRecords" mnemonicParsing="false" onAction="#onGetAllRecords" prefHeight="35.0" style="-fx-background-color: #1971c2;" text="Obtener Todos los Registros" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </HBox>
       <TableView fx:id="tblMovement" layoutX="95.0" layoutY="391.0" prefHeight="234.0" prefWidth="1089.0">

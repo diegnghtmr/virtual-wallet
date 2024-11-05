@@ -19,6 +19,9 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class MovementManagementViewController extends CoreViewController implements IRecordViewController<TransactionDto>, IReportGenerationViewController {
@@ -35,6 +38,9 @@ public class MovementManagementViewController extends CoreViewController impleme
 
     @FXML
     private Button btnGetCurrentRecords;
+
+    @FXML
+    private Button btnGetAllRecords;
 
     @FXML
     private Button btnGetPreviousRecords;
@@ -85,6 +91,11 @@ public class MovementManagementViewController extends CoreViewController impleme
     @FXML
     public void onGetCurrentRecords(ActionEvent event) {
         getCurrentRecords();
+    }
+
+    @FXML
+    void onGetAllRecords(ActionEvent event) {
+        getAllRecords();
     }
 
     @FXML
@@ -148,6 +159,7 @@ public class MovementManagementViewController extends CoreViewController impleme
         transactionsListDto.addAll(movementManagementController.getTransactionsByUser(userId));
 
     }
+
     private void initializeDataComboBox() {
         ObservableList<Account> accountDtoList = FXCollections.observableArrayList(
                 movementManagementController.getAccountsByUserId(loggedUser.getId()));
@@ -156,7 +168,6 @@ public class MovementManagementViewController extends CoreViewController impleme
                 account -> account.getBankName() + " - " + account.getAccountNumber());
 
     }
-
 
     @Override
     public void listenerSelection() {
@@ -185,10 +196,7 @@ public class MovementManagementViewController extends CoreViewController impleme
         transactionSelected = null;
     }
 
-    @Override
-    public boolean validateData(TransactionDto transactionDto) {
-        return false;
-    }
+
 
     private void generateCSV() {
         String userId = loggedUser.getId();
@@ -241,16 +249,67 @@ public class MovementManagementViewController extends CoreViewController impleme
         movementManagementController.generateSerialization();
     }
 
+    @Override
+    public boolean validateData() {
+        String message = "";
+        if (cbAccount.getValue() == null) {
+            message += "La cuenta es requerida.\n";
+        }
+        if (dpDate.getValue() == null) {
+            message += "La fecha es requerida.\n";
+        }
+        if (!message.isEmpty()) {
+            showMessage("Notificación de validación", "Datos no válidos", message, Alert.AlertType.WARNING);
+            return false;
+        }
+        return true;
+    }
 
     private void getCurrentRecords() {
-        //logic to get current records
+        if (validateData()) {
+            Account selectedAccount = cbAccount.getValue();
+            LocalDate selectedDate = dpDate.getValue();
+
+            List<TransactionDto> filteredTransactions = transactionsListDto.stream()
+                    .filter(transaction -> transaction.account().getAccountNumber().equals(selectedAccount.getAccountNumber()) &&
+                            transaction.date().equals(selectedDate))
+                    .collect(Collectors.toList());
+
+            tblMovement.setItems(FXCollections.observableArrayList(filteredTransactions));
+        }
+    }
+
+    private void getAllRecords() {
+        tblMovement.setItems(transactionsListDto);
+        clearFields();
+        deselectTable();
     }
 
     private void getPreviousRecords() {
-        //logic to get previous records
+        if (validateData()) {
+            Account selectedAccount = cbAccount.getValue();
+            LocalDate selectedDate = dpDate.getValue();
+
+            List<TransactionDto> filteredTransactions = transactionsListDto.stream()
+                    .filter(transaction -> transaction.account().getAccountNumber().equals(selectedAccount.getAccountNumber()) &&
+                            transaction.date().isBefore(selectedDate))
+                    .collect(Collectors.toList());
+
+            tblMovement.setItems(FXCollections.observableArrayList(filteredTransactions));
+        }
     }
 
     private void getSubsequentRecords() {
-        //logic to get subsequent records
+        if (validateData()) {
+            Account selectedAccount = cbAccount.getValue();
+            LocalDate selectedDate = dpDate.getValue();
+
+            List<TransactionDto> filteredTransactions = transactionsListDto.stream()
+                    .filter(transaction -> transaction.account().getAccountNumber().equals(selectedAccount.getAccountNumber()) &&
+                            transaction.date().isAfter(selectedDate))
+                    .collect(Collectors.toList());
+
+            tblMovement.setItems(FXCollections.observableArrayList(filteredTransactions));
+        }
     }
 }

@@ -19,7 +19,7 @@ public interface IRecordViewController<T> {
 
     void listenerSelection();
 
-    boolean validateData(T object);
+    boolean validateData();
 
     void clearFields();
 
