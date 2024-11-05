@@ -47,12 +47,16 @@ public class CsvReportGenerator implements IReportGenerator {
                 String formattedDate = transaction.date().format(DATE_FORMAT);
                 String formattedAmount = String.format(Locale.getDefault(), "%.2f", transaction.amount());
 
+                // Internacionalizar el estado
+                String statusKey = "transaction.status." + transaction.status();
+                String localizedStatus = I18n.get(statusKey);
+
                 String[] rowData = {
                         transaction.idTransaction(),
                         transaction.account().getBankName() + " - " + transaction.account().getAccountNumber(),
                         formattedAmount,
                         formattedDate,
-                        transaction.status(),
+                        localizedStatus, // Usar el estado localizado
                         transaction.transactionType()
                 };
                 writer.writeNext(rowData);

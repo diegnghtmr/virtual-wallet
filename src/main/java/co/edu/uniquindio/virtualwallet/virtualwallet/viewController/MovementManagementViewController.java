@@ -133,7 +133,11 @@ public class MovementManagementViewController extends CoreViewController impleme
                 String.valueOf(cellData.getValue().amount())));
         tcDateMovement.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().date().toString()));
         tcIdTransaction.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().idTransaction()));
-        tcState.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().status()));
+        tcState.setCellValueFactory(data -> {
+            String statusKey = "transaction.status." + data.getValue().status();
+            String localizedStatus = I18n.get(statusKey);
+            return new SimpleStringProperty(localizedStatus);
+        });
         tcTransactionType.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().transactionType()));
 
 

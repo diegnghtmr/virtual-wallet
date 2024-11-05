@@ -122,7 +122,9 @@ public class PdfReportGenerator implements IReportGenerator {
                 table.addCell(dateCell);
 
                 // Estado
-                PdfPCell statusCell = new PdfPCell(new Phrase(transaction.status(), dataFont));
+                String statusKey = "transaction.status." + transaction.status();
+                String localizedStatus = I18n.get(statusKey);
+                PdfPCell statusCell = new PdfPCell(new Phrase(localizedStatus, dataFont));
                 statusCell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 statusCell.setBackgroundColor(rowColor);
                 statusCell.setPadding(5);
