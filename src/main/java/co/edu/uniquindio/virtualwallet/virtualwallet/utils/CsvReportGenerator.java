@@ -6,6 +6,7 @@ import com.opencsv.CSVWriter;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +23,7 @@ public class CsvReportGenerator implements IReportGenerator {
     }
 
     @Override
-    public File generateReport(List<TransactionDto> data, double totalBalance) {
+    public File generateReport(List<TransactionDto> data, double totalBalance, LocalDate startDate, LocalDate endDate) {
         // Crear el archivo en el directorio temporal
         String tempDir = System.getProperty("java.io.tmpdir");
         File file = new File(tempDir, userId + ".csv");
@@ -79,6 +80,8 @@ public class CsvReportGenerator implements IReportGenerator {
 
             // Escribir Resumen de Transacciones
             writer.writeNext(new String[]{"Resumen de Transacciones"});
+            writer.writeNext(new String[]{"Fecha de Inicio", startDate.format(DATE_FORMAT)});
+            writer.writeNext(new String[]{"Fecha de Fin", endDate.format(DATE_FORMAT)});
             writer.writeNext(new String[]{"Saldo Actual", String.format("%.2f", totalBalance)});
             writer.writeNext(new String[]{"Ingresos Totales", String.format("%.2f", totalIncome)});
             writer.writeNext(new String[]{"Gastos Totales", String.format("%.2f", totalExpenses)});

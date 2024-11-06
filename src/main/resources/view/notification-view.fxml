@@ -7,28 +7,27 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 
 <StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.NotificationViewController">
     <VBox spacing="20" style="-fx-background-color: #f0f0f0;">
         <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
+            <Insets bottom="20" left="20" right="20" top="20" />
         </padding>
 
         <StackPane>
-            <Rectangle fill="#080e48" height="60.0" width="640.0" arcHeight="5.0" arcWidth="5.0">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#080e48" height="60.0" width="640.0">
                 <effect>
                     <DropShadow color="#00000040" radius="5" spread="0.2" />
                 </effect>
             </Rectangle>
-            <Label text="Notificaciones" textFill="WHITE" style="-fx-font-size: 28px; -fx-font-weight: bold;">
+            <Label style="-fx-font-size: 28px; -fx-font-weight: bold;" text="Notificaciones" textFill="WHITE">
                 <effect>
                     <DropShadow />
                 </effect>
@@ -39,9 +38,9 @@
 
         <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-background-radius: 20; -fx-padding: 5 10;">
             <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                <Image url="@../img/search.png"/>
+                <Image url="@../img/search.png" />
             </ImageView>
-            <TextField fx:id="txtFilter" promptText="Buscar notificaciones..." HBox.hgrow="ALWAYS" style="-fx-background-color: transparent; -fx-padding: 5 0 5 5;">
+            <TextField fx:id="txtFilter" promptText="Buscar notificaciones..." style="-fx-background-color: transparent; -fx-padding: 5 0 5 5;" HBox.hgrow="ALWAYS">
                 <HBox.margin>
                     <Insets left="10" />
                 </HBox.margin>
@@ -50,9 +49,9 @@
 
         <TableView fx:id="tblNotification" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="tcType" text="Tipo" prefWidth="100"/>
-                <TableColumn fx:id="tcMessage" text="Mensaje" prefWidth="350"/>
-                <TableColumn fx:id="tcDate" text="Fecha" prefWidth="120"/>
+                <TableColumn fx:id="tcType" prefWidth="100" text="Tipo" />
+                <TableColumn fx:id="tcMessage" prefWidth="350" text="Mensaje" />
+                <TableColumn fx:id="tcDate" prefWidth="120" text="Fecha" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -63,14 +62,12 @@
         </TableView>
 
         <HBox alignment="CENTER" spacing="20">
-            <Button fx:id="btnCloseNotifications" onAction="#onCloseNotifications" text="Cerrar Notificaciones" 
-                    style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 20; -fx-padding: 10 20;">
+            <Button fx:id="btnCloseNotifications" onAction="#onCloseNotifications" style="-fx-background-color: #c21919; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 20; -fx-padding: 10 20;" text="Cerrar Notificaciones">
                 <effect>
                     <DropShadow color="#00000060" radius="10" spread="0.1" />
                 </effect>
             </Button>
-            <Button fx:id="btnReturnToUserData" onAction="#onReturnToUserData" text="Volver al Perfil" 
-                    style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 20; -fx-padding: 10 20;">
+            <Button fx:id="btnReturnToUserData" onAction="#onReturnToUserData" style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 20; -fx-padding: 10 20;" text="Volver al Perfil">
                 <effect>
                     <DropShadow color="#00000060" radius="10" spread="0.1" />
                 </effect>

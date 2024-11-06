@@ -112,14 +112,9 @@
          </image>
       </ImageView>
       <Button fx:id="btnNotification" contentDisplay="GRAPHIC_ONLY" layoutX="1165.0" layoutY="11.0" mnemonicParsing="false" onAction="#onNotification" opacity="0.0" prefHeight="39.0" prefWidth="39.0" text="Button" />
-      <HBox alignment="CENTER" layoutX="251.0" layoutY="630.0" prefHeight="57.0" prefWidth="800.0" spacing="180.0">
+      <HBox alignment="CENTER" layoutX="240.0" layoutY="629.0" prefHeight="57.0" prefWidth="800.0" spacing="180.0">
          <children>
-            <Button fx:id="btnGeneratePDF" mnemonicParsing="false" onAction="#onGeneratePDF" prefHeight="35.0" style="-fx-background-color: #1971c2;" text="Generar PDF" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnGenerateCSV" mnemonicParsing="false" onAction="#onGenerateCSV" prefHeight="35.0" style="-fx-background-color: #1971c2;" text="Generar CSV" textFill="WHITE">
+            <Button fx:id="btnGenerateReport" mnemonicParsing="false" onAction="#onGenerateReport" prefHeight="35.0" style="-fx-background-color: #1971c2;" text="Generar Reporte" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

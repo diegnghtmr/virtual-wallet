@@ -24,17 +24,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class MovementManagementViewController extends CoreViewController implements IRecordViewController<TransactionDto>, IReportGenerationViewController {
+public class MovementManagementViewController extends CoreViewController implements IRecordViewController<TransactionDto> {
     MovementManagementController movementManagementController;
     User loggedUser;
     ObservableList<TransactionDto> transactionsListDto = FXCollections.observableArrayList();
     TransactionDto transactionSelected;
 
     @FXML
-    private Button btnGenerateCSV;
-
-    @FXML
-    private Button btnGeneratePDF;
+    private Button btnGenerateReport;
 
     @FXML
     private Button btnGetCurrentRecords;
@@ -79,13 +76,9 @@ public class MovementManagementViewController extends CoreViewController impleme
     private TableColumn<TransactionDto, String> tcTransactionType;
 
     @FXML
-    public void onGenerateCSV(ActionEvent event) {
-        generateCSV();
-    }
-
-    @FXML
-    public void onGeneratePDF(ActionEvent event) {
-        generatePDF();
+    void onGenerateReport(ActionEvent event) {
+        Stage ownerStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        openWindow("/view/report-generation-view.fxml", "Generación de reportes", ownerStage);
     }
 
     @FXML
@@ -103,7 +96,6 @@ public class MovementManagementViewController extends CoreViewController impleme
         getPreviousRecords();
 
     }
-
 
     @FXML
     public void onGetSubsequentRecords(ActionEvent event) {
@@ -194,61 +186,6 @@ public class MovementManagementViewController extends CoreViewController impleme
     public void deselectTable() {
         tblMovement.getSelectionModel().clearSelection();
         transactionSelected = null;
-    }
-
-
-
-    private void generateCSV() {
-        String userId = loggedUser.getId();
-        double totalBalance = loggedUser.getTotalBalance(); // Obtener el saldo total del usuario
-
-        // Crear una instancia de ReportGeneration para CSV
-        ReportGeneration reportGeneration = new ReportGeneration("CSV");
-        reportGeneration.addObserver(loggedUser); // Añadir al usuario como observador
-
-        // Generar el reporte
-        File csvFile = reportGeneration.generateReport(transactionsListDto, userId, totalBalance);
-
-        if (csvFile != null && csvFile.exists()) {
-            String userEmail = loggedUser.getEmail();
-            String subject = "Reporte de Transacciones CSV - Usuario ID: " + userId;
-            String message = "Estimado " + loggedUser.getFullName() + ", adjunto encontrará su reporte de transacciones en formato CSV.";
-
-            EmailAttachmentUtil emailUtil = new EmailAttachmentUtil(userEmail, subject, message, csvFile);
-            emailUtil.sendNotification();
-
-            showMessage("Éxito", "CSV Generado y Enviado", "El reporte CSV ha sido generado y enviado a su correo.", Alert.AlertType.INFORMATION);
-        } else {
-            showMessage("Error", "CSV No Generado", "Ocurrió un error al generar el reporte CSV.", Alert.AlertType.ERROR);
-        }
-        movementManagementController.generateSerialization();
-    }
-
-
-    private void generatePDF() {
-        String userId = loggedUser.getId();
-        double totalBalance = loggedUser.getTotalBalance(); // Obtener el saldo total del usuario
-
-        // Crear una instancia de ReportGeneration para PDF
-        ReportGeneration reportGeneration = new ReportGeneration("PDF");
-        reportGeneration.addObserver(loggedUser); // Añadir al usuario como observador
-
-        // Generar el reporte
-        File pdfFile = reportGeneration.generateReport(transactionsListDto, userId, totalBalance);
-
-        if (pdfFile != null && pdfFile.exists()) {
-            String userEmail = loggedUser.getEmail();
-            String subject = "Reporte de Transacciones - Usuario ID: " + userId;
-            String message = "Estimado " + loggedUser.getFullName() + ", adjunto encontrará su reporte de transacciones en formato PDF.";
-
-            EmailAttachmentUtil emailUtil = new EmailAttachmentUtil(userEmail, subject, message, pdfFile);
-            emailUtil.sendNotification();
-
-            showMessage("Éxito", "PDF Generado y Enviado", "El reporte PDF ha sido generado y enviado a su correo.", Alert.AlertType.INFORMATION);
-        } else {
-            showMessage("Error", "PDF No Generado", "Ocurrió un error al generar el reporte PDF.", Alert.AlertType.ERROR);
-        }
-        movementManagementController.generateSerialization();
     }
 
     @Override

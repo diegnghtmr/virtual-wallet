@@ -22,14 +22,16 @@ public class ReportGeneration implements Observable {
     }
 
     /**
-     * Genera el reporte basado en el tipo y pasa el saldo total del usuario.
+     * Genera el reporte basado en el tipo y pasa el saldo total del usuario junto con el rango de fechas.
      *
-     * @param data    Lista de transacciones.
-     * @param userId  ID del usuario.
+     * @param data         Lista de transacciones filtradas.
+     * @param userId       ID del usuario.
      * @param totalBalance Saldo total del usuario.
+     * @param startDate    Fecha de inicio del rango.
+     * @param endDate      Fecha de fin del rango.
      * @return Archivo del reporte generado.
      */
-    public File generateReport(List<TransactionDto> data, String userId, double totalBalance) {
+    public File generateReport(List<TransactionDto> data, String userId, double totalBalance, LocalDate startDate, LocalDate endDate) {
         // Generar el reporte basado en el tipo
         IReportGenerator reportGenerator;
 
@@ -42,7 +44,7 @@ public class ReportGeneration implements Observable {
         }
 
         // Generar el reporte y obtener el archivo
-        reportFile = reportGenerator.generateReport(data, totalBalance);
+        reportFile = reportGenerator.generateReport(data, totalBalance, startDate, endDate);
 
         if (reportFile != null && reportFile.exists()) {
             // Notificar a los observadores que el reporte ha sido generado

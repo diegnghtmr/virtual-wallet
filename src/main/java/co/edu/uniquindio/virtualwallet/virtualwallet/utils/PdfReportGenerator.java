@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -34,7 +35,7 @@ public class PdfReportGenerator implements IReportGenerator {
     }
 
     @Override
-    public File generateReport(List<TransactionDto> data, double totalBalance) {
+    public File generateReport(List<TransactionDto> data, double totalBalance, LocalDate startDate, LocalDate endDate) {
         // Crear el archivo en el directorio temporal
         String tempDir = System.getProperty("java.io.tmpdir");
         File file = new File(tempDir, userId + ".pdf");
@@ -56,6 +57,14 @@ public class PdfReportGenerator implements IReportGenerator {
             Paragraph sectionTitle = new Paragraph("Detalle de Movimientos", sectionTitleFont);
             sectionTitle.setAlignment(Element.ALIGN_CENTER); // Centramos el título
             document.add(sectionTitle);
+
+            document.add(Chunk.NEWLINE); // Añadir una línea en blanco
+
+            // Añadir información del rango de fechas
+            Font dateRangeFont = new Font(Font.HELVETICA, 12, Font.NORMAL, Color.BLACK);
+            Paragraph dateRange = new Paragraph("Período: " + startDate.format(DATE_FORMAT) + " - " + endDate.format(DATE_FORMAT), dateRangeFont);
+            dateRange.setAlignment(Element.ALIGN_CENTER);
+            document.add(dateRange);
 
             document.add(Chunk.NEWLINE); // Añadir una línea en blanco
 
@@ -208,8 +217,11 @@ public class PdfReportGenerator implements IReportGenerator {
             document.close();
             return file; // Reporte generado exitosamente
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     // Clase interna para manejar el encabezado y pie de página
