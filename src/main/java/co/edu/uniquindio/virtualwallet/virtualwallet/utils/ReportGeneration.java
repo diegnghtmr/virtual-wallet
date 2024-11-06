@@ -21,7 +21,15 @@ public class ReportGeneration implements Observable {
         this.reportType = reportType;
     }
 
-    public File generateReport(List<TransactionDto> data, String userId) {
+    /**
+     * Genera el reporte basado en el tipo y pasa el saldo total del usuario.
+     *
+     * @param data    Lista de transacciones.
+     * @param userId  ID del usuario.
+     * @param totalBalance Saldo total del usuario.
+     * @return Archivo del reporte generado.
+     */
+    public File generateReport(List<TransactionDto> data, String userId, double totalBalance) {
         // Generar el reporte basado en el tipo
         IReportGenerator reportGenerator;
 
@@ -34,7 +42,7 @@ public class ReportGeneration implements Observable {
         }
 
         // Generar el reporte y obtener el archivo
-        reportFile = reportGenerator.generateReport(data);
+        reportFile = reportGenerator.generateReport(data, totalBalance);
 
         if (reportFile != null && reportFile.exists()) {
             // Notificar a los observadores que el reporte ha sido generado

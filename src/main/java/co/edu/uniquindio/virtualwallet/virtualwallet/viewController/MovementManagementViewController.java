@@ -200,13 +200,14 @@ public class MovementManagementViewController extends CoreViewController impleme
 
     private void generateCSV() {
         String userId = loggedUser.getId();
+        double totalBalance = loggedUser.getTotalBalance(); // Obtener el saldo total del usuario
 
         // Crear una instancia de ReportGeneration para CSV
         ReportGeneration reportGeneration = new ReportGeneration("CSV");
         reportGeneration.addObserver(loggedUser); // Añadir al usuario como observador
 
         // Generar el reporte
-        File csvFile = reportGeneration.generateReport(transactionsListDto, userId);
+        File csvFile = reportGeneration.generateReport(transactionsListDto, userId, totalBalance);
 
         if (csvFile != null && csvFile.exists()) {
             String userEmail = loggedUser.getEmail();
@@ -226,13 +227,14 @@ public class MovementManagementViewController extends CoreViewController impleme
 
     private void generatePDF() {
         String userId = loggedUser.getId();
+        double totalBalance = loggedUser.getTotalBalance(); // Obtener el saldo total del usuario
 
         // Crear una instancia de ReportGeneration para PDF
         ReportGeneration reportGeneration = new ReportGeneration("PDF");
         reportGeneration.addObserver(loggedUser); // Añadir al usuario como observador
 
         // Generar el reporte
-        File pdfFile = reportGeneration.generateReport(transactionsListDto, userId);
+        File pdfFile = reportGeneration.generateReport(transactionsListDto, userId, totalBalance);
 
         if (pdfFile != null && pdfFile.exists()) {
             String userEmail = loggedUser.getEmail();

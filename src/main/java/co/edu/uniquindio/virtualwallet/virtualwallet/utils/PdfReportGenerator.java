@@ -8,6 +8,7 @@ import com.lowagie.text.pdf.*;
 
 import java.awt.Color;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.text.NumberFormat;
@@ -33,7 +34,7 @@ public class PdfReportGenerator implements IReportGenerator {
     }
 
     @Override
-    public File generateReport(List<TransactionDto> data) {
+    public File generateReport(List<TransactionDto> data, double totalBalance) {
         // Crear el archivo en el directorio temporal
         String tempDir = System.getProperty("java.io.tmpdir");
         File file = new File(tempDir, userId + ".pdf");
@@ -58,7 +59,7 @@ public class PdfReportGenerator implements IReportGenerator {
 
             document.add(Chunk.NEWLINE); // Añadir una línea en blanco
 
-            // Crear Tabla
+            // Crear Tabla de Transacciones
             PdfPTable table = new PdfPTable(6); // 6 columnas
             table.setWidthPercentage(100);
             table.setSpacingBefore(10f);
@@ -146,11 +147,43 @@ public class PdfReportGenerator implements IReportGenerator {
             summary.setAlignment(Element.ALIGN_LEFT);
             document.add(summary);
 
-            // Calcular el total de montos
+            // Calcular el total de ingresos y gastos
+            double totalIncome = data.stream()
+                    .filter(tx -> tx.transactionType().equalsIgnoreCase("DEPÓSITO"))
+                    .mapToDouble(TransactionDto::amount)
+                    .sum();
+
+            double totalExpenses = data.stream()
+                    .filter(tx -> tx.transactionType().equalsIgnoreCase("TRANSFERENCIA") || tx.transactionType().equalsIgnoreCase("RETIRO"))
+                    .mapToDouble(TransactionDto::amount)
+                    .sum();
+
+            String formattedTotalIncome = CURRENCY_FORMAT.format(totalIncome);
+            String formattedTotalExpenses = CURRENCY_FORMAT.format(totalExpenses);
+            String formattedTotalBalance = CURRENCY_FORMAT.format(totalBalance);
+
+            // Añadir Saldo del Usuario
+            Paragraph balance = new Paragraph("Saldo Actual: " + formattedTotalBalance, dataFont);
+            balance.setAlignment(Element.ALIGN_LEFT);
+            document.add(balance);
+
+            // Añadir Ingresos Totales
+            Paragraph income = new Paragraph("Ingresos Totales: " + formattedTotalIncome, dataFont);
+            income.setAlignment(Element.ALIGN_LEFT);
+            document.add(income);
+
+            // Añadir Gastos Totales
+            Paragraph expenses = new Paragraph("Gastos Totales: " + formattedTotalExpenses, dataFont);
+            expenses.setAlignment(Element.ALIGN_LEFT);
+            document.add(expenses);
+
+            document.add(Chunk.NEWLINE); // Añadir una línea en blanco
+
+            // Calcular el total de montos (opcional, ya incluido en ingresos y gastos)
             double totalAmount = data.stream().mapToDouble(TransactionDto::amount).sum();
             String formattedTotalAmount = CURRENCY_FORMAT.format(totalAmount);
 
-            Paragraph total = new Paragraph("Total: " + formattedTotalAmount, dataFont);
+            Paragraph total = new Paragraph("Total Movimientos: " + formattedTotalAmount, dataFont);
             total.setAlignment(Element.ALIGN_LEFT);
             document.add(total);
 
@@ -174,14 +207,13 @@ public class PdfReportGenerator implements IReportGenerator {
 
             document.close();
             return file; // Reporte generado exitosamente
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null; // Ocurrió un error durante la generación
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     // Clase interna para manejar el encabezado y pie de página
-    class HeaderFooterPageEvent extends PdfPageEventHelper {
+    private class HeaderFooterPageEvent extends PdfPageEventHelper {
         private Image logo;
         private Font headerFont = new Font(Font.HELVETICA, 14, Font.BOLD, PRIMARY_COLOR);
         private Font footerFont = new Font(Font.HELVETICA, 9, Font.NORMAL, Color.GRAY);

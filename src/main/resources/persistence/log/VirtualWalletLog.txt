@@ -632,3 +632,7 @@ Nov 05, 2024 4:21:58 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: registerUser,UserDto added: diegoa.floresq@uqvirtual.edu.co,2024-11-05
 Nov 05, 2024 4:24:08 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-05
+Nov 05, 2024 11:17:40 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-05
+Nov 05, 2024 11:22:37 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-05

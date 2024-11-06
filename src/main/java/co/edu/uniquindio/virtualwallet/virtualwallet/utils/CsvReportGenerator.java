@@ -22,7 +22,7 @@ public class CsvReportGenerator implements IReportGenerator {
     }
 
     @Override
-    public File generateReport(List<TransactionDto> data) {
+    public File generateReport(List<TransactionDto> data, double totalBalance) {
         // Crear el archivo en el directorio temporal
         String tempDir = System.getProperty("java.io.tmpdir");
         File file = new File(tempDir, userId + ".csv");
@@ -40,6 +40,10 @@ public class CsvReportGenerator implements IReportGenerator {
             // Escribir encabezados
             String[] headers = {"ID", "Cuenta", "Monto", "Fecha", "Estado", "Tipo de Transacción"};
             writer.writeNext(headers);
+
+            // Variables para calcular ingresos y gastos
+            double totalIncome = 0.0;
+            double totalExpenses = 0.0;
 
             // Escribir datos
             for (TransactionDto transaction : data) {
@@ -60,7 +64,24 @@ public class CsvReportGenerator implements IReportGenerator {
                         transaction.transactionType()
                 };
                 writer.writeNext(rowData);
+
+                // Calcular ingresos y gastos
+                String transactionType = transaction.transactionType().toUpperCase();
+                if (transactionType.equals("DEPÓSITO")) {
+                    totalIncome += transaction.amount();
+                } else if (transactionType.equals("TRANSFERENCIA") || transactionType.equals("RETIRO")) {
+                    totalExpenses += transaction.amount();
+                }
             }
+
+            // Añadir líneas en blanco para separar los datos de los totales
+            writer.writeNext(new String[]{}); // Línea en blanco
+
+            // Escribir Resumen de Transacciones
+            writer.writeNext(new String[]{"Resumen de Transacciones"});
+            writer.writeNext(new String[]{"Saldo Actual", String.format("%.2f", totalBalance)});
+            writer.writeNext(new String[]{"Ingresos Totales", String.format("%.2f", totalIncome)});
+            writer.writeNext(new String[]{"Gastos Totales", String.format("%.2f", totalExpenses)});
 
             return file;
         } catch (IOException e) {
