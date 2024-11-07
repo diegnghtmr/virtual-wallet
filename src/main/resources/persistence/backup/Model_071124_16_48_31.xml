@@ -29,7 +29,7 @@
      <object class="java.time.LocalDate" method="of">
       <int>2024</int>
       <int>11</int>
-      <int>6</int>
+      <int>7</int>
      </object>
     </void>
    </object>
@@ -172,7 +172,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>6</int>
+            <int>7</int>
            </object>
           </void>
           <void property="message">
@@ -192,7 +192,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>6</int>
+            <int>7</int>
            </object>
           </void>
           <void property="message">
@@ -203,40 +203,6 @@
             <class>co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType</class>
             <string>TRANSACTION</string>
            </object>
-          </void>
-         </object>
-        </void>
-        <void method="add">
-         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil">
-          <void property="date">
-           <object class="java.time.LocalDate" method="of">
-            <int>2024</int>
-            <int>11</int>
-            <int>6</int>
-           </object>
-          </void>
-          <void property="message">
-           <string>Reporte PDF generado exitosamente.</string>
-          </void>
-          <void property="type">
-           <object idref="NotificationType0"/>
-          </void>
-         </object>
-        </void>
-        <void method="add">
-         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil">
-          <void property="date">
-           <object class="java.time.LocalDate" method="of">
-            <int>2024</int>
-            <int>11</int>
-            <int>6</int>
-           </object>
-          </void>
-          <void property="message">
-           <string>Reporte CSV generado exitosamente.</string>
-          </void>
-          <void property="type">
-           <object idref="NotificationType0"/>
           </void>
          </object>
         </void>
@@ -251,13 +217,16 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>11</int>
-         <int>6</int>
+         <int>7</int>
         </object>
        </void>
        <void property="totalBalance">
         <double>3000.0</double>
        </void>
        <void property="verified">
+        <boolean>true</boolean>
+       </void>
+       <void property="voted">
         <boolean>true</boolean>
        </void>
       </object>
@@ -407,7 +376,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>6</int>
+            <int>7</int>
            </object>
           </void>
           <void property="message">
@@ -424,7 +393,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>6</int>
+            <int>7</int>
            </object>
           </void>
           <void property="message">
@@ -446,7 +415,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>11</int>
-         <int>6</int>
+         <int>7</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -458,6 +427,32 @@
    </void>
    <void method="add">
     <object idref="Budget3"/>
+   </void>
+  </void>
+  <void property="califications">
+   <void method="add">
+    <string>★</string>
+   </void>
+   <void method="add">
+    <string>★★</string>
+   </void>
+   <void method="add">
+    <string>★★★★</string>
+   </void>
+   <void method="add">
+    <string>★★★★★</string>
+   </void>
+   <void method="add">
+    <string>★★★★★</string>
+   </void>
+   <void method="add">
+    <string>★★★★</string>
+   </void>
+   <void method="add">
+    <string>★★★</string>
+   </void>
+   <void method="add">
+    <string>★★★★★</string>
    </void>
   </void>
   <void property="categoryList">
@@ -498,7 +493,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>6</int>
+       <int>7</int>
       </object>
      </void>
      <void property="description">
@@ -530,7 +525,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>6</int>
+       <int>7</int>
       </object>
      </void>
      <void property="description">
@@ -569,7 +564,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>6</int>
+       <int>7</int>
       </object>
      </void>
      <void property="description">
@@ -604,7 +599,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>6</int>
+       <int>7</int>
       </object>
      </void>
      <void property="description">
@@ -649,7 +644,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>6</int>
+       <int>7</int>
       </object>
      </void>
      <void property="description">
@@ -678,7 +673,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>6</int>
+       <int>7</int>
       </object>
      </void>
      <void property="description">

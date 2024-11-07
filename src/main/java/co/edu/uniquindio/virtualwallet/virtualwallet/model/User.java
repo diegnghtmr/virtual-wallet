@@ -21,6 +21,7 @@ public class User extends Person implements Observer {
     private List<Account> associatedAccounts = new ArrayList<>();
     private String verificationCode;
     private boolean isVerified;
+    private boolean voted;
     private List<Category> categoryList = new ArrayList<>();
     private List<NotificationUtil> notificationUtils = new ArrayList<>();
 

@@ -1,14 +1,21 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
+import co.edu.uniquindio.virtualwallet.virtualwallet.controller.OscashController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IOscashViewController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class OscashViewController extends CoreViewController implements IOscashViewController {
+    OscashController oscashController;
+    User loggedUser;
 
     @FXML
     private Button btnNotification;
@@ -20,7 +27,10 @@ public class OscashViewController extends CoreViewController implements IOscashV
     private Button btnSendRating;
 
     @FXML
-    private ComboBox<?> cbPercentageQuality;
+    private ComboBox<String> cbPercentageQuality;
+
+    @FXML
+    private VBox chatContainer;
 
     @FXML
     private TextField txtQuestion;
@@ -30,22 +40,87 @@ public class OscashViewController extends CoreViewController implements IOscashV
 
     @FXML
     public void onNotification(ActionEvent event) {
-
+        Stage ownerStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        openWindow("/view/notification-view.fxml", "Notificaciones", ownerStage);
     }
 
     @FXML
     public void onSendMessage(ActionEvent event) {
-
+        sendMessage();
     }
 
     @FXML
     public void onSendRating(ActionEvent event) {
-
+        sendRating();
     }
 
     @FXML
     public void initialize() {
+        oscashController = new OscashController();
+        loggedUser = (User) Session.getInstance().getPerson();
+        initializeDataComboBox();
+        initView();
+    }
 
+    private void initView() {
+        // Verificar si el usuario ya ha votado
+        if (loggedUser.isVoted()) {
+            cbPercentageQuality.setDisable(true);
+            btnSendRating.setDisable(true);
+            updateComboBoxWithMessage("¡Gracias por votar!");
+        }
+
+        txtaAnswer.setEditable(false);
+    }
+
+    private void initializeDataComboBox() {
+        ObservableList<String> percentageQuality = FXCollections.observableArrayList(
+                oscashController.getPercentageQuality());
+
+        initializeComboBox(cbPercentageQuality, percentageQuality, item -> item);
+    }
+
+    private void sendMessage() {
+        
+    }
+
+    private void sendRating() {
+        String selectedRating = cbPercentageQuality.getValue();
+        if (selectedRating != null) {
+            // Mostrar mensaje de agradecimiento
+            showMessage("Gracias", "Calificación enviada",
+                    "Gracias por dar tu calificación: " + selectedRating, Alert.AlertType.INFORMATION);
+            
+            // Deshabilitar el ComboBox y el botón de enviar calificación
+            cbPercentageQuality.setDisable(true);
+            btnSendRating.setDisable(true);
+
+            // Establecer texto de agradecimiento en el ComboBox
+            updateComboBoxWithMessage("¡Gracias por votar!");
+
+            // Marcar que el usuario ha votado y guardar el estado
+            loggedUser.setVoted(true);
+            oscashController.addVotedUser(selectedRating);
+        } else {
+            showMessage("Error", "Calificación no enviada",
+                    "Por favor selecciona una calificación antes de enviar.", Alert.AlertType.WARNING);
+        }
+    }
+
+    private void updateComboBoxWithMessage(String message) {
+        cbPercentageQuality.getItems().clear();
+        cbPercentageQuality.setValue(message);
+        cbPercentageQuality.setButtonCell(new ListCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(message);
+                } else {
+                    setText(item);
+                }
+            }
+        });
     }
 
 }

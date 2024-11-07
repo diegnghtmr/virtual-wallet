@@ -46,6 +46,7 @@ public class ModelFactory {
 
 
 
+
     }
     public static ModelFactory getInstance() {
         return SingletonHolder.eINSTANCE;
@@ -108,38 +109,41 @@ public class ModelFactory {
     private void loadXMLResource() {
         virtualWallet = PersistenceUtil.loadXMLVirtualWalletResource();
     }
-
     private void saveXMLResource() {
         PersistenceUtil.saveXMLVirtualWalletResource(virtualWallet);
     }
+
     private void registerSystemActions(String logMessage, int level, String action) {
         PersistenceUtil.saveLogRecord(logMessage, level, action);
     }
-
     public void generateSerialization() {
         //saveBinaryResource();
         saveXMLResource();
     }
 
 
+
     // Utility Methods
     // ---------------
-
     public List<String> getTransactionTypes() {
         return VirtualWalletUtils.getTransactionTypes();
     }
+
     public List<String> getAccountTypes() {
         return VirtualWalletUtils.getAccountTypes();
+    }
+    public List<String> getCalifications() {
+        return VirtualWalletUtils.getCalifications();
     }
 
     public String generateRandomCode() {
         return virtualWallet.generateRandomCode();
     }
+
     public boolean isVerified() {
         Person person = Session.getInstance().getPerson();
         return virtualWallet.isVerified(person.getId());
     }
-
     public boolean verifyCode(String verificationCode) {
         Person person = Session.getInstance().getPerson();
         boolean isCorrect = virtualWallet.verifyCode(person.getId(), verificationCode);
@@ -148,6 +152,7 @@ public class ModelFactory {
         }
         return isCorrect;
     }
+
     public void setVerificationCode(String id, String verificationCode) {
         virtualWallet.setVerificationCode(id, verificationCode);
         saveXMLResource();
@@ -158,13 +163,13 @@ public class ModelFactory {
 
     // Account Management Methods
     // --------------------------
-
     public List<AccountDto> getAccounts() {
         List<AccountDto> accountDtos = new ArrayList<>();
         accountDtos.addAll(virtualWalletMapper.getSavingsAccountsDto(virtualWallet.getSavingsAccountList()));
         accountDtos.addAll(virtualWalletMapper.getCheckingAccountsDto(virtualWallet.getCheckingAccountList()));
         return accountDtos;
     }
+
     public boolean addAccount(AccountDto accountDto) {
         try {
             if (virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
@@ -190,7 +195,6 @@ public class ModelFactory {
             return false;
         }
     }
-
     public boolean removeAccount(AccountDto accountSelected) {
         boolean flagExist = false;
         try {
@@ -209,6 +213,7 @@ public class ModelFactory {
         }
         return flagExist;
     }
+
     public boolean updateAccount(AccountDto accountSelected, AccountDto accountDto) {
         try {
             Account account;
@@ -231,7 +236,6 @@ public class ModelFactory {
             return false;
         }
     }
-
     public List<AccountDto> getAccountsByUserId(String userId) {
         List<Account> userAccounts = virtualWallet.getAccountListByUserId(userId);
         List<AccountDto> accountsDto = new ArrayList<>();
@@ -244,6 +248,7 @@ public class ModelFactory {
         }
         return accountsDto;
     }
+
     public List<TransactionDto> getTransactionsByUser(String userId) {
         List<Transaction> userTransactions = virtualWallet.getTransactionsByUser(userId);
         List<TransactionDto> transactionsDto = new ArrayList<>();
@@ -261,13 +266,12 @@ public class ModelFactory {
 
 
 
-
     // User Management Methods
     // -----------------------
+
     public Person validateLogin(String email, String password) throws Exception {
         return virtualWallet.validateLogin(email, password);
     }
-
     public boolean registerUser(UserDto userDto) {
         try {
             if (virtualWallet.verifyUserExistence(userDto.email())) {
@@ -284,6 +288,7 @@ public class ModelFactory {
             return false;
         }
     }
+
     public boolean updateUser(User person, UserDto userDto) {
         try {
             User user = virtualWalletMapper.userDtoToUser(userDto);
@@ -297,17 +302,17 @@ public class ModelFactory {
             return false;
         }
     }
-
     public User getUserById(String id) {
         return virtualWallet.findUserById(id);
     }
+
     public List<DepositDto> getDepositsByUser(String userId) {
         return virtualWalletMapper.getDepositsDto(virtualWallet.getDepositsByUser(userId));
     }
-
     public boolean isTransactionIdExists(String idTransaction) {
         return virtualWallet.isTransactionIdExists(idTransaction);
     }
+
     public boolean addDeposit(DepositDto depositDto) {
         try {
             Deposit deposit = virtualWalletMapper.depositDtoToDeposit(depositDto);
@@ -322,14 +327,13 @@ public class ModelFactory {
             return false;
         }
     }
-
     public List<Account> getAccountListByUserId(String id) {
         return virtualWallet.getAccountListByUserId(id);
     }
+
     public List<CategoryDto> getCategoriesByUserId(String id) {
         return virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryListByUserId(id));
     }
-
     public List<TransferDto> getTransfersByUser(String userId) {
         return virtualWalletMapper.getTransfersDto(virtualWallet.getTransfersByUser(userId));
     }
@@ -344,5 +348,10 @@ public class ModelFactory {
 
     public List<CategoryDto> getCategoriesByUser(String userId) {
         return virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryListByUserId(userId));
+    }
+
+    public void addVotedUser(String selectedRating) {
+        virtualWallet.addVotedUser(selectedRating);
+        saveXMLResource();
     }
 }

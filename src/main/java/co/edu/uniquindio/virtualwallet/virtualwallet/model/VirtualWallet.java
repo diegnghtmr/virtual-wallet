@@ -29,6 +29,7 @@ public class VirtualWallet implements Serializable {
     private List<CheckingAccount> checkingAccountList = new ArrayList<>();
     private List<User> userList = new ArrayList<>();
     private Administrator administrator;
+    private List<String> califications = new ArrayList<>();
     private static final long serialVersionUID = 1L;
 
     // Account Management Methods
@@ -337,4 +338,20 @@ public class VirtualWallet implements Serializable {
         return withdrawalList.stream().filter(withdrawal -> withdrawal.getAccount().getUser().getId().equals(userId)).toList();
     }
 
+    public void addVotedUser(String selectedRating) {
+        califications.add(selectedRating);
+    }
+
+    public double getAverageRating() {
+        if (califications.isEmpty()) {
+            return 0;
+        }
+
+        int totalStars = 0;
+        for (String stars : califications) {
+            totalStars += stars.length();
+        }
+
+        return (double) totalStars / califications.size();
+    }
 }

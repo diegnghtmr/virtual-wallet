@@ -293,6 +293,13 @@ public class VirtualWalletUtils {
         virtualWallet.getWithdrawalList().add(newWithdrawal);
         virtualWallet.getTransferList().add(newTransfer);
 
+        List<String> exampleVotes = Arrays.asList("★", "★★", "★★★★", "★★★★★", "★★★★★", "★★★★", "★★★");
+
+        // Add votes to the califications list
+        for (String vote : exampleVotes) {
+            virtualWallet.addVotedUser(vote);
+        }
+
         return virtualWallet;
     }
 
@@ -302,5 +309,9 @@ public class VirtualWalletUtils {
 
     public static List<String> getAccountTypes() {
         return Arrays.asList(I18n.get("account.type.savings"), I18n.get("account.type.checking"));
+    }
+
+    public static List<String> getCalifications() {
+        return Arrays.asList("★", "★★", "★★★", "★★★★", "★★★★★");
     }
 }
