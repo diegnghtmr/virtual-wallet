@@ -2,7 +2,10 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.OscashController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IOscashViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +15,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.time.LocalDate;
 
 public class OscashViewController extends CoreViewController implements IOscashViewController {
     OscashController oscashController;
@@ -67,7 +72,7 @@ public class OscashViewController extends CoreViewController implements IOscashV
         if (loggedUser.isVoted()) {
             cbPercentageQuality.setDisable(true);
             btnSendRating.setDisable(true);
-            updateComboBoxWithMessage("¡Gracias por votar!");
+            updateComboBoxWithMessage(I18n.get("notification.message.THANKS_FOR_VOTING"));
         }
 
         txtaAnswer.setEditable(false);
@@ -96,11 +101,19 @@ public class OscashViewController extends CoreViewController implements IOscashV
             btnSendRating.setDisable(true);
 
             // Establecer texto de agradecimiento en el ComboBox
-            updateComboBoxWithMessage("¡Gracias por votar!");
+            updateComboBoxWithMessage(I18n.get("notification.message.THANKS_FOR_VOTING"));
 
             // Marcar que el usuario ha votado y guardar el estado
             loggedUser.setVoted(true);
             oscashController.addVotedUser(selectedRating);
+
+            // Crear y enviar la notificación de agradecimiento
+            NotificationUtil thankYouNotification = NotificationUtil.builder()
+                    .message(I18n.get("notification.message.THANKS_FOR_RATING"))
+                    .date(LocalDate.now())
+                    .type(NotificationType.INFORMATION)
+                    .build();
+            loggedUser.update(thankYouNotification);
         } else {
             showMessage("Error", "Calificación no enviada",
                     "Por favor selecciona una calificación antes de enviar.", Alert.AlertType.WARNING);
