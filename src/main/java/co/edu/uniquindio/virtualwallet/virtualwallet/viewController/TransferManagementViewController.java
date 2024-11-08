@@ -136,6 +136,7 @@ public class TransferManagementViewController extends CoreViewController impleme
 
     private void getTransfers() {
         String userId = loggedUser.getId();
+        transferListDto.clear();
         transferListDto.addAll(transferManagementController.getTransfersByUser(userId));
     }
 

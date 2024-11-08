@@ -124,6 +124,7 @@ public class DepositManagementViewController extends CoreViewController implemen
 
     private void getDeposits() {
         String userId = loggedUser.getId();
+        depositListDto.clear();
         depositListDto.addAll(depositManagementController.getDepositsByUser(userId));
     }
 
@@ -132,6 +133,9 @@ public class DepositManagementViewController extends CoreViewController implemen
                 depositManagementController.getAccountsByUserId(loggedUser.getId()));
         ObservableList<CategoryDto> categoryDtoList = FXCollections.observableArrayList(
                 depositManagementController.getCategoriesByUserId(loggedUser.getId()));
+
+//        cbAccount.setItems(accountDtoList);
+//        cbCategory.setItems(categoryDtoList);
 
         initializeComboBox(cbAccount, accountDtoList,
                 account -> account.getBankName() + " - " + account.getAccountNumber());

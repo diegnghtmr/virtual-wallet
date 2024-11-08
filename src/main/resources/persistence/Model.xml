@@ -73,53 +73,6 @@
           <void property="accountNumber">
            <string>1234567890</string>
           </void>
-          <void property="associatedDeposits">
-           <void method="add">
-            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit0">
-             <void property="account">
-              <object idref="SavingsAccount0"/>
-             </void>
-             <void property="amount">
-              <double>12.0</double>
-             </void>
-             <void property="category">
-              <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
-               <void property="description">
-                <string>Gastos en viajes</string>
-               </void>
-               <void property="id">
-                <string>002</string>
-               </void>
-               <void property="name">
-                <string>Viaje</string>
-               </void>
-              </object>
-             </void>
-             <void property="date">
-              <object class="java.time.LocalDate" method="of">
-               <int>2024</int>
-               <int>11</int>
-               <int>8</int>
-              </object>
-             </void>
-             <void property="description">
-              <string>xd</string>
-             </void>
-             <void property="idTransaction">
-              <string>112858822</string>
-             </void>
-             <void property="observers">
-              <null/>
-             </void>
-             <void property="status">
-              <object class="java.lang.Enum" id="TransactionStatus0" method="valueOf">
-               <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
-               <string>PENDING</string>
-              </object>
-             </void>
-            </object>
-           </void>
-          </void>
           <void property="balance">
            <double>1500.0</double>
           </void>
@@ -150,10 +103,10 @@
         <void method="add">
          <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount1">
           <void property="accountNumber">
-           <string>3213123</string>
+           <string>1</string>
           </void>
           <void property="bankName">
-           <string>xd</string>
+           <string>a</string>
           </void>
           <void property="user">
            <object idref="User0"/>
@@ -557,7 +510,7 @@
       <string>D001</string>
      </void>
      <void property="status">
-      <object class="java.lang.Enum" id="TransactionStatus1" method="valueOf">
+      <object class="java.lang.Enum" id="TransactionStatus0" method="valueOf">
        <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
        <string>ACCEPTED</string>
       </object>
@@ -589,12 +542,9 @@
       <string>D002</string>
      </void>
      <void property="status">
-      <object idref="TransactionStatus1"/>
+      <object idref="TransactionStatus0"/>
      </void>
     </object>
-   </void>
-   <void method="add">
-    <object idref="Deposit0"/>
    </void>
   </void>
   <void property="savingsAccountList">
@@ -637,7 +587,10 @@
       <object idref="CheckingAccount0"/>
      </void>
      <void property="status">
-      <object idref="TransactionStatus0"/>
+      <object class="java.lang.Enum" method="valueOf">
+       <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
+       <string>PENDING</string>
+      </object>
      </void>
     </object>
    </void>
@@ -711,7 +664,7 @@
       <string>W001</string>
      </void>
      <void property="status">
-      <object idref="TransactionStatus1"/>
+      <object idref="TransactionStatus0"/>
      </void>
     </object>
    </void>
@@ -740,7 +693,7 @@
       <string>W002</string>
      </void>
      <void property="status">
-      <object idref="TransactionStatus1"/>
+      <object idref="TransactionStatus0"/>
      </void>
     </object>
    </void>

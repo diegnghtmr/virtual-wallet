@@ -148,6 +148,7 @@ public class MovementManagementViewController extends CoreViewController impleme
 
     private void getTransactionList() {
         String userId = loggedUser.getId();
+        transactionsListDto.clear();
         transactionsListDto.addAll(movementManagementController.getTransactionsByUser(userId));
 
     }

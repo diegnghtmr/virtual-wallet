@@ -112,6 +112,7 @@ public class CategoryManagementViewController extends CoreViewController impleme
 
     private void getCategories() {
         String userId = loggedUser.getId();
+        categoryListDto.clear();
         categoryListDto.addAll(categoryManagementController.getCategoriesByUser(userId));
     }
 

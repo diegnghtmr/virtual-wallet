@@ -131,12 +131,15 @@ public class AccountManagementViewController extends CoreViewController implemen
 
     private void getAccounts() {
         String userId = loggedUser.getId();
+        accountsListDto.clear();
         accountsListDto.addAll(accountManagementController.getAccountsByUserId(userId));
     }
 
     private void initializeDataComboBox() {
         ObservableList<String> accountTypes = FXCollections.observableArrayList(
                 accountManagementController.getAccountTypes());
+
+
 
         initializeComboBox(cbAccountType, accountTypes, item -> item);
     }

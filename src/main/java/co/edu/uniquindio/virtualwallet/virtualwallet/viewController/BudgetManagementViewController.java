@@ -123,6 +123,7 @@ public class BudgetManagementViewController extends CoreViewController implement
 
     private void getBudgets() {
         String userId = loggedUser.getId();
+        budgetListDto.clear();
         budgetListDto.addAll(budgetManagementController.getBudgetsByUser(userId));
     }
 

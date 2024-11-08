@@ -127,6 +127,7 @@ public class WithdrawalManagementViewController extends CoreViewController imple
 
     private void getWithdrawals() {
         String userId = loggedUser.getId();
+        withdrawalListDto.clear();
         withdrawalListDto.addAll(withdrawalManagementController.getWithdrawalsByUser(userId));
     }
 
