@@ -19,18 +19,18 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.OscashViewController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#080e48" height="51.0" layoutX="60.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="1179.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="11.0" text="Asistente Virtual Financiero" textAlignment="CENTER" textFill="WHITE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#080e48" height="51.0" layoutX="50.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1179.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="1.0" text="Asistente Virtual Financiero" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="1175.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="1165.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/notification.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnNotification" contentDisplay="GRAPHIC_ONLY" layoutX="1175.0" layoutY="21.0" mnemonicParsing="false" onAction="#onNotification" opacity="0.0" prefHeight="39.0" prefWidth="39.0" text="Button" />
+      <Button fx:id="btnNotification" contentDisplay="GRAPHIC_ONLY" layoutX="1165.0" layoutY="11.0" mnemonicParsing="false" onAction="#onNotification" opacity="0.0" prefHeight="39.0" prefWidth="39.0" text="Button" />
 
       <ScrollPane layoutX="20.0" layoutY="100.0" prefHeight="450.0" prefWidth="800.0" style="-fx-background-color: transparent; -fx-border-color: #1973c2; -fx-border-radius: 15; -fx-background-radius: 15;">
          <content>
@@ -119,5 +119,6 @@
             <DropShadow color="#00000040" />
          </effect>
       </VBox>
+      <Separator layoutX="14.0" layoutY="60.0" prefWidth="1250.0" />
    </children>
 </AnchorPane>
