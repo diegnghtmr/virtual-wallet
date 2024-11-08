@@ -103,12 +103,15 @@ public class ModelFactory {
     private void loadBinaryResource() {
         virtualWallet = PersistenceUtil.loadBinaryVirtualWalletResource();
     }
+
     private void saveBinaryResource() {
         PersistenceUtil.saveBinaryVirtualWalletResource(virtualWallet);
     }
+
     private void loadXMLResource() {
         virtualWallet = PersistenceUtil.loadXMLVirtualWalletResource();
     }
+
     private void saveXMLResource() {
         PersistenceUtil.saveXMLVirtualWalletResource(virtualWallet);
     }

@@ -7,12 +7,11 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementatio
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class PersistenceUtil {
     private static final ResourceBundle config = ResourceBundle.getBundle("config.config");
@@ -23,6 +22,7 @@ public class PersistenceUtil {
     public static final String LOG_FILE_PATH = config.getString("logFilePath");
     public static final String VIRTUAL_WALLET_MODEL_BINARY_FILE_PATH = config.getString("virtualWalletModelBinaryFilePath");
     public static final String VIRTUAL_WALLET_XML_FILE_PATH = config.getString("virtualWalletXmlFilePath");
+    public static final String BACKUP_FILE_PATH = config.getString("backupFilePath");
 
     // Credenciales del administrador obtenidas del archivo de propiedades
     public static final String ADMIN_EMAIL = config.getString("admin.email");
@@ -214,12 +214,31 @@ public class PersistenceUtil {
     }
 
     public static VirtualWallet loadXMLVirtualWalletResource() {
+        return loadXMLVirtualWalletResource(VIRTUAL_WALLET_XML_FILE_PATH);
+    }
+
+    private static VirtualWallet loadXMLVirtualWalletResource(String filePath) {
         VirtualWallet virtualWallet = null;
         try {
-            virtualWallet = (VirtualWallet) FileUtil.loadSerializedXMLResource(VIRTUAL_WALLET_XML_FILE_PATH);
+            virtualWallet = (VirtualWallet) FileUtil.loadSerializedXMLResource(filePath);
         } catch (Exception e) {
-            //Leer el backup acá y asignarlo a virtualWallet
-            e.printStackTrace();
+            File backupDir = new File(BackupUtil.BACKUP_DIR);
+            File[] backupFiles = backupDir.listFiles((dir, name) -> name.endsWith(".xml"));
+            if (backupFiles != null && backupFiles.length > 0) {
+                Arrays.sort(backupFiles, Comparator.comparingLong(File::lastModified).reversed());
+                for (File backupFile : backupFiles) {
+                    try {
+                        virtualWallet = (VirtualWallet) FileUtil.loadSerializedXMLResource(backupFile.getPath());
+                        if (virtualWallet != null) {
+                            System.out.println("Loaded backup from: " + backupFile.getPath());
+                            return virtualWallet;
+                        }
+                    } catch (Exception backupException) {
+                        backupException.printStackTrace();
+                    }
+                }
+            }
+            System.out.println("No backups found. Creating new XML.");
         }
         return virtualWallet;
     }

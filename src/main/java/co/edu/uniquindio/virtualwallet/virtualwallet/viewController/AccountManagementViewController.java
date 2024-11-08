@@ -4,6 +4,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.controller.AccountManagemen
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.beans.property.SimpleStringProperty;
@@ -165,7 +166,7 @@ public class AccountManagementViewController extends CoreViewController implemen
     private AccountDto buildAccountDto() {
         String accountType = cbAccountType.getValue();
 
-        if ("AHORROS".equals(accountType)) {
+        if (I18n.get("account.type.savings").equals(accountType)) {
             return new SavingsAccountDto(
                     0, // Balance inicial
                     txtBankName.getText(), // Nombre del banco
@@ -175,7 +176,7 @@ public class AccountManagementViewController extends CoreViewController implemen
                     new ArrayList<DepositDto>(), // Lista de depósitos asociadas
                     new ArrayList<WithdrawalDto>() // Lista de retiros asociados
             );
-        } else if ("CORRIENTE".equals(accountType)) {
+        } else if (I18n.get("account.type.checking").equals(accountType)) {
             return new CheckingAccountDto(
                     0, // Balance inicial
                     txtBankName.getText(), // Nombre del banco
