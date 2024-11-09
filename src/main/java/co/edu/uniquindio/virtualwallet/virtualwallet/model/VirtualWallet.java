@@ -8,6 +8,8 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementatio
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -354,4 +356,75 @@ public class VirtualWallet implements Serializable {
 
         return (double) totalStars / califications.size();
     }
+
+    public String getUserRiskProfile(String id) {
+        // Recuperar el usuario
+        User user = findUserById(id);
+        if (user == null) {
+            return "Desconocido";
+        }
+
+        double totalBalance = user.getTotalBalance();
+        double averageMonthlyIncome = calculateAverageMonthlyIncome(user);
+        int numberOfInvestments = user.getAssociatedAccounts().size(); // Asumiendo que cada cuenta asociada es una inversión
+        int age = Period.between(user.getBirthDate(), LocalDate.now()).getYears();
+
+        // Calcular un puntaje de riesgo basado en los factores
+        int riskScore = 0;
+
+        // Evaluación del saldo total
+        if (totalBalance < 10000) {
+            riskScore += 1;
+        } else if (totalBalance < 50000) {
+            riskScore += 2;
+        } else {
+            riskScore += 3;
+        }
+
+        // Evaluación de ingresos mensuales
+        if (averageMonthlyIncome < 3000) {
+            riskScore += 1;
+        } else if (averageMonthlyIncome < 7000) {
+            riskScore += 2;
+        } else {
+            riskScore += 3;
+        }
+
+        // Evaluación del historial de inversiones
+        if (numberOfInvestments < 2) {
+            riskScore += 1;
+        } else if (numberOfInvestments < 5) {
+            riskScore += 2;
+        } else {
+            riskScore += 3;
+        }
+
+        // Evaluación de la edad
+        if (age < 30) {
+            riskScore += 3;
+        } else if (age < 50) {
+            riskScore += 2;
+        } else {
+            riskScore += 1;
+        }
+
+        // Determinar el perfil de riesgo basado en el puntaje total
+        if (riskScore <= 6) {
+            return "Conservador";
+        } else if (riskScore <= 10) {
+            return "Moderado";
+        } else {
+            return "Agresivo";
+        }
+    }
+
+    private double calculateAverageMonthlyIncome(User user) {
+        List<Deposit> deposits = getDepositsByUser(user.getId());
+        double totalIncome = 0.0;
+        for (Deposit deposit : deposits) {
+            totalIncome += deposit.getAmount();
+        }
+        return totalIncome / deposits.size();
+    }
+
 }
