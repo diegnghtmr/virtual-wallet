@@ -29,7 +29,7 @@
      <object class="java.time.LocalDate" method="of">
       <int>2024</int>
       <int>11</int>
-      <int>8</int>
+      <int>9</int>
      </object>
     </void>
    </object>
@@ -94,19 +94,6 @@
           </void>
           <void property="bankName">
            <string>Bancolombia</string>
-          </void>
-          <void property="user">
-           <object idref="User0"/>
-          </void>
-         </object>
-        </void>
-        <void method="add">
-         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount1">
-          <void property="accountNumber">
-           <string>1</string>
-          </void>
-          <void property="bankName">
-           <string>a</string>
           </void>
           <void property="user">
            <object idref="User0"/>
@@ -185,7 +172,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>8</int>
+            <int>9</int>
            </object>
           </void>
           <void property="message">
@@ -205,7 +192,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>8</int>
+            <int>9</int>
            </object>
           </void>
           <void property="message">
@@ -230,7 +217,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>11</int>
-         <int>8</int>
+         <int>9</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -280,7 +267,7 @@
        </void>
        <void property="associatedAccounts">
         <void method="add">
-         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount2">
+         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount1">
           <void property="accountNumber">
            <string>1122334455</string>
           </void>
@@ -386,7 +373,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>8</int>
+            <int>9</int>
            </object>
           </void>
           <void property="message">
@@ -403,7 +390,7 @@
            <object class="java.time.LocalDate" method="of">
             <int>2024</int>
             <int>11</int>
-            <int>8</int>
+            <int>9</int>
            </object>
           </void>
           <void property="message">
@@ -425,7 +412,7 @@
         <object class="java.time.LocalDate" method="of">
          <int>2024</int>
          <int>11</int>
-         <int>8</int>
+         <int>9</int>
         </object>
        </void>
        <void property="totalBalance">
@@ -500,7 +487,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>8</int>
+       <int>9</int>
       </object>
      </void>
      <void property="description">
@@ -520,7 +507,7 @@
    <void method="add">
     <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit">
      <void property="account">
-      <object idref="SavingsAccount2"/>
+      <object idref="SavingsAccount1"/>
      </void>
      <void property="amount">
       <double>600.0</double>
@@ -532,7 +519,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>8</int>
+       <int>9</int>
       </object>
      </void>
      <void property="description">
@@ -550,9 +537,6 @@
   <void property="savingsAccountList">
    <void method="add">
     <object idref="SavingsAccount0"/>
-   </void>
-   <void method="add">
-    <object idref="SavingsAccount2"/>
    </void>
    <void method="add">
     <object idref="SavingsAccount1"/>
@@ -574,7 +558,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>8</int>
+       <int>9</int>
       </object>
      </void>
      <void property="description">
@@ -609,7 +593,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>8</int>
+       <int>9</int>
       </object>
      </void>
      <void property="description">
@@ -619,7 +603,7 @@
       <string>T002</string>
      </void>
      <void property="receivingAccount">
-      <object idref="SavingsAccount2"/>
+      <object idref="SavingsAccount1"/>
      </void>
      <void property="status">
       <object class="java.lang.Enum" method="valueOf">
@@ -654,7 +638,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>8</int>
+       <int>9</int>
       </object>
      </void>
      <void property="description">
@@ -683,7 +667,7 @@
       <object class="java.time.LocalDate" method="of">
        <int>2024</int>
        <int>11</int>
-       <int>8</int>
+       <int>9</int>
       </object>
      </void>
      <void property="description">

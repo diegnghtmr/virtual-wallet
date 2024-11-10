@@ -774,3 +774,13 @@ Nov 08, 2024 8:33:59 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: addDeposit,DepositDto added: 423457763,2024-11-08
 nov 09, 2024 1:15:20 A. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-09
+Nov 09, 2024 1:50:58 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-09
+Nov 09, 2024 4:40:22 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-09
+Nov 09, 2024 4:41:41 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 482178614,2024-11-09
+Nov 09, 2024 11:48:07 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-09
+Nov 09, 2024 11:48:55 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-09
