@@ -497,7 +497,7 @@ public class VirtualWallet implements Serializable {
         sortedUsers.sort((user1, user2) -> {
             int count1 = countTransaction(user1);
             int count2 = countTransaction(user2);
-            return Integer.compare(count1, count2);
+            return Integer.compare(count2, count1);
         });
         return sortedUsers;
     }

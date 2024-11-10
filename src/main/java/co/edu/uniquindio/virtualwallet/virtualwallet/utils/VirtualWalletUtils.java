@@ -149,9 +149,40 @@ public class VirtualWalletUtils {
         transfer.setReceivingAccount(checkingAccount);
         transfer.setStatus(TransactionStatus.PENDING);
 
+        savingsAccount.getAssociatedTransfers().add(transfer);
+        savingsAccount.getAssociatedDeposits().add(deposit);
+        checkingAccount.getAssociatedWithdrawals().add(withdrawal);
+
         foodCategory.getTransactionList().add(deposit);
         travelCategory.getTransactionList().add(withdrawal);
         foodCategory.getTransactionList().add(transfer);
+
+        Deposit extraDeposit1 = (Deposit) transactionFactory.getTransaction(I18n.get("transaction.type.deposit"));
+        extraDeposit1.setIdTransaction("D003");
+        extraDeposit1.setAmount(100.0);
+        extraDeposit1.setDate(LocalDate.now());
+        extraDeposit1.setDescription("Depósito extra 1");
+        extraDeposit1.setCategory(foodCategory);
+        extraDeposit1.setAccount(savingsAccount);
+        extraDeposit1.setStatus(TransactionStatus.ACCEPTED);
+
+        Deposit extraDeposit2 = (Deposit) transactionFactory.getTransaction(I18n.get("transaction.type.deposit"));
+        extraDeposit2.setIdTransaction("D004");
+        extraDeposit2.setAmount(150.0);
+        extraDeposit2.setDate(LocalDate.now());
+        extraDeposit2.setDescription("Depósito extra 2");
+        extraDeposit2.setCategory(foodCategory);
+        extraDeposit2.setAccount(savingsAccount);
+        extraDeposit2.setStatus(TransactionStatus.ACCEPTED);
+
+        // Agregar las transacciones a la categoría
+        foodCategory.getTransactionList().add(extraDeposit1);
+        foodCategory.getTransactionList().add(extraDeposit2);
+
+        // Agregar las transacciones a la cuenta de ahorros
+        savingsAccount.getAssociatedDeposits().add(extraDeposit1);
+        savingsAccount.getAssociatedDeposits().add(extraDeposit2);
+
 
         // Create and populate VirtualWallet
         VirtualWallet virtualWallet = new VirtualWallet();
@@ -166,6 +197,8 @@ public class VirtualWalletUtils {
         virtualWallet.getDepositList().add(deposit);
         virtualWallet.getWithdrawalList().add(withdrawal);
         virtualWallet.getTransferList().add(transfer);
+        virtualWallet.getDepositList().add(extraDeposit1); //nuevo depósito
+        virtualWallet.getDepositList().add(extraDeposit2); //nuevo depósito
 
         // New categories
         Category entertainmentCategory = Category.builder()
@@ -284,6 +317,9 @@ public class VirtualWalletUtils {
         newTransfer.setReceivingAccount(newSavingsAccount);
         newTransfer.setStatus(TransactionStatus.REJECTED);
 
+        newSavingsAccount.getAssociatedTransfers().add(newTransfer);
+        newSavingsAccount.getAssociatedDeposits().add(newDeposit);
+        newCheckingAccount.getAssociatedWithdrawals().add(newWithdrawal);
 
         travelBudget.setUser(user1);
         foodBudget.setUser(user1);

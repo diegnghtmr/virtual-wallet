@@ -127,7 +127,7 @@ public class AdminTransferManagementViewController extends CoreViewController {
         tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().date().toString()));
         tcCommission.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().commission())));
         tcSourceAccount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().account().getBankName() + " - " + cellData.getValue().account().getAccountNumber()));
-        tcReceivingAccount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().account().getBankName() + " - " + cellData.getValue().account().getAccountNumber()));
+        tcReceivingAccount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().receivingAccount().getBankName() + " - " + cellData.getValue().receivingAccount().getAccountNumber()));
     }
 
     private void getTransfer() {
