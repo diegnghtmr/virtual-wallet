@@ -17,7 +17,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class AdminTransferManagementViewController extends CoreViewController {
     Administrator loggedAdmin;
@@ -91,6 +93,14 @@ public class AdminTransferManagementViewController extends CoreViewController {
 
     @FXML
     void onHome(ActionEvent event) {
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        if (currentStage != null) {
+            currentStage.close();
+        }
+
+        openWindow("/view/admin-data-view.fxml", "Datos del Administrador", null);
 
     }
 
