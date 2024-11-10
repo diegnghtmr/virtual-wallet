@@ -187,10 +187,10 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TableView layoutX="95.0" layoutY="391.0" prefHeight="234.0" prefWidth="1089.0">
-        <columns>
-          <TableColumn fx:id="tcNameUser" prefWidth="139.3333740234375" text="Nombre" />
-          <TableColumn fx:id="tcId" prefWidth="138.6666259765625" text="Número documento" />
+      <TableView fx:id="tblUser" layoutX="95.0" layoutY="391.0" prefHeight="234.0" prefWidth="1089.0">
+         <columns>
+            <TableColumn fx:id="tcNameUser" prefWidth="139.3333740234375" text="Nombre" />
+            <TableColumn fx:id="tcId" prefWidth="138.6666259765625" text="Número documento" />
             <TableColumn fx:id="tcBirthdate" prefWidth="118.0" text="Fecha nacimiento" />
             <TableColumn fx:id="tcPhoneNumber" prefWidth="104.0" text="Teléfono" />
             <TableColumn fx:id="tcEmail" prefWidth="160.0" text="E-mail" />
@@ -198,7 +198,7 @@
             <TableColumn fx:id="tcRegistrationDate" prefWidth="112.6666259765625" text="Fecha registro" />
             <TableColumn fx:id="tcPassword" prefWidth="94.0" text="Contraseña" />
             <TableColumn fx:id="tcTotalBalance" prefWidth="117.33333333333326" text="Saldo total" />
-        </columns>
+         </columns>
       </TableView>
       <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="1165.0" layoutY="11.0">
          <image>

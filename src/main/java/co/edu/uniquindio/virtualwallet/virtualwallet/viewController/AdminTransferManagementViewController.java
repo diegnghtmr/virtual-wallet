@@ -1,17 +1,29 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import java.net.URL;
+import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.virtualwallet.virtualwallet.controller.AdminTransferManagementController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransferDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
-public class AdminTransferManagementViewController {
+public class AdminTransferManagementViewController extends CoreViewController {
+    Administrator loggedAdmin;
+    ObservableList<TransferDto> transferDtoList = FXCollections.observableArrayList();
+    TransferDto transferSelected;
+    AdminTransferManagementController adminTransferManagementController;
 
     @FXML
     private ResourceBundle resources;
@@ -29,40 +41,40 @@ public class AdminTransferManagementViewController {
     private Button btnNew;
 
     @FXML
-    private ComboBox<?> cbCategory;
+    private ComboBox<CategoryDto> cbCategory;
 
     @FXML
-    private ComboBox<?> cbReceivingAccount;
+    private ComboBox<Account> cbReceivingAccount;
 
     @FXML
-    private ComboBox<?> cbSourceAccount;
+    private ComboBox<Account> cbSourceAccount;
 
     @FXML
-    private TableView<?> tblTransfer;
+    private TableView<TransferDto> tblTransfer;
 
     @FXML
-    private TableColumn<?, ?> tcAmount;
+    private TableColumn<TransferDto, String> tcAmount;
 
     @FXML
-    private TableColumn<?, ?> tcCategory;
+    private TableColumn<TransferDto, String> tcCategory;
 
     @FXML
-    private TableColumn<?, ?> tcCommission;
+    private TableColumn<TransferDto, String> tcCommission;
 
     @FXML
-    private TableColumn<?, ?> tcDate;
+    private TableColumn<TransferDto, String> tcDate;
 
     @FXML
-    private TableColumn<?, ?> tcDescription;
+    private TableColumn<TransferDto, String> tcDescription;
 
     @FXML
-    private TableColumn<?, ?> tcId;
+    private TableColumn<TransferDto, String> tcId;
 
     @FXML
-    private TableColumn<?, ?> tcReceivingAccount;
+    private TableColumn<TransferDto, String> tcReceivingAccount;
 
     @FXML
-    private TableColumn<?, ?> tcSourceAccount;
+    private TableColumn<TransferDto, String> tcSourceAccount;
 
     @FXML
     private TextField txtAmount;
@@ -72,8 +84,10 @@ public class AdminTransferManagementViewController {
 
     @FXML
     void onAdd(ActionEvent event) {
+        addTransfer();
 
     }
+
 
     @FXML
     void onHome(ActionEvent event) {
@@ -82,13 +96,167 @@ public class AdminTransferManagementViewController {
 
     @FXML
     void onNew(ActionEvent event) {
+        clearFields();
+
 
     }
 
     @FXML
     void initialize() {
+        adminTransferManagementController = new AdminTransferManagementController();
+        loggedAdmin = (Administrator) Session.getInstance().getPerson();
+        initView();
+
+    }
+
+    private void initView() {
+        initDataBinding();
+        getTransfer();
+        initializeDataComboBox();
+        tblTransfer.getItems().clear();
+        tblTransfer.setItems(transferDtoList);
+        listenerSelection();
+
+    }
+
+    private void initDataBinding() {
+        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().amount())));
+        tcCategory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().category().name()));
+        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().idTransaction()));
+        tcDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().description()));
+        tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().date().toString()));
+        tcCommission.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().commission())));
+        tcSourceAccount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().account().getBankName() + " - " + cellData.getValue().account().getAccountNumber()));
+        tcReceivingAccount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().account().getBankName() + " - " + cellData.getValue().account().getAccountNumber()));
+    }
+
+    private void getTransfer() {
+        transferDtoList.clear();
+        transferDtoList.addAll(adminTransferManagementController.getTransfers());
+    }
+
+    private void initializeDataComboBox() {
+        ObservableList<Account> accountDtoList = FXCollections.observableArrayList(adminTransferManagementController.getAccounts());
+        cbSourceAccount.setItems(accountDtoList);
+        cbReceivingAccount.setItems(accountDtoList);
+
+        cbSourceAccount.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                // Filtrar la lista de cuentas, excluyendo la cuenta seleccionada como origen
+                ObservableList<Account> filteredList = accountDtoList.filtered(account -> !account.equals(newSelection));
+                cbReceivingAccount.setItems(filteredList);
+            } else {
+                cbReceivingAccount.setItems(accountDtoList);
+            }
+
+        });
+        ObservableList<CategoryDto> categoryDtoList = FXCollections.observableArrayList(adminTransferManagementController.getCategories());
+        cbCategory.setItems(categoryDtoList);
+
+        initializeComboBox(cbReceivingAccount, accountDtoList, account -> account.getBankName() + " - " + account.getAccountNumber());
+        initializeComboBox(cbSourceAccount, accountDtoList, account -> account.getBankName() + " - " + account.getAccountNumber());
+        initializeComboBox(cbCategory, categoryDtoList, CategoryDto::name);
+    }
+
+    private void listenerSelection() {
+        tblTransfer.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            transferSelected = newSelection;
+            showInformation(transferSelected);
+        });
+    }
+
+    private void showInformation(TransferDto transferSelected) {
+        if (transferSelected != null) {
+            txtaDescription.setText(transferSelected.description());
+            txtAmount.setText(String.valueOf(transferSelected.amount()));
+            cbCategory.setValue(transferSelected.category());
+            cbReceivingAccount.setValue(transferSelected.receivingAccount());
+            cbSourceAccount.setValue(transferSelected.account());
+        }
+    }
+
+    private void clearFields() {
+        txtAmount.clear();
+        txtaDescription.clear();
+        cbCategory.getSelectionModel().clearSelection();
+        cbSourceAccount.getSelectionModel().clearSelection();
+        cbReceivingAccount.getSelectionModel().clearSelection();
+    }
+
+    private void addTransfer() {
+        TransferDto transferDto = buildTransfer();
+        if (transferDto == null) {
+            showMessage("Error", "Datos no válidos", "La transferencia no es válida", Alert.AlertType.ERROR);
+            return;
+        }
+        if (validateData(transferDto)) {
+            try {
+                boolean success = adminTransferManagementController.performTransfer(transferDto);
+
+                if (success) {
+                    transferDtoList.add(transferDto);
+                    showMessage("Notificación", "Transferencia exitosa", "La transferencia se ha realizado con éxito", Alert.AlertType.INFORMATION);
+                    clearFields();
+                } else {
+                    showMessage("Error", "Transferencia no realizada", "Ocurrió un problema al procesar la transferencia", Alert.AlertType.ERROR);
+                }
+            } catch (IllegalArgumentException e) {
+                showMessage("Error", "Fondos insuficientes", "No hay suficientes fondos en la cuenta de origen para realizar la transferencia.", Alert.AlertType.ERROR);
+            }
+        }
+    }
 
 
+    private boolean validateData(TransferDto transferDto) {
+        String message = "";
+        if (transferDto.account() == null) {
+            message += "La cuenta de origen es requerida.\n";
+        }
+        if (transferDto.receivingAccount() == null) {
+            message += "La cuenta de destino es requerida.\n";
+        }
+        if (transferDto.amount() <= 0) {
+            message += "El monto no puede ser negativo.\n";
+        }
+        if (transferDto.description().isEmpty()) {
+            message += "La descripción es requerida.\n";
+        }
+        if (transferDto.category() == null){
+            message += "La categoría es requerida.\n";
+
+        }
+        if (!message.isEmpty()) {
+            showMessage("Notificación de validación", "Datos no válidos", message, Alert.AlertType.WARNING);
+            return false;
+        }
+        return true;
+    }
+
+    private TransferDto buildTransfer() {
+        // Generación de ID de transacción único
+        SecureRandom random = new SecureRandom();
+        String idNumber;
+        do {
+            idNumber = String.format("%09d", random.nextInt(1_000_000_000));
+        } while (adminTransferManagementController.isTransactionIdExists(idNumber));
+
+        // Validar y convertir el monto
+        String amountText = txtAmount.getText();
+        if (amountText.isEmpty()) {
+            showMessage("Error", "El monto no puede estar vacío", "Por favor, ingrese un monto válido", Alert.AlertType.ERROR);
+            return null;
+        }
+
+        return new TransferDto(
+                idNumber,
+                LocalDate.now(),
+                Double.parseDouble(amountText),
+                txtaDescription.getText(),
+                cbCategory.getValue(),
+                cbSourceAccount.getValue(),
+                TransactionStatus.PENDING.name(),
+                cbReceivingAccount.getValue(),
+                6000);
     }
 
 }

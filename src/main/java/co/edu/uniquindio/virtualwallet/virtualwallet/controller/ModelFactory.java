@@ -1,6 +1,7 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
+import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.UserException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
@@ -8,6 +9,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWalletMapper;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.Category;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet;
@@ -21,6 +23,7 @@ import lombok.Setter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -29,23 +32,12 @@ public class ModelFactory {
     VirtualWallet virtualWallet;
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
+
+
     // Singleton instance
     private static class SingletonHolder {
 
         private static final ModelFactory eINSTANCE = new ModelFactory();
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -361,4 +353,164 @@ public class ModelFactory {
     public String getUserRiskProfile(String id) {
         return virtualWallet.getUserRiskProfile(id);
     }
+
+    public List<User> getUserList() {
+        return virtualWallet.getUserList();
+
+    }
+
+    public List<DepositDto> getDeposits() {
+        List<DepositDto> depositDtoList = new ArrayList<>();
+        depositDtoList.addAll(virtualWalletMapper.getDepositsDto(virtualWallet.getDepositList()));
+        return depositDtoList;
+    }
+
+    public List<CategoryDto> getCategories() {
+        List<CategoryDto> categoryDtoList = new ArrayList<>();
+        categoryDtoList.addAll(virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryList()));
+        return categoryDtoList;
+    }
+
+
+    public List<Account> getAccountList() {
+        return virtualWallet.getAccounts();
+    }
+
+    public boolean adminAddDeposit(DepositDto depositDto) {
+        try {
+            Deposit deposit = virtualWalletMapper.depositDtoToDeposit(depositDto);
+            getVirtualWallet().getDepositList().add(deposit);
+            getVirtualWallet().addDepositToAccount(deposit);
+            registerSystemActions("DepositDto added: " + deposit.getIdTransaction(), 1, "addDeposit");
+            saveXMLResource();
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+            registerSystemActions(e.getMessage(), 3, "addDeposit");
+            return false;
+        }
+    }
+
+    public List<TransferDto> getTransfers() {
+        List<TransferDto> transferDtoList = new ArrayList<>();
+        transferDtoList.addAll(virtualWalletMapper.getTransfersDto(virtualWallet.getTransferList()));
+        return transferDtoList;
+    }
+
+
+    public boolean performTransfer(TransferDto transferDto) {
+        try {
+            Transfer transfer = virtualWalletMapper.transferDtoToTransfer(transferDto);
+            getVirtualWallet().getTransferList().add(transfer);
+            getVirtualWallet().getTransferToAccount(transfer);  // Esta línea puede lanzar IllegalArgumentException
+            registerSystemActions("Transferencia realizada de " + transfer.getAccount().getAccountNumber() + " a " + transfer.getReceivingAccount().getAccountNumber(), 1, "performTransfer");
+            saveXMLResource();
+            return true;
+        } catch (IllegalArgumentException e) {
+            // Aquí no es necesario hacer nada en específico, ya que se maneja en el controlador de vista.
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            registerSystemActions(e.getMessage(), 3, "performTransfer");
+            return false;
+        }
+    }
+
+    public List<WithdrawalDto> getWithdrawals() {
+        List<WithdrawalDto> withdrawalDtoList = new ArrayList<>();
+        withdrawalDtoList.addAll(virtualWalletMapper.getWithdrawalsDto(virtualWallet.getWithdrawalList()));
+        return withdrawalDtoList;
+    }
+
+    public double getAverageRating() {
+        return virtualWallet.getAverageRating();
+    }
+
+    public double getAverageUserBalance() {
+        return virtualWallet.getAverageUserBalance();
+    }
+
+    public List<Category> getcommonExpenses() {
+        return virtualWallet.getCategoryList();
+    }
+
+    public Map<String, Double> calculateTotalExpenses() {
+        return virtualWallet.calculateTotalExpenses();
+    }
+
+    public List<User> getUsersWithMostTransactions() {
+        return virtualWallet.getUsersWithMostTransactions();
+    }
+
+    public int countTransaction(User user) {
+        return virtualWallet.countTransaction(user);
+    }
+
+    public List<UserDto> getUserListDto() {
+        List<UserDto> userDtoList = new ArrayList<>();
+        userDtoList.addAll(virtualWalletMapper.getUsersDto(virtualWallet.getUserList()));
+        return userDtoList;
+    }
+
+    public boolean addUser(UserDto userDto) {
+        try {
+            // Verificar si el usuario ya existe
+            if (virtualWallet.verifyUserExists(userDto.id())) {
+                return false; // Si existe, retorna false
+            }
+            User user = virtualWalletMapper.userDtoToUser(userDto);
+            registerSystemActions("User added: " + userDto.id(), 1, "addUser");
+            // Agregar el usuario a la billetera virtual
+            getVirtualWallet().addUser(user);
+            saveXMLResource();
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            registerSystemActions(e.getMessage(), 3, "addUser");
+            return false; // En caso de error, retorna false
+        }
+    }
+
+    public boolean removeUser(UserDto userSelected) {
+        boolean flagExist = false;
+        try {
+            flagExist = getVirtualWallet().removeUser(userSelected.id());
+
+            if (flagExist) {
+                registerSystemActions("Usuario eliminado: " + userSelected.id(), 1, "removeUser");
+                saveXMLResource();
+            } else {
+                // Si el usuario no existe
+                registerSystemActions("Intento de eliminar un usuario no existente: " + userSelected.id(), 2, "removeUser");
+            }
+        } catch (UserException e) {
+            // Maneja las excepciones específicas de usuario
+            registerSystemActions(e.getMessage(), 3, "removeUser");
+            e.printStackTrace();
+        }
+        return flagExist; // Devuelve si el usuario fue eliminado exitosamente
+    }
+
+    public boolean adminUpdateUser(UserDto userSelected, UserDto userDto) {
+        boolean userUpdated = false;
+        try {
+            User user = virtualWalletMapper.userDtoToUser(userDto);
+
+            userUpdated = getVirtualWallet().updateUser(userSelected.id(), user);
+
+            if (userUpdated) {
+                registerSystemActions("User updated: " + userDto.email(), 1, "adminUpdateUser");
+                saveXMLResource();
+            } else {
+                registerSystemActions("Failed to update user: " + userDto.email(), 2, "adminUpdateUser");
+            }
+        } catch (Exception e) {
+            registerSystemActions(e.getMessage(), 3, "adminUpdateUser");
+            e.printStackTrace();
+        }
+        return userUpdated;
+    }
+
+
 }

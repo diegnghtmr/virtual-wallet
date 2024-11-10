@@ -124,15 +124,15 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TableView layoutX="95.0" layoutY="391.0" prefHeight="234.0" prefWidth="1089.0">
-        <columns>
-          <TableColumn fx:id="tcAccountNumber" prefWidth="138.66668701171875" text="Número de cuenta" />
-          <TableColumn fx:id="tcBankName" prefWidth="144.0" text="Nombre del banco" />
+      <TableView fx:id="tblAccount" layoutX="95.0" layoutY="391.0" prefHeight="234.0" prefWidth="1089.0">
+         <columns>
+            <TableColumn fx:id="tcAccountNumber" prefWidth="138.66668701171875" text="Número de cuenta" />
+            <TableColumn fx:id="tcBankName" prefWidth="144.0" text="Nombre del banco" />
             <TableColumn fx:id="tcAccountType" prefWidth="165.33319091796875" text="Tipo de cuenta" />
             <TableColumn fx:id="tcBalance" prefWidth="174.0" text="Saldo" />
             <TableColumn fx:id="tcIdUser" prefWidth="192.6666259765625" text="Id del usuario" />
             <TableColumn fx:id="tcNameUser" prefWidth="274.0" text="Nombre del usuario" />
-        </columns>
+         </columns>
       </TableView>
       <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="1165.0" layoutY="11.0">
          <image>

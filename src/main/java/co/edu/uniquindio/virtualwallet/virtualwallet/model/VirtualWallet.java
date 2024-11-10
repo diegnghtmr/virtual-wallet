@@ -10,9 +10,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
@@ -427,4 +425,135 @@ public class VirtualWallet implements Serializable {
         return totalIncome / deposits.size();
     }
 
+    public void getTransferToAccount(Transfer transfer) {
+        Account sourceAccount = transfer.getAccount();
+        Account receivingAccount = transfer.getReceivingAccount();
+
+        double totalAmount = transfer.getAmount() + transfer.getCommission();
+
+        if (sourceAccount.getBalance() < totalAmount) {
+            throw new IllegalArgumentException("Fondos insuficientes en la cuenta de origen");
+        }
+
+        sourceAccount.setBalance(sourceAccount.getBalance() - totalAmount);
+        receivingAccount.setBalance(receivingAccount.getBalance() + transfer.getAmount());
+        sourceAccount.getAssociatedTransfers().add(transfer);
+        receivingAccount.getAssociatedTransfers().add(transfer);
+
+
+    }
+
+    public double getAverageUserBalance() {
+        double totalBalance = 0;
+        int userCount = userList.size();
+
+        for (User user : userList) {
+            totalBalance += user.getTotalBalance(); // Obtiene el saldo total de cada usuario
+        }
+
+        if (userCount > 0) {
+            return totalBalance / userCount;
+        } else {
+            return 0; // Evita la división por cero si no hay usuarios
+        }
+    }
+
+    public Map<String, Double> calculateTotalExpenses() {
+        Map<String, Double> commonExpenses = new HashMap<>();
+
+        for (User user : userList) {
+            if (user.getCategoryList() != null) {
+                for (Category category : user.getCategoryList()) {
+                    double totalExpenses = calculateTotalExpensesCommon(category);
+                    commonExpenses.put(category.getName(), commonExpenses.getOrDefault(category.getName(), 0.0) + totalExpenses);
+                }
+            } else {
+                System.out.println("El usuario " + user.getFullName() + " tiene la lista de categorías vacía");
+            }
+        }
+        return commonExpenses;
+    }
+
+
+    public double calculateTotalExpensesCommon(Category category) {
+        double totalExpenses = 0;
+
+        // Validar si la lista de transacciones está vacía
+        if (category.getTransactionList() == null || category.getTransactionList().isEmpty()) {
+            System.out.println("Depuración: La categoría con nombre " + category.getName() + " tiene la lista de transacciones vacía.");
+        } else {
+            // Si la lista no está vacía, se calcula el total
+            for (Transaction transaction : category.getTransactionList()) {
+                totalExpenses += transaction.getAmount();
+            }
+        }
+
+        return totalExpenses;
+    }
+
+    public List<User> getUsersWithMostTransactions() {
+        List<User> sortedUsers = new ArrayList<>(getUserList());
+
+        sortedUsers.sort((user1, user2) -> {
+            int count1 = countTransaction(user1);
+            int count2 = countTransaction(user2);
+            return Integer.compare(count1, count2);
+        });
+        return sortedUsers;
+    }
+
+    public int countTransaction(User user) {
+        int totalTransaction = 0;
+
+        for (Account account : user.getAssociatedAccounts()) {
+            // Verificar que cada lista esté inicializada antes de acceder a su tamaño
+            if (account.getAssociatedTransfers() != null) {
+                totalTransaction += account.getAssociatedTransfers().size();
+            }
+            if (account.getAssociatedDeposits() != null) {
+                totalTransaction += account.getAssociatedDeposits().size();
+            }
+            if (account.getAssociatedWithdrawals() != null) {
+                totalTransaction += account.getAssociatedWithdrawals().size();
+            }
+        }
+
+        System.out.println("Total transacciones para el usuario " + user.getFullName() + ": " + totalTransaction); // Depuración
+        return totalTransaction;
+    }
+    public boolean verifyUserExists(String id) {
+        return verifyUserExistsRecursive(getUserList(), id, 0);
+
+    }
+
+    private boolean verifyUserExistsRecursive(List<User> userList, String id, int i) {
+        if (i >= userList.size()) {
+            return false;
+        }
+        if (userList.get(i).getId().equals(id)) {
+            return true;
+        }
+        return verifyUserExistsRecursive(userList, id, i + 1);
+
+    }
+
+    public void addUser(User user) throws UserException {
+        if (user == null) {
+            throw new UserException("El usuario no puede ser nulo");
+        }
+        getUserList().add(user);
+    }
+
+    public boolean removeUser(String id) throws UserException {
+        Iterator<User> iterator = getUserList().iterator(); // Usar un iterator para evitar ConcurrentModificationException
+        while (iterator.hasNext()) {
+            User user = iterator.next();
+            if (user.getId().equals(id)) {
+                iterator.remove(); // Remover usando el iterator
+                return true; // Retorna true si se encontró y eliminó el usuario
+            }
+        }
+        // Si llegamos aquí, el usuario no fue encontrado
+        throw new UserException("Usuario con ID " + id + " no encontrado."); // Lanza excepción si no se encuentra
+    }
 }

@@ -1,17 +1,34 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import java.net.URL;
+import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.virtualwallet.virtualwallet.controller.AdminDepositController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.DepositDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
+import co.edu.uniquindio.virtualwallet.virtualwallet.services.Observable;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
-public class AdminDepositManagementViewController {
+public class AdminDepositManagementViewController extends CoreViewController {
+    Administrator loggedAdmin;
+
+    ObservableList<DepositDto> depositsListDto = FXCollections.observableArrayList();
+    DepositDto depositSelected;
+    AdminDepositController adminDepositController;
 
     @FXML
     private ResourceBundle resources;
@@ -29,31 +46,31 @@ public class AdminDepositManagementViewController {
     private Button btnNew;
 
     @FXML
-    private ComboBox<?> cbAccount;
+    private ComboBox<Account> cbAccount;
 
     @FXML
-    private ComboBox<?> cbCategory;
+    private ComboBox<CategoryDto> cbCategory;
 
     @FXML
-    private TableView<?> tblDeposit;
+    private TableView<DepositDto> tblDeposit;
 
     @FXML
-    private TableColumn<?, ?> tcAccount;
+    private TableColumn<DepositDto, String> tcAccount;
 
     @FXML
-    private TableColumn<?, ?> tcAmount;
+    private TableColumn<DepositDto, String> tcAmount;
 
     @FXML
-    private TableColumn<?, ?> tcCategory;
+    private TableColumn<DepositDto, String> tcCategory;
 
     @FXML
-    private TableColumn<?, ?> tcDate;
+    private TableColumn<DepositDto, String> tcDate;
 
     @FXML
-    private TableColumn<?, ?> tcDescription;
+    private TableColumn<DepositDto, String> tcDescription;
 
     @FXML
-    private TableColumn<?, ?> tcId;
+    private TableColumn<DepositDto, String> tcId;
 
     @FXML
     private TextField txtAmount;
@@ -63,23 +80,159 @@ public class AdminDepositManagementViewController {
 
     @FXML
     void onAdd(ActionEvent event) {
+        addDeposit();
 
     }
 
+
     @FXML
     void onHome(ActionEvent event) {
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        if (currentStage != null) {
+            currentStage.close();
+        }
+
+        openWindow("/view/admin-data-view.fxml", "Datos del Administrador", null);
 
     }
 
     @FXML
     void onNew(ActionEvent event) {
-
+        clearFields();
     }
 
     @FXML
     void initialize() {
+        adminDepositController = new AdminDepositController();
+        loggedAdmin = (Administrator) Session.getInstance().getPerson();
+        initView();
+    }
+
+    private void initView() {
+        initDataBinding();
+        getDeposits();
+        initializeDataComboBox();
+        tblDeposit.getItems().clear();
+        tblDeposit.setItems(depositsListDto);
+        listenerSelection();
+    }
+
+
+    private void initDataBinding() {
+        tcAccount.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().account().getBankName() + "-" + cellData.getValue().account().getAccountNumber()));
+        tcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().idTransaction()));
+        tcDate.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().date().toString()));
+        tcCategory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().category().name()));
+        tcDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().description()));
+        tcAmount.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().amount())));
+
+    }
+
+    private void getDeposits() {
+        depositsListDto.clear();
+        depositsListDto.addAll(adminDepositController.getDeposits());
+    }
+
+    private void initializeDataComboBox() {
+        ObservableList<CategoryDto> categoryDtoList = FXCollections.observableArrayList(adminDepositController.getCategories());
+        cbCategory.setItems(categoryDtoList);
+
+        ObservableList<Account> accountDtoList = FXCollections.observableArrayList(adminDepositController.getAccounts());
+        cbAccount.setItems(accountDtoList);
+
+        initializeComboBox(cbAccount, accountDtoList, account -> account.getBankName() + " - " + account.getAccountNumber());
+
+        initializeComboBox(cbCategory, categoryDtoList, CategoryDto::name);
+    }
+
+    private void listenerSelection() {
+        tblDeposit.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            depositSelected = newSelection;
+            showInformation(depositSelected);
+        });
+    }
+
+    private void showInformation(DepositDto depositSelected) {
+        if (depositSelected != null) {
+            txtaDescription.setText(depositSelected.description());
+            txtAmount.setText(String.valueOf(depositSelected.amount()));
+            cbAccount.setValue(depositSelected.account());
+            cbCategory.setValue(depositSelected.category());
+        }
 
 
     }
+
+    private void addDeposit() {
+        DepositDto depositDto = buildDeposit();
+        if (depositDto == null) {
+            showMessage("Error", "Datos no validos", "El tipo de depósito no es valido", Alert.AlertType.ERROR);
+            return;
+        }
+        if (validateData(depositDto)) {
+            if (adminDepositController.adminAddDeposit(depositDto)) {
+                depositsListDto.add(depositDto);
+                showMessage("Notificación", "depósito agregado", "el deposito ha sido agregado con éxito", Alert.AlertType.INFORMATION);
+                clearFields();
+            } else {
+                showMessage("Error", "Depósito no agregado", "El depósito no ha sido agregado con éxito", Alert.AlertType.ERROR);
+            }
+        }
+    }
+
+    private void clearFields() {
+        txtAmount.clear();
+        txtaDescription.clear();
+        cbCategory.getSelectionModel().clearSelection();
+        cbAccount.getSelectionModel().clearSelection();
+
+    }
+
+    private DepositDto buildDeposit() {
+        SecureRandom random = new SecureRandom();
+        String idNumber;
+        do {
+            idNumber = String.format("%09d", random.nextInt(1_000_000_000));
+        } while (adminDepositController.isTransactionIdExists(idNumber));
+
+        String amountText = txtAmount.getText();
+        if (amountText.isEmpty()) {
+            showMessage("Error", "El monto no puede estar vacío",
+                    "Por favor, ingrese un monto válido", Alert.AlertType.ERROR);
+            return null;
+        }
+        return new DepositDto(
+                idNumber, // idTransaction, generated randomly and checked for uniqueness
+                LocalDate.now(), // date, the current date
+                Double.parseDouble(txtAmount.getText()), // amount, the value from txtAmount field
+                txtaDescription.getText(), // description, the value from txtaDescription field
+                cbCategory.getValue(), // category, the selected value from cbCategory
+                cbAccount.getValue(), // account, the selected value from cbAccount
+                TransactionStatus.PENDING.name()
+        );
+    }
+
+    private boolean validateData(DepositDto depositDto) {
+        String message = "";
+        if (depositDto.account() == null) {
+            message += "La cuenta es requerida.\n";
+        }
+        if (depositDto.category() == null) {
+            message += "La categoría es requerida.\n";
+        }
+        if (depositDto.amount() < 0) {
+            message += "El monto no puede ser negativo.\n";
+        }
+        if (depositDto.description().isEmpty()) {
+            message += "La descripción es requerida.\n";
+        }
+        if (!message.isEmpty()) {
+            showMessage("Notificación de validación", "Datos no válidos", message, Alert.AlertType.WARNING);
+            return false;
+        }
+        return true;
+    }
+
 
 }

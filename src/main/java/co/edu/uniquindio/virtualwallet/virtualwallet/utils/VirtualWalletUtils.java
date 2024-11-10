@@ -27,12 +27,14 @@ public class VirtualWalletUtils {
                 .id("001")
                 .name("Comida")
                 .description("Compras de alimentos")
+                .transactionList(new ArrayList<>())
                 .build();
 
         Category travelCategory = Category.builder()
                 .id("002")
                 .name("Viaje")
                 .description("Gastos en viajes")
+                .transactionList(new ArrayList<>())
                 .build();
 
         // Create example budgets
@@ -54,12 +56,12 @@ public class VirtualWalletUtils {
 
         // Create example accounts
         SavingsAccount savingsAccount = (SavingsAccount) accountFactory.getAccount(I18n.get("account.type.savings"));
-        savingsAccount.setBalance(1500);
+        savingsAccount.setBalance(10000);
         savingsAccount.setBankName("Banco de Occidente");
         savingsAccount.setAccountNumber("1234567890");
 
         CheckingAccount checkingAccount = (CheckingAccount) accountFactory.getAccount(I18n.get("account.type.checking"));
-        checkingAccount.setBalance(1500);
+        checkingAccount.setBalance(10000);
         checkingAccount.setBankName("Bancolombia");
         checkingAccount.setAccountNumber("0987654321");
 
@@ -105,6 +107,7 @@ public class VirtualWalletUtils {
         user1.getCategoryList().add(travelCategory);
 
         user1.getBudgetList().add(travelBudget);
+        user1.getBudgetList().add(foodBudget);
 
         // Create example administrator
         Administrator admin = Administrator.builder()
@@ -146,6 +149,10 @@ public class VirtualWalletUtils {
         transfer.setReceivingAccount(checkingAccount);
         transfer.setStatus(TransactionStatus.PENDING);
 
+        foodCategory.getTransactionList().add(deposit);
+        travelCategory.getTransactionList().add(withdrawal);
+        foodCategory.getTransactionList().add(transfer);
+
         // Create and populate VirtualWallet
         VirtualWallet virtualWallet = new VirtualWallet();
         virtualWallet.getCategoryList().add(foodCategory);
@@ -165,12 +172,14 @@ public class VirtualWalletUtils {
                 .id("003")
                 .name("Entretenimiento")
                 .description("Gastos en entretenimiento")
+                .transactionList(new ArrayList<>())
                 .build();
 
         Category healthCategory = Category.builder()
                 .id("004")
                 .name("Salud")
                 .description("Gastos en salud")
+                .transactionList(new ArrayList<>())
                 .build();
 
         // New budgets
@@ -192,12 +201,12 @@ public class VirtualWalletUtils {
 
         // New accounts
         SavingsAccount newSavingsAccount = (SavingsAccount) accountFactory.getAccount(I18n.get("account.type.savings"));
-        newSavingsAccount.setBalance(2000);
+        newSavingsAccount.setBalance(20000);
         newSavingsAccount.setBankName("Davivienda");
         newSavingsAccount.setAccountNumber("1122334455");
 
         CheckingAccount newCheckingAccount = (CheckingAccount) accountFactory.getAccount(I18n.get("account.type.checking"));
-        newCheckingAccount.setBalance(2500);
+        newCheckingAccount.setBalance(25000);
         newCheckingAccount.setBankName("BBVA");
         newCheckingAccount.setAccountNumber("5566778899");
 
@@ -280,6 +289,10 @@ public class VirtualWalletUtils {
         foodBudget.setUser(user1);
         entertainmentBudget.setUser(user2);
         healthBudget.setUser(user2);
+
+        entertainmentCategory.getTransactionList().add(newDeposit);
+        healthCategory.getTransactionList().add(newWithdrawal);
+        entertainmentCategory.getTransactionList().add(newTransfer);
 
         // Add new data to VirtualWallet
         virtualWallet.getCategoryList().add(entertainmentCategory);
