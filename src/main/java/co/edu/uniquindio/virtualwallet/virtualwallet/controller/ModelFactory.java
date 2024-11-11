@@ -2,6 +2,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.UserException;
+import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.WithdrawalException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
@@ -33,7 +34,6 @@ public class ModelFactory {
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
 
-
     // Singleton instance
     private static class SingletonHolder {
 
@@ -41,9 +41,11 @@ public class ModelFactory {
 
 
     }
+
     public static ModelFactory getInstance() {
         return SingletonHolder.eINSTANCE;
     }
+
     public ModelFactory() {
         System.out.println("singleton class invocation");
         //1. initialize data and then save it to files
@@ -66,18 +68,20 @@ public class ModelFactory {
 
         //You should always check if the root of the resource is null
 
-        if(virtualWallet == null){
+        if (virtualWallet == null) {
             initializeData();
             //saveBinaryResource();
             saveXMLResource();
         }
         registerSystemActions("Login", 1, "login");
     }
+
     // Initialization Methods
     // ----------------------
     private void initializeData() {
         virtualWallet = VirtualWalletUtils.initializeData();
     }
+
     private void loadDataFromFiles() {
         virtualWallet = new VirtualWallet();
         try {
@@ -86,6 +90,7 @@ public class ModelFactory {
             throw new RuntimeException(e);
         }
     }
+
     private void saveTestData() {
         try {
             PersistenceUtil.saveAccounts(getVirtualWallet().getAccounts());
@@ -93,9 +98,11 @@ public class ModelFactory {
             throw new RuntimeException(e);
         }
     }
+
     private void loadBinaryResource() {
         virtualWallet = PersistenceUtil.loadBinaryVirtualWalletResource();
     }
+
     private void saveBinaryResource() {
         PersistenceUtil.saveBinaryVirtualWalletResource(virtualWallet);
     }
@@ -124,6 +131,7 @@ public class ModelFactory {
     public List<String> getTransactionTypes() {
         return VirtualWalletUtils.getTransactionTypes();
     }
+
     public List<String> getAccountTypes() {
         return VirtualWalletUtils.getAccountTypes();
     }
@@ -131,6 +139,7 @@ public class ModelFactory {
     public List<String> getCalifications() {
         return VirtualWalletUtils.getCalifications();
     }
+
     public String generateRandomCode() {
         return virtualWallet.generateRandomCode();
     }
@@ -148,12 +157,11 @@ public class ModelFactory {
         }
         return isCorrect;
     }
+
     public void setVerificationCode(String id, String verificationCode) {
         virtualWallet.setVerificationCode(id, verificationCode);
         saveXMLResource();
     }
-
-
 
 
     // Account Management Methods
@@ -165,6 +173,7 @@ public class ModelFactory {
         accountDtos.addAll(virtualWalletMapper.getCheckingAccountsDto(virtualWallet.getCheckingAccountList()));
         return accountDtos;
     }
+
     public boolean addAccount(AccountDto accountDto) {
         try {
             if (virtualWallet.verifyAccountExistence(accountDto.accountNumber())) {
@@ -209,6 +218,7 @@ public class ModelFactory {
         }
         return flagExist;
     }
+
     public boolean updateAccount(AccountDto accountSelected, AccountDto accountDto) {
         try {
             Account account;
@@ -244,6 +254,7 @@ public class ModelFactory {
         }
         return accountsDto;
     }
+
     public List<TransactionDto> getTransactionsByUser(String userId) {
         List<Transaction> userTransactions = virtualWallet.getTransactionsByUser(userId);
         List<TransactionDto> transactionsDto = new ArrayList<>();
@@ -258,8 +269,6 @@ public class ModelFactory {
         }
         return transactionsDto;
     }
-
-
 
 
     // User Management Methods
@@ -284,6 +293,7 @@ public class ModelFactory {
             return false;
         }
     }
+
     public boolean updateUser(User person, UserDto userDto) {
         try {
             User user = virtualWalletMapper.userDtoToUser(userDto);
@@ -301,6 +311,7 @@ public class ModelFactory {
     public User getUserById(String id) {
         return virtualWallet.findUserById(id);
     }
+
     public List<DepositDto> getDepositsByUser(String userId) {
         return virtualWalletMapper.getDepositsDto(virtualWallet.getDepositsByUser(userId));
     }
@@ -308,6 +319,7 @@ public class ModelFactory {
     public boolean isTransactionIdExists(String idTransaction) {
         return virtualWallet.isTransactionIdExists(idTransaction);
     }
+
     public boolean addDeposit(DepositDto depositDto) {
         try {
             Deposit deposit = virtualWalletMapper.depositDtoToDeposit(depositDto);
@@ -326,6 +338,7 @@ public class ModelFactory {
     public List<Account> getAccountListByUserId(String id) {
         return virtualWallet.getAccountListByUserId(id);
     }
+
     public List<CategoryDto> getCategoriesByUserId(String id) {
         return virtualWalletMapper.getCategoriesDto(virtualWallet.getCategoryListByUserId(id));
     }
@@ -333,6 +346,7 @@ public class ModelFactory {
     public List<TransferDto> getTransfersByUser(String userId) {
         return virtualWalletMapper.getTransfersDto(virtualWallet.getTransfersByUser(userId));
     }
+
     public List<WithdrawalDto> getWithdrawalsByUser(String userId) {
         return virtualWalletMapper.getWithdrawalsDto(virtualWallet.getWithdrawalsByUser(userId));
     }
@@ -406,9 +420,6 @@ public class ModelFactory {
             registerSystemActions("Transferencia realizada de " + transfer.getAccount().getAccountNumber() + " a " + transfer.getReceivingAccount().getAccountNumber(), 1, "performTransfer");
             saveXMLResource();
             return true;
-        } catch (IllegalArgumentException e) {
-            // Aquí no es necesario hacer nada en específico, ya que se maneja en el controlador de vista.
-            return false;
         } catch (Exception e) {
             e.printStackTrace();
             registerSystemActions(e.getMessage(), 3, "performTransfer");
@@ -512,5 +523,21 @@ public class ModelFactory {
         return userUpdated;
     }
 
+    public boolean addWithdrawal(WithdrawalDto withdrawalDto) {
+        try {
+            Withdrawal withdrawal = virtualWalletMapper.withdrawalDtoToWithdrawal(withdrawalDto);
+            getVirtualWallet().getWithdrawalList().add(withdrawal);
+            getVirtualWallet().getWithdrawalToAccount(withdrawal);
+            registerSystemActions("Transferencia realizada de " + withdrawal.getAccount().getAccountNumber(), 1, "AddRetiro");
+            saveXMLResource();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            registerSystemActions(e.getMessage(), 3, "addWithdrawal");
+            return false;
+
+        }
+
+    }
 
 }

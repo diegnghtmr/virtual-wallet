@@ -200,18 +200,19 @@ public class AdminTransferManagementViewController extends CoreViewController {
             return;
         }
         if (validateData(transferDto)) {
-            try {
-                boolean success = adminTransferManagementController.performTransfer(transferDto);
-
-                if (success) {
+            if (showConfirmationMessage("¿Está seguro de realizar la transferencia?")) {
+                if (adminTransferManagementController.performTransfer(transferDto)) {
                     transferDtoList.add(transferDto);
                     showMessage("Notificación", "Transferencia exitosa", "La transferencia se ha realizado con éxito", Alert.AlertType.INFORMATION);
                     clearFields();
+
                 } else {
-                    showMessage("Error", "Transferencia no realizada", "Ocurrió un problema al procesar la transferencia", Alert.AlertType.ERROR);
+                    showMessage("Error", "Transferencia no realizada", "La cuenta no tiene saldo suficiente", Alert.AlertType.ERROR);
+
                 }
-            } catch (IllegalArgumentException e) {
-                showMessage("Error", "Fondos insuficientes", "No hay suficientes fondos en la cuenta de origen para realizar la transferencia.", Alert.AlertType.ERROR);
+
+            } else {
+                showMessage("Operación cancelada", "Transferencia no realizada", "Ha cancelado la transferencia.", Alert.AlertType.WARNING);
             }
         }
     }
@@ -231,7 +232,7 @@ public class AdminTransferManagementViewController extends CoreViewController {
         if (transferDto.description().isEmpty()) {
             message += "La descripción es requerida.\n";
         }
-        if (transferDto.category() == null){
+        if (transferDto.category() == null) {
             message += "La categoría es requerida.\n";
 
         }
@@ -257,10 +258,18 @@ public class AdminTransferManagementViewController extends CoreViewController {
             return null;
         }
 
+        double amount;
+        try {
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException e) {
+            showMessage("Error", "Monto inválido", "El monto debe ser un número válido.", Alert.AlertType.ERROR);
+            return null;
+        }
+
         return new TransferDto(
                 idNumber,
                 LocalDate.now(),
-                Double.parseDouble(amountText),
+                amount,
                 txtaDescription.getText(),
                 cbCategory.getValue(),
                 cbSourceAccount.getValue(),

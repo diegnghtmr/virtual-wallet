@@ -29,7 +29,7 @@
      <object class="java.time.LocalDate" method="of">
       <int>2024</int>
       <int>11</int>
-      <int>10</int>
+      <int>11</int>
      </object>
     </void>
    </object>
@@ -79,7 +79,7 @@
                  <object class="java.time.LocalDate" method="of">
                   <int>2024</int>
                   <int>11</int>
-                  <int>10</int>
+                  <int>11</int>
                  </object>
                 </void>
                 <void property="description">
@@ -111,7 +111,7 @@
                  <object class="java.time.LocalDate" method="of">
                   <int>2024</int>
                   <int>11</int>
-                  <int>10</int>
+                  <int>11</int>
                  </object>
                 </void>
                 <void property="description">
@@ -142,7 +142,7 @@
                  <object class="java.time.LocalDate" method="of">
                   <int>2024</int>
                   <int>11</int>
-                  <int>10</int>
+                  <int>11</int>
                  </object>
                 </void>
                 <void property="description">
@@ -189,7 +189,7 @@
                       <object class="java.time.LocalDate" method="of">
                        <int>2024</int>
                        <int>11</int>
-                       <int>10</int>
+                       <int>11</int>
                       </object>
                      </void>
                      <void property="description">
@@ -287,7 +287,7 @@
                         <object class="java.time.LocalDate" method="of">
                          <int>2024</int>
                          <int>11</int>
-                         <int>10</int>
+                         <int>11</int>
                         </object>
                        </void>
                        <void property="message">
@@ -307,7 +307,7 @@
                         <object class="java.time.LocalDate" method="of">
                          <int>2024</int>
                          <int>11</int>
-                         <int>10</int>
+                         <int>11</int>
                         </object>
                        </void>
                        <void property="message">
@@ -332,7 +332,7 @@
                      <object class="java.time.LocalDate" method="of">
                       <int>2024</int>
                       <int>11</int>
-                      <int>10</int>
+                      <int>11</int>
                      </object>
                     </void>
                     <void property="totalBalance">
@@ -346,7 +346,7 @@
                  </object>
                 </void>
                 <void property="status">
-                 <object class="java.lang.Enum" method="valueOf">
+                 <object class="java.lang.Enum" id="TransactionStatus1" method="valueOf">
                   <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
                   <string>PENDING</string>
                  </object>
@@ -354,8 +354,68 @@
                </object>
               </void>
              </void>
+             <void property="associatedWithdrawals">
+              <void method="add">
+               <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal" id="Withdrawal1">
+                <void property="account">
+                 <object idref="SavingsAccount0"/>
+                </void>
+                <void property="amount">
+                 <double>200.0</double>
+                </void>
+                <void property="category">
+                 <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
+                  <void property="description">
+                   <string>Compras de alimentos</string>
+                  </void>
+                  <void property="id">
+                   <string>001</string>
+                  </void>
+                  <void property="name">
+                   <string>Comida</string>
+                  </void>
+                  <void property="transactionList">
+                   <object class="java.util.ArrayList">
+                    <void method="add">
+                     <object idref="Deposit0"/>
+                    </void>
+                    <void method="add">
+                     <object idref="Transfer0"/>
+                    </void>
+                    <void method="add">
+                     <object idref="Deposit1"/>
+                    </void>
+                    <void method="add">
+                     <object idref="Deposit2"/>
+                    </void>
+                   </object>
+                  </void>
+                 </object>
+                </void>
+                <void property="date">
+                 <object class="java.time.LocalDate" method="of">
+                  <int>2024</int>
+                  <int>11</int>
+                  <int>11</int>
+                 </object>
+                </void>
+                <void property="description">
+                 <string>Retiro para comida</string>
+                </void>
+                <void property="idTransaction">
+                 <string>970307771</string>
+                </void>
+                <void property="observers">
+                 <null/>
+                </void>
+                <void property="status">
+                 <object idref="TransactionStatus1"/>
+                </void>
+               </object>
+              </void>
+             </void>
              <void property="balance">
-              <double>10000.0</double>
+              <double>5800.0</double>
              </void>
              <void property="bankName">
               <string>Banco de Occidente</string>
@@ -375,7 +435,7 @@
             <object class="java.time.LocalDate" method="of">
              <int>2024</int>
              <int>11</int>
-             <int>10</int>
+             <int>11</int>
             </object>
            </void>
            <void property="description">
@@ -459,7 +519,7 @@
                   </void>
                   <void property="associatedWithdrawals">
                    <void method="add">
-                    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal" id="Withdrawal1">
+                    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal" id="Withdrawal2">
                      <void property="account">
                       <object idref="CheckingAccount1"/>
                      </void>
@@ -480,7 +540,7 @@
                        <void property="transactionList">
                         <object class="java.util.ArrayList">
                          <void method="add">
-                          <object idref="Withdrawal1"/>
+                          <object idref="Withdrawal2"/>
                          </void>
                         </object>
                        </void>
@@ -490,7 +550,7 @@
                       <object class="java.time.LocalDate" method="of">
                        <int>2024</int>
                        <int>11</int>
-                       <int>10</int>
+                       <int>11</int>
                       </object>
                      </void>
                      <void property="description">
@@ -588,7 +648,7 @@
                         <object class="java.time.LocalDate" method="of">
                          <int>2024</int>
                          <int>11</int>
-                         <int>10</int>
+                         <int>11</int>
                         </object>
                        </void>
                        <void property="message">
@@ -605,7 +665,7 @@
                         <object class="java.time.LocalDate" method="of">
                          <int>2024</int>
                          <int>11</int>
-                         <int>10</int>
+                         <int>11</int>
                         </object>
                        </void>
                        <void property="message">
@@ -627,7 +687,7 @@
                      <object class="java.time.LocalDate" method="of">
                       <int>2024</int>
                       <int>11</int>
-                      <int>10</int>
+                      <int>11</int>
                      </object>
                     </void>
                     <void property="totalBalance">
@@ -647,7 +707,7 @@
                  <object class="java.time.LocalDate" method="of">
                   <int>2024</int>
                   <int>11</int>
-                  <int>10</int>
+                  <int>11</int>
                  </object>
                 </void>
                 <void property="description">
@@ -689,7 +749,7 @@
             <object class="java.time.LocalDate" method="of">
              <int>2024</int>
              <int>11</int>
-             <int>10</int>
+             <int>11</int>
             </object>
            </void>
            <void property="description">
@@ -814,6 +874,9 @@
   <void property="withdrawalList">
    <void method="add">
     <object idref="Withdrawal0"/>
+   </void>
+   <void method="add">
+    <object idref="Withdrawal2"/>
    </void>
    <void method="add">
     <object idref="Withdrawal1"/>

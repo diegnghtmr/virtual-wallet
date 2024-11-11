@@ -34,7 +34,7 @@ public class VirtualWallet implements Serializable {
 
     // Account Management Methods
     // --------------------------
-    
+
     public ArrayList<Account> getAccounts() {
         ArrayList<Account> accountList = new ArrayList<>();
         accountList.addAll(savingsAccountList);
@@ -521,6 +521,7 @@ public class VirtualWallet implements Serializable {
         System.out.println("Total transacciones para el usuario " + user.getFullName() + ": " + totalTransaction); // Depuración
         return totalTransaction;
     }
+
     public boolean verifyUserExists(String id) {
         return verifyUserExistsRecursive(getUserList(), id, 0);
 
@@ -555,5 +556,17 @@ public class VirtualWallet implements Serializable {
         }
         // Si llegamos aquí, el usuario no fue encontrado
         throw new UserException("Usuario con ID " + id + " no encontrado."); // Lanza excepción si no se encuentra
+    }
+
+    public void getWithdrawalToAccount(Withdrawal withdrawal) {
+        Account account = withdrawal.getAccount();
+
+        double totalAmount = withdrawal.getAmount() + withdrawal.getCommission();
+
+        if (account.getBalance() < totalAmount) {
+            throw new IllegalArgumentException("Fondos insuficientes");
+        }
+        account.setBalance(account.getBalance()-totalAmount);
+        account.getAssociatedWithdrawals().add(withdrawal);
     }
 }
