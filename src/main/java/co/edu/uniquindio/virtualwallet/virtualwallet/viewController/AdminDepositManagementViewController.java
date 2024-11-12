@@ -202,10 +202,18 @@ public class AdminDepositManagementViewController extends CoreViewController {
                     "Por favor, ingrese un monto válido", Alert.AlertType.ERROR);
             return null;
         }
+
+        double amount;
+        try {
+            amount = Double.parseDouble(amountText);
+        }catch (NumberFormatException e){
+            showMessage("Error", "Monto inválido", "El monto debe ser un número válido.", Alert.AlertType.ERROR);
+            return null;
+        }
         return new DepositDto(
                 idNumber, // idTransaction, generated randomly and checked for uniqueness
                 LocalDate.now(), // date, the current date
-                Double.parseDouble(txtAmount.getText()), // amount, the value from txtAmount field
+                amount, // amount, the value from txtAmount field
                 txtaDescription.getText(), // description, the value from txtaDescription field
                 cbCategory.getValue(), // category, the selected value from cbCategory
                 cbAccount.getValue(), // account, the selected value from cbAccount
