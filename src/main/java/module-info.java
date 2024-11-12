@@ -31,5 +31,6 @@ module co.edu.uniquindio.virtualwallet.virtualwallet {
     opens co.edu.uniquindio.virtualwallet.virtualwallet.utils to javafx.base, javafx.controls;
     exports co.edu.uniquindio.virtualwallet.virtualwallet.utils;
     exports co.edu.uniquindio.virtualwallet.virtualwallet.services;
+    exports co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer;
 
 }

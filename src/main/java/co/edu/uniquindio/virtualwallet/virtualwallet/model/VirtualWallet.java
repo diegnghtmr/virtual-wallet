@@ -439,8 +439,6 @@ public class VirtualWallet implements Serializable {
         receivingAccount.setBalance(receivingAccount.getBalance() + transfer.getAmount());
         sourceAccount.getAssociatedTransfers().add(transfer);
         receivingAccount.getAssociatedTransfers().add(transfer);
-
-
     }
 
     public double getAverageUserBalance() {

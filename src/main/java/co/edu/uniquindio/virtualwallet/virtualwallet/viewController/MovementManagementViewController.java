@@ -2,13 +2,12 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.MovementManagementController;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagenment;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.*;
-import co.edu.uniquindio.virtualwallet.virtualwallet.utils.services.IReportGenerator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IRecordViewController;
-import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IReportGenerationViewController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,13 +17,12 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class MovementManagementViewController extends CoreViewController implements IRecordViewController<TransactionDto> {
+public class MovementManagementViewController extends CoreViewController implements IRecordViewController<TransactionDto>, ObserverView {
     MovementManagementController movementManagementController;
     User loggedUser;
     ObservableList<TransactionDto> transactionsListDto = FXCollections.observableArrayList();
@@ -113,6 +111,8 @@ public class MovementManagementViewController extends CoreViewController impleme
         movementManagementController = new MovementManagementController();
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
+
+        ObserverManagenment.getInstance().agregarObservador(this);
 
     }
 
@@ -251,5 +251,10 @@ public class MovementManagementViewController extends CoreViewController impleme
 
             tblMovement.setItems(FXCollections.observableArrayList(filteredTransactions));
         }
+    }
+
+    @Override
+    public void notificar() {
+        getTransactionList();
     }
 }

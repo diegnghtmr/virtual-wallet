@@ -844,3 +844,41 @@ nov 11, 2024 4:36:27 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils
 INFO: login,Login,2024-11-11
 nov 11, 2024 4:37:28 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: AddRetiro,Transferencia realizada de 1234567890,2024-11-11
+Nov 12, 2024 2:21:21 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 2:21:45 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 503450233,2024-11-12
+Nov 12, 2024 2:39:55 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 2:52:42 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 2:54:39 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 3:00:19 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 3:00:42 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 466281531,2024-11-12
+Nov 12, 2024 3:02:12 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 3:03:28 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 3:03:47 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 601373099,2024-11-12
+Nov 12, 2024 3:06:51 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 3:07:18 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 041630461,2024-11-12
+Nov 12, 2024 3:21:24 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 3:21:40 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 213483060,2024-11-12
+Nov 12, 2024 3:22:19 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 470388498,2024-11-12
+Nov 12, 2024 3:24:11 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12
+Nov 12, 2024 3:24:27 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 458002733,2024-11-12
+Nov 12, 2024 3:25:02 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 7,2024-11-12
+Nov 12, 2024 3:26:35 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-12

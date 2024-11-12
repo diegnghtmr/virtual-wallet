@@ -5,9 +5,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionSt
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.DepositDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWalletMapper;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagenment;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ITransactionViewController;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class DepositManagementViewController extends CoreViewController implements ITransactionViewController<DepositDto> {
     DepositManagementController depositManagementController;
@@ -171,6 +170,7 @@ public class DepositManagementViewController extends CoreViewController implemen
                 showMessage("Depósito", "Depósito agregado correctamente",
                         "El depósito ha sido agregado correctamente", Alert.AlertType.INFORMATION);
                 clearFields();
+                ObserverManagenment.getInstance().notificar();
             } else {
                 showMessage("Error", "Error al agregar el depósito",
                         "Ha ocurrido un error al agregar el depósito, por favor intente nuevamente", Alert.AlertType.ERROR);
