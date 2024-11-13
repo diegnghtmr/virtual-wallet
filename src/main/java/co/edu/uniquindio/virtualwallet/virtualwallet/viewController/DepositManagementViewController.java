@@ -7,9 +7,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.DepositDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
-import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagenment;
-import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ITransactionViewController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 
-public class DepositManagementViewController extends CoreViewController implements ITransactionViewController<DepositDto> {
+public class DepositManagementViewController extends CoreViewController implements ITransactionViewController<DepositDto>, ObserverView {
     DepositManagementController depositManagementController;
     User loggedUser;
     ObservableList<DepositDto>  depositListDto = FXCollections.observableArrayList();
@@ -93,6 +93,7 @@ public class DepositManagementViewController extends CoreViewController implemen
         depositManagementController = new DepositManagementController();
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
     }
 
     @Override
@@ -171,7 +172,7 @@ public class DepositManagementViewController extends CoreViewController implemen
                 showMessage("Depósito", "Depósito agregado correctamente",
                         "El depósito ha sido agregado correctamente", Alert.AlertType.INFORMATION);
                 clearFields();
-                ObserverManagenment.getInstance().notifyObservers(EventType.DEPOSIT);
+                ObserverManagement.getInstance().notifyObservers(EventType.DEPOSIT);
             } else {
                 showMessage("Error", "Error al agregar el depósito",
                         "Ha ocurrido un error al agregar el depósito, por favor intente nuevamente", Alert.AlertType.ERROR);
@@ -240,5 +241,11 @@ public class DepositManagementViewController extends CoreViewController implemen
         depositSelected = null;
     }
 
+    @Override
+    public void updateView(EventType event) {
+        if (event == EventType.ACCOUNT) {
+            initializeDataComboBox();
+        }
+    }
 }
 

@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ObserverManagenment {
+public class ObserverManagement {
 
-    private static ObserverManagenment INSTANCE;
+    private static ObserverManagement INSTANCE;
     private Map<EventType, List<ObserverView>> observers = new HashMap<>();
 
-    private ObserverManagenment() {
+    private ObserverManagement() {
     }
 
-    public static ObserverManagenment getInstance() {
+    public static ObserverManagement getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new ObserverManagenment();
+            INSTANCE = new ObserverManagement();
         }
         return INSTANCE;
     }

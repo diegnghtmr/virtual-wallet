@@ -227,8 +227,146 @@
                        <void property="accountNumber">
                         <string>10</string>
                        </void>
+                       <void property="associatedDeposits">
+                        <void method="add">
+                         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit3">
+                          <void property="account">
+                           <object idref="SavingsAccount1"/>
+                          </void>
+                          <void property="amount">
+                           <double>3.0</double>
+                          </void>
+                          <void property="category">
+                           <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
+                            <void property="description">
+                             <string>Compras de alimentos</string>
+                            </void>
+                            <void property="id">
+                             <string>001</string>
+                            </void>
+                            <void property="name">
+                             <string>Comida</string>
+                            </void>
+                            <void property="transactionList">
+                             <object class="java.util.ArrayList">
+                              <void method="add">
+                               <object idref="Deposit0"/>
+                              </void>
+                              <void method="add">
+                               <object idref="Transfer0"/>
+                              </void>
+                              <void method="add">
+                               <object idref="Deposit1"/>
+                              </void>
+                              <void method="add">
+                               <object idref="Deposit2"/>
+                              </void>
+                             </object>
+                            </void>
+                           </object>
+                          </void>
+                          <void property="date">
+                           <object class="java.time.LocalDate" method="of">
+                            <int>2024</int>
+                            <int>11</int>
+                            <int>13</int>
+                           </object>
+                          </void>
+                          <void property="description">
+                           <string>xd</string>
+                          </void>
+                          <void property="idTransaction">
+                           <string>442971498</string>
+                          </void>
+                          <void property="observers">
+                           <null/>
+                          </void>
+                          <void property="status">
+                           <object class="java.lang.Enum" id="TransactionStatus1" method="valueOf">
+                            <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
+                            <string>PENDING</string>
+                           </object>
+                          </void>
+                         </object>
+                        </void>
+                        <void method="add">
+                         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit4">
+                          <void property="account">
+                           <object idref="SavingsAccount1"/>
+                          </void>
+                          <void property="amount">
+                           <double>6969.0</double>
+                          </void>
+                          <void property="category">
+                           <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
+                            <void property="description">
+                             <string>Gastos en viajes</string>
+                            </void>
+                            <void property="id">
+                             <string>002</string>
+                            </void>
+                            <void property="name">
+                             <string>Viaje</string>
+                            </void>
+                            <void property="transactionList">
+                             <object class="java.util.ArrayList">
+                              <void method="add">
+                               <object idref="Withdrawal0"/>
+                              </void>
+                             </object>
+                            </void>
+                           </object>
+                          </void>
+                          <void property="date">
+                           <object class="java.time.LocalDate" method="of">
+                            <int>2024</int>
+                            <int>11</int>
+                            <int>13</int>
+                           </object>
+                          </void>
+                          <void property="description">
+                           <string>a</string>
+                          </void>
+                          <void property="idTransaction">
+                           <string>008609946</string>
+                          </void>
+                          <void property="observers">
+                           <null/>
+                          </void>
+                          <void property="status">
+                           <object idref="TransactionStatus1"/>
+                          </void>
+                         </object>
+                        </void>
+                       </void>
                        <void property="bankName">
                         <string>ben</string>
+                       </void>
+                       <void property="user">
+                        <object idref="User0"/>
+                       </void>
+                      </object>
+                     </void>
+                     <void method="add">
+                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount2">
+                       <void property="accountNumber">
+                        <string>7</string>
+                       </void>
+                       <void property="bankName">
+                        <string>xd</string>
+                       </void>
+                       <void property="user">
+                        <object idref="User0"/>
+                       </void>
+                      </object>
+                     </void>
+                     <void method="add">
+                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount3">
+                       <void property="accountNumber">
+                        <string>69</string>
+                       </void>
+                       <void property="bankName">
+                        <string>jorge</string>
                        </void>
                        <void property="user">
                         <object idref="User0"/>
@@ -359,10 +497,7 @@
                  </object>
                 </void>
                 <void property="status">
-                 <object class="java.lang.Enum" method="valueOf">
-                  <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
-                  <string>PENDING</string>
-                 </object>
+                 <object idref="TransactionStatus1"/>
                 </void>
                </object>
               </void>
@@ -451,15 +586,15 @@
        <void property="transactionList">
         <object class="java.util.ArrayList">
          <void method="add">
-          <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit3">
+          <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit5">
            <void property="account">
-            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount2">
+            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount4">
              <void property="accountNumber">
               <string>1122334455</string>
              </void>
              <void property="associatedDeposits">
               <void method="add">
-               <object idref="Deposit3"/>
+               <object idref="Deposit5"/>
               </void>
              </void>
              <void property="associatedTransfers">
@@ -531,7 +666,7 @@
                     </void>
                     <void property="associatedAccounts">
                      <void method="add">
-                      <object idref="SavingsAccount2"/>
+                      <object idref="SavingsAccount4"/>
                      </void>
                      <void method="add">
                       <object idref="CheckingAccount1"/>
@@ -670,7 +805,7 @@
                  <string>T002</string>
                 </void>
                 <void property="receivingAccount">
-                 <object idref="SavingsAccount2"/>
+                 <object idref="SavingsAccount4"/>
                 </void>
                 <void property="status">
                  <object class="java.lang.Enum" method="valueOf">
@@ -797,7 +932,13 @@
     <object idref="Deposit2"/>
    </void>
    <void method="add">
+    <object idref="Deposit5"/>
+   </void>
+   <void method="add">
     <object idref="Deposit3"/>
+   </void>
+   <void method="add">
+    <object idref="Deposit4"/>
    </void>
   </void>
   <void property="savingsAccountList">
@@ -805,10 +946,16 @@
     <object idref="SavingsAccount0"/>
    </void>
    <void method="add">
-    <object idref="SavingsAccount2"/>
+    <object idref="SavingsAccount4"/>
    </void>
    <void method="add">
     <object idref="SavingsAccount1"/>
+   </void>
+   <void method="add">
+    <object idref="SavingsAccount2"/>
+   </void>
+   <void method="add">
+    <object idref="SavingsAccount3"/>
    </void>
   </void>
   <void property="transferList">

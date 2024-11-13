@@ -5,7 +5,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
-import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagenment;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.IRecordViewController;
@@ -113,8 +113,8 @@ public class MovementManagementViewController extends CoreViewController impleme
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
 
-        ObserverManagenment.getInstance().addObserver(EventType.DEPOSIT, this);
-
+        ObserverManagement.getInstance().addObserver(EventType.DEPOSIT, this);
+        ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
     }
 
     @Override
@@ -256,9 +256,16 @@ public class MovementManagementViewController extends CoreViewController impleme
 
     @Override
     public void updateView(EventType event) {
-        if (event == EventType.DEPOSIT) {
-            getTransactionList();
-            tblMovement.refresh();
+        switch (event) {
+            case DEPOSIT:
+                getTransactionList();
+                tblMovement.refresh();
+                break;
+            case ACCOUNT:
+                initializeDataComboBox();
+                break;
+            default:
+                break;
         }
     }
 }

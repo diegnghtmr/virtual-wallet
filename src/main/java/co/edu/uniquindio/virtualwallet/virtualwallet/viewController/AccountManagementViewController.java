@@ -6,6 +6,8 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.Accoun
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -156,6 +158,7 @@ public class AccountManagementViewController extends CoreViewController implemen
         if (validateData(accountDto)) {
             if (accountManagementController.addAccountDto(accountDto)) {
                 accountsListDto.add(accountDto);
+                ObserverManagement.getInstance().notifyObservers(EventType.ACCOUNT);
                 showMessage("Notificación", "Cuenta agregada",
                         "La cuenta ha sido agregada con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
