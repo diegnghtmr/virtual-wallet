@@ -6,6 +6,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.DepositDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagenment;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
@@ -170,7 +171,7 @@ public class DepositManagementViewController extends CoreViewController implemen
                 showMessage("Depósito", "Depósito agregado correctamente",
                         "El depósito ha sido agregado correctamente", Alert.AlertType.INFORMATION);
                 clearFields();
-                ObserverManagenment.getInstance().notificar();
+                ObserverManagenment.getInstance().notifyObservers(EventType.DEPOSIT);
             } else {
                 showMessage("Error", "Error al agregar el depósito",
                         "Ha ocurrido un error al agregar el depósito, por favor intente nuevamente", Alert.AlertType.ERROR);

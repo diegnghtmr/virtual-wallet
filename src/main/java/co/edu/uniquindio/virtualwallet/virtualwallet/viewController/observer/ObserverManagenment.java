@@ -1,11 +1,17 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ObserverManagenment {
 
-    private ObserverView observerView;
     private static ObserverManagenment INSTANCE;
+    private Map<EventType, List<ObserverView>> observers = new HashMap<>();
 
-    private ObserverManagenment() {}
+    private ObserverManagenment() {
+    }
 
     public static ObserverManagenment getInstance() {
         if (INSTANCE == null) {
@@ -14,12 +20,25 @@ public class ObserverManagenment {
         return INSTANCE;
     }
 
-    public void agregarObservador(ObserverView observerView) {
-        this.observerView = observerView;
+    public void addObserver(EventType event, ObserverView observer) {
+        observers.computeIfAbsent(event, k -> new ArrayList<>()).add(observer);
     }
 
-    public void notificar() {
-        this.observerView.notificar();
+    public void removeObserver(EventType event, ObserverView observer) {
+        List<ObserverView> observersList = observers.get(event);
+        if (observersList != null) {
+            observersList.remove(observer);
+            if (observersList.isEmpty()) {
+                observers.remove(event);
+            }
+        }
+    }
+
+    public void notifyObservers(EventType event) {
+        List<ObserverView> observersList = observers.get(event);
+        if (observersList != null) {
+            observersList.forEach(observer -> observer.updateView(event));
+        }
     }
 
 }

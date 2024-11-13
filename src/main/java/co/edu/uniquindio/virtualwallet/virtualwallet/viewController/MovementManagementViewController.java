@@ -4,6 +4,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.controller.MovementManageme
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagenment;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.*;
@@ -112,7 +113,7 @@ public class MovementManagementViewController extends CoreViewController impleme
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
 
-        ObserverManagenment.getInstance().agregarObservador(this);
+        ObserverManagenment.getInstance().addObserver(EventType.DEPOSIT, this);
 
     }
 
@@ -254,7 +255,10 @@ public class MovementManagementViewController extends CoreViewController impleme
     }
 
     @Override
-    public void notificar() {
-        getTransactionList();
+    public void updateView(EventType event) {
+        if (event == EventType.DEPOSIT) {
+            getTransactionList();
+            tblMovement.refresh();
+        }
     }
 }
