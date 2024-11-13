@@ -22,6 +22,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +34,45 @@ public class ModelFactory {
     VirtualWallet virtualWallet;
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
+//    RabbitFactory rabbitFactory;
+//    ConnectionFactory connectionFactory;
 
     // Singleton instance
     private static class SingletonHolder {
 
         private static final ModelFactory eINSTANCE = new ModelFactory();
 
-
     }
+
+//    public void producirMensaje(String queue, String message) {
+//        try (Connection connection = connectionFactory.newConnection();
+//             Channel channel = connection.createChannel()) {
+//            channel.queueDeclare(queue, false, false, false, null);
+//            channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
+//            System.out.println(" [x] Sent '" + message + "'");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void consumirMensajes() {
+//        try {
+//            Connection connection = connectionFactory.newConnection();
+//            Channel channel = connection.createChannel();
+//            channel.queueDeclare(QUEUE_NUEVA_PUBLICACION, false, false, false, null);
+//
+//            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+//                String message = new String(delivery.getBody());
+//                System.out.println("Mensaje recibido: " + message);
+//                //actualizarEstado(message);
+//            };
+//            while (true) {
+//                channel.basicConsume(QUEUE_NUEVA_PUBLICACION, true, deliverCallback, consumerTag -> { });
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public static ModelFactory getInstance() {
         return SingletonHolder.eINSTANCE;
