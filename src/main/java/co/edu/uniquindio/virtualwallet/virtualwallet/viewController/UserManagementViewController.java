@@ -9,6 +9,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.controller.UserManagementCo
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.UserDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class UserManagementViewController extends CoreViewController {
+public class UserManagementViewController extends CoreViewController  {
 
     Administrator loggedAdmin;
     ObservableList<UserDto> userDtoList = FXCollections.observableArrayList();
@@ -206,6 +209,7 @@ public class UserManagementViewController extends CoreViewController {
                 userDtoList.add(userDto);
                 showMessage("Notificación", "Usuario agregado", "El usuario ha sido aagregado con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
+                ObserverManagement.getInstance().notifyObservers(EventType.USER);
             } else {
                 showMessage("Error", "Usuario no agregado", "El usuario no pudo ser agregado", Alert.AlertType.ERROR);
             }
@@ -222,6 +226,7 @@ public class UserManagementViewController extends CoreViewController {
                     userDtoList.remove(userSelected);
                     showMessage("Notificación", "Usuario eliminado", "El usuario ha sido eliminado con éxito", Alert.AlertType.INFORMATION);
                     clearFields();
+                    ObserverManagement.getInstance().notifyObservers(EventType.USER);
                 } else {
                     showMessage("Error", "Usuario no eliminado",
                             "El usuario no pudo ser eliminado", Alert.AlertType.ERROR);
@@ -350,6 +355,7 @@ public class UserManagementViewController extends CoreViewController {
         tblUser.getSelectionModel().clearSelection();
         userSelected = null;
     }
+
 
 
 }

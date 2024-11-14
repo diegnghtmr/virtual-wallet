@@ -14,6 +14,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.Accoun
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.services.Observable;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class AdminDepositManagementViewController extends CoreViewController {
+public class AdminDepositManagementViewController extends CoreViewController implements ObserverView {
     Administrator loggedAdmin;
 
     ObservableList<DepositDto> depositsListDto = FXCollections.observableArrayList();
@@ -107,6 +110,7 @@ public class AdminDepositManagementViewController extends CoreViewController {
         adminDepositController = new AdminDepositController();
         loggedAdmin = (Administrator) Session.getInstance().getPerson();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
     }
 
     private void initView() {
@@ -175,6 +179,7 @@ public class AdminDepositManagementViewController extends CoreViewController {
                 depositsListDto.add(depositDto);
                 showMessage("Notificación", "depósito agregado", "el deposito ha sido agregado con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
+                ObserverManagement.getInstance().notifyObservers(EventType.DEPOSIT);
             } else {
                 showMessage("Error", "Depósito no agregado", "El depósito no ha sido agregado con éxito", Alert.AlertType.ERROR);
             }
@@ -243,4 +248,11 @@ public class AdminDepositManagementViewController extends CoreViewController {
     }
 
 
+    @Override
+    public void updateView(EventType event) {
+        if (event == EventType.ACCOUNT) {
+            initializeDataComboBox();
+        }
+
+    }
 }

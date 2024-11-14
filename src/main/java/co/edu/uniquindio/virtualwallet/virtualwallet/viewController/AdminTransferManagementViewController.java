@@ -12,6 +12,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransferDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class AdminTransferManagementViewController extends CoreViewController {
+public class AdminTransferManagementViewController extends CoreViewController implements ObserverView {
     Administrator loggedAdmin;
     ObservableList<TransferDto> transferDtoList = FXCollections.observableArrayList();
     TransferDto transferSelected;
@@ -116,6 +119,7 @@ public class AdminTransferManagementViewController extends CoreViewController {
         adminTransferManagementController = new AdminTransferManagementController();
         loggedAdmin = (Administrator) Session.getInstance().getPerson();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
 
     }
 
@@ -205,6 +209,7 @@ public class AdminTransferManagementViewController extends CoreViewController {
                     transferDtoList.add(transferDto);
                     showMessage("Notificación", "Transferencia exitosa", "La transferencia se ha realizado con éxito", Alert.AlertType.INFORMATION);
                     clearFields();
+                    ObserverManagement.getInstance().notifyObservers(EventType.TRANSFER);
 
                 } else {
                     showMessage("Error", "Transferencia no realizada", "La cuenta no tiene saldo suficiente", Alert.AlertType.ERROR);
@@ -278,4 +283,11 @@ public class AdminTransferManagementViewController extends CoreViewController {
                 6000);
     }
 
+    @Override
+    public void updateView(EventType event) {
+        if (event == EventType.ACCOUNT) {
+            initializeDataComboBox();
+        }
+
+    }
 }

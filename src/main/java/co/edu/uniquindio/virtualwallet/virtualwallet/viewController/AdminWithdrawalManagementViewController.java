@@ -11,6 +11,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.WithdrawalDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +23,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class AdminWithdrawalManagementViewController extends CoreViewController {
+public class AdminWithdrawalManagementViewController extends CoreViewController implements ObserverView {
     Administrator administrator;
     ObservableList<WithdrawalDto> withdrawalDtoList = FXCollections.observableArrayList();
     WithdrawalDto withdrawalSelected;
@@ -114,6 +117,7 @@ public class AdminWithdrawalManagementViewController extends CoreViewController 
     void initialize() {
         adminWithdrawalManagementController = new AdminWithdrawalManagementController();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
 
 
     }
@@ -184,6 +188,7 @@ public class AdminWithdrawalManagementViewController extends CoreViewController 
                 withdrawalDtoList.add(withdrawalDto);
                 showMessage("Notificación", "Retiro exitoso", "El retiro se ha realizado con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
+                ObserverManagement.getInstance().notifyObservers(EventType.WITHDRAWAL);
 
             } else {
                 showMessage("Error", "Retiro no realizado", "No se pudo hacer el retiro", Alert.AlertType.ERROR);
@@ -245,6 +250,14 @@ public class AdminWithdrawalManagementViewController extends CoreViewController 
                 3000000
         );
 
+
+    }
+
+    @Override
+    public void updateView(EventType event) {
+        if(event == EventType.ACCOUNT) {
+            initializeDataComboBox();
+        }
 
     }
 }

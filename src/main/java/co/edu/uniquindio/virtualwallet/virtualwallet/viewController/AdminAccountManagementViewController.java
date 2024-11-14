@@ -14,6 +14,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,7 +28,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-public class AdminAccountManagementViewController extends CoreViewController {
+public class AdminAccountManagementViewController extends CoreViewController implements ObserverView {
     Administrator loggedAdmin;
 
     ObservableList<AccountDto> accountsListDto = FXCollections.observableArrayList();
@@ -133,6 +136,10 @@ public class AdminAccountManagementViewController extends CoreViewController {
         adminAccountManagementController = new AdminAccountManagementController();
         loggedAdmin = (Administrator) Session.getInstance().getPerson();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.USER, this);
+        ObserverManagement.getInstance().addObserver(EventType.TRANSFER,this);
+        ObserverManagement.getInstance().addObserver(EventType.WITHDRAWAL, this);
+        ObserverManagement.getInstance().addObserver(EventType.DEPOSIT, this);
 
 
     }
@@ -227,6 +234,7 @@ public class AdminAccountManagementViewController extends CoreViewController {
                 showMessage("Notificación", "Cuenta agregada",
                         "La cuenta ha sido agregada con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
+                ObserverManagement.getInstance().notifyObservers(EventType.ACCOUNT);
             }else {
                 showMessage("Error", "Cuenta no agregada",
                         "La cuenta no pudo ser agregada", Alert.AlertType.ERROR);
@@ -244,6 +252,7 @@ public class AdminAccountManagementViewController extends CoreViewController {
                     showMessage("Notificación", "Cuenta eliminada",
                             "La cuenta ha sido eliminada con éxito", Alert.AlertType.INFORMATION);
                     clearFields();
+                    ObserverManagement.getInstance().notifyObservers(EventType.ACCOUNT);
                 } else {
                     showMessage("Error", "Cuenta no eliminada",
                             "La cuenta no pudo ser eliminada", Alert.AlertType.ERROR);
@@ -276,6 +285,7 @@ public class AdminAccountManagementViewController extends CoreViewController {
                             "La cuenta ha sido actualizada con éxito", Alert.AlertType.INFORMATION);
                     deselectTable();
                     clearFields();
+                    ObserverManagement.getInstance().notifyObservers(EventType.ACCOUNT);
                 } else {
                     showMessage("Error", "Cuenta no actualizada",
                             "La cuenta no pudo ser actualizada", Alert.AlertType.ERROR);
@@ -379,5 +389,22 @@ public class AdminAccountManagementViewController extends CoreViewController {
         }
     }
 
+
+    @Override
+    public void updateView(EventType event) {
+        switch (event) {
+            case USER:
+                initializeDataComboBox();
+                break;
+            case TRANSFER:
+            case WITHDRAWAL:
+            case DEPOSIT:
+                getAccounts();
+                tblAccount.refresh();
+                break;
+            default:
+                break;
+        }
+    }
 
 }
