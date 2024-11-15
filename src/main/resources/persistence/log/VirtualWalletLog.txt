@@ -26,3 +26,11 @@ Nov 13, 2024 1:29:25 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: addAccount,CheckingAccountDto added: 777,2024-11-13
 Nov 13, 2024 1:29:37 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: addDeposit,DepositDto added: 473911675,2024-11-13
+Nov 13, 2024 3:10:06 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-13
+Nov 13, 2024 3:10:32 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,CheckingAccountDto added: 9911,2024-11-13
+Nov 13, 2024 3:16:05 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-13
+Nov 13, 2024 3:16:26 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 505,2024-11-13

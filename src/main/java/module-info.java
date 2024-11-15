@@ -12,6 +12,9 @@ module co.edu.uniquindio.virtualwallet.virtualwallet {
     requires com.github.librepdf.openpdf;
     requires com.opencsv;
     requires jakarta.activation;
+    requires com.rabbitmq.client;
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.datatype.jsr310;
 
     opens co.edu.uniquindio.virtualwallet.virtualwallet to javafx.fxml;
     exports co.edu.uniquindio.virtualwallet.virtualwallet;

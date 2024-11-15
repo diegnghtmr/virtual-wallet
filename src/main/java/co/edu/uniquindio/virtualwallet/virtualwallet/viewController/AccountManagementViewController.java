@@ -4,11 +4,15 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.controller.AccountManagemen
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.services.RabbitMQClient;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,13 +22,18 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 public class AccountManagementViewController extends CoreViewController implements ICoreViewController<AccountDto> {
     AccountManagementController accountManagementController;
     User loggedUser;
     ObservableList<AccountDto> accountsListDto = FXCollections.observableArrayList();
     AccountDto accountSelected;
+    RabbitMQClient rabbitMQClient;
 
     @FXML
     private Button btnAdd;
@@ -103,7 +112,45 @@ public class AccountManagementViewController extends CoreViewController implemen
         accountManagementController = new AccountManagementController();
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
+        initRabbitMQClient();
     }
+
+    private void initRabbitMQClient() {
+        try {
+            rabbitMQClient = new RabbitMQClient();
+            rabbitMQClient.setMessageListener(this::handleMessageFromServer);
+        } catch (IOException | TimeoutException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para manejar mensajes recibidos del servidor
+    private void handleMessageFromServer(String message) {
+        Platform.runLater(() -> {
+            // Actualizar la interfaz de usuario y los datos
+            getAccounts();
+        });
+    }
+
+    // Método para enviar actualizaciones al servidor
+    private void sendUpdateToServer(String action, Object data) {
+        try {
+            // Crear un mensaje en formato JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule()); // Registrar el módulo
+
+            Map<String, Object> messageMap = new HashMap<>();
+            messageMap.put("action", action);
+            messageMap.put("data", data);
+            String message = objectMapper.writeValueAsString(messageMap);
+
+            rabbitMQClient.sendMessageToServer(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public void initView() {
@@ -159,6 +206,7 @@ public class AccountManagementViewController extends CoreViewController implemen
             if (accountManagementController.addAccountDto(accountDto)) {
                 accountsListDto.add(accountDto);
                 ObserverManagement.getInstance().notifyObservers(EventType.ACCOUNT);
+                sendUpdateToServer("addAccount", accountDto);
                 showMessage("Notificación", "Cuenta agregada",
                         "La cuenta ha sido agregada con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
