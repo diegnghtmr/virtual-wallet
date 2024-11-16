@@ -23,6 +23,7 @@ public class VirtualWalletApplication extends Application {
         // Llamar al método para guardar los datos al cerrar la aplicación
         ModelFactory.getInstance().generateSerialization();
         System.out.println("Data saved successfully");
+        ModelFactory.getInstance().shutdown();
     }
 
     public static void main(String[] args) {

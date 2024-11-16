@@ -1,6 +1,8 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import java.io.Serializable;
@@ -13,6 +15,7 @@ import java.util.Random;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class Category implements Serializable {
     private String id;

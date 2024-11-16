@@ -18,6 +18,10 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.utils.BackupUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PersistenceUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.VirtualWalletUtils;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,8 +38,8 @@ public class ModelFactory {
     VirtualWallet virtualWallet;
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
-//    RabbitFactory rabbitFactory;
-//    ConnectionFactory connectionFactory;
+    private ClientController clientController;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     // Singleton instance
     private static class SingletonHolder {
@@ -44,35 +48,6 @@ public class ModelFactory {
 
     }
 
-//    public void producirMensaje(String queue, String message) {
-//        try (Connection connection = connectionFactory.newConnection();
-//             Channel channel = connection.createChannel()) {
-//            channel.queueDeclare(queue, false, false, false, null);
-//            channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
-//            System.out.println(" [x] Sent '" + message + "'");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void consumirMensajes() {
-//        try {
-//            Connection connection = connectionFactory.newConnection();
-//            Channel channel = connection.createChannel();
-//            channel.queueDeclare(QUEUE_NUEVA_PUBLICACION, false, false, false, null);
-//
-//            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-//                String message = new String(delivery.getBody());
-//                System.out.println("Mensaje recibido: " + message);
-//                //actualizarEstado(message);
-//            };
-//            while (true) {
-//                channel.basicConsume(QUEUE_NUEVA_PUBLICACION, true, deliverCallback, consumerTag -> { });
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public static ModelFactory getInstance() {
         return SingletonHolder.eINSTANCE;
@@ -106,6 +81,11 @@ public class ModelFactory {
             saveXMLResource();
         }
         registerSystemActions("Login", 1, "login");
+        // Register the JavaTimeModule
+        objectMapper.registerModule(new JavaTimeModule());
+
+        // Initialize the RabbitMQ client
+        clientController = new ClientController();
     }
 
     // Initialization Methods
@@ -359,6 +339,8 @@ public class ModelFactory {
             getVirtualWallet().addDepositToAccount(deposit);
             registerSystemActions("DepositDto added: " + deposit.getIdTransaction(), 1, "addDeposit");
             saveXMLResource();
+            String message = objectMapper.writeValueAsString(depositDto);
+            clientController.sendMessage(message);
             return true;
         } catch (Exception e) {
             e.getMessage();
@@ -429,6 +411,10 @@ public class ModelFactory {
             getVirtualWallet().addDepositToAccount(deposit);
             registerSystemActions("DepositDto added: " + deposit.getIdTransaction(), 1, "addDeposit");
             saveXMLResource();
+
+            // Send the deposit via RabbitMQ
+            String message = objectMapper.writeValueAsString(depositDto);
+            clientController.sendMessage(message);
             return true;
         } catch (Exception e) {
             e.getMessage();
@@ -570,6 +556,27 @@ public class ModelFactory {
 
         }
 
+    }
+
+    // Handle incoming transactions from RabbitMQ
+    public void handleIncomingTransaction(TransactionDto transactionDto) {
+        // Update the model based on the type of transaction
+        if (transactionDto instanceof DepositDto) {
+            Deposit deposit = virtualWalletMapper.depositDtoToDeposit((DepositDto) transactionDto);
+            virtualWallet.getDepositList().add(deposit);
+            // Notify observers or update UI
+            ObserverManagement.getInstance().notifyObservers(EventType.DEPOSIT);
+        }
+        // Handle other transaction types similarly
+    }
+
+    // Ensure to close connections when the application stops
+    public void shutdown() {
+        try {
+            clientController.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

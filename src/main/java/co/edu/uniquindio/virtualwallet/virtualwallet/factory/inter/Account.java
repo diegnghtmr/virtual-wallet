@@ -4,6 +4,8 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementatio
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Transfer;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +20,8 @@ import java.util.Random;
 @Getter
 @NoArgsConstructor
 @SuperBuilder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accountNumber")
+
 
 public class Account implements Serializable {
     private double balance;

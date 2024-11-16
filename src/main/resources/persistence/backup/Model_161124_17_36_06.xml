@@ -1257,55 +1257,6 @@
                                 </void>
                                </object>
                               </void>
-                              <void method="add">
-                               <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit14">
-                                <void property="account">
-                                 <object idref="CheckingAccount1"/>
-                                </void>
-                                <void property="amount">
-                                 <double>321321.0</double>
-                                </void>
-                                <void property="category">
-                                 <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
-                                  <void property="description">
-                                   <string>Gastos en viajes</string>
-                                  </void>
-                                  <void property="id">
-                                   <string>002</string>
-                                  </void>
-                                  <void property="name">
-                                   <string>Viaje</string>
-                                  </void>
-                                  <void property="transactionList">
-                                   <object class="java.util.ArrayList">
-                                    <void method="add">
-                                     <object idref="Withdrawal0"/>
-                                    </void>
-                                   </object>
-                                  </void>
-                                 </object>
-                                </void>
-                                <void property="date">
-                                 <object class="java.time.LocalDate" method="of">
-                                  <int>2024</int>
-                                  <int>11</int>
-                                  <int>16</int>
-                                 </object>
-                                </void>
-                                <void property="description">
-                                 <string>dio mio</string>
-                                </void>
-                                <void property="idTransaction">
-                                 <string>468614807</string>
-                                </void>
-                                <void property="observers">
-                                 <null/>
-                                </void>
-                                <void property="status">
-                                 <object idref="TransactionStatus1"/>
-                                </void>
-                               </object>
-                              </void>
                              </void>
                              <void property="bankName">
                               <string>asd</string>
@@ -1639,9 +1590,6 @@
    </void>
    <void method="add">
     <object idref="Deposit13"/>
-   </void>
-   <void method="add">
-    <object idref="Deposit14"/>
    </void>
   </void>
   <void property="savingsAccountList">

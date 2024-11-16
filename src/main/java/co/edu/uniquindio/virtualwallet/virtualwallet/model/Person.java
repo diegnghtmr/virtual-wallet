@@ -1,5 +1,7 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class Person implements Serializable {
    @EqualsAndHashCode.Include

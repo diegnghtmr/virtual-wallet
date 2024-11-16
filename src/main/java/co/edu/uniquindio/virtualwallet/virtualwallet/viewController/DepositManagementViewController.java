@@ -11,6 +11,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.Obs
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ITransactionViewController;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -94,6 +95,7 @@ public class DepositManagementViewController extends CoreViewController implemen
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
         ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
+        ObserverManagement.getInstance().addObserver(EventType.DEPOSIT, this);
     }
 
     @Override
@@ -243,7 +245,13 @@ public class DepositManagementViewController extends CoreViewController implemen
 
     @Override
     public void updateView(EventType event) {
-        if (event == EventType.ACCOUNT) {
+        if (event == EventType.DEPOSIT) {
+            // Reload deposits
+            Platform.runLater(() -> {
+                getDeposits();
+                tblDeposit.refresh();
+            });
+        } else if (event == EventType.ACCOUNT) {
             initializeDataComboBox();
         }
     }

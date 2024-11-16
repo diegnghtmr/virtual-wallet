@@ -3,6 +3,8 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.services.Observer;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +16,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @ToString
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User extends Person implements Observer {
     private String address;
     private double totalBalance;

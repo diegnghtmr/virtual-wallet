@@ -6,6 +6,8 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.services.Observable;
 import co.edu.uniquindio.virtualwallet.virtualwallet.services.Observer;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Category;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +23,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idTransaction")
 
 public  class Transaction implements Serializable, Observable {
     private String idTransaction;
