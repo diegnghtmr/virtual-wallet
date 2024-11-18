@@ -31,4 +31,8 @@ public class TransferManagementController extends CoreController {
     public List<CategoryDto> getCategoriesByUserId(String id) {
         return modelFactory.getCategoriesByUserId(id);
     }
+
+    public Account findByAccount(String id) {
+        return modelFactory.isAccountId(id);
+    }
 }

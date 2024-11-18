@@ -17,6 +17,6 @@ public class Transfer extends Transaction {
     private Account receivingAccount;
 
     public Transfer(){
-        this.commission = 6000;
+        this.commission = 300;
     }
 }

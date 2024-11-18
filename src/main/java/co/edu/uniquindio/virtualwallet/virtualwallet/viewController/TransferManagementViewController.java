@@ -7,7 +7,10 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransferDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
@@ -188,9 +191,19 @@ public class TransferManagementViewController extends CoreViewController impleme
                     showMessage("Notificación", "Transferencia exitosa", "La transferencia se ha realizado con éxito", Alert.AlertType.INFORMATION);
                     clearFields();
                     ObserverManagement.getInstance().notifyObservers(EventType.TRANSFER);
-
+                    String transferMessage = I18n.getFormatted(
+                            "notification.message.TRANSFER",
+                            transferDto.amount(),
+                            transferDto.receivingAccount().getAccountNumber()
+                    );
+                    NotificationUtil transferNotification = new NotificationUtil(
+                            transferMessage,
+                            LocalDate.now(),
+                            NotificationType.INFORMATION
+                    );
+                    loggedUser.update(transferNotification);
                 } else {
-                    showMessage("Error", "Transferencia no realizada", "La cuenta no tiene saldo suficiente", Alert.AlertType.ERROR);
+                    showMessage("Error", "Transferencia no realizada", "No se pudo realizar la transferencia", Alert.AlertType.ERROR);
 
                 }
 
@@ -201,15 +214,12 @@ public class TransferManagementViewController extends CoreViewController impleme
     }
 
     private TransferDto buildTransfer() {
+        // Generación de ID de transacción único
+        SecureRandom random = new SecureRandom();
         String idNumber;
-        if (transferSelected != null) {
-            idNumber = transferSelected.idTransaction();
-        } else {
-            SecureRandom random = new SecureRandom();
-            do {
-                idNumber = String.format("%09d", random.nextInt(1_000_000_000));
-            } while (transferManagementController.isTransactionIdExists(idNumber));
-        }
+        do {
+            idNumber = String.format("%09d", random.nextInt(1_000_000_000));
+        } while (transferManagementController.isTransactionIdExists(idNumber));
 
         // Validar y convertir el monto
         String amountText = txtAmount.getText();
@@ -226,6 +236,8 @@ public class TransferManagementViewController extends CoreViewController impleme
             return null;
         }
 
+        Account receivingAccount = transferManagementController.findByAccount(txtIdReceivingAccount.getText());
+
         return new TransferDto(
                 idNumber,
                 LocalDate.now(),
@@ -234,8 +246,8 @@ public class TransferManagementViewController extends CoreViewController impleme
                 cbCategory.getValue(),
                 cbSourceAccount.getValue(),
                 TransactionStatus.PENDING.name(),
-                transferSelected.receivingAccount(),
-                6000);
+                receivingAccount,
+                300);
     }
 
     @Override

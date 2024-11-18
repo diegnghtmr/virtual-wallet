@@ -19,6 +19,6 @@ public class Withdrawal extends Transaction {
 
     public Withdrawal() {
         this.withdrawalLimit =3000000;
-        this.commission = 4000;
+        this.commission = 200;
     }
 }

@@ -317,11 +317,16 @@ public class VirtualWallet implements Serializable {
     }
 
     public void addDepositToAccount(Deposit deposit) {
-        for (Account a : getAccounts()) {
-            if (a.getAccountNumber().equals(deposit.getAccount().getAccountNumber())) {
-                a.getAssociatedDeposits().add(deposit);
-            }
-        }
+
+        double amount = deposit.getAmount();
+        Account account = deposit.getAccount();
+
+        account.setBalance(account.getBalance()+amount);
+
+        String idUser = account.getUser().getId();
+        User user = findUserById(idUser);
+        updateUserBalance(user);
+
     }
 
     public List<Category> getCategoryListByUserId(String userId) {
@@ -558,17 +563,33 @@ public class VirtualWallet implements Serializable {
         throw new UserException("Usuario con ID " + id + " no encontrado."); // Lanza excepción si no se encuentra
     }
 
-    public void getWithdrawalToAccount(Withdrawal withdrawal) throws WithdrawalException {
+    public void getWithdrawalToAccount(Withdrawal withdrawal) throws WithdrawalException  {
         Account account = withdrawal.getAccount();
 
         double totalAmount = withdrawal.getAmount() + withdrawal.getCommission();
 
         if (account.getBalance() < totalAmount) {
             throw new WithdrawalException("Fondos insuficientes");
+
         }
+
         account.setBalance(account.getBalance()-totalAmount);
         account.getAssociatedWithdrawals().add(withdrawal);
+        String idUser = account.getUser().getId();
+        User user = findUserById(idUser);
+        updateUserBalance(user);
+
     }
+
+    private void updateUserBalance(User user){
+        double totalBalance = 0;
+
+        for (Account account: user.getAssociatedAccounts()) {
+            totalBalance += account.getBalance();
+        }
+        user.setTotalBalance(totalBalance);
+    }
+
 
     public void getBudgetToUser(Budget budget) {
         User user = budget.getUser();
@@ -622,6 +643,14 @@ public class VirtualWallet implements Serializable {
             receivingAccount.setBalance(receivingAccount.getBalance() + transfer.getAmount());
             sourceAccount.getAssociatedTransfers().add(transfer);
             receivingAccount.getAssociatedTransfers().add(transfer);
+
+            String idUserSourceAccount = sourceAccount.getUser().getId();
+            String idUserReceivingAccount = receivingAccount.getUser().getId();
+            User user1 = findUserById(idUserSourceAccount);
+            User user2 = findUserById(idUserReceivingAccount);
+            updateUserBalance(user1);
+            updateUserBalance(user2);
+
         } else {
             transfer.setStatus(TransactionStatus.REJECTED);
         }
@@ -678,5 +707,14 @@ public class VirtualWallet implements Serializable {
             }
         }
         return false;
+    }
+
+    public Account isAccountId(String id) {
+        for (Account receivingAccount: getAccounts()) {
+            if(receivingAccount.getAccountNumber().equals(id)){
+                return receivingAccount;
+            }
+        }
+        return null;
     }
 }

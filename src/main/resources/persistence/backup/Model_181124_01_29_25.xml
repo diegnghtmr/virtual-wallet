@@ -471,7 +471,7 @@
                      </object>
                     </void>
                     <void property="totalBalance">
-                     <double>24480.0</double>
+                     <double>23480.0</double>
                     </void>
                     <void property="verified">
                      <boolean>true</boolean>
@@ -611,7 +611,7 @@
               </void>
              </void>
              <void property="balance">
-              <double>14378.0</double>
+              <double>13378.0</double>
              </void>
              <void property="bankName">
               <string>Banco de Occidente</string>
@@ -1149,55 +1149,6 @@
      </void>
      <void property="idTransaction">
       <string>D001</string>
-     </void>
-     <void property="observers">
-      <null/>
-     </void>
-     <void property="status">
-      <object idref="TransactionStatus1"/>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit">
-     <void property="account">
-      <object idref="SavingsAccount0"/>
-     </void>
-     <void property="amount">
-      <double>1000.0</double>
-     </void>
-     <void property="category">
-      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
-       <void property="description">
-        <string>Gastos en viajes</string>
-       </void>
-       <void property="id">
-        <string>002</string>
-       </void>
-       <void property="name">
-        <string>Viaje</string>
-       </void>
-       <void property="transactionList">
-        <object class="java.util.ArrayList">
-         <void method="add">
-          <object idref="Withdrawal0"/>
-         </void>
-        </object>
-       </void>
-      </object>
-     </void>
-     <void property="date">
-      <object class="java.time.LocalDate" method="of">
-       <int>2024</int>
-       <int>11</int>
-       <int>18</int>
-      </object>
-     </void>
-     <void property="description">
-      <string>a</string>
-     </void>
-     <void property="idTransaction">
-      <string>499694014</string>
      </void>
      <void property="observers">
       <null/>

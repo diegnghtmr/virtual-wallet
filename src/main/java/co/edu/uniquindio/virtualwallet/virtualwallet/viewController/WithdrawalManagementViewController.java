@@ -183,15 +183,11 @@ public class WithdrawalManagementViewController extends CoreViewController imple
     }
 
     private WithdrawalDto buildWithdrawal() {
+        SecureRandom random = new SecureRandom();
         String idNumber;
-        if (withdrawalSelected != null) {
-            idNumber = withdrawalSelected.idTransaction();
-        } else {
-            SecureRandom random = new SecureRandom();
-            do {
-                idNumber = String.format("%09d", random.nextInt(1_000_000_000));
-            } while (withdrawalManagementController.isTransactionIdExists(idNumber));
-        }
+        do {
+            idNumber = String.format("%09d", random.nextInt(1_000_000_000));
+        } while (withdrawalManagementController.isTransactionIdExists(idNumber));
 
         // Validar y convertir el monto
         String amountText = txtAmount.getText();
@@ -215,7 +211,7 @@ public class WithdrawalManagementViewController extends CoreViewController imple
                 cbCategory.getValue(),
                 cbAccount.getValue(),
                 TransactionStatus.PENDING.name(),
-                4000,
+                200,
                 3000000
         );
 

@@ -31,6 +31,8 @@ public class ModelFactory {
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
 
+
+
     //    RabbitFactory rabbitFactory;
 //    ConnectionFactory connectionFactory;
     // Singleton instance
@@ -691,6 +693,10 @@ public class ModelFactory {
 
     public boolean isCategoryExists(String id) {
         return virtualWallet.isCategoryExists(id);
+    }
+
+    public Account isAccountId(String id) {
+        return virtualWallet.isAccountId(id);
     }
 
 }
