@@ -21,4 +21,7 @@ public record DepositDto(
     public String transactionType() {
         return I18n.get("transaction.type.deposit");
     }
+    public String statusType() {
+        return I18n.get("transaction.status." + status);
+    }
 }

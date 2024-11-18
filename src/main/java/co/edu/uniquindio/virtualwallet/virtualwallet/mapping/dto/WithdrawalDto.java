@@ -23,4 +23,7 @@ public record WithdrawalDto(
     public String transactionType() {
         return I18n.get("transaction.type.withdrawal");
     }
+    public String statusType() {
+        return I18n.get("transaction.status." + status);
+    }
 }

@@ -268,3 +268,43 @@ Nov 18, 2024 1:29:26 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: login,Login,2024-11-18
 Nov 18, 2024 1:31:37 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: addDeposit,DepositDto added: 499694014,2024-11-18
+Nov 18, 2024 1:46:37 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+Nov 18, 2024 1:49:53 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+Nov 18, 2024 1:50:11 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 361100425,2024-11-18
+Nov 18, 2024 1:50:51 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 1234567890,2024-11-18
+Nov 18, 2024 1:58:36 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+Nov 18, 2024 1:58:55 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 732688925,2024-11-18
+Nov 18, 2024 2:13:58 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+Nov 18, 2024 2:14:38 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 482348079,2024-11-18
+Nov 18, 2024 2:15:02 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addWithdrawal,Withdrawal added: 039580454,2024-11-18
+Nov 18, 2024 2:15:08 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 0987654321,2024-11-18
+Nov 18, 2024 2:16:03 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addWithdrawal,Withdrawal added: 731706259,2024-11-18
+Nov 18, 2024 2:16:59 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+Nov 18, 2024 2:17:17 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addWithdrawal,Withdrawal added: 774017502,2024-11-18
+Nov 18, 2024 2:17:36 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+SEVERE: addWithdrawal,Fondos insuficientes en la cuenta de origen,2024-11-18
+Nov 18, 2024 2:17:43 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addWithdrawal,Withdrawal added: 745804207,2024-11-18
+Nov 18, 2024 2:22:04 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+Nov 18, 2024 2:22:19 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 879206069,2024-11-18
+Nov 18, 2024 2:22:43 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addWithdrawal,Withdrawal added: 976668851,2024-11-18
+Nov 18, 2024 2:22:49 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 0987654321,2024-11-18
+Nov 18, 2024 2:26:59 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18

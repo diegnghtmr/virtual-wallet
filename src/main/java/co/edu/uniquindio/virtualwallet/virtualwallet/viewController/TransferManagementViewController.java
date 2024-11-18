@@ -191,15 +191,16 @@ public class TransferManagementViewController extends CoreViewController impleme
                     showMessage("Notificación", "Transferencia exitosa", "La transferencia se ha realizado con éxito", Alert.AlertType.INFORMATION);
                     clearFields();
                     ObserverManagement.getInstance().notifyObservers(EventType.TRANSFER);
+                    // Create and send the transfer notification with localized status and transaction ID
                     String transferMessage = I18n.getFormatted(
                             "notification.message.TRANSFER",
-                            transferDto.amount(),
-                            transferDto.receivingAccount().getAccountNumber()
+                            transferDto.statusType(),
+                            transferDto.idTransaction()
                     );
                     NotificationUtil transferNotification = new NotificationUtil(
                             transferMessage,
                             LocalDate.now(),
-                            NotificationType.INFORMATION
+                            NotificationType.TRANSACTION
                     );
                     loggedUser.update(transferNotification);
                 } else {

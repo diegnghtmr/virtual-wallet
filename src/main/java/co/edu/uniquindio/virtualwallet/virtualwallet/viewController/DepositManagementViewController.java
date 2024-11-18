@@ -6,6 +6,9 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.DepositDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
@@ -173,6 +176,18 @@ public class DepositManagementViewController extends CoreViewController implemen
                         "El depósito ha sido agregado correctamente", Alert.AlertType.INFORMATION);
                 clearFields();
                 ObserverManagement.getInstance().notifyObservers(EventType.DEPOSIT);
+                // Create and send the deposit notification with localized status and transaction ID
+                String depositMessage = I18n.getFormatted(
+                        "notification.message.DEPOSIT",
+                        depositDto.statusType(),
+                        depositDto.idTransaction()
+                );
+                NotificationUtil depositNotification = new NotificationUtil(
+                        depositMessage,
+                        LocalDate.now(),
+                        NotificationType.TRANSACTION
+                );
+                loggedUser.update(depositNotification);
             } else {
                 showMessage("Error", "Error al agregar el depósito",
                         "Ha ocurrido un error al agregar el depósito, por favor intente nuevamente", Alert.AlertType.ERROR);
@@ -192,8 +207,15 @@ public class DepositManagementViewController extends CoreViewController implemen
         }
 
         String amountText = txtAmount.getText();
-        if (amountText.isEmpty()) {
-            showMessage("Error", "El monto no puede estar vacío",
+        try {
+            double amount = Double.parseDouble(amountText);
+            if (amount <= 0) {
+                showMessage("Error", "El monto debe ser mayor a cero",
+                        "Por favor, ingrese un monto válido", Alert.AlertType.ERROR);
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            showMessage("Error", "El monto debe ser un número",
                     "Por favor, ingrese un monto válido", Alert.AlertType.ERROR);
             return null;
         }

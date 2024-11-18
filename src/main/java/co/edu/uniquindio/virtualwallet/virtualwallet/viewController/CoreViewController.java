@@ -64,7 +64,7 @@ public abstract class CoreViewController {
         okButton.setText("Entendido");
 
         // Mantener el tamaño de la alerta
-        dialogPane.setPrefWidth(400);
+        dialogPane.setPrefWidth(600);
         dialogPane.setPrefHeight(250);
 
         // Mostrar alerta y esperar respuesta
@@ -96,7 +96,7 @@ public abstract class CoreViewController {
         alert.getButtonTypes().setAll(okButton, cancelButton);
 
         // Ajustar el tamaño de la alerta
-        dialogPane.setPrefWidth(400);
+        dialogPane.setPrefWidth(600);
         dialogPane.setPrefHeight(250);
 
         // Aplicar estilos específicos a los botones

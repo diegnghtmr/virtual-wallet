@@ -6,7 +6,10 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.WithdrawalDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
@@ -176,6 +179,18 @@ public class WithdrawalManagementViewController extends CoreViewController imple
                 clearFields();
                 ObserverManagement.getInstance().notifyObservers(EventType.WITHDRAWAL);
 
+                // Create and send the withdrawal notification with localized status and transaction ID
+                String withdrawalMessage = I18n.getFormatted(
+                        "notification.message.WITHDRAWAL",
+                        withdrawalDto.statusType(),
+                        withdrawalDto.idTransaction()
+                );
+                NotificationUtil withdrawalNotification = new NotificationUtil(
+                        withdrawalMessage,
+                        LocalDate.now(),
+                        NotificationType.TRANSACTION
+                );
+                loggedUser.update(withdrawalNotification);
             } else {
                 showMessage("Error", "Retiro no realizado", "No se pudo hacer el retiro", Alert.AlertType.ERROR);
             }
