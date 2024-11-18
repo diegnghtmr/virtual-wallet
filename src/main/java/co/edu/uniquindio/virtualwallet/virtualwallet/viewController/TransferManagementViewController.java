@@ -1,32 +1,35 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.TransferManagementController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.controller.WithdrawalManagementController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransferDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ITransactionViewController;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class TransferManagementViewController extends CoreViewController implements ITransactionViewController<TransferDto> {
-    TransferManagementController transferManagementController;
-    User loggedUser;
-    ObservableList<TransferDto> transferListDto = FXCollections.observableArrayList();
-    TransferDto transferSelected;
+import java.security.SecureRandom;
+import java.time.LocalDate;
 
+public class TransferManagementViewController extends CoreViewController implements ITransactionViewController<TransferDto>, ObserverView {
+    private TransferManagementController transferManagementController;
+    private User loggedUser;
+    private ObservableList<TransferDto> transferListDto = FXCollections.observableArrayList();
+    private TransferDto transferSelected;
     @FXML
     private Button btnAdd;
 
@@ -93,6 +96,7 @@ public class TransferManagementViewController extends CoreViewController impleme
     public void onNotification(ActionEvent event) {
         Stage ownerStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         openWindow("/view/notification-view.fxml", "Notificaciones", ownerStage);
+
     }
 
     @FXML
@@ -100,6 +104,7 @@ public class TransferManagementViewController extends CoreViewController impleme
         transferManagementController = new TransferManagementController();
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
     }
 
     @Override
@@ -171,11 +176,90 @@ public class TransferManagementViewController extends CoreViewController impleme
     }
 
     private void addTransfer() {
+        TransferDto transferDto = buildTransfer();
+        if (transferDto == null) {
+            showMessage("Error", "Datos no válidos", "La transferencia no es válida", Alert.AlertType.ERROR);
+            return;
+        }
+        if (validateData(transferDto)) {
+            if (showConfirmationMessage("¿Está seguro de realizar la transferencia?")) {
+                if (transferManagementController.addTransfer(transferDto)) {
+                    transferListDto.add(transferDto);
+                    showMessage("Notificación", "Transferencia exitosa", "La transferencia se ha realizado con éxito", Alert.AlertType.INFORMATION);
+                    clearFields();
+                    ObserverManagement.getInstance().notifyObservers(EventType.TRANSFER);
+
+                } else {
+                    showMessage("Error", "Transferencia no realizada", "La cuenta no tiene saldo suficiente", Alert.AlertType.ERROR);
+
+                }
+
+            } else {
+                showMessage("Operación cancelada", "Transferencia no realizada", "Ha cancelado la transferencia.", Alert.AlertType.WARNING);
+            }
+        }
+    }
+
+    private TransferDto buildTransfer() {
+        // Generación de ID de transacción único
+        SecureRandom random = new SecureRandom();
+        String idNumber;
+        do {
+            idNumber = String.format("%09d", random.nextInt(1_000_000_000));
+        } while (transferManagementController.isTransactionIdExists(idNumber));
+
+        // Validar y convertir el monto
+        String amountText = txtAmount.getText();
+        if (amountText.isEmpty()) {
+            showMessage("Error", "El monto no puede estar vacío", "Por favor, ingrese un monto válido", Alert.AlertType.ERROR);
+            return null;
+        }
+
+        double amount;
+        try {
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException e) {
+            showMessage("Error", "Monto inválido", "El monto debe ser un número válido.", Alert.AlertType.ERROR);
+            return null;
+        }
+
+        return new TransferDto(
+                idNumber,
+                LocalDate.now(),
+                amount,
+                txtaDescription.getText(),
+                cbCategory.getValue(),
+                cbSourceAccount.getValue(),
+                TransactionStatus.PENDING.name(),
+                transferSelected.receivingAccount(),
+                6000);
     }
 
     @Override
+
     public boolean validateData(TransferDto transferDto) {
-        return false;
+        String message = "";
+        if (transferDto.account() == null) {
+            message += "La cuenta de origen es requerida.\n";
+        }
+        if (transferDto.receivingAccount() == null) {
+            message += "La cuenta de destino es requerida.\n";
+        }
+        if (transferDto.amount() <= 0) {
+            message += "El monto no puede ser negativo.\n";
+        }
+        if (transferDto.description().isEmpty()) {
+            message += "La descripción es requerida.\n";
+        }
+        if (transferDto.category() == null) {
+            message += "La categoría es requerida.\n";
+
+        }
+        if (!message.isEmpty()) {
+            showMessage("Notificación de validación", "Datos no válidos", message, Alert.AlertType.WARNING);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -193,5 +277,14 @@ public class TransferManagementViewController extends CoreViewController impleme
         transferSelected = null;
     }
 
-}
+    @Override
+    public void updateView(EventType event) {
+        if (event == EventType.ACCOUNT) {
+            initializeDataComboBox();
+        }
 
+    }
+
+
+
+}

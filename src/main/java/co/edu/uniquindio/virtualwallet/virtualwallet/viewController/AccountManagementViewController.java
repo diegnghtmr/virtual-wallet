@@ -8,6 +8,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class AccountManagementViewController extends CoreViewController implements ICoreViewController<AccountDto> {
+public class AccountManagementViewController extends CoreViewController implements ICoreViewController<AccountDto>, ObserverView {
     AccountManagementController accountManagementController;
     User loggedUser;
     ObservableList<AccountDto> accountsListDto = FXCollections.observableArrayList();
@@ -103,6 +104,9 @@ public class AccountManagementViewController extends CoreViewController implemen
         accountManagementController = new AccountManagementController();
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.TRANSFER,this);
+        ObserverManagement.getInstance().addObserver(EventType.WITHDRAWAL, this);
+        ObserverManagement.getInstance().addObserver(EventType.DEPOSIT, this);
     }
 
     @Override
@@ -299,5 +303,19 @@ public class AccountManagementViewController extends CoreViewController implemen
         return !accountSelected.accountNumber().equals(accountDto.accountNumber()) ||
                 !accountSelected.bankName().equals(accountDto.bankName()) ||
                 !accountSelected.accountType().equals(accountDto.accountType());
+    }
+
+    @Override
+    public void updateView(EventType event) {
+        if (event == EventType.TRANSFER) {
+            getAccounts();
+            tblAccount.refresh();
+        } else if (event == EventType.DEPOSIT) {
+            getAccounts();
+            tblAccount.refresh();
+        } else if (event == EventType.WITHDRAWAL) {
+            getAccounts();
+            tblAccount.refresh();
+        }
     }
 }

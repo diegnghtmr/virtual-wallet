@@ -8,4 +8,7 @@ public abstract class CoreController {
     }
 
 
+    public  boolean isTransactionIdExists(String idNumber){
+        return  modelFactory.isTransactionIdExists(idNumber);
+    }
 }

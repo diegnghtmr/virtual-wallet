@@ -11,6 +11,14 @@ public class TransferManagementController extends CoreController {
         super();
     }
 
+    public  boolean isTransactionIdExists(String idNumber) {
+        return isTransactionIdExists(idNumber);
+    }
+
+    public boolean addTransfer(TransferDto transferDto) {
+        return modelFactory.addTransfer(transferDto);
+    }
+
 
     public List<TransferDto> getTransfersByUser(String userId) {
         return modelFactory.getTransfersByUser(userId);

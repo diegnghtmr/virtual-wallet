@@ -80,3 +80,21 @@ Nov 17, 2024 7:13:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: addBudget,Budget added: xd,2024-11-17
 Nov 17, 2024 7:13:33 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-17
+Nov 17, 2024 8:16:11 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 8:16:41 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 1234567890,2024-11-17
+Nov 17, 2024 8:21:41 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 8:22:01 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 1234567890,2024-11-17
+Nov 17, 2024 8:22:45 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 0987654321,2024-11-17
+Nov 17, 2024 8:23:21 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 0987654321,2024-11-17
+Nov 17, 2024 8:23:41 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+SEVERE: addWithdrawal,Fondos insuficientes,2024-11-17
+Nov 17, 2024 8:31:36 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 8:32:20 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+SEVERE: addWithdrawal,Fondos insuficientes,2024-11-17

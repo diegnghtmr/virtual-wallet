@@ -2,6 +2,8 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.UserException;
+import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.WithdrawalException;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
@@ -555,13 +557,13 @@ public class VirtualWallet implements Serializable {
         throw new UserException("Usuario con ID " + id + " no encontrado."); // Lanza excepción si no se encuentra
     }
 
-    public void getWithdrawalToAccount(Withdrawal withdrawal) {
+    public void getWithdrawalToAccount(Withdrawal withdrawal) throws WithdrawalException {
         Account account = withdrawal.getAccount();
 
         double totalAmount = withdrawal.getAmount() + withdrawal.getCommission();
 
         if (account.getBalance() < totalAmount) {
-            throw new IllegalArgumentException("Fondos insuficientes");
+            throw new WithdrawalException("Fondos insuficientes");
         }
         account.setBalance(account.getBalance()-totalAmount);
         account.getAssociatedWithdrawals().add(withdrawal);
@@ -590,6 +592,37 @@ public class VirtualWallet implements Serializable {
     public boolean isBudgetIdExists(String id) {
         for (Budget budget : budgetList) {
             if (budget.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addTransferToAccount(Transfer transfer) {
+        Account receivingAccount = transfer.getReceivingAccount();
+        String idReceivingAccount = receivingAccount.getAccountNumber();
+        Account sourceAccount = transfer.getAccount();
+
+        if (validateIdRecivingAccount(idReceivingAccount)) {
+            double totalAmount = transfer.getAmount() + transfer.getCommission();
+
+            if (sourceAccount.getBalance() < totalAmount) {
+                throw new IllegalArgumentException("Fondos insuficientes en la cuenta de origen");
+            }
+
+            sourceAccount.setBalance(sourceAccount.getBalance() - totalAmount);
+            receivingAccount.setBalance(receivingAccount.getBalance() + transfer.getAmount());
+            sourceAccount.getAssociatedTransfers().add(transfer);
+            receivingAccount.getAssociatedTransfers().add(transfer);
+        } else {
+            transfer.setStatus(TransactionStatus.REJECTED);
+        }
+
+    }
+
+    private boolean validateIdRecivingAccount(String idReceivingAccount) {
+        for (Account receivingAccount : getAccounts()) {
+            if (receivingAccount.getAccountNumber().equals(idReceivingAccount)) {
                 return true;
             }
         }

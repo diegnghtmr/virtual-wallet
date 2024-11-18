@@ -1,6 +1,8 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.viewController;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.controller.CategoryManagementController;
+import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.BudgetDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
@@ -11,12 +13,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.security.SecureRandom;
+import java.util.ArrayList;
 
 public class CategoryManagementViewController extends CoreViewController implements ICoreViewController<CategoryDto> {
     CategoryManagementController categoryManagementController;
@@ -134,16 +135,99 @@ public class CategoryManagementViewController extends CoreViewController impleme
 
     @Override
     public boolean validateData(CategoryDto categoryDto) {
-        return false;
+        String message = "";
+        if (categoryDto.name().isEmpty()) {
+            message += "El nombre de la categoría no puede estar vacío.\n";
+        }
+        if (categoryDto.description().isEmpty()) {
+            message += "La descripción de la categoría no puede estar vacía.\n";
+        }
+        if (!message.isEmpty()) {
+            showMessage("Validación de Datos", "Datos Inválidos", message, Alert.AlertType.ERROR);
+            return false;
+        }
+        return true;
+    }
+
+    private CategoryDto buildCategoryDto() {
+        String id = categorySelected != null ? categorySelected.id() : generateId();
+        String name = txtName.getText().trim();
+        String description = txtaDescription.getText().trim();
+        return new CategoryDto(id, name, description, new ArrayList<BudgetDto>(), new ArrayList<Transaction>());
+    }
+
+    private String generateId() {
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[16];
+        random.nextBytes(bytes);
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
     }
 
     private void addCategory() {
+        CategoryDto newCategory = buildCategoryDto();
+        if (validateData(newCategory)) {
+            boolean success = categoryManagementController.addCategory(loggedUser.getId(), newCategory);
+            if (success) {
+                showMessage("Éxito", "Categoría Añadida", "La categoría se ha añadido correctamente.", Alert.AlertType.INFORMATION);
+                getCategories();
+                clearFields();
+            } else {
+                showMessage("Error", "Añadir Categoría", "No se pudo añadir la categoría.", Alert.AlertType.ERROR);
+            }
+        }
     }
 
     private void removeCategory() {
+        if (categorySelected != null) {
+            boolean confirm = showConfirmationMessage("¿Está seguro de que desea eliminar la categoría seleccionada?");
+            if (confirm) {
+                boolean success = categoryManagementController.removeCategory(loggedUser.getId(), categorySelected.id());
+                if (success) {
+                    showMessage("Éxito", "Categoría Eliminada", "La categoría se ha eliminado correctamente.", Alert.AlertType.INFORMATION);
+                    getCategories();
+                    clearFields();
+                } else {
+                    showMessage("Error", "Eliminar Categoría", "No se pudo eliminar la categoría.", Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            showMessage("Información", "Sin Selección", "Por favor, seleccione una categoría para eliminar.", Alert.AlertType.WARNING);
+        }
     }
 
     private void updateCategory() {
+        boolean categoryUpdated = false;
+        CategoryDto categoryDto = buildCategoryDto();
+        if (categorySelected != null) {
+            if (validateData(categoryDto)) {
+                if (!hasChanges(categorySelected, categoryDto)) {
+                    showMessage("Información", "Sin Cambios", "No se han realizado cambios en la categoría.", Alert.AlertType.INFORMATION);
+                    return;
+                }
+                int selecIndex = tblCatergory.getSelectionModel().getSelectedIndex();
+                categoryUpdated = categoryManagementController.updateCategory(loggedUser.getId(), categoryDto);
+                if (categoryUpdated) {
+                    categoryListDto.set(selecIndex, categoryDto);
+                    tblCatergory.refresh();
+                    tblCatergory.getSelectionModel().select(selecIndex);
+                    showMessage("Éxito", "Categoría Actualizada", "La categoría se ha actualizado correctamente.", Alert.AlertType.INFORMATION);
+                    deselectTable();
+                    clearFields();
+                } else {
+                    showMessage("Error", "Actualizar Categoría", "No se pudo actualizar la categoría.", Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            showMessage("Información", "Sin Selección", "Por favor, seleccione una categoría para actualizar.", Alert.AlertType.WARNING);
+        }
+    }
+
+    private boolean hasChanges(CategoryDto categorySelected, CategoryDto categoryDto) {
+        return !categorySelected.name().equals(categoryDto.name()) || !categorySelected.description().equals(categoryDto.description());
     }
 
     @Override

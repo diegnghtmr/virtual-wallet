@@ -2,6 +2,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.UserException;
+import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.WithdrawalException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
@@ -30,7 +31,9 @@ public class ModelFactory {
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
 
-//    RabbitFactory rabbitFactory;
+
+
+    //    RabbitFactory rabbitFactory;
 //    ConnectionFactory connectionFactory;
     // Singleton instance
     private static class SingletonHolder {
@@ -558,8 +561,7 @@ public class ModelFactory {
             registerSystemActions("Transferencia realizada de " + withdrawal.getAccount().getAccountNumber(), 1, "AddRetiro");
             saveXMLResource();
             return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (WithdrawalException e) {
             registerSystemActions(e.getMessage(), 3, "addWithdrawal");
             return false;
 
@@ -619,5 +621,20 @@ public class ModelFactory {
 
     public boolean isBudgetIdExists(String id) {
         return virtualWallet.isBudgetIdExists(id);
+    }
+
+    public boolean addTransfer(TransferDto transferDto) {
+        try {
+            Transfer transfer = virtualWalletMapper.transferDtoToTransfer(transferDto);
+            getVirtualWallet().getTransferList().add(transfer);
+            getVirtualWallet().addTransferToAccount(transfer);
+            registerSystemActions("Withdrawal added: " + transfer.getIdTransaction(), 1, "addWithdrawal");
+            saveXMLResource();
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+            registerSystemActions(e.getMessage(), 3, "addWithdrawal");
+            return false;
+        }
     }
 }

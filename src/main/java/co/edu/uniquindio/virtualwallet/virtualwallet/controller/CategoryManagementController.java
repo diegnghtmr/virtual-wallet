@@ -12,4 +12,12 @@ public class CategoryManagementController extends CoreController {
     public List<CategoryDto> getCategoriesByUser(String userId) {
         return modelFactory.getCategoriesByUser(userId);
     }
+
+    public boolean addCategory(String idUser, CategoryDto newCategory) {
+        return modelFactory.addCategory(idUser, newCategory);
+    }
+
+    public boolean removeCategory(String idUser, String idCategory) {
+        return modelFactory.removeCategory(idUser, idCategory);
+    }
 }

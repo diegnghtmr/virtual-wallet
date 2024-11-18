@@ -193,9 +193,6 @@ public class AdminAccountManagementViewController extends CoreViewController imp
 
     }
 
-
-
-
     private void initializeDataComboBox() {
         // combobox de cuentas
         ObservableList<String> accountTypes = FXCollections.observableArrayList(adminAccountManagementController.getAccountsTypes());
@@ -318,8 +315,6 @@ public class AdminAccountManagementViewController extends CoreViewController imp
 
         return hasChanges;
     }
-
-
 
     private void clearFields() {
         txtAccountNumber.clear();
