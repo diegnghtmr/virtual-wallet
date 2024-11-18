@@ -2,7 +2,6 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.UserException;
-import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.WithdrawalException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
@@ -10,10 +9,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.TransactionDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.mappers.IVirtualWalletMapper;
-import co.edu.uniquindio.virtualwallet.virtualwallet.model.Category;
-import co.edu.uniquindio.virtualwallet.virtualwallet.model.Person;
-import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
-import co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.*;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.BackupUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.PersistenceUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
@@ -22,7 +18,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -34,15 +29,16 @@ public class ModelFactory {
     VirtualWallet virtualWallet;
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
+
 //    RabbitFactory rabbitFactory;
 //    ConnectionFactory connectionFactory;
-
     // Singleton instance
     private static class SingletonHolder {
 
         private static final ModelFactory eINSTANCE = new ModelFactory();
 
-    }
+
+}
 
 //    public void producirMensaje(String queue, String message) {
 //        try (Connection connection = connectionFactory.newConnection();
@@ -73,7 +69,6 @@ public class ModelFactory {
 //            e.printStackTrace();
 //        }
 //    }
-
     public static ModelFactory getInstance() {
         return SingletonHolder.eINSTANCE;
     }
@@ -110,10 +105,10 @@ public class ModelFactory {
 
     // Initialization Methods
     // ----------------------
+
     private void initializeData() {
         virtualWallet = VirtualWalletUtils.initializeData();
     }
-
     private void loadDataFromFiles() {
         virtualWallet = new VirtualWallet();
         try {
@@ -157,9 +152,9 @@ public class ModelFactory {
     }
 
 
+
     // Utility Methods
     // ---------------
-
     public List<String> getTransactionTypes() {
         return VirtualWalletUtils.getTransactionTypes();
     }
@@ -196,9 +191,9 @@ public class ModelFactory {
     }
 
 
+
     // Account Management Methods
     // --------------------------
-
     public List<AccountDto> getAccounts() {
         List<AccountDto> accountDtos = new ArrayList<>();
         accountDtos.addAll(virtualWalletMapper.getSavingsAccountsDto(virtualWallet.getSavingsAccountList()));
@@ -305,10 +300,10 @@ public class ModelFactory {
 
     // User Management Methods
     // -----------------------
+
     public Person validateLogin(String email, String password) throws Exception {
         return virtualWallet.validateLogin(email, password);
     }
-
     public boolean registerUser(UserDto userDto) {
         try {
             if (virtualWallet.verifyUserExistence(userDto.email())) {
@@ -569,7 +564,60 @@ public class ModelFactory {
             return false;
 
         }
-
     }
 
+    public boolean addBudget(BudgetDto budgetDto) {
+        try {
+            Budget budget = virtualWalletMapper.budgetDtoToBudget(budgetDto);
+            getVirtualWallet().getBudgetList().add(budget);
+            getVirtualWallet().getBudgetToUser(budget);
+            registerSystemActions("Budget added: " + budget.getName(), 1, "addBudget");
+            saveXMLResource();
+            return true;
+            } catch (Exception e) {
+            e.printStackTrace();
+            registerSystemActions(e.getMessage(), 3, "addBudget");
+            return false;
+        }
+    }
+
+    public boolean removeBudget(BudgetDto budgetSelected) {
+        boolean flagExist = false;
+        try {
+            flagExist = getVirtualWallet().removeBudget(budgetSelected.id());
+
+            if (flagExist) {
+                registerSystemActions("Budget removed: " + budgetSelected.id(), 1, "removeBudget");
+                saveXMLResource();
+            } else {
+                registerSystemActions("Attempted to remove non-existent budget: " + budgetSelected.id(), 2, "removeBudget");
+            }
+        } catch (Exception e) {
+            registerSystemActions(e.getMessage(), 3, "removeBudget");
+            e.printStackTrace();
+        }
+        return flagExist;
+    }
+
+    public boolean updateBudget(BudgetDto budgetSelected, BudgetDto budgetDto) {
+        boolean budgetUpdated = false;
+        try {
+            Budget budget = virtualWalletMapper.budgetDtoToBudget(budgetDto);
+            budgetUpdated = getVirtualWallet().updateBudget(budgetSelected.id(), budget);
+            if (budgetUpdated) {
+                registerSystemActions("Budget updated: " + budgetDto.name(), 1, "updateBudget");
+                saveXMLResource();
+            } else {
+                registerSystemActions("Failed to update budget: " + budgetDto.name(), 2, "updateBudget");
+            }
+        } catch (Exception e) {
+            registerSystemActions(e.getMessage(), 3, "updateBudget");
+            e.printStackTrace();
+        }
+        return budgetUpdated;
+    }
+
+    public boolean isBudgetIdExists(String id) {
+        return virtualWallet.isBudgetIdExists(id);
+    }
 }

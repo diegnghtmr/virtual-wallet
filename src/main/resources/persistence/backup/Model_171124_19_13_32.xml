@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="21.0.2" class="java.beans.XMLDecoder">
+<java version="21.0.4" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.VirtualWallet" id="VirtualWallet0">
   <void property="administrator">
    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator">
@@ -29,7 +29,7 @@
      <object class="java.time.LocalDate" method="of">
       <int>2024</int>
       <int>11</int>
-      <int>12</int>
+      <int>17</int>
      </object>
     </void>
    </object>
@@ -79,7 +79,7 @@
                  <object class="java.time.LocalDate" method="of">
                   <int>2024</int>
                   <int>11</int>
-                  <int>12</int>
+                  <int>17</int>
                  </object>
                 </void>
                 <void property="description">
@@ -111,7 +111,7 @@
                  <object class="java.time.LocalDate" method="of">
                   <int>2024</int>
                   <int>11</int>
-                  <int>12</int>
+                  <int>17</int>
                  </object>
                 </void>
                 <void property="description">
@@ -142,7 +142,7 @@
                  <object class="java.time.LocalDate" method="of">
                   <int>2024</int>
                   <int>11</int>
-                  <int>12</int>
+                  <int>17</int>
                  </object>
                 </void>
                 <void property="description">
@@ -189,7 +189,7 @@
                       <object class="java.time.LocalDate" method="of">
                        <int>2024</int>
                        <int>11</int>
-                       <int>12</int>
+                       <int>17</int>
                       </object>
                      </void>
                      <void property="description">
@@ -221,234 +221,6 @@
                      </void>
                      <void method="add">
                       <object idref="CheckingAccount0"/>
-                     </void>
-                     <void method="add">
-                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount1">
-                       <void property="accountNumber">
-                        <string>10</string>
-                       </void>
-                       <void property="associatedDeposits">
-                        <void method="add">
-                         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit3">
-                          <void property="account">
-                           <object idref="SavingsAccount1"/>
-                          </void>
-                          <void property="amount">
-                           <double>3.0</double>
-                          </void>
-                          <void property="category">
-                           <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
-                            <void property="description">
-                             <string>Compras de alimentos</string>
-                            </void>
-                            <void property="id">
-                             <string>001</string>
-                            </void>
-                            <void property="name">
-                             <string>Comida</string>
-                            </void>
-                            <void property="transactionList">
-                             <object class="java.util.ArrayList">
-                              <void method="add">
-                               <object idref="Deposit0"/>
-                              </void>
-                              <void method="add">
-                               <object idref="Transfer0"/>
-                              </void>
-                              <void method="add">
-                               <object idref="Deposit1"/>
-                              </void>
-                              <void method="add">
-                               <object idref="Deposit2"/>
-                              </void>
-                             </object>
-                            </void>
-                           </object>
-                          </void>
-                          <void property="date">
-                           <object class="java.time.LocalDate" method="of">
-                            <int>2024</int>
-                            <int>11</int>
-                            <int>13</int>
-                           </object>
-                          </void>
-                          <void property="description">
-                           <string>xd</string>
-                          </void>
-                          <void property="idTransaction">
-                           <string>442971498</string>
-                          </void>
-                          <void property="observers">
-                           <null/>
-                          </void>
-                          <void property="status">
-                           <object class="java.lang.Enum" id="TransactionStatus1" method="valueOf">
-                            <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
-                            <string>PENDING</string>
-                           </object>
-                          </void>
-                         </object>
-                        </void>
-                        <void method="add">
-                         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit4">
-                          <void property="account">
-                           <object idref="SavingsAccount1"/>
-                          </void>
-                          <void property="amount">
-                           <double>6969.0</double>
-                          </void>
-                          <void property="category">
-                           <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
-                            <void property="description">
-                             <string>Gastos en viajes</string>
-                            </void>
-                            <void property="id">
-                             <string>002</string>
-                            </void>
-                            <void property="name">
-                             <string>Viaje</string>
-                            </void>
-                            <void property="transactionList">
-                             <object class="java.util.ArrayList">
-                              <void method="add">
-                               <object idref="Withdrawal0"/>
-                              </void>
-                             </object>
-                            </void>
-                           </object>
-                          </void>
-                          <void property="date">
-                           <object class="java.time.LocalDate" method="of">
-                            <int>2024</int>
-                            <int>11</int>
-                            <int>13</int>
-                           </object>
-                          </void>
-                          <void property="description">
-                           <string>a</string>
-                          </void>
-                          <void property="idTransaction">
-                           <string>008609946</string>
-                          </void>
-                          <void property="observers">
-                           <null/>
-                          </void>
-                          <void property="status">
-                           <object idref="TransactionStatus1"/>
-                          </void>
-                         </object>
-                        </void>
-                       </void>
-                       <void property="bankName">
-                        <string>ben</string>
-                       </void>
-                       <void property="user">
-                        <object idref="User0"/>
-                       </void>
-                      </object>
-                     </void>
-                     <void method="add">
-                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount2">
-                       <void property="accountNumber">
-                        <string>7</string>
-                       </void>
-                       <void property="bankName">
-                        <string>xd</string>
-                       </void>
-                       <void property="user">
-                        <object idref="User0"/>
-                       </void>
-                      </object>
-                     </void>
-                     <void method="add">
-                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount3">
-                       <void property="accountNumber">
-                        <string>69</string>
-                       </void>
-                       <void property="bankName">
-                        <string>jorge</string>
-                       </void>
-                       <void property="user">
-                        <object idref="User0"/>
-                       </void>
-                      </object>
-                     </void>
-                     <void method="add">
-                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount4">
-                       <void property="accountNumber">
-                        <string>2</string>
-                       </void>
-                       <void property="bankName">
-                        <string>a</string>
-                       </void>
-                       <void property="user">
-                        <object idref="User0"/>
-                       </void>
-                      </object>
-                     </void>
-                     <void method="add">
-                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount" id="CheckingAccount1">
-                       <void property="accountNumber">
-                        <string>777</string>
-                       </void>
-                       <void property="associatedDeposits">
-                        <void method="add">
-                         <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit5">
-                          <void property="account">
-                           <object idref="CheckingAccount1"/>
-                          </void>
-                          <void property="amount">
-                           <double>23.0</double>
-                          </void>
-                          <void property="category">
-                           <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
-                            <void property="description">
-                             <string>Gastos en viajes</string>
-                            </void>
-                            <void property="id">
-                             <string>002</string>
-                            </void>
-                            <void property="name">
-                             <string>Viaje</string>
-                            </void>
-                            <void property="transactionList">
-                             <object class="java.util.ArrayList">
-                              <void method="add">
-                               <object idref="Withdrawal0"/>
-                              </void>
-                             </object>
-                            </void>
-                           </object>
-                          </void>
-                          <void property="date">
-                           <object class="java.time.LocalDate" method="of">
-                            <int>2024</int>
-                            <int>11</int>
-                            <int>13</int>
-                           </object>
-                          </void>
-                          <void property="description">
-                           <string>xd</string>
-                          </void>
-                          <void property="idTransaction">
-                           <string>473911675</string>
-                          </void>
-                          <void property="observers">
-                           <null/>
-                          </void>
-                          <void property="status">
-                           <object idref="TransactionStatus1"/>
-                          </void>
-                         </object>
-                        </void>
-                       </void>
-                       <void property="bankName">
-                        <string>asd</string>
-                       </void>
-                       <void property="user">
-                        <object idref="User0"/>
-                       </void>
-                      </object>
                      </void>
                     </void>
                     <void property="birthDate">
@@ -490,6 +262,96 @@
                      <void method="add">
                       <object idref="Budget0"/>
                      </void>
+                     <void method="add">
+                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget">
+                       <void property="category">
+                        <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
+                         <void property="description">
+                          <string>Compras de alimentos</string>
+                         </void>
+                         <void property="id">
+                          <string>001</string>
+                         </void>
+                         <void property="name">
+                          <string>Comida</string>
+                         </void>
+                         <void property="transactionList">
+                          <object class="java.util.ArrayList">
+                           <void method="add">
+                            <object idref="Deposit0"/>
+                           </void>
+                           <void method="add">
+                            <object idref="Transfer0"/>
+                           </void>
+                           <void method="add">
+                            <object idref="Deposit1"/>
+                           </void>
+                           <void method="add">
+                            <object idref="Deposit2"/>
+                           </void>
+                          </object>
+                         </void>
+                        </object>
+                       </void>
+                       <void property="id">
+                        <string>116983669</string>
+                       </void>
+                       <void property="name">
+                        <string>12</string>
+                       </void>
+                       <void property="totalAmount">
+                        <double>10.0</double>
+                       </void>
+                       <void property="user">
+                        <object idref="User0"/>
+                       </void>
+                      </object>
+                     </void>
+                     <void method="add">
+                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget" id="Budget2">
+                       <void property="category">
+                        <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Category">
+                         <void property="description">
+                          <string>Compras de alimentos</string>
+                         </void>
+                         <void property="id">
+                          <string>001</string>
+                         </void>
+                         <void property="name">
+                          <string>Comida</string>
+                         </void>
+                         <void property="transactionList">
+                          <object class="java.util.ArrayList">
+                           <void method="add">
+                            <object idref="Deposit0"/>
+                           </void>
+                           <void method="add">
+                            <object idref="Transfer0"/>
+                           </void>
+                           <void method="add">
+                            <object idref="Deposit1"/>
+                           </void>
+                           <void method="add">
+                            <object idref="Deposit2"/>
+                           </void>
+                          </object>
+                         </void>
+                        </object>
+                       </void>
+                       <void property="id">
+                        <string>819457803</string>
+                       </void>
+                       <void property="name">
+                        <string>xd</string>
+                       </void>
+                       <void property="totalAmount">
+                        <double>2.0</double>
+                       </void>
+                       <void property="user">
+                        <object idref="User0"/>
+                       </void>
+                      </object>
+                     </void>
                     </void>
                     <void property="categoryList">
                      <void method="add">
@@ -515,7 +377,7 @@
                         <object class="java.time.LocalDate" method="of">
                          <int>2024</int>
                          <int>11</int>
-                         <int>12</int>
+                         <int>17</int>
                         </object>
                        </void>
                        <void property="message">
@@ -535,7 +397,7 @@
                         <object class="java.time.LocalDate" method="of">
                          <int>2024</int>
                          <int>11</int>
-                         <int>12</int>
+                         <int>17</int>
                         </object>
                        </void>
                        <void property="message">
@@ -560,7 +422,7 @@
                      <object class="java.time.LocalDate" method="of">
                       <int>2024</int>
                       <int>11</int>
-                      <int>12</int>
+                      <int>17</int>
                      </object>
                     </void>
                     <void property="totalBalance">
@@ -574,7 +436,10 @@
                  </object>
                 </void>
                 <void property="status">
-                 <object idref="TransactionStatus1"/>
+                 <object class="java.lang.Enum" method="valueOf">
+                  <class>co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus</class>
+                  <string>PENDING</string>
+                 </object>
                 </void>
                </object>
               </void>
@@ -600,7 +465,7 @@
             <object class="java.time.LocalDate" method="of">
              <int>2024</int>
              <int>11</int>
-             <int>12</int>
+             <int>17</int>
             </object>
            </void>
            <void property="description">
@@ -645,7 +510,7 @@
     <object idref="Budget1"/>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget" id="Budget2">
+    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget" id="Budget3">
      <void property="amountSpent">
       <double>150.0</double>
      </void>
@@ -663,22 +528,22 @@
        <void property="transactionList">
         <object class="java.util.ArrayList">
          <void method="add">
-          <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit6">
+          <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Deposit" id="Deposit3">
            <void property="account">
-            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount5">
+            <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.SavingsAccount" id="SavingsAccount1">
              <void property="accountNumber">
               <string>1122334455</string>
              </void>
              <void property="associatedDeposits">
               <void method="add">
-               <object idref="Deposit6"/>
+               <object idref="Deposit3"/>
               </void>
              </void>
              <void property="associatedTransfers">
               <void method="add">
                <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Transfer" id="Transfer1">
                 <void property="account">
-                 <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount" id="CheckingAccount2">
+                 <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.CheckingAccount" id="CheckingAccount1">
                   <void property="accountNumber">
                    <string>5566778899</string>
                   </void>
@@ -686,7 +551,7 @@
                    <void method="add">
                     <object class="co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal" id="Withdrawal1">
                      <void property="account">
-                      <object idref="CheckingAccount2"/>
+                      <object idref="CheckingAccount1"/>
                      </void>
                      <void property="amount">
                       <double>100.0</double>
@@ -715,7 +580,7 @@
                       <object class="java.time.LocalDate" method="of">
                        <int>2024</int>
                        <int>11</int>
-                       <int>12</int>
+                       <int>17</int>
                       </object>
                      </void>
                      <void property="description">
@@ -743,10 +608,10 @@
                     </void>
                     <void property="associatedAccounts">
                      <void method="add">
-                      <object idref="SavingsAccount5"/>
+                      <object idref="SavingsAccount1"/>
                      </void>
                      <void method="add">
-                      <object idref="CheckingAccount2"/>
+                      <object idref="CheckingAccount1"/>
                      </void>
                     </void>
                     <void property="birthDate">
@@ -758,10 +623,10 @@
                     </void>
                     <void property="budgetList">
                      <void method="add">
-                      <object idref="Budget2"/>
+                      <object idref="Budget3"/>
                      </void>
                      <void method="add">
-                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget" id="Budget3">
+                      <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.Budget" id="Budget4">
                        <void property="amountSpent">
                         <double>50.0</double>
                        </void>
@@ -783,10 +648,10 @@
                       </object>
                      </void>
                      <void method="add">
-                      <object idref="Budget2"/>
+                      <object idref="Budget3"/>
                      </void>
                      <void method="add">
-                      <object idref="Budget3"/>
+                      <object idref="Budget4"/>
                      </void>
                     </void>
                     <void property="categoryList">
@@ -813,7 +678,7 @@
                         <object class="java.time.LocalDate" method="of">
                          <int>2024</int>
                          <int>11</int>
-                         <int>12</int>
+                         <int>17</int>
                         </object>
                        </void>
                        <void property="message">
@@ -830,7 +695,7 @@
                         <object class="java.time.LocalDate" method="of">
                          <int>2024</int>
                          <int>11</int>
-                         <int>12</int>
+                         <int>17</int>
                         </object>
                        </void>
                        <void property="message">
@@ -852,7 +717,7 @@
                      <object class="java.time.LocalDate" method="of">
                       <int>2024</int>
                       <int>11</int>
-                      <int>12</int>
+                      <int>17</int>
                      </object>
                     </void>
                     <void property="totalBalance">
@@ -872,7 +737,7 @@
                  <object class="java.time.LocalDate" method="of">
                   <int>2024</int>
                   <int>11</int>
-                  <int>12</int>
+                  <int>17</int>
                  </object>
                 </void>
                 <void property="description">
@@ -882,7 +747,7 @@
                  <string>T002</string>
                 </void>
                 <void property="receivingAccount">
-                 <object idref="SavingsAccount5"/>
+                 <object idref="SavingsAccount1"/>
                 </void>
                 <void property="status">
                  <object class="java.lang.Enum" method="valueOf">
@@ -914,7 +779,7 @@
             <object class="java.time.LocalDate" method="of">
              <int>2024</int>
              <int>11</int>
-             <int>12</int>
+             <int>17</int>
             </object>
            </void>
            <void property="description">
@@ -950,7 +815,10 @@
     </object>
    </void>
    <void method="add">
-    <object idref="Budget3"/>
+    <object idref="Budget4"/>
+   </void>
+   <void method="add">
+    <object idref="Budget2"/>
    </void>
   </void>
   <void property="califications">
@@ -995,9 +863,6 @@
     <object idref="CheckingAccount0"/>
    </void>
    <void method="add">
-    <object idref="CheckingAccount2"/>
-   </void>
-   <void method="add">
     <object idref="CheckingAccount1"/>
    </void>
   </void>
@@ -1012,16 +877,7 @@
     <object idref="Deposit2"/>
    </void>
    <void method="add">
-    <object idref="Deposit6"/>
-   </void>
-   <void method="add">
     <object idref="Deposit3"/>
-   </void>
-   <void method="add">
-    <object idref="Deposit4"/>
-   </void>
-   <void method="add">
-    <object idref="Deposit5"/>
    </void>
   </void>
   <void property="savingsAccountList">
@@ -1029,19 +885,7 @@
     <object idref="SavingsAccount0"/>
    </void>
    <void method="add">
-    <object idref="SavingsAccount5"/>
-   </void>
-   <void method="add">
     <object idref="SavingsAccount1"/>
-   </void>
-   <void method="add">
-    <object idref="SavingsAccount2"/>
-   </void>
-   <void method="add">
-    <object idref="SavingsAccount3"/>
-   </void>
-   <void method="add">
-    <object idref="SavingsAccount4"/>
    </void>
   </void>
   <void property="transferList">
@@ -1058,42 +902,6 @@
    </void>
    <void method="add">
     <object idref="User1"/>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.virtualwallet.virtualwallet.model.User">
-     <void property="address">
-      <string>Calarcá</string>
-     </void>
-     <void property="birthDate">
-      <object class="java.time.LocalDate" method="of">
-       <int>2003</int>
-       <int>11</int>
-       <int>1</int>
-      </object>
-     </void>
-     <void property="email">
-      <string>jorgetoro708@gmail.com</string>
-     </void>
-     <void property="fullName">
-      <string>manylobo</string>
-     </void>
-     <void property="id">
-      <string>1098099078</string>
-     </void>
-     <void property="password">
-      <string>holaMundo</string>
-     </void>
-     <void property="phoneNumber">
-      <string>3219800975</string>
-     </void>
-     <void property="registrationDate">
-      <object class="java.time.LocalDate" method="of">
-       <int>2024</int>
-       <int>11</int>
-       <int>13</int>
-      </object>
-     </void>
-    </object>
    </void>
   </void>
   <void property="withdrawalList">

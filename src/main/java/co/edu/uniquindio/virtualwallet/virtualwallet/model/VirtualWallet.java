@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -566,5 +565,34 @@ public class VirtualWallet implements Serializable {
         }
         account.setBalance(account.getBalance()-totalAmount);
         account.getAssociatedWithdrawals().add(withdrawal);
+    }
+
+    public void getBudgetToUser(Budget budget) {
+        User user = budget.getUser();
+        user.getBudgetList().add(budget);
+    }
+
+    public boolean removeBudget(String id) {
+        return budgetList.removeIf(budget -> budget.getId().equals(id));
+    }
+
+    public boolean updateBudget(String id, Budget updatedBudget) {
+        for (int i = 0; i < budgetList.size(); i++) {
+            Budget budget = budgetList.get(i);
+            if (budget.getId().equals(id)) {
+                budgetList.set(i, updatedBudget);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isBudgetIdExists(String id) {
+        for (Budget budget : budgetList) {
+            if (budget.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
