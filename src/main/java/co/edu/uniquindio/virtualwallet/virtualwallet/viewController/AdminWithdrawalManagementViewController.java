@@ -246,7 +246,7 @@ public class AdminWithdrawalManagementViewController extends CoreViewController 
                 cbCategory.getValue(),
                 cbAccount.getValue(),
                 TransactionStatus.PENDING.name(),
-                4000,
+                200,
                 3000000
         );
 

@@ -312,3 +312,19 @@ Nov 18, 2024 2:30:36 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: login,Login,2024-11-18
 Nov 18, 2024 2:30:55 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-18
+nov 18, 2024 12:50:58 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+nov 18, 2024 12:51:18 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+nov 18, 2024 12:54:38 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: performTransfer,Transferencia realizada de 1234567890 a 0987654321,2024-11-18
+nov 18, 2024 1:06:41 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+nov 18, 2024 1:11:04 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 305402601,2024-11-18
+nov 18, 2024 1:30:31 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+nov 18, 2024 1:31:36 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 573443295,2024-11-18
+nov 18, 2024 1:32:52 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 0987654321,2024-11-18

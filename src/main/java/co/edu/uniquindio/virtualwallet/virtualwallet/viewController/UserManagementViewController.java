@@ -21,7 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class UserManagementViewController extends CoreViewController  {
+public class UserManagementViewController extends CoreViewController implements ObserverView  {
 
     Administrator loggedAdmin;
     ObservableList<UserDto> userDtoList = FXCollections.observableArrayList();
@@ -147,6 +147,9 @@ public class UserManagementViewController extends CoreViewController  {
         userManagementController = new UserManagementController();
         loggedAdmin = (Administrator) Session.getInstance().getPerson();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.WITHDRAWAL, this);
+        ObserverManagement.getInstance().addObserver(EventType.DEPOSIT, this);
+        ObserverManagement.getInstance().addObserver(EventType.TRANSFER, this);
 
     }
 
@@ -357,5 +360,17 @@ public class UserManagementViewController extends CoreViewController  {
     }
 
 
+    @Override
+    public void updateView(EventType event) {
+        switch (event){
+            case DEPOSIT:
+            case TRANSFER:
+            case WITHDRAWAL:
+                tblUser.refresh();
+                break;
+            default:
+                break;
 
+        }
+    }
 }

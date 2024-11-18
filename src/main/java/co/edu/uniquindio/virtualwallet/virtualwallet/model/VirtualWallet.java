@@ -321,11 +321,13 @@ public class VirtualWallet implements Serializable {
         double amount = deposit.getAmount();
         Account account = deposit.getAccount();
 
-        account.setBalance(account.getBalance()+amount);
+        account.setBalance(account.getBalance() + amount);
 
         String idUser = account.getUser().getId();
         User user = findUserById(idUser);
         updateUserBalance(user);
+
+        account.getAssociatedDeposits().add(deposit);
 
     }
 
@@ -432,7 +434,7 @@ public class VirtualWallet implements Serializable {
         return totalIncome / deposits.size();
     }
 
-    public void getTransferToAccount(Transfer transfer) {
+    public void getTransferToAccount(Transfer transfer) throws IllegalArgumentException {
         Account sourceAccount = transfer.getAccount();
         Account receivingAccount = transfer.getReceivingAccount();
 
@@ -446,6 +448,15 @@ public class VirtualWallet implements Serializable {
         receivingAccount.setBalance(receivingAccount.getBalance() + transfer.getAmount());
         sourceAccount.getAssociatedTransfers().add(transfer);
         receivingAccount.getAssociatedTransfers().add(transfer);
+
+        String idUserSourceAccount = sourceAccount.getUser().getId();
+        String idUserReceivingAccount = receivingAccount.getUser().getId();
+        User user1 = findUserById(idUserSourceAccount);
+        User user2 = findUserById(idUserReceivingAccount);
+        updateUserBalance(user1);
+        updateUserBalance(user2);
+
+
     }
 
     public double getAverageUserBalance() {
@@ -523,7 +534,6 @@ public class VirtualWallet implements Serializable {
             }
         }
 
-        System.out.println("Total transacciones para el usuario " + user.getFullName() + ": " + totalTransaction); // Depuración
         return totalTransaction;
     }
 
@@ -563,7 +573,7 @@ public class VirtualWallet implements Serializable {
         throw new UserException("Usuario con ID " + id + " no encontrado."); // Lanza excepción si no se encuentra
     }
 
-    public void getWithdrawalToAccount(Withdrawal withdrawal) throws WithdrawalException  {
+    public void getWithdrawalToAccount(Withdrawal withdrawal) throws WithdrawalException {
         Account account = withdrawal.getAccount();
 
         double totalAmount = withdrawal.getAmount() + withdrawal.getCommission();
@@ -573,7 +583,7 @@ public class VirtualWallet implements Serializable {
 
         }
 
-        account.setBalance(account.getBalance()-totalAmount);
+        account.setBalance(account.getBalance() - totalAmount);
         account.getAssociatedWithdrawals().add(withdrawal);
         String idUser = account.getUser().getId();
         User user = findUserById(idUser);
@@ -581,10 +591,10 @@ public class VirtualWallet implements Serializable {
 
     }
 
-    private void updateUserBalance(User user){
+    private void updateUserBalance(User user) {
         double totalBalance = 0;
 
-        for (Account account: user.getAssociatedAccounts()) {
+        for (Account account : user.getAssociatedAccounts()) {
             totalBalance += account.getBalance();
         }
         user.setTotalBalance(totalBalance);
@@ -710,8 +720,8 @@ public class VirtualWallet implements Serializable {
     }
 
     public Account isAccountId(String id) {
-        for (Account receivingAccount: getAccounts()) {
-            if(receivingAccount.getAccountNumber().equals(id)){
+        for (Account receivingAccount : getAccounts()) {
+            if (receivingAccount.getAccountNumber().equals(id)) {
                 return receivingAccount;
             }
         }

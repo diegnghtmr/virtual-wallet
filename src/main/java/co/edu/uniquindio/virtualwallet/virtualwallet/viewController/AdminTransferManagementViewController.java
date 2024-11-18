@@ -280,7 +280,7 @@ public class AdminTransferManagementViewController extends CoreViewController im
                 cbSourceAccount.getValue(),
                 TransactionStatus.PENDING.name(),
                 cbReceivingAccount.getValue(),
-                6000);
+                300);
     }
 
     @Override
