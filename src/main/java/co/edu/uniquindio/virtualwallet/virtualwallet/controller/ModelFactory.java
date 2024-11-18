@@ -31,8 +31,6 @@ public class ModelFactory {
     IVirtualWalletMapper virtualWalletMapper = IVirtualWalletMapper.INSTANCE;
 
 
-
-
     //    RabbitFactory rabbitFactory;
 //    ConnectionFactory connectionFactory;
     // Singleton instance
@@ -576,7 +574,7 @@ public class ModelFactory {
             registerSystemActions("Budget added: " + budget.getName(), 1, "addBudget");
             saveXMLResource();
             return true;
-            } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             registerSystemActions(e.getMessage(), 3, "addBudget");
             return false;
@@ -589,6 +587,7 @@ public class ModelFactory {
             flagExist = getVirtualWallet().removeBudget(budgetSelected.id());
 
             if (flagExist) {
+                getVirtualWallet().removeBudgetFromUser(budgetSelected.user().getId(), budgetSelected.id());
                 registerSystemActions("Budget removed: " + budgetSelected.id(), 1, "removeBudget");
                 saveXMLResource();
             } else {
@@ -637,4 +636,61 @@ public class ModelFactory {
             return false;
         }
     }
+
+    public boolean addCategory(String idUser, CategoryDto categoryDto) {
+        try {
+            Category category = virtualWalletMapper.categoryDtoToCategory(categoryDto);
+            getVirtualWallet().getCategoryList().add(category);
+            getVirtualWallet().addCategoryToUser(idUser, category);
+            registerSystemActions("Category added: " + category.getName(), 1, "addCategory");
+            saveXMLResource();
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+            registerSystemActions(e.getMessage(), 3, "addCategory");
+            return false;
+        }
+    }
+
+    public boolean removeCategory(String idUser, String idCategory) {
+        boolean flagExist = false;
+        try {
+            flagExist = getVirtualWallet().removeCategory(idCategory);
+
+            if (flagExist) {
+                getVirtualWallet().removeCategoryFromUser(idUser, idCategory);
+                registerSystemActions("Category removed: " + idCategory, 1, "removeCategory");
+                saveXMLResource();
+            } else {
+                registerSystemActions("Attempted to remove non-existent category: " + idCategory, 2, "removeCategory");
+            }
+        } catch (Exception e) {
+            registerSystemActions(e.getMessage(), 3, "removeCategory");
+            e.printStackTrace();
+        }
+        return flagExist;
+    }
+
+    public boolean updateCategory(String idUser, CategoryDto categorySelected, CategoryDto categoryDto) {
+        boolean categoryUpdated = false;
+        try {
+            Category category = virtualWalletMapper.categoryDtoToCategory(categoryDto);
+            categoryUpdated = getVirtualWallet().updateCategory(idUser, categorySelected.id(), category);
+            if (categoryUpdated) {
+                registerSystemActions("Category updated: " + categoryDto.name(), 1, "updateCategory");
+                saveXMLResource();
+            } else {
+                registerSystemActions("Failed to update category: " + categoryDto.name(), 2, "updateCategory");
+            }
+        } catch (Exception e) {
+            registerSystemActions(e.getMessage(), 3, "updateCategory");
+            e.printStackTrace();
+        }
+        return categoryUpdated;
+    }
+
+    public boolean isCategoryExists(String id) {
+        return virtualWallet.isCategoryExists(id);
+    }
+
 }

@@ -7,6 +7,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionSt
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
+import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import lombok.*;
 
 import java.io.Serializable;
@@ -578,6 +579,13 @@ public class VirtualWallet implements Serializable {
         return budgetList.removeIf(budget -> budget.getId().equals(id));
     }
 
+    public void removeBudgetFromUser(String userId, String budgetId) {
+        User user = findUserById(userId);
+        if (user != null) {
+            user.getBudgetList().removeIf(budget -> budget.getId().equals(budgetId));
+        }
+    }
+
     public boolean updateBudget(String id, Budget updatedBudget) {
         for (int i = 0; i < budgetList.size(); i++) {
             Budget budget = budgetList.get(i);
@@ -623,6 +631,49 @@ public class VirtualWallet implements Serializable {
     private boolean validateIdRecivingAccount(String idReceivingAccount) {
         for (Account receivingAccount : getAccounts()) {
             if (receivingAccount.getAccountNumber().equals(idReceivingAccount)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addCategoryToUser(String idUser, Category category) {
+        User user = findUserById(idUser);
+        if (user != null) {
+            user.getCategoryList().add(category);
+            System.out.println("se agrego la categoria");
+        }
+    }
+
+    public boolean removeCategory(String idCategory) {
+        return categoryList.removeIf(category -> category.getId().equals(idCategory));
+    }
+
+    public void removeCategoryFromUser(String idUser, String idCategory) {
+        User user = findUserById(idUser);
+        if (user != null) {
+            user.getCategoryList().removeIf(category -> category.getId().equals(idCategory));
+            System.out.println("se elimino la categoria");
+        }
+    }
+
+    public boolean updateCategory(String idUser, String id, Category category) {
+        User user = findUserById(idUser);
+        if (user != null) {
+            for (int i = 0; i < user.getCategoryList().size(); i++) {
+                Category categoryCurrent = user.getCategoryList().get(i);
+                if (categoryCurrent.getId().equals(id)) {
+                    user.getCategoryList().set(i, category);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isCategoryExists(String id) {
+        for (Category category : categoryList) {
+            if (category.getId().equals(id)) {
                 return true;
             }
         }

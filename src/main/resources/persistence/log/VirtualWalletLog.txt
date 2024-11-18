@@ -98,3 +98,93 @@ Nov 17, 2024 8:31:36 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: login,Login,2024-11-17
 Nov 17, 2024 8:32:20 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 SEVERE: addWithdrawal,Fondos insuficientes,2024-11-17
+Nov 17, 2024 9:41:33 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 9:42:06 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: holaaa,2024-11-17
+Nov 17, 2024 9:42:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeCategory,Category removed: 2cd954db76369a9f2745d40730eba362,2024-11-17
+Nov 17, 2024 9:42:22 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: holaa,2024-11-17
+Nov 17, 2024 9:42:26 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateCategory,Category updated: holaa,2024-11-17
+Nov 17, 2024 9:50:39 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 9:51:48 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: holaaa,2024-11-17
+Nov 17, 2024 9:51:52 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateCategory,Category updated: holaaa,2024-11-17
+Nov 17, 2024 9:52:01 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateCategory,Category updated: holaa,2024-11-17
+Nov 17, 2024 9:52:07 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+WARNING: removeCategory,Attempted to remove non-existent category: 656324539,2024-11-17
+Nov 17, 2024 9:52:23 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+WARNING: removeCategory,Attempted to remove non-existent category: 656324539,2024-11-17
+Nov 17, 2024 9:53:13 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 9:53:29 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeBudget,Budget removed: B002,2024-11-17
+Nov 17, 2024 9:53:40 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeCategory,Category removed: 001,2024-11-17
+Nov 17, 2024 10:09:31 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 10:09:54 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeBudget,Budget removed: B001,2024-11-17
+Nov 17, 2024 10:10:00 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeCategory,Category removed: 002,2024-11-17
+Nov 17, 2024 10:10:25 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 10:11:37 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 10:11:56 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addBudget,Budget added: dfdfd,2024-11-17
+Nov 17, 2024 10:12:01 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeBudget,Budget removed: 469927116,2024-11-17
+Nov 17, 2024 10:12:10 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: aggg,2024-11-17
+Nov 17, 2024 10:12:15 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeCategory,Category removed: 980055440,2024-11-17
+Nov 17, 2024 10:13:09 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: asdasd,2024-11-17
+Nov 17, 2024 10:13:13 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateCategory,Category updated: asdasd,2024-11-17
+Nov 17, 2024 10:13:17 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+WARNING: removeCategory,Attempted to remove non-existent category: 161743125,2024-11-17
+Nov 17, 2024 10:13:36 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addBudget,Budget added: aaaa,2024-11-17
+Nov 17, 2024 10:13:43 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateBudget,Budget updated: aaaas,2024-11-17
+Nov 17, 2024 10:13:46 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeBudget,Budget removed: 767876589,2024-11-17
+Nov 17, 2024 10:14:14 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addBudget,Budget added: holaaa,2024-11-17
+Nov 17, 2024 10:14:23 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateBudget,Budget updated: nola,2024-11-17
+Nov 17, 2024 10:14:27 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeBudget,Budget removed: 311276978,2024-11-17
+Nov 17, 2024 10:22:10 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 10:22:43 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: p,2024-11-17
+Nov 17, 2024 10:30:42 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 10:30:58 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: jorge,2024-11-17
+Nov 17, 2024 10:31:04 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateCategory,Category updated: jorgeee,2024-11-17
+Nov 17, 2024 10:31:09 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeCategory,Category removed: 529361892,2024-11-17
+Nov 17, 2024 10:31:19 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: ahhhhh,2024-11-17
+Nov 17, 2024 10:31:25 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateCategory,Category updated: ahhhhh,2024-11-17
+Nov 17, 2024 10:31:29 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateCategory,Category updated: ahhhhh,2024-11-17
+Nov 17, 2024 10:31:32 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeCategory,Category removed: 449896079,2024-11-17
+Nov 17, 2024 10:31:40 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addBudget,Budget added: 4323432,2024-11-17
+Nov 17, 2024 10:31:44 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateBudget,Budget updated: 4323432,2024-11-17
+Nov 17, 2024 10:31:51 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeBudget,Budget removed: 466778374,2024-11-17

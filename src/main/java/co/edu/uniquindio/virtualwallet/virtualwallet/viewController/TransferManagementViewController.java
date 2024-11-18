@@ -201,12 +201,15 @@ public class TransferManagementViewController extends CoreViewController impleme
     }
 
     private TransferDto buildTransfer() {
-        // Generación de ID de transacción único
-        SecureRandom random = new SecureRandom();
         String idNumber;
-        do {
-            idNumber = String.format("%09d", random.nextInt(1_000_000_000));
-        } while (transferManagementController.isTransactionIdExists(idNumber));
+        if (transferSelected != null) {
+            idNumber = transferSelected.idTransaction();
+        } else {
+            SecureRandom random = new SecureRandom();
+            do {
+                idNumber = String.format("%09d", random.nextInt(1_000_000_000));
+            } while (transferManagementController.isTransactionIdExists(idNumber));
+        }
 
         // Validar y convertir el monto
         String amountText = txtAmount.getText();

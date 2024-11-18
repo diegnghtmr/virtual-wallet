@@ -175,11 +175,15 @@ public class BudgetManagementViewController extends CoreViewController implement
     }
 
     private BudgetDto buildBudgetDto() {
-        SecureRandom random = new SecureRandom();
         String id;
-        do {
-            id = String.format("%09d", random.nextInt(1_000_000_000));
-        } while (budgetManagementController.isBudgetIdExists(id));
+        if (budgetSelected != null) {
+            id = budgetSelected.id();
+        } else {
+            SecureRandom random = new SecureRandom();
+            do {
+                id = String.format("%09d", random.nextInt(1_000_000_000));
+            } while (budgetManagementController.isBudgetIdExists(id));
+        }
         String name = txtNombre.getText();
         double totalAmount = 0;
         try {

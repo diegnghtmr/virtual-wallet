@@ -150,21 +150,18 @@ public class CategoryManagementViewController extends CoreViewController impleme
     }
 
     private CategoryDto buildCategoryDto() {
-        String id = categorySelected != null ? categorySelected.id() : generateId();
+        String id;
+        if (categorySelected != null) {
+            id = categorySelected.id();
+        } else {
+            SecureRandom random = new SecureRandom();
+            do {
+                id = String.format("%09d", random.nextInt(1_000_000_000));
+            } while (categoryManagementController.isCategoryExists(id));
+        }
         String name = txtName.getText().trim();
         String description = txtaDescription.getText().trim();
         return new CategoryDto(id, name, description, new ArrayList<BudgetDto>(), new ArrayList<Transaction>());
-    }
-
-    private String generateId() {
-        SecureRandom random = new SecureRandom();
-        byte[] bytes = new byte[16];
-        random.nextBytes(bytes);
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
     }
 
     private void addCategory() {
@@ -209,7 +206,7 @@ public class CategoryManagementViewController extends CoreViewController impleme
                     return;
                 }
                 int selecIndex = tblCatergory.getSelectionModel().getSelectedIndex();
-                categoryUpdated = categoryManagementController.updateCategory(loggedUser.getId(), categoryDto);
+                categoryUpdated = categoryManagementController.updateCategory(loggedUser.getId(), categorySelected, categoryDto);
                 if (categoryUpdated) {
                     categoryListDto.set(selecIndex, categoryDto);
                     tblCatergory.refresh();

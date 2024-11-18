@@ -181,11 +181,15 @@ public class DepositManagementViewController extends CoreViewController implemen
     }
 
     private DepositDto buildDeposit() {
-        SecureRandom random = new SecureRandom();
         String idNumber;
-        do {
-            idNumber = String.format("%09d", random.nextInt(1_000_000_000));
-        } while (depositManagementController.isTransactionIdExists(idNumber));
+        if (depositSelected != null) {
+            idNumber = depositSelected.idTransaction();
+        } else {
+            SecureRandom random = new SecureRandom();
+            do {
+                idNumber = String.format("%09d", random.nextInt(1_000_000_000));
+            } while (depositManagementController.isTransactionIdExists(idNumber));
+        }
 
         String amountText = txtAmount.getText();
         if (amountText.isEmpty()) {
