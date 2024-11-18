@@ -12,7 +12,7 @@ public class TransferManagementController extends CoreController {
     }
 
     public  boolean isTransactionIdExists(String idNumber) {
-        return isTransactionIdExists(idNumber);
+        return modelFactory.isTransactionIdExists(idNumber);
     }
 
     public boolean addTransfer(TransferDto transferDto) {

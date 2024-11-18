@@ -188,3 +188,7 @@ Nov 17, 2024 10:31:44 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.Fil
 INFO: updateBudget,Budget updated: 4323432,2024-11-17
 Nov 17, 2024 10:31:51 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: removeBudget,Budget removed: 466778374,2024-11-17
+Nov 17, 2024 10:45:24 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
+Nov 17, 2024 10:47:38 PM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-17
