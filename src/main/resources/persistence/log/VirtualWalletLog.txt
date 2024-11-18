@@ -308,3 +308,7 @@ Nov 18, 2024 2:22:49 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.File
 INFO: AddRetiro,Transferencia realizada de 0987654321,2024-11-18
 Nov 18, 2024 2:26:59 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-18
+Nov 18, 2024 2:30:36 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
+Nov 18, 2024 2:30:55 AM co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-18
