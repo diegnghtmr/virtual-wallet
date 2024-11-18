@@ -1,0 +1,100 @@
+.dialog-pane {
+    -fx-background-color: #f8f9fa;
+    -fx-padding: 20px;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.dialog-pane > .content {
+    -fx-font-size: 16px;  // Aumentado de 14px a 16px
+-fx-padding: 15px 10px 10px 10px;
+    -fx-text-fill: #495057;
+}
+
+.dialog-pane > .header-panel {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 10px 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #dee2e6;
+}
+
+.dialog-pane > .header-panel > .label {
+    -fx-font-size: 22px;  // Aumentado de 18px a 22px
+-fx-font-weight: bold;
+    -fx-text-fill: #212529;
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-background-color: transparent;
+    -fx-padding: 20px 0 0 0;
+}
+
+.dialog-pane > .button-bar > .container > .button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;  // Aumentado de 8px 16px a 10px 20px
+-fx-background-radius: 4px;
+    -fx-font-size: 16px;  // Aumentado de 14px a 16px
+-fx-cursor: hand;
+}
+
+.dialog-pane > .button-bar > .container > .button:hover {
+    -fx-background-color: #0056b3;
+}
+
+/* Estilos específicos para cada tipo de alerta */
+.custom-info {
+    -fx-background-color: linear-gradient(to bottom right, #e8f4fd, #f8f9fa);
+}
+
+.custom-confirmation {
+    -fx-background-color: linear-gradient(to bottom right, #e8f8ed, #f8f9fa);
+}
+
+.custom-error {
+    -fx-background-color: linear-gradient(to bottom right, #fde8e8, #f8f9fa);
+}
+
+.custom-warning {
+    -fx-background-color: linear-gradient(to bottom right, #fff3e0, #f8f9fa);
+}
+
+.custom-info > .header-panel > .label {
+    -fx-text-fill: #0c5460;
+}
+
+.custom-confirmation > .header-panel > .label {
+    -fx-text-fill: #155724;
+}
+
+.custom-error > .header-panel > .label {
+    -fx-text-fill: #721c24;
+}
+
+.custom-warning > .header-panel > .label {
+    -fx-text-fill: #856404;
+}
+
+/* Estilo para el ícono */
+.dialog-pane > .graphic-container {
+    -fx-padding: 0 15px 0 0;  // Ajustado para acomodar el ícono más grande
+}
+
+.dialog-pane > .header-panel > .graphic-container > * {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 1);
+}
+
+/* Mejora de la accesibilidad */
+.dialog-pane:focused,
+.dialog-pane > .button-bar > .container > .button:focused {
+    -fx-effect: dropshadow(three-pass-box, #007bff, 10, 0, 0, 0);
+}
+
+/* Ajustes adicionales para mejorar el layout con elementos más grandes */
+.dialog-pane > .content-panel {
+    -fx-padding: 0 10px;
+}
+
+.dialog-pane > .header-panel {
+    -fx-padding: 0 0 15px 0;  // Aumentado el padding inferior
+}
