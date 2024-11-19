@@ -1,6 +1,7 @@
 package co.edu.uniquindio.virtualwallet.virtualwallet.model;
 
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AccountException;
+import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.AdministratorException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.UserException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.exceptions.WithdrawalException;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionStatus;
@@ -483,9 +484,8 @@ public class VirtualWallet implements Serializable {
                     double totalExpenses = calculateTotalExpensesCommon(category);
                     commonExpenses.put(category.getName(), commonExpenses.getOrDefault(category.getName(), 0.0) + totalExpenses);
                 }
-            } else {
-                System.out.println("El usuario " + user.getFullName() + " tiene la lista de categorías vacía");
             }
+
         }
         return commonExpenses;
     }
@@ -724,6 +724,24 @@ public class VirtualWallet implements Serializable {
             if (receivingAccount.getAccountNumber().equals(id)) {
                 return receivingAccount;
             }
+        }
+        return null;
+    }
+
+    public void updateAdmin(String id, Administrator admin) throws AdministratorException {
+        if (!administrator.getId().equals(id)) {
+            throw new AdministratorException("El ID proporcionado no coincide con el administrador actual") ;
+        }
+        administrator.setFullName(admin.getFullName());
+        administrator.setFullName(admin.getPhoneNumber());
+        administrator.setBirthDate(admin.getBirthDate());
+        administrator.setRegistrationDate(admin.getRegistrationDate());
+
+    }
+
+    public Administrator getAdminById(String id) {
+        if (administrator.getId().equals(id)) {
+            return administrator;
         }
         return null;
     }

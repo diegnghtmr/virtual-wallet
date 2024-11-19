@@ -32,7 +32,6 @@ public class ModelFactory {
 
 
 
-
     //    RabbitFactory rabbitFactory;
 //    ConnectionFactory connectionFactory;
     // Singleton instance
@@ -698,5 +697,27 @@ public class ModelFactory {
     public Account isAccountId(String id) {
         return virtualWallet.isAccountId(id);
     }
+
+    public boolean updateAdmin(Administrator person, AdministratorDto administratorDto) {
+        try {
+            Administrator admin = virtualWalletMapper.administratorDtoToAdministrator(administratorDto);
+            getVirtualWallet().updateAdmin(person.getId(), admin);
+            registerSystemActions("Administrador actualizado: "+ administratorDto.email(), 1, "updateAdmin");
+            saveXMLResource();
+            return true;
+        } catch (Exception e) {
+            registerSystemActions(e.getMessage(), 3, "updateAdmin");
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public Administrator getAdminById(String id) {
+        return virtualWallet.getAdminById(id);
+
+    }
+
+
 
 }
