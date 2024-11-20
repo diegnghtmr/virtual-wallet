@@ -3,6 +3,7 @@ package co.edu.uniquindio.virtualwallet.virtualwallet.controller;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.DepositDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 
 import java.util.List;
 
@@ -30,5 +31,9 @@ public class AdminDepositController extends CoreController {
 
     public boolean adminAddDeposit(DepositDto depositDto) {
         return modelFactory.adminAddDeposit(depositDto);
+    }
+
+    public User searchUserDeposit(DepositDto depositDto) {
+        return modelFactory.searchUserDeposit(depositDto);
     }
 }

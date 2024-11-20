@@ -174,6 +174,7 @@ public class WithdrawalManagementViewController extends CoreViewController imple
         }
         if (validateData(withdrawalDto)) {
             if (withdrawalManagementController.userAddWithdrawal(withdrawalDto)) {
+                withdrawalDto = withdrawalDto.withStatus(TransactionStatus.ACCEPTED.name());
                 withdrawalListDto.add(withdrawalDto);
                 showMessage("Notificación", "Retiro exitoso", "El retiro se ha realizado con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
@@ -193,6 +194,8 @@ public class WithdrawalManagementViewController extends CoreViewController imple
                 loggedUser.update(withdrawalNotification);
             } else {
                 showMessage("Error", "Retiro no realizado", "No se pudo hacer el retiro", Alert.AlertType.ERROR);
+                 withdrawalDto = withdrawalDto.withStatus(TransactionStatus.REJECTED.name());
+                 withdrawalListDto.add(withdrawalDto);
             }
         }
     }

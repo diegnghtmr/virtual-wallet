@@ -26,4 +26,18 @@ public record WithdrawalDto(
     public String statusType() {
         return I18n.get("transaction.status." + status);
     }
+
+    public WithdrawalDto withStatus(String newStatus) {
+        return new WithdrawalDto(
+                this.idTransaction,
+                this.date,
+                this.amount,
+                this.description,
+                this.category,
+                this.account,
+                newStatus,  // Estado actualizado
+                this.commission,
+                this.withdrawalLimit
+        );
+    }
 }

@@ -11,6 +11,10 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.WithdrawalDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
@@ -185,13 +189,30 @@ public class AdminWithdrawalManagementViewController extends CoreViewController 
         }
         if (validateData(withdrawalDto)) {
             if (adminWithdrawalManagementController.addWithdrawal(withdrawalDto)) {
+                withdrawalDto = withdrawalDto.withStatus(TransactionStatus.ACCEPTED.name());
                 withdrawalDtoList.add(withdrawalDto);
                 showMessage("Notificación", "Retiro exitoso", "El retiro se ha realizado con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
                 ObserverManagement.getInstance().notifyObservers(EventType.WITHDRAWAL);
 
+                String withdrawalMessage = I18n.getFormatted(
+                        "notification.message.WITHDRAWAL",
+                        withdrawalDto.statusType(),
+                        withdrawalDto.idTransaction()
+                );
+                NotificationUtil withdrawalNotification = new NotificationUtil(
+                        withdrawalMessage,
+                        LocalDate.now(),
+                        NotificationType.TRANSACTION
+                );
+
+                User user = adminWithdrawalManagementController.searchUserWithDrawal(withdrawalDto);
+                user.update(withdrawalNotification);
+
             } else {
                 showMessage("Error", "Retiro no realizado", "No se pudo hacer el retiro", Alert.AlertType.ERROR);
+                withdrawalDto = withdrawalDto.withStatus(TransactionStatus.REJECTED.name());
+                withdrawalDtoList.add(withdrawalDto);
             }
         }
     }

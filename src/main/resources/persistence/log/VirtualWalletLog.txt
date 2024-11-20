@@ -358,3 +358,61 @@ nov 19, 2024 3:37:26 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils
 INFO: updateAdmin,Administrador actualizado: virtualwalletuq@gmail.com,2024-11-19
 nov 19, 2024 3:38:38 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
 INFO: login,Login,2024-11-19
+nov 19, 2024 5:30:27 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-19
+nov 19, 2024 5:31:01 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addWithdrawal,Withdrawal added: 583450126,2024-11-19
+nov 19, 2024 5:48:33 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-19
+nov 19, 2024 5:48:57 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 861080819,2024-11-19
+nov 19, 2024 5:49:47 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 0987654321,2024-11-19
+nov 19, 2024 6:17:22 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-19
+nov 19, 2024 6:18:24 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 878997549,2024-11-19
+nov 19, 2024 6:52:53 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: login,Login,2024-11-19
+nov 19, 2024 6:54:39 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: performTransfer,Transferencia realizada de 5566778899 a 0987654321,2024-11-19
+nov 19, 2024 6:55:56 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,CheckingAccountDto added: 69,2024-11-19
+nov 19, 2024 6:56:08 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addBudget,Budget added: w,2024-11-19
+nov 19, 2024 6:56:28 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 719038850,2024-11-19
+nov 19, 2024 6:56:42 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addCategory,Category added: pr,2024-11-19
+nov 19, 2024 6:57:34 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addWithdrawal,Withdrawal added: 912006037,2024-11-19
+nov 19, 2024 6:57:43 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: AddRetiro,Transferencia realizada de 1234567890,2024-11-19
+nov 19, 2024 6:58:41 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeAccount,Account removed: 69,2024-11-19
+nov 19, 2024 6:59:26 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateAccount,Account updated: 1234567890,2024-11-19
+nov 19, 2024 6:59:32 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeBudget,Budget removed: 307466491,2024-11-19
+nov 19, 2024 6:59:40 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateBudget,Budget updated: Mensualidad Comidaa,2024-11-19
+nov 19, 2024 6:59:54 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateCategory,Category updated: pr,2024-11-19
+nov 19, 2024 6:59:57 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeCategory,Category removed: 243444713,2024-11-19
+nov 19, 2024 7:00:32 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateUser,User updated: diegoa.floresq@uqvirtual.edu.co,2024-11-19
+nov 19, 2024 7:01:07 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: updateAdmin,Administrador actualizado: virtualwalletuq@gmail.com,2024-11-19
+nov 19, 2024 7:02:27 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,SavingsAccountDto added: 03247836253,2024-11-19
+nov 19, 2024 7:04:11 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addUser,User added: 5455668,2024-11-19
+nov 19, 2024 7:04:31 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: adminUpdateUser,User updated: jorgetoro708@gmail.com,2024-11-19
+nov 19, 2024 7:05:01 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addAccount,CheckingAccountDto added: 4373264382473,2024-11-19
+nov 19, 2024 7:05:18 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: removeUser,Usuario eliminado: 1090273361,2024-11-19
+nov 19, 2024 7:06:33 P. M. co.edu.uniquindio.virtualwallet.virtualwallet.utils.FileUtil saveLogRecord
+INFO: addDeposit,DepositDto added: 733964820,2024-11-19

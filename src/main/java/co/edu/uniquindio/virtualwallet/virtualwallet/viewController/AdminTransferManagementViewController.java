@@ -11,7 +11,11 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.TransferDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
@@ -206,22 +210,43 @@ public class AdminTransferManagementViewController extends CoreViewController im
         if (validateData(transferDto)) {
             if (showConfirmationMessage("¿Está seguro de realizar la transferencia?")) {
                 if (adminTransferManagementController.performTransfer(transferDto)) {
+                    transferDto = transferDto.withStatus(TransactionStatus.ACCEPTED.name());
                     transferDtoList.add(transferDto);
                     showMessage("Notificación", "Transferencia exitosa", "La transferencia se ha realizado con éxito", Alert.AlertType.INFORMATION);
                     clearFields();
                     ObserverManagement.getInstance().notifyObservers(EventType.TRANSFER);
+                    String transferMessage = I18n.getFormatted(
+                            "notification.message.TRANSFER",
+                            transferDto.statusType(),
+                            transferDto.idTransaction()
+                    );
+                    NotificationUtil depositNotification = new NotificationUtil(
+                            transferMessage,
+                            LocalDate.now(),
+                            NotificationType.TRANSACTION
+                    );
+
+                    User user = adminTransferManagementController.searchUserTransfer(transferDto);
+                    User userReceiving = adminTransferManagementController.searchUserTransferReceiving(transferDto);
+                    user.update(depositNotification);
+                    userReceiving.update(depositNotification);
+
+
 
                 } else {
                     showMessage("Error", "Transferencia no realizada", "La cuenta no tiene saldo suficiente", Alert.AlertType.ERROR);
+                    transferDto = transferDto.withStatus(TransactionStatus.REJECTED.name());
+                    transferDtoList.add(transferDto);
 
                 }
 
             } else {
                 showMessage("Operación cancelada", "Transferencia no realizada", "Ha cancelado la transferencia.", Alert.AlertType.WARNING);
+                transferDto = transferDto.withStatus(TransactionStatus.REJECTED.name());
+                transferDtoList.add(transferDto);
             }
         }
     }
-
 
     private boolean validateData(TransferDto transferDto) {
         String message = "";

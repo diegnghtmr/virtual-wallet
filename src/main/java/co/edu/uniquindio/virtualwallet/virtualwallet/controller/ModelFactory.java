@@ -718,6 +718,32 @@ public class ModelFactory {
 
     }
 
+    public User searchUserDeposit(DepositDto depositDto) {
+        Deposit deposit = virtualWalletMapper.depositDtoToDeposit(depositDto);
+        User user = virtualWallet.searchUserDeposit(deposit);
+        return user;
+    }
+
+    public User searchUserTransfer(TransferDto transferDto) {
+        Transfer transfer = virtualWalletMapper.transferDtoToTransfer(transferDto);
+        User user = virtualWallet.searchUserTransfer(transfer);
+        return user;
+    }
+
+    public User searchUserTransferReceiving(TransferDto transferDto) {
+        Transfer transfer = virtualWalletMapper.transferDtoToTransfer(transferDto);
+        User user = virtualWallet.searchUserTransferReceiving(transfer);
+        return user;
+    }
+
+    public User searchUserWithDrawal(WithdrawalDto withdrawalDto) {
+        Withdrawal withdrawal = virtualWalletMapper.withdrawalDtoToWithdrawal(withdrawalDto);
+        User user = virtualWallet.searchUserWithDrawal(withdrawal);
+        return user;
+    }
+
+
+
 
 
 }

@@ -26,4 +26,18 @@ public record TransferDto (
     public String statusType() {
         return I18n.get("transaction.status." + status);
     }
+
+    public TransferDto withStatus(String newStatus) {
+        return new TransferDto(
+                this.idTransaction,
+                this.date,
+                this.amount,
+                this.description,
+                this.category,
+                this.account,
+                newStatus,  // Estado actualizado
+                this.receivingAccount,
+                this.commission
+        );
+    }
 }

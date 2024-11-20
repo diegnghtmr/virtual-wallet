@@ -171,6 +171,7 @@ public class DepositManagementViewController extends CoreViewController implemen
         }
         if (validateData(depositDto)) {
             if (depositManagementController.addDeposit(depositDto)) {
+                depositDto = depositDto.withStatus(TransactionStatus.ACCEPTED.name());
                 depositListDto.add(depositDto);
                 showMessage("Depósito", "Depósito agregado correctamente",
                         "El depósito ha sido agregado correctamente", Alert.AlertType.INFORMATION);
@@ -191,6 +192,8 @@ public class DepositManagementViewController extends CoreViewController implemen
             } else {
                 showMessage("Error", "Error al agregar el depósito",
                         "Ha ocurrido un error al agregar el depósito, por favor intente nuevamente", Alert.AlertType.ERROR);
+                depositDto = depositDto.withStatus(TransactionStatus.REJECTED.name());
+                depositListDto.add(depositDto);
             }
         }
     }

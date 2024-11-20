@@ -187,9 +187,11 @@ public class TransferManagementViewController extends CoreViewController impleme
         if (validateData(transferDto)) {
             if (showConfirmationMessage("¿Está seguro de realizar la transferencia?")) {
                 if (transferManagementController.addTransfer(transferDto)) {
+                    transferDto = transferDto.withStatus(TransactionStatus.ACCEPTED.name()); // Cambiar estado a ACCEPTED
                     transferListDto.add(transferDto);
                     showMessage("Notificación", "Transferencia exitosa", "La transferencia se ha realizado con éxito", Alert.AlertType.INFORMATION);
                     clearFields();
+
                     ObserverManagement.getInstance().notifyObservers(EventType.TRANSFER);
                     // Create and send the transfer notification with localized status and transaction ID
                     String transferMessage = I18n.getFormatted(
@@ -210,6 +212,8 @@ public class TransferManagementViewController extends CoreViewController impleme
 
             } else {
                 showMessage("Operación cancelada", "Transferencia no realizada", "Ha cancelado la transferencia.", Alert.AlertType.WARNING);
+                transferDto =  transferDto.withStatus(TransactionStatus.REJECTED.name());
+                transferListDto.add(transferDto);
             }
         }
     }

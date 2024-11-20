@@ -24,4 +24,19 @@ public record DepositDto(
     public String statusType() {
         return I18n.get("transaction.status." + status);
     }
+
+
+    public DepositDto withStatus(String newStatus) {
+        return new DepositDto(
+                this.idTransaction,
+                this.date,
+                this.amount,
+                this.description,
+                this.category,
+                this.account,
+                newStatus  // Estado actualizado
+        );
+    }
+
+
 }

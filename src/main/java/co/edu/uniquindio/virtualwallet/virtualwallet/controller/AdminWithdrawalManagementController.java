@@ -4,6 +4,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.Withdrawal;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.WithdrawalDto;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 
 import java.util.List;
 
@@ -31,5 +32,9 @@ public class AdminWithdrawalManagementController extends CoreController{
 
     public boolean addWithdrawal(WithdrawalDto withdrawalDto) {
        return modelFactory.addWithdrawal(withdrawalDto);
+    }
+
+    public User searchUserWithDrawal(WithdrawalDto withdrawalDto) {
+        return modelFactory.searchUserWithDrawal(withdrawalDto);
     }
 }

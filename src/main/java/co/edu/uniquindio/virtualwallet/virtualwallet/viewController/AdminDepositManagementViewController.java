@@ -10,10 +10,12 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionSt
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.DepositDto;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.services.AccountDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.Administrator;
-import co.edu.uniquindio.virtualwallet.virtualwallet.services.Observable;
+import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.I18n;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.NotificationUtil;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
+import co.edu.uniquindio.virtualwallet.virtualwallet.utils.enums.NotificationType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
@@ -176,12 +178,28 @@ public class AdminDepositManagementViewController extends CoreViewController imp
         }
         if (validateData(depositDto)) {
             if (adminDepositController.adminAddDeposit(depositDto)) {
+                depositDto = depositDto.withStatus(TransactionStatus.ACCEPTED.name());
                 depositsListDto.add(depositDto);
                 showMessage("Notificación", "depósito agregado", "el deposito ha sido agregado con éxito", Alert.AlertType.INFORMATION);
                 clearFields();
                 ObserverManagement.getInstance().notifyObservers(EventType.DEPOSIT);
+
+                String depositMessage = I18n.getFormatted(
+                        "notification.message.DEPOSIT",
+                        depositDto.statusType(),
+                        depositDto.idTransaction()
+                );
+                NotificationUtil depositNotification = new NotificationUtil(
+                        depositMessage,
+                        LocalDate.now(),
+                        NotificationType.TRANSACTION
+                );
+                User user = adminDepositController.searchUserDeposit(depositDto);
+                user.update(depositNotification);
             } else {
                 showMessage("Error", "Depósito no agregado", "El depósito no ha sido agregado con éxito", Alert.AlertType.ERROR);
+                depositDto = depositDto.withStatus(TransactionStatus.REJECTED.name());
+                depositsListDto.add(depositDto);
             }
         }
     }

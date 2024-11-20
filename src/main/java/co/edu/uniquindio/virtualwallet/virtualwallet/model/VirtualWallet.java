@@ -8,7 +8,6 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.factory.enums.TransactionSt
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Account;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.Transaction;
 import co.edu.uniquindio.virtualwallet.virtualwallet.factory.inter.implementation.*;
-import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import lombok.*;
 
 import java.io.Serializable;
@@ -330,6 +329,8 @@ public class VirtualWallet implements Serializable {
 
         account.getAssociatedDeposits().add(deposit);
 
+        deposit.setStatus(TransactionStatus.ACCEPTED);
+
     }
 
     public List<Category> getCategoryListByUserId(String userId) {
@@ -579,7 +580,9 @@ public class VirtualWallet implements Serializable {
         double totalAmount = withdrawal.getAmount() + withdrawal.getCommission();
 
         if (account.getBalance() < totalAmount) {
+            withdrawal.setStatus(TransactionStatus.REJECTED);
             throw new WithdrawalException("Fondos insuficientes");
+
 
         }
 
@@ -588,6 +591,8 @@ public class VirtualWallet implements Serializable {
         String idUser = account.getUser().getId();
         User user = findUserById(idUser);
         updateUserBalance(user);
+
+        withdrawal.setStatus(TransactionStatus.ACCEPTED);
 
     }
 
@@ -661,6 +666,8 @@ public class VirtualWallet implements Serializable {
             updateUserBalance(user1);
             updateUserBalance(user2);
 
+            transfer.setStatus(TransactionStatus.ACCEPTED);
+
         } else {
             transfer.setStatus(TransactionStatus.REJECTED);
         }
@@ -733,7 +740,7 @@ public class VirtualWallet implements Serializable {
             throw new AdministratorException("El ID proporcionado no coincide con el administrador actual") ;
         }
         administrator.setFullName(admin.getFullName());
-        administrator.setFullName(admin.getPhoneNumber());
+        administrator.setPhoneNumber(admin.getPhoneNumber());
         administrator.setBirthDate(admin.getBirthDate());
         administrator.setRegistrationDate(admin.getRegistrationDate());
 
@@ -744,5 +751,27 @@ public class VirtualWallet implements Serializable {
             return administrator;
         }
         return null;
+    }
+
+    public User searchUserDeposit(Deposit deposit) {
+        Account account = deposit.getAccount();
+
+        return account.getUser();
+
+    }
+
+    public User searchUserTransfer(Transfer transfer) {
+        Account account = transfer.getAccount();
+        return account.getUser();
+    }
+
+    public User searchUserTransferReceiving(Transfer transfer) {
+        Account accountReceiving = transfer.getReceivingAccount();
+        return accountReceiving.getUser();
+    }
+
+    public User searchUserWithDrawal(Withdrawal withdrawal) {
+        Account account = withdrawal.getAccount();
+        return account.getUser();
     }
 }
