@@ -68,7 +68,7 @@ public class VirtualWalletUtils {
         // Create example users
         User user1 = User.builder()
                 .id("1097032932")
-                .fullName("Jorge William Montoya")
+                .fullName("Diego Alejandro Flores")
                 .phoneNumber("3244544139")
                 .email("diegoa.floresq@uqvirtual.edu.co") //jorgew.montoyat@uqvirtual.edu.co
                 .password("maloh")
