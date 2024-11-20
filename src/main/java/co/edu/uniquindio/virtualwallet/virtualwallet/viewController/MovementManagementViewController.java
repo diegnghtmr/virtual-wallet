@@ -114,6 +114,8 @@ public class MovementManagementViewController extends CoreViewController impleme
         initView();
 
         ObserverManagement.getInstance().addObserver(EventType.DEPOSIT, this);
+        ObserverManagement.getInstance().addObserver(EventType.WITHDRAWAL, this);
+        ObserverManagement.getInstance().addObserver(EventType.TRANSFER, this);
         ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
     }
 
@@ -263,6 +265,14 @@ public class MovementManagementViewController extends CoreViewController impleme
                 break;
             case ACCOUNT:
                 initializeDataComboBox();
+                break;
+            case WITHDRAWAL:
+                getTransactionList();
+                tblMovement.refresh();
+                break;
+            case TRANSFER:
+                getTransactionList();
+                tblMovement.refresh();
                 break;
             default:
                 break;

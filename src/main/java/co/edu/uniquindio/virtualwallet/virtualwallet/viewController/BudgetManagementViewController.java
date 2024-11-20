@@ -6,6 +6,7 @@ import co.edu.uniquindio.virtualwallet.virtualwallet.mapping.dto.CategoryDto;
 import co.edu.uniquindio.virtualwallet.virtualwallet.model.User;
 import co.edu.uniquindio.virtualwallet.virtualwallet.utils.Session;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.EventType;
+import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverManagement;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.observer.ObserverView;
 import co.edu.uniquindio.virtualwallet.virtualwallet.viewController.services.ICoreViewController;
 import javafx.beans.property.SimpleStringProperty;
@@ -99,6 +100,7 @@ public class BudgetManagementViewController extends CoreViewController implement
         budgetManagementController = new BudgetManagementController();
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
+        ObserverManagement.getInstance().addObserver(EventType.CATEGORY, this);
     }
 
     @Override

@@ -97,6 +97,7 @@ public class DepositManagementViewController extends CoreViewController implemen
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
         ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
+        ObserverManagement.getInstance().addObserver(EventType.CATEGORY, this);
     }
 
     @Override
@@ -273,6 +274,8 @@ public class DepositManagementViewController extends CoreViewController implemen
     @Override
     public void updateView(EventType event) {
         if (event == EventType.ACCOUNT) {
+            initializeDataComboBox();
+        } else if (event == EventType.CATEGORY) {
             initializeDataComboBox();
         }
     }

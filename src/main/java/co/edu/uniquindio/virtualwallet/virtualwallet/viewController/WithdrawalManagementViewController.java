@@ -100,6 +100,7 @@ public class WithdrawalManagementViewController extends CoreViewController imple
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
         ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
+        ObserverManagement.getInstance().addObserver(EventType.CATEGORY, this);
     }
 
     @Override
@@ -276,7 +277,8 @@ public class WithdrawalManagementViewController extends CoreViewController imple
     public void updateView(EventType event) {
         if (event == EventType.ACCOUNT) {
             initializeDataComboBox();
+        } else if (event == EventType.CATEGORY) {
+            initializeDataComboBox();
         }
-
     }
 }

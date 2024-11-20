@@ -108,6 +108,7 @@ public class TransferManagementViewController extends CoreViewController impleme
         loggedUser = (User) Session.getInstance().getPerson();
         initView();
         ObserverManagement.getInstance().addObserver(EventType.ACCOUNT, this);
+        ObserverManagement.getInstance().addObserver(EventType.CATEGORY, this);
     }
 
     @Override
@@ -301,8 +302,9 @@ public class TransferManagementViewController extends CoreViewController impleme
     public void updateView(EventType event) {
         if (event == EventType.ACCOUNT) {
             initializeDataComboBox();
+        } else if (event == EventType.CATEGORY) {
+            initializeDataComboBox();
         }
-
     }
 
 
