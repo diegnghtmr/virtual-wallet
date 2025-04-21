@@ -1,0 +1,2 @@
+John Doe@@123456789@@123 Main St@@john.doe@example.com@@1990-01-01@@555-1234@@p1ssw0rd@@2023-01-01@@1000.0
+Jane Smith@@987654321@@456 Elm St@@jane.smith@example.com@@1992-02-02@@555-5678@@password456@@2023-02-01@@2000.0

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.CommonExpensesViewController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#080e48" height="51.0" layoutX="50.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1179.0" />
+      <Label fx:id="pcCommonExpenses" alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="1.0" text="Gastos Comunes" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <PieChart fx:id="pc" layoutX="507.0" layoutY="102.0" prefHeight="501.0" prefWidth="669.0" />
+      <Line endX="100.0" endY="-160.0" layoutX="387.0" layoutY="260.0" startX="100.0" startY="326.66668701171875" />
+      <Line endX="740.3333740234375" endY="326.66668701171875" layoutX="428.0" layoutY="301.0" startX="65.3333740234375" startY="326.66668701171875" />
+      <Button fx:id="btnReturn" layoutX="81.0" layoutY="555.0" mnemonicParsing="false" onAction="#onReturn" prefHeight="39.0" prefWidth="113.0" style="-fx-background-color: #1971c2;" text="volver" textFill="#efefef" />
+   </children>
+</AnchorPane>

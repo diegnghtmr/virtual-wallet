@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.ValidationViewController">
+   <VBox alignment="CENTER" maxWidth="600" spacing="20.0" style="-fx-background-color: #f0f0f0;">
+      <padding>
+         <Insets bottom="20" left="20" right="20" top="20" />
+      </padding>
+
+      <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1971c2;" text="Escribe el código">
+         <effect>
+            <DropShadow color="#00000040" radius="5" spread="0.2" />
+         </effect>
+      </Label>
+
+      <Label style="-fx-font-size: 16px; -fx-text-fill: #333333;" text="Escribe el código de verificación para continuar">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" />
+         </VBox.margin></Label>
+
+      <TextField fx:id="txtVerificationCode" promptText="Código" style="-fx-background-radius: 25; -fx-font-size: 14px; -fx-padding: 10 15 10 15;">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" />
+         </VBox.margin></TextField>
+
+      <VBox alignment="CENTER" spacing="10">
+         <Button fx:id="btnVerifyCode" minHeight="50.0" minWidth="200.0" onAction="#onVerifyCode" style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 25;">
+            <effect>
+               <DropShadow color="#00000060" radius="10" spread="0.1" />
+            </effect>
+            <text>Continuar</text>
+         </Button>
+         <Hyperlink onAction="#onResendCode" style="-fx-font-size: 14px; -fx-text-fill: #1971c2;" text="Reenviar código" />
+      </VBox>
+   </VBox>
+</StackPane>

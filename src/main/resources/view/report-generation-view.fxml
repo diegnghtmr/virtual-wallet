@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane style="-fx-background-color: linear-gradient(to bottom, #f8f9fa, #e9ecef);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.ReportGenerationViewController">
+
+    <VBox spacing="25" style="-fx-background-radius: 15;">
+        <padding>
+            <Insets bottom="30" left="30" right="30" top="30" />
+        </padding>
+
+        <!-- Header -->
+        <StackPane>
+            <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#080e48" height="70.0" width="640.0">
+                <effect>
+                    <DropShadow color="#00000060" radius="8" spread="0.3" />
+                </effect>
+            </Rectangle>
+            <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-font-family: 'Segoe UI';" text="Generación de Reportes" textFill="WHITE">
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Label>
+        </StackPane>
+
+        <Separator style="-fx-background-color: #dee2e6;" />
+
+        <!-- Date Range Section -->
+        <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20;">
+            <effect>
+                <DropShadow color="#00000020" radius="5" spread="0.1" />
+            </effect>
+
+            <Label alignment="CENTER" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #495057;" text="Rango de fechas">
+            <VBox.margin>
+               <Insets left="230.0" />
+            </VBox.margin></Label>
+
+            <HBox alignment="CENTER" spacing="100">
+                <VBox alignment="CENTER" spacing="10">
+                    <Label style="-fx-font-size: 16px; -fx-text-fill: #495057;" text="Fecha Inicial" />
+                    <DatePicker fx:id="dpStartDate" style="-fx-background-color: white; -fx-border-color: #ced4da; -fx-border-radius: 5;" />
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="10">
+                    <Label style="-fx-font-size: 16px; -fx-text-fill: #495057;" text="Fecha Final" />
+                    <DatePicker fx:id="dpEndDate" style="-fx-background-color: white; -fx-border-color: #ced4da; -fx-border-radius: 5;" />
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <!-- Action Buttons -->
+        <HBox alignment="CENTER" spacing="30">
+            <Button fx:id="btnGeneratePDF" onAction="#onGeneratePDF" style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 25; -fx-padding: 12 25; -fx-font-weight: bold;" text="Generar PDF">
+                <graphic>
+                    <Region prefHeight="20" prefWidth="20" style="-fx-background-color: white; -fx-shape: 'M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z';" />
+                </graphic>
+                <effect>
+                    <DropShadow color="#00000040" radius="10" spread="0.2" />
+                </effect>
+            </Button>
+
+            <Button fx:id="btnGenerateCSV" onAction="#onGenerateCSV" style="-fx-background-color: #1971c2; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 25; -fx-padding: 12 25; -fx-font-weight: bold;" text="Generar CSV">
+                <graphic>
+                    <Region prefHeight="20" prefWidth="20" style="-fx-background-color: white; -fx-shape: 'M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z';" />
+                </graphic>
+                <effect>
+                    <DropShadow color="#00000040" radius="10" spread="0.2" />
+                </effect>
+            </Button>
+        </HBox>
+
+        <!-- Close Button -->
+        <HBox alignment="CENTER">
+            <Button fx:id="btnClose" onAction="#onClose" style="-fx-background-color: #c21919; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 25; -fx-padding: 12 25; -fx-font-weight: bold;" text="Cerrar Ventana">
+                <graphic>
+                    <Region prefHeight="20" prefWidth="20" style="-fx-background-color: white; -fx-shape: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z';" />
+                </graphic>
+                <effect>
+                    <DropShadow color="#00000040" radius="10" spread="0.2" />
+                </effect>
+            </Button>
+        </HBox>
+    </VBox>
+</StackPane>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1279.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.virtualwallet.virtualwallet.viewController.OscashViewController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#080e48" height="51.0" layoutX="50.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" width="1179.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="1.0" text="Asistente Virtual Financiero" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="39.0" fitWidth="46.0" layoutX="1165.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/notification.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnNotification" contentDisplay="GRAPHIC_ONLY" layoutX="1165.0" layoutY="11.0" mnemonicParsing="false" onAction="#onNotification" opacity="0.0" prefHeight="39.0" prefWidth="39.0" text="Button" />
+
+      <ScrollPane layoutX="20.0" layoutY="100.0" prefHeight="450.0" prefWidth="800.0" style="-fx-background-color: transparent; -fx-border-color: #1973c2; -fx-border-radius: 15; -fx-background-radius: 15;">
+         <content>
+            <VBox fx:id="chatContainer" prefHeight="450.0" prefWidth="800.0" spacing="10.0" style="-fx-background-color: #ffffff; -fx-border-color: #1973c2; -fx-border-radius: 15; -fx-background-radius: 15;">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <TextArea fx:id="txtaAnswer" style="-fx-background-color: transparent; -fx-border-color: transparent;" wrapText="true" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </content>
+         <effect>
+            <DropShadow color="#00000040" />
+         </effect>
+      </ScrollPane>
+
+      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="570.0" prefHeight="60.0" prefWidth="800.0" spacing="10.0" style="-fx-background-color: #ffffff; -fx-border-color: #1973c2; -fx-border-radius: 15; -fx-background-radius: 15;">
+         <children>
+            <TextField fx:id="txtQuestion" prefHeight="40.0" prefWidth="700.0" promptText="Ingrese su pregunta aquí" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button fx:id="btnSendMessage" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/send-question.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+         <effect>
+            <DropShadow color="#00000040" />
+         </effect>
+      </HBox>
+
+      <VBox layoutX="840.0" layoutY="100.0" prefHeight="530.0" prefWidth="420.0" style="-fx-background-color: white; -fx-border-color: #1973c2; -fx-border-radius: 15; -fx-background-radius: 15;">
+         <children>
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/oscash.png" />
+               </image>
+               <VBox.margin>
+                  <Insets left="85.0" top="20.0" />
+               </VBox.margin>
+            </ImageView>
+            <Label alignment="CENTER" prefHeight="100.0" prefWidth="420.0" text="&quot;Incluso cuando las cosas salen muy very very, recuerda: tu memoria muscular sabe el camino. Cada día es una lección que te acerca más a la meta, no olvides que esto vale la plata. ¡Persiste y triunfarás!&quot;" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </Label>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Separator>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="420.0" text="Ayúdanos a mejorar. ¡Califícanos!">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="420.0" spacing="20.0">
+               <children>
+                  <ComboBox fx:id="cbPercentageQuality" prefHeight="40.0" prefWidth="200.0" promptText="Seleccione calificación" style="-fx-background-color: #f0f8ff; -fx-border-color: #1973c2; -fx-border-radius: 5;" />
+                  <Button fx:id="btnSendRating" mnemonicParsing="false" onAction="#onSendRating" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #1973c2; -fx-background-radius: 20;" text="Enviar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <effect>
+            <DropShadow color="#00000040" />
+         </effect>
+      </VBox>
+      <Separator layoutX="14.0" layoutY="60.0" prefWidth="1250.0" />
+   </children>
+</AnchorPane>

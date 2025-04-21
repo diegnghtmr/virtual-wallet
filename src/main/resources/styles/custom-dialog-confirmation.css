@@ -1,0 +1,86 @@
+/* Estilos base para todas las alertas */
+.dialog-pane {
+    -fx-background-color: #f8f9fa;
+    -fx-padding: 20px;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.dialog-pane > .content {
+    -fx-font-size: 16px;
+    -fx-padding: 15px 10px 10px 10px;
+    -fx-text-fill: #495057;
+}
+
+.dialog-pane > .header-panel {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 15px 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #dee2e6;
+}
+
+.dialog-pane > .header-panel > .label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #212529;
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-background-color: transparent;
+    -fx-padding: 20px 0 0 0;
+}
+
+.dialog-pane > .button-bar > .container > .button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 4px;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+/* Estilos específicos para la alerta de confirmación */
+.custom-confirmation {
+    -fx-background-color: linear-gradient(to bottom right, #e8f8ed, #f8f9fa);
+}
+
+.custom-confirmation > .header-panel > .label {
+    -fx-text-fill: #155724;
+}
+
+/* Estilo para el botón de aceptar (verde) */
+.custom-confirmation > .button-bar > .container > .button.accept-button {
+    -fx-background-color: #28a745;
+}
+
+.custom-confirmation > .button-bar > .container > .button.accept-button:hover {
+    -fx-background-color: #218838;
+}
+
+/* Estilo para el botón de cancelar (rojo) */
+.custom-confirmation > .button-bar > .container > .button.cancel-button {
+    -fx-background-color: #dc3545;
+}
+
+.custom-confirmation > .button-bar > .container > .button.cancel-button:hover {
+    -fx-background-color: #c82333;
+}
+
+/* Estilo para el ícono */
+.dialog-pane > .graphic-container {
+    -fx-padding: 0 15px 0 0;
+}
+
+.dialog-pane > .header-panel > .graphic-container > * {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 1);
+}
+
+/* Mejora de la accesibilidad */
+.dialog-pane:focused,
+.dialog-pane > .button-bar > .container > .button:focused {
+    -fx-effect: dropshadow(three-pass-box, #28a745, 10, 0, 0, 0);
+}
+
+/* Ajustes adicionales para mejorar el layout */
+.dialog-pane > .content-panel {
+    -fx-padding: 0 10px;
+}
