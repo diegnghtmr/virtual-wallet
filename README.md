@@ -43,7 +43,7 @@ This project leverages a stack of modern and robust technologies to deliver its 
 *   **☕ Java:** Core programming language (Version 21, as specified in `pom.xml`).
 *   **🎨 JavaFX:** Used for creating the graphical user interface (GUI).
 *   **🗃️ Maven:** Dependency management and project build tool.
-*   ** Lombok:** A library to reduce boilerplate code (e.g., getters, setters, constructors).
+*   **🏗️ Lombok:** A library to reduce boilerplate code (e.g., getters, setters, constructors).
 *   **🗺️ MapStruct:** A code generator for bean mappings, simplifying data transfer between layers.
 *   **📧 SimpleJavaMail:** For handling email sending capabilities (e.g., notifications).
 *   **📄 OpenPDF:** Library for creating and manipulating PDF files (for reports).
