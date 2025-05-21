@@ -142,9 +142,3 @@ Don't forget to give the project a star! Thanks again! ⭐
 5.  **Open a Pull Request**
 
 We value clear communication and constructive feedback. Please ensure your pull requests are well-documented and your code adheres to the existing style as much as possible.
-
-## 📜 License
-
-Distributed under the **[Specify License Here]** License. See `LICENSE.txt` (you'll need to create this file) for more information.
-
-*(**Note for project owner:** You should create a `LICENSE.txt` file in the root of your project and choose an appropriate open-source license, e.g., MIT License, Apache License 2.0, GNU GPLv3. If you need help choosing, visit [https://choosealicense.com/](https://choosealicense.com/))*
