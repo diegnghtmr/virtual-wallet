@@ -34,8 +34,6 @@ This application is packed with features to provide a complete financial managem
     *   Dedicated interface for administrators.
     *   Manage users and oversee system operations.
 
-*(Note: Some feature details like multi-account support or user-to-user transfers are inferred and might need verification against actual application capabilities.)*
-
 ## 💻 Technologies Used
 
 This project leverages a stack of modern and robust technologies to deliver its functionalities:
