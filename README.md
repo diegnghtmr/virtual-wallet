@@ -13,11 +13,11 @@ This application is packed with features to provide a complete financial managem
 *   **👤 User Authentication:** Secure login and registration system. 🔑
 *   **💳 Account Management:**
     *   View your account balance and details at a glance.
-    *   Manage multiple accounts if necessary *( уточнить, если это поддерживается)*.
+    *   Manage multiple accounts if necessary.
 *   **💸 Transaction Management:**
     *   **Deposits:** Easily add funds to your accounts.
     *   **Withdrawals:** Withdraw funds when you need them.
-    *   **Transfers:** Move money between your accounts or to other users *( уточнить)*.
+    *   **Transfers:** Move money between your accounts or to other users.
 *   **📊 Budget Management:**
     *   Set monthly or categorical budgets.
     *   Track your spending against your budget goals.
