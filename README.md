@@ -62,9 +62,8 @@ Follow these instructions to get a local copy up and running.
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository_url> 
+    git clone https://github.com/diegnghtmr/virtual-wallet.git
     ```
-    **Important:** Replace `<repository_url>` with the actual URL of this repository.
     ```bash
     cd virtual-wallet 
     # Or your project's root directory name if different
